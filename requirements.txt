@@ -1,4 +1,8 @@
--e . 
+# My packages
+-e .
+git+https://github.com/ndeutschmann/better_abc@3ed85b43a22161b4b53939738abba6cf5c12db72#egg=better_abc
+
+# pypi packages
 alabaster==0.7.12
 appnope==0.1.0
 attrs==19.3.0
