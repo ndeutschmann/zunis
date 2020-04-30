@@ -1,0 +1,24 @@
+src.models.flows package
+========================
+
+.. automodule:: src.models.flows
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.models.flows.backprop_jacobian_flows
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.models.flows.general_flow
+   src.models.flows.sampling

@@ -1,0 +1,7 @@
+src.models.flows.sampling module
+================================
+
+.. automodule:: src.models.flows.sampling
+   :members:
+   :undoc-members:
+   :show-inheritance:

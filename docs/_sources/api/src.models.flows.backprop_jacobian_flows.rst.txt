@@ -1,0 +1,17 @@
+src.models.flows.backprop\_jacobian\_flows package
+==================================================
+
+.. automodule:: src.models.flows.backprop_jacobian_flows
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.models.flows.backprop_jacobian_flows.general_backprop_j_flow
+   src.models.flows.backprop_jacobian_flows.nnflows
+   src.models.flows.backprop_jacobian_flows.simple_backprop_flows

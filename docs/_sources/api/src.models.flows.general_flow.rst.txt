@@ -1,0 +1,7 @@
+src.models.flows.general\_flow module
+=====================================
+
+.. automodule:: src.models.flows.general_flow
+   :members:
+   :undoc-members:
+   :show-inheritance:
