@@ -1,4 +1,4 @@
-.PHONY: clean data requirements
+.PHONY: clean data requirements doc static-doc docinstall
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -7,6 +7,8 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = pytorch_flows
 PYTHON_INTERPRETER = python
+DOC_DIR = docs
+DOC_BUILD_DIR = doc_build
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -36,6 +38,23 @@ lint:
 ## Test python environment is setup correctly
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
+
+## Build automatic API documentation
+doc:
+	$(MAKE) clean -C $(DOC_BUILD_DIR)
+	$(MAKE) cleanapi -C $(DOC_BUILD_DIR)
+	$(MAKE) apidoc -C $(DOC_BUILD_DIR)
+	$(MAKE) html -C $(DOC_BUILD_DIR)
+
+## Build documentation from the current state of ./docs
+static-doc:
+	$(MAKE) clean -C $(DOC_BUILD_DIR)
+	$(MAKE) html -C $(DOC_BUILD_DIR)
+
+## Install the built documentation
+doc-install:
+	cp -r $(DOC_BUILD_DIR)/_build/html $(DOC_DIR)
+
 
 #################################################################################
 # PROJECT RULES                                                                 #

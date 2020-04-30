@@ -22,6 +22,7 @@ class FactorizedFlowPrior(torch.nn.Module):
         self.prior = prior_1d
 
     def forward(self, n_batch):
+        """Sample n_batch points and stack them with their jacobians"""
         # Generate normally distributed points
         x = self.prior.sample((n_batch, self.d))
         # Compute their per-dimension log PDF and sum them across dimenions

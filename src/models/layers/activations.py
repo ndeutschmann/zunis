@@ -14,6 +14,7 @@ class BiLU(torch.nn.Module):
         self.delta = torch.nn.Parameter(torch.tensor(delta), requires_grad=False)
 
     def forward(self, input):
+        """Output of the BiLU activation function"""
         return input * self.alpha + self.delta * torch.abs(input)
 
 
@@ -27,4 +28,5 @@ class NormBiTanh(torch.nn.Module):
         self.alpha = torch.nn.Parameter(torch.tensor(alpha), requires_grad=False)
 
     def forward(self, input):
+        """Output of the NormBiTanh activation function"""
         return self.alpha * input + (1 - self.alpha) * torch.tanh(input)

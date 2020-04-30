@@ -4,8 +4,12 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
+SPHINXAPIDOC  = sphinx-apidoc
 PAPER         =
 BUILDDIR      = _build
+MODULEDIR     = api
+APIDIR        = ../src
+APIOPTS       = -MeT -d 2
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -14,7 +18,9 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext
+.PHONY: help clean html dirhtml singlehtml pickle json\
+ htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext\
+ apidoc cleanapi
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -37,9 +43,18 @@ help:
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "  apidoc     to use sphinx-apidoc to build module pages from ../src"
+	@echo "  cleanapi   to remove the output of apidoc"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
+
+cleanapi:
+	-rm -rf $(MODULEDIR)/*
+
+apidoc:
+	$(SPHINXAPIDOC) -f $(APIOPTS) -o $(MODULEDIR) $(APIDIR)
+
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html

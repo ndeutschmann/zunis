@@ -12,6 +12,9 @@ class LinearFlow(GeneralBackpropJacobianFlow):
         self.flow = torch.nn.Linear(d, d, bias=False)
 
     def weight_init_identity_(self,std=None):
+        """Initialize weights as eye + normal(0,std)
+        Essentially realizing a resnet-like layer
+        """
         if std is None:
             std_ = 0.1/self.d
         else:

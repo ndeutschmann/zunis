@@ -14,6 +14,7 @@ class GeneralBackpropJacobianFlow(GeneralFlow):
     The jacobian is computed naively by using autograd.
     """
     def transform_and_compute_jacobian(self, xj):
+        """Compute the flow transformation and its Jacobian using pytorch.autograd"""
         x = xj[:, :self.d].detach()
         log_j = xj[:, -1]
 

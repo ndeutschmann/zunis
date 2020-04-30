@@ -13,4 +13,5 @@ class OverallAffineLayer(torch.nn.Module):
         self.delta = torch.nn.Parameter(torch.tensor(delta), requires_grad=True)
 
     def forward(self, input):
+        """Output of the OverallAffineLayer"""
         return input * self.alpha + self.delta
