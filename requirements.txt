@@ -1,6 +1,6 @@
 # My packages
 -e .
-git+https://github.com/ndeutschmann/better_abc@6b393a2ae82da68e85f9a960eecbbb98bfd8d143#egg=better_abc
+better-abc @ git+https://github.com/ndeutschmann/better_abc@6b393a2ae82da68e85f9a960eecbbb98bfd8d143
 
 # pypi packages
 alabaster==0.7.12
