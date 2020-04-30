@@ -19,8 +19,7 @@ class GeneralFlow(torch.nn.Module,ABC):
     def __init__(self, *, d):
         super(GeneralFlow, self).__init__()
         self.d = d
-
-    flow = abstract_attribute()
+        self.flow = abstract_attribute()
 
     @abstractmethod
     def transform_and_compute_jacobian(self, xj):
