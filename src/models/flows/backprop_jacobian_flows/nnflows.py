@@ -56,5 +56,5 @@ class NNFlow(GeneralBackpropJacobianFlow):
             std_ = std
         for layer in self.flow:
             if isinstance(layer, torch.nn.Linear):
-                torch.nn.init.normal_(self.layer.weight, std=std_)
+                torch.nn.init.normal_(layer.weight, std=std_)
                 layer.weight.data += torch.eye(self.d).to(layer.weight.data.device)

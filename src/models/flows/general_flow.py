@@ -38,10 +38,10 @@ class GeneralFlow(torch.nn.Module,ABC):
         and no jacobian is passed: pure sampling mode.
         """
         if self.training:
-            assert xj.shape[1] == self.d+1
+            assert xj.shape[-1] == self.d+1
             return self.transform_and_compute_jacobian(xj)
         else:
-            assert xj.shape[1] == self.d
+            assert xj.shape[-1] == self.d
             return self.flow(xj)
 
 
