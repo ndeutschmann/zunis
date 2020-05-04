@@ -16,7 +16,7 @@ class NNFlow(GeneralBackpropJacobianFlow):
     The layers are organized as follows:
     R^d -[Linear(d,dh), activation]-> R^dh -[(Linear(dh,dh),activation)*nh]-> R^dh -[Linear(dh,d)]-> R^d
     """
-    def __init__(self, *, d, nh, dh, activation_layer_class=NormBiTanh):
+    def __init__(self, *, d, nh, dh, activation_layer_class=NormBiTanh, batch_norm=False):
         super(GeneralBackpropJacobianFlow, self).__init__(d=d)
         self.nh = nh
         self.dh = dh
@@ -30,6 +30,8 @@ class NNFlow(GeneralBackpropJacobianFlow):
             ll,
             activation_layer_class(),
         ]
+        if batch_norm:
+            layers.append(torch.nn.BatchNorm1d(dh))
 
         for i in range(nh):
             ll = torch.nn.Linear(dh, dh, bias=False)
@@ -37,6 +39,8 @@ class NNFlow(GeneralBackpropJacobianFlow):
 #            ll.weight.data += torch.eye(dh).to(ll.weight.data.device)
             layers.append(ll)
             layers.append(activation_layer_class())
+            if batch_norm:
+                layers.append(torch.nn.BatchNorm1d(dh))
 
         ll = torch.nn.Linear(dh, d, bias=False)
 #        torch.nn.init.normal_(ll.weight, std=0.1)
