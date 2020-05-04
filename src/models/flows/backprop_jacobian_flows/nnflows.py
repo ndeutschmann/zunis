@@ -48,7 +48,7 @@ class NNFlow(GeneralBackpropJacobianFlow):
         layers.append(ll)
         layers.append(activation_layer_class())
 
-        self.flow = (torch.nn.Sequential(*layers))
+        self.flow_ = (torch.nn.Sequential(*layers))
 
     def weight_init_identity_(self,std=None):
         """Initialize weights as eye + normal(0,std)
@@ -58,7 +58,7 @@ class NNFlow(GeneralBackpropJacobianFlow):
             std_ = 0.1 / self.d / self.nh
         else:
             std_ = std
-        for layer in self.flow:
+        for layer in self.flow_:
             if isinstance(layer, torch.nn.Linear):
                 torch.nn.init.normal_(layer.weight, std=std_)
                 layer.weight.data += torch.eye(self.d).to(layer.weight.data.device)

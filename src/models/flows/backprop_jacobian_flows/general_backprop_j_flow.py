@@ -2,8 +2,8 @@
 differentiable pytorch function on an input point. In train mode, the last entry of the
 input is the logarithm of the inverse PDF at that point.
 """
-
 import torch
+from better_abc import abstract_attribute
 from src.models.flows.general_flow import GeneralFlow
 
 
@@ -13,13 +13,23 @@ class GeneralBackpropJacobianFlow(GeneralFlow):
     y = flow(x), - log(j(y)) = - log(j(x)) + log(det(dy_i/dx_j))
     The jacobian is computed naively by using autograd.
     """
+    def __init__(self, *, d):
+        super(GeneralBackpropJacobianFlow, self).__init__(d=d)
+        # A backprop Jacobian flow must implement an attribute flow_
+        # which computes the transformation in a differentiable way
+        self.flow_ = abstract_attribute()
+
+    def flow(self, x):
+        """For a backprop_flow, the transformation is just a pytorch module"""
+        return self.flow_(x)
+
     def transform_and_compute_jacobian(self, xj):
         """Compute the flow transformation and its Jacobian using pytorch.autograd"""
         x = xj[:, :self.d].detach()
         log_j = xj[:, -1]
 
         x.requires_grad = True
-        y = self.flow(x)
+        y = self.flow_(x)
 
         n_batch = xj.shape[0]
 

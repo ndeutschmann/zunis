@@ -9,7 +9,7 @@ class LinearFlow(GeneralBackpropJacobianFlow):
     def __init__(self, *, d):
         super(LinearFlow, self).__init__(d=d)
 
-        self.flow = torch.nn.Linear(d, d, bias=False)
+        self.flow_ = torch.nn.Linear(d, d, bias=False)
 
     def weight_init_identity_(self,std=None):
         """Initialize weights as eye + normal(0,std)
@@ -19,8 +19,8 @@ class LinearFlow(GeneralBackpropJacobianFlow):
             std_ = 0.1/self.d
         else:
             std_ = std
-        torch.nn.init.normal_(self.flow.weight, std=std_)
-        self.flow.weight.data += torch.eye(self.d).to(self.flow.weight.data.device)
+        torch.nn.init.normal_(self.flow_.weight, std=std_)
+        self.flow_.weight.data += torch.eye(self.d).to(self.flow_.weight.data.device)
 
 
 class SigmoidFlow(GeneralBackpropJacobianFlow):
@@ -30,4 +30,4 @@ class SigmoidFlow(GeneralBackpropJacobianFlow):
         super(SigmoidFlow, self).__init__(d=d)
 
         layers = [torch.nn.Sigmoid()]
-        self.flow = (torch.nn.Sequential(*layers))
+        self.flow_ = (torch.nn.Sequential(*layers))

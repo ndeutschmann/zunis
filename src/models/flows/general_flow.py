@@ -10,7 +10,7 @@ dx p(x) = dy q(y) = dx dy/dx q(y)
 => -log q(y) = -log p(x) + log dy/dx
 """
 import torch
-from better_abc import ABC,abstract_attribute,abstractmethod
+from better_abc import ABC, abstract_attribute, abstractmethod
 
 
 class GeneralFlow(torch.nn.Module,ABC):
@@ -19,12 +19,17 @@ class GeneralFlow(torch.nn.Module,ABC):
     def __init__(self, *, d):
         super(GeneralFlow, self).__init__()
         self.d = d
-        self.flow = abstract_attribute()
+
+    @abstractmethod
+    def flow(self, x):
+        """Transform the batch of points x  with shape (...,d)
+        This is an abstract method that should be overriden"""
+        pass
 
     @abstractmethod
     def transform_and_compute_jacobian(self, xj):
         """Compute the flow transformation and its Jacobian simulatenously on
-        xj with xj.shape == (:,d+1)
+        xj with xj.shape == (...,d+1)
 
         This is an abstract method that should be overriden
         """
