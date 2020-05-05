@@ -25,6 +25,7 @@ class GeneralRealNVP(GeneralCouplingCell):
     def __init__(self, *, d, mask):
         super(GeneralRealNVP, self).__init__(d=d, transform=element_wise_affine, mask=mask)
 
+
 class FakeT(torch.nn.Module):
     """Fake neural net for the test FakeRealNVP that returns a trainable constant"""
     def __init__(self, s=0., t=0.):
@@ -42,6 +43,7 @@ class FakeRealNVP(GeneralRealNVP):
     def __init__(self, *, d, mask, s=0., t=0.):
         super(FakeRealNVP, self).__init__(d=d, mask=mask)
         self.T = FakeT(s, t)
+
 
 class RealNVP(GeneralRealNVP):
     def __init__(self, *, d, mask,
