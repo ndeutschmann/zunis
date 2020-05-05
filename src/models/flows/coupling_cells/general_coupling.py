@@ -7,16 +7,17 @@ from src.models.flows.general_flow import GeneralFlow
 
 class GeneralCouplingCell(GeneralFlow):
     """Abstract class for coupling cell"""
-    def __init__(self, d, transform, mask):
+    def __init__(self, *, d, transform, mask):
         """Coupling cell instantiation:
         - mask: boolean Tensor that indicates which variables are passed (y_N) through
         and which are transformed (y_M)
-        - transform: function that takes two arguments
+        - transform: function that takes three arguments
             - y_M: the variables that are transformed element wise
             - t: a set of parameters for the transformation
+            - compute_jacobian: a bool deciding whether the jacobian should be computed
         and returns a 2-tuple
             - x_M: the transformed variable batch
-            - j: the Jacobian batch
+            - log_j: the log-Jacobian batch if compute_jacobian, None otherwise
         - T the function that computes the parameters T from y_N
 
         NB:
