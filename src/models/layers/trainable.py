@@ -48,3 +48,36 @@ def create_rectangular_dnn(
             layers.append(output_activation())
 
         return torch.nn.Sequential(*layers)
+
+
+class ArbitraryShapeRectangularDNN(torch.nn.Module):
+    """Rectangular DNN with the output layer reshaped to a given shape"""
+    def __init__(self, *,
+                 d_in,
+                 out_shape,
+                 d_hidden,
+                 n_hidden,
+                 input_activation=None,
+                 hidden_activation=torch.nn.ReLU,
+                 output_activation=None,
+                 use_batch_norm=False):
+
+        super(ArbitraryShapeRectangularDNN, self).__init__()
+        self.out_shape = out_shape
+
+        d_out = 1
+        for d in out_shape:
+            d_out *= d
+
+        self.nn = create_rectangular_dnn(d_in=d_in,
+                                         d_out=d_out,
+                                         d_hidden=d_hidden,
+                                         n_hidden=n_hidden,
+                                         input_activation=input_activation,
+                                         hidden_activation=hidden_activation,
+                                         output_activation=output_activation,
+                                         use_batch_norm=use_batch_norm)
+
+    def forward(self, x):
+        return self.nn(x).view(*(x.shape[:-1]), *self.out_shape)
+

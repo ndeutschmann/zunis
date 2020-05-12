@@ -2,7 +2,7 @@
 
 import torch
 from .general_coupling import GeneralCouplingCell
-from src.models.layers.trainable import create_rectangular_dnn
+from src.models.layers.trainable import ArbitraryShapeRectangularDNN
 
 def element_wise_affine(x,st,compute_jacobian=True):
     """Transform x element-wise through an affine function y = exp(s)*x + t
@@ -59,13 +59,14 @@ class RealNVP(GeneralRealNVP):
         d_in = sum(mask)
         d_out = d - d_in
 
-        self.T = create_rectangular_dnn(d_in=d_in,
-                                        d_out=d_out,
-                                        d_hidden=d_hidden,
-                                        n_hidden=n_hidden,
-                                        input_activation=input_activation,
-                                        hidden_activation=torch.nn.ReLU,
-                                        output_activation=output_activation,
-                                        use_batch_norm=use_batch_norm)
+        self.T = ArbitraryShapeRectangularDNN(d_in=d_in,
+                                              out_shape=(d_out,2),
+                                              d_hidden=d_hidden,
+                                              n_hidden=n_hidden,
+                                              input_activation=input_activation,
+                                              hidden_activation=hidden_activation,
+                                              output_activation=output_activation,
+                                              use_batch_norm=use_batch_norm)
+
 
 
