@@ -4,6 +4,11 @@ from better_abc import abstract_attribute
 
 from src.models.flows.general_flow import GeneralFlow
 
+def not_list(l):
+    """Return the element wise negation of a list of booleans"""
+    assert all([isinstance(it,bool) for it in l])
+    return [not it for it in l]
+
 
 class GeneralCouplingCell(GeneralFlow):
     """Abstract class for coupling cell"""
@@ -25,7 +30,7 @@ class GeneralCouplingCell(GeneralFlow):
         super(GeneralCouplingCell, self).__init__(d=d)
 
         self.mask = mask+[False]
-        self.mask_complement = (~mask)+[False]
+        self.mask_complement = not_list(mask)+[False]
         self.transform = transform
         self.T = abstract_attribute()
 
@@ -38,7 +43,7 @@ class GeneralCouplingCell(GeneralFlow):
         x = torch.zeros_like(yj).to(yj.device)
         x[..., self.mask] = y_n
         x[..., self.mask_complement], log_jy = self.transform(y_m, self.T(y_n))
-        x[..., -1] = log_j
+        x[..., -1] = log_j + log_jy
         return x
 
     def flow(self, y):

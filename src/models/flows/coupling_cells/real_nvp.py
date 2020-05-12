@@ -8,14 +8,14 @@ def element_wise_affine(x,st,compute_jacobian=True):
     """Transform x element-wise through an affine function y = exp(s)*x + t
     where s = st[...,0] and t = st[...,1] with s.shape == x.shape == t.shape
 
-    The Jacobian for this transformation is the coordinate-wise produc of the scaling factors
+    The Jacobian for this transformation is the coordinate-wise product of the scaling factors
     J = prod(es[...,i],i)
     """
     es = torch.exp(st[..., 0])
     t = st[..., 1]
     logj = None
     if compute_jacobian:
-        torch.sum(torch.log(es),dim=-1)
+        logj = torch.sum(torch.log(es), dim=-1)
 
     return es*x + t, logj
 
