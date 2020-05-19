@@ -1,10 +1,12 @@
 """Implementatin of realNVP: a coupling cell with an affine transform"""
 
 import torch
-from .general_coupling import GeneralCouplingCell
+from .general_coupling import InvertibleCouplingCell
 from src.models.layers.trainable import ArbitraryShapeRectangularDNN
+from .transforms import InvertibleTransform
 
-def element_wise_affine(x,st,compute_jacobian=True):
+
+def element_wise_affine(x, st, compute_jacobian=True):
     """Transform x element-wise through an affine function y = exp(s)*x + t
     where s = st[...,0] and t = st[...,1] with s.shape == x.shape == t.shape
 
@@ -20,10 +22,35 @@ def element_wise_affine(x,st,compute_jacobian=True):
     return es*x + t, logj
 
 
-class GeneralRealNVP(GeneralCouplingCell):
+def inverse_element_wise_affine(x, st, compute_jacobian=True):
+    """Transform x element-wise through an affine function y = exp(-s)*(x - t)
+    where s = st[...,0] and t = st[...,1] with s.shape == x.shape == t.shape
+    This is the inverse of `element_wise_affine` above for the same set of parameters st
+
+    The Jacobian for this transformation is the coordinate-wise product of the scaling factors
+    J = prod(es[...,i],i)
+    """
+    es = torch.exp(-st[..., 0])
+    t = st[..., 1]
+    logj = None
+    if compute_jacobian:
+        logj = torch.sum(torch.log(es), dim=-1)
+
+    return es*(x - t), logj
+
+
+class ElementWiseAffineTransform(InvertibleTransform):
+    def forward(self, y, st, compute_jacobian=True):
+        return element_wise_affine(y, st, compute_jacobian=compute_jacobian)
+
+    def backward(self, y, st, compute_jacobian=True):
+        return inverse_element_wise_affine(y, st, compute_jacobian=compute_jacobian)
+
+
+class GeneralRealNVP(InvertibleCouplingCell):
     """Coupling cell based on affine transforms without a specific parameter prediction function"""
     def __init__(self, *, d, mask):
-        super(GeneralRealNVP, self).__init__(d=d, transform=element_wise_affine, mask=mask)
+        super(GeneralRealNVP, self).__init__(d=d, transform=ElementWiseAffineTransform(), mask=mask)
 
 
 class FakeT(torch.nn.Module):
