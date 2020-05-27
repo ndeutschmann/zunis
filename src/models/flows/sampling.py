@@ -21,11 +21,14 @@ class FactorizedFlowPrior(torch.nn.Module):
         self.d = d
         self.prior = prior_1d
 
+    def log_prob(self, x):
+        torch.sum(self.prior.log_prob(x), -1)
+
     def forward(self, n_batch):
         """Sample n_batch points and stack them with their jacobians"""
         # Generate normally distributed points
         x = self.prior.sample((n_batch, self.d))
         # Compute their per-dimension log PDF and sum them across dimenions
         # to get the log PDF then add a batch dimension
-        log_j = -torch.sum(self.prior.log_prob(x), -1).unsqueeze(-1)
-        return torch.cat([x, log_j], -1)
+        log_j = - self.log_prob(x)
+        return torch.cat([x, log_j.unsqueeze(-1)], -1)
