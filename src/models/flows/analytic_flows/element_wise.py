@@ -1,4 +1,4 @@
-from .analytic_flow import AnalyticFlow
+from .analytic_flow import AnalyticFlow,InvertibleAnalyticFlow
 import torch
 
 
@@ -36,3 +36,10 @@ class AnalyticInverseSigmoid(AnalyticFlow):
         yj[..., -1] = logj-torch.sum(torch.log(x * (1 - x)), dim=-1)
 
         return yj
+
+
+class InvertibleAnalyticSigmoid(InvertibleAnalyticFlow):
+    def __init__(self,d):
+        super(InvertibleAnalyticSigmoid, self).__init__(d=d)
+        self.forward_flow = AnalyticSigmoid(d)
+        self.backward_flow = AnalyticInverseSigmoid(d)
