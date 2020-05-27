@@ -16,3 +16,23 @@ class AnalyticSigmoid(AnalyticFlow):
         yj[..., -1] = logj+torch.sum(torch.log(yj[..., :-1] * (1 - yj[..., :-1])), dim=-1)
 
         return yj
+
+
+def inverse_sigmoid(x):
+    return torch.log(x / (1 - x))
+
+
+class AnalyticInverseSigmoid(AnalyticFlow):
+    def __init__(self,d):
+        super(AnalyticInverseSigmoid, self).__init__(d=d)
+        self.flow_ = inverse_sigmoid
+
+    def transform_and_compute_jacobian(self, xj):
+        x = xj[..., :-1]
+        logj = xj[..., -1]
+        yj = torch.zeros_like(xj).to(xj.device)
+        yj[..., :-1] = self.flow(x)
+
+        yj[..., -1] = logj-torch.sum(torch.log(x * (1 - x)), dim=-1)
+
+        return yj
