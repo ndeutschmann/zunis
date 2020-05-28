@@ -29,13 +29,13 @@ from.weighted_dataset_trainer import GenericTrainer
 logger = logging.getLogger(__name__)
 
 
-def weighted_dkl_loss(fx,px,logqx):
+def weighted_dkl_loss(fx, px, logqx):
     return - torch.mean(fx * logqx / px)
 
 
 class GenericDKLTrainer(GenericTrainer):
-    def __init__(self):
-        super(GenericDKLTrainer, self).__init__()
+    def __init__(self,flow, latent_prior):
+        super(GenericDKLTrainer, self).__init__(flow, latent_prior)
         self.loss = weighted_dkl_loss
 
 
