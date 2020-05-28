@@ -2,6 +2,7 @@ import logging
 import torch
 from math import isfinite, ceil
 from better_abc import ABC, abstractmethod, abstract_attribute
+from .training_state import TrainingState
 
 logger = logging.getLogger(__name__)
 
@@ -101,7 +102,7 @@ class GenericTrainer(ABC):
         return xpx, fx
 
     def train_on_target_batches_from_posterior(self,
-                                               *
+                                               *,
                                                f,
                                                batch_size,
                                                n_batches=1,
@@ -117,3 +118,40 @@ class GenericTrainer(ABC):
             logger.info("Generating a new batch of points")
             xpx, fx = self.generate_target_batch_from_posterior(batch_size, f, target_posterior)
             self.train_on_target_batch(xpx, fx, optim, n_epochs_per_batch, minibatch_size)
+
+
+class GenericStatefulTrainer(GenericTrainer):
+    def __init__(self, flow, latent_prior):
+        super(GenericStatefulTrainer, self).__init__(flow, latent_prior)
+        self.state = TrainingState()
+
+    def process_loss(self, loss):
+        self.state.log_loss(loss)
+        return super(GenericStatefulTrainer, self).process_loss(loss)
+
+    def train_step_on_target_minibatch(self, xpx, fx, optim):
+        super(GenericStatefulTrainer, self).train_step_on_target_minibatch(xpx, fx, optim)
+        self.state.next_step()
+
+    def train_step_on_target_batch(self, xpx, fx, optim, minibatch_size=None):
+        self.state.next_epoch()
+        super(GenericStatefulTrainer, self).train_step_on_target_batch(xpx, fx, optim, minibatch_size)
+
+    def train_on_target_batches_from_posterior(self,
+                                               *,
+                                               f,
+                                               batch_size,
+                                               n_batches=1,
+                                               n_epochs_per_batch,
+                                               minibatch_size=None,
+                                               target_posterior,
+                                               optim):
+        self.state = TrainingState()
+        super(GenericStatefulTrainer, self).train_on_target_batches_from_posterior(f=f,
+                                                                                   batch_size=batch_size,
+                                                                                   n_batches=n_batches,
+                                                                                   n_epochs_per_batch=n_epochs_per_batch,
+                                                                                   minibatch_size=minibatch_size,
+                                                                                   target_posterior=target_posterior,
+                                                                                   optim=optim)
+        return self.state
