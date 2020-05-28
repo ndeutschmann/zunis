@@ -23,6 +23,8 @@ class GenericTrainer(ABC):
             self.flow.invert()
 
         points = self.latent_prior(n_points)
+        with torch.no_grad():
+            points = self.flow(points)[:, :-1]
         return points
 
     def process_loss(self, loss):
@@ -40,7 +42,7 @@ class GenericTrainer(ABC):
 
         with torch.no_grad():
             px = xpx[:, -1]
-            xj = torch.cat(xpx[:, :-1], torch.ones(xpx.size[0], 1), dim=1)
+            xj = torch.cat(xpx[:, :-1], torch.ones(xpx.shape[0], 1), dim=1)
 
             zj = self.flow(xj)
             z = zj[:, :-1]
@@ -54,7 +56,7 @@ class GenericTrainer(ABC):
             self.flow.invert()
 
         px = xpx[:, -1]
-        xj = torch.cat(xpx[:, :-1], torch.ones(xpx.size[0], 1), dim=1)
+        xj = torch.cat([xpx[:, :-1], torch.zeros(xpx.shape[0], 1).to(xpx.device)], dim=1)
 
         zj = self.flow(xj)
         z = zj[:, :-1]
@@ -83,9 +85,10 @@ class GenericTrainer(ABC):
             early_stop = self.process_loss(loss)
             if early_stop:
                 break
+            begin = end
 
     def train_on_target_batch(self, xpx, fx, optim, n_epochs, minibatch_size=None):
-        logger.info(f"Training on batch: {xpx.size[0]} points")
+        logger.info(f"Training on batch: {xpx.shape[0]} points")
         for epoch in range(n_epochs):
             logger.info(f"Epoch {epoch + 1}/{n_epochs}")
             try:
@@ -97,6 +100,7 @@ class GenericTrainer(ABC):
     @staticmethod
     def generate_target_batch_from_posterior(n_points, f, target_posterior):
         xpx = target_posterior(n_points)
+        xpx[:, -1] = torch.exp(- xpx[:, -1])
         fx = f(xpx[:, :-1])
 
         return xpx, fx

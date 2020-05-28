@@ -24,7 +24,7 @@ class FactorizedFlowSampler(torch.nn.Module):
     def log_prob(self, x):
         """Compute, point-per-point, the log-PDF of a batch of points"""
         assert len(x.shape) == 2 and x.shape[1] == self.d, f"Expected shape: (:, {self.d})"
-        torch.sum(self.prior.log_prob(x), -1)
+        return torch.sum(self.prior.log_prob(x), -1)
 
     def forward(self, n_batch):
         """Sample n_batch points and stack them with their jacobians"""
@@ -41,7 +41,7 @@ class FactorizedGaussianSampler(FactorizedFlowSampler):
     Note that tensorflow distribution objects cannot easily be moved devices so specify the right
     device at initialization.
     """
-    def __init__(self, *, d, mu=0, sig=1, device=None):
+    def __init__(self, *, d, mu=0., sig=1., device=None):
         # Copy data
         sig_ = torch.tensor(sig)
         mu_ = torch.tensor(mu)
@@ -50,7 +50,7 @@ class FactorizedGaussianSampler(FactorizedFlowSampler):
             sig_ = sig_.to(device)
             mu_ = mu_.to(device)
 
-        prior_1d = torch.distributions.normal.Normal(mu,sig)
+        prior_1d = torch.distributions.normal.Normal(mu_, sig_)
         super(FactorizedGaussianSampler, self).__init__(d=d, prior_1d=prior_1d)
 
 
@@ -59,14 +59,14 @@ class UniformSampler(FactorizedFlowSampler):
     Note that tensorflow distribution objects cannot easily be moved devices so specify the right
     device at initialization.
     """
-    def __init__(self, *, d, low=0, high=1, device=None):
+    def __init__(self, *, d, low=0., high=1., device=None):
         # Copy data
-        low_ = torch.tensor(low)
-        high_ = torch.tensor(high)
+        low_ = torch.tensor(low, dtype=torch.get_default_dtype())
+        high_ = torch.tensor(high, dtype=torch.get_default_dtype())
 
         if device is not None:
             low_ = low_.to(device)
             high_ = high_.to(device)
 
-        prior_1d = torch.distributions.Uniform(low_,high_)
+        prior_1d = torch.distributions.Uniform(low_, high_)
         super(UniformSampler, self).__init__(d=d, prior_1d=prior_1d)
