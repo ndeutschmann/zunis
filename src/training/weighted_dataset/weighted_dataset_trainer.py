@@ -96,7 +96,7 @@ class GenericTrainer(ABC):
 
     @staticmethod
     def generate_target_batch_from_posterior(n_points, f, target_posterior):
-        xpx = target_posterior.sample(n_points)
+        xpx = target_posterior(n_points)
         fx = f(xpx[:, :-1])
 
         return xpx, fx
