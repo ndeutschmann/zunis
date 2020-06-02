@@ -24,7 +24,7 @@ the optimum for both the variance loss and the DKL/ML is when the flow reproduce
 """
 import logging
 import torch
-from.weighted_dataset_trainer import GenericTrainer
+from .weighted_dataset_trainer import BasicTrainer, BasicStatefulTrainer
 
 logger = logging.getLogger(__name__)
 
@@ -33,9 +33,13 @@ def weighted_dkl_loss(fx, px, logqx):
     return - torch.mean(fx * logqx / px)
 
 
-class GenericDKLTrainer(GenericTrainer):
-    def __init__(self,flow, latent_prior):
-        super(GenericDKLTrainer, self).__init__(flow, latent_prior)
+class BasicDKLTrainer(BasicTrainer):
+    def __init__(self, flow, latent_prior):
+        super(BasicDKLTrainer, self).__init__(flow, latent_prior)
         self.loss = weighted_dkl_loss
 
 
+class BasicStatefulDKLTrainer(BasicStatefulTrainer):
+    def __init__(self, flow, latent_prior, **kwargs):
+        super(BasicStatefulDKLTrainer, self).__init__(flow, latent_prior, **kwargs)
+        self.loss = weighted_dkl_loss

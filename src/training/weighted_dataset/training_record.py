@@ -25,9 +25,10 @@ class DictWrapper(MutableMapping):
         return len(self.store)
 
 
-class TrainingState(DictWrapper):
-    def __init__(self, metrics=None, metadata=None, **kwargs):
-        super(TrainingState, self).__init__()
+class TrainingRecord(DictWrapper):
+    """Dictionary-like object to hold records about a training run"""
+    def __init__(self, metrics=None, metadata=None, config=None, **kwargs):
+        super(TrainingRecord, self).__init__()
 
         self.update({
             "metrics": {
@@ -43,6 +44,9 @@ class TrainingState(DictWrapper):
 
         if metadata is not None:
             self["metadata"] = metadata
+
+        if config is not None:
+            self["config"] = config
 
         self.update(kwargs)
 
@@ -75,5 +79,5 @@ class TrainingState(DictWrapper):
     def next_step(self):
         self["step"] += 1
 
-    def next_epoch(self):
+    def new_epoch(self):
         self["epochs"].append(self.step)
