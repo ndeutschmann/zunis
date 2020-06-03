@@ -97,7 +97,7 @@ class BasicTrainer(ABC):
             x: batch of points in target space sampled from some PDF p(x)
             px: values of p(x) for the batch
             fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer class
+            optim: pytorch optimizer object
         """
         if not self.flow.inverse:
             self.flow.invert()
@@ -123,7 +123,7 @@ class BasicTrainer(ABC):
             x: batch of points in target space sampled from some PDF p(x)
             px: values of p(x) for the batch
             fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer class
+            optim: pytorch optimizer object
             minibatch_size: Optional. Size of each minibatch for gradient steps.
 
         Notes:
@@ -157,7 +157,7 @@ class BasicTrainer(ABC):
             x: batch of points in target space sampled from some PDF p(x)
             px: values of p(x) for the batch
             fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer class
+            optim: pytorch optimizer object
             n_epochs: number of iterations over the full batch
             minibatch_size: Optional. Size of each minibatch for gradient steps
 
@@ -189,9 +189,9 @@ class BasicTrainer(ABC):
             x,px,fx
                 sampled points, sampling distribution PDF values, function values
         """
-        with target_posterior(n_points) as xlpx:
-            x = xlpx[:, :-1]
-            px = torch.exp(- xlpx[:, -1])
+        xlpx = target_posterior(n_points)
+        x = xlpx[:, :-1]
+        px = torch.exp(- xlpx[:, -1])
         fx = f(x)
 
         return x, px, fx
@@ -216,7 +216,7 @@ class BasicTrainer(ABC):
             n_epochs_per_batch: number of iterations over each full batch before sampling a new one
             minibatch_size: Optional. Size of each minibatch for gradient steps
             target_posterior: distribution from which points are sampled in target space
-            optim: pytorch optimizer class
+            optim: pytorch optimizer object
 
         Notes:
         ------
@@ -261,8 +261,9 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         return super(BasicStatefulTrainer, self).process_loss(loss)
 
     def train_step_on_target_minibatch(self, x, px, fx, optim):
-        super(BasicStatefulTrainer, self).train_step_on_target_minibatch(x, px, fx, optim)
+        loss = super(BasicStatefulTrainer, self).train_step_on_target_minibatch(x, px, fx, optim)
         self.record.next_step()
+        return loss
 
     def train_step_on_target_batch(self, x, px, fx, optim, minibatch_size=None):
         self.record.new_epoch()
@@ -297,17 +298,16 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
 
     def set_config(self, **kwargs):
         """Set the saved configuration
-
-        This is part of the GenericTrainerAPI, which provides facilities for training
-        *on a batch* therefore
         """
         for key in kwargs:
             if key in self.config_keys:
                 self.config[key] = kwargs[key]
             else:
-                logger.warning(f"Specified config key {key} is not recognized and was ignored")
+                logger.error(f"Specified config key {key} is not recognized")
+                raise KeyError(f"Config key {key} was not recognized")
 
     def get_config(self):
+        """Return the saved configuration"""
         return self.config
 
     def train_on_batch(self, x, px, fx, **kwargs):
