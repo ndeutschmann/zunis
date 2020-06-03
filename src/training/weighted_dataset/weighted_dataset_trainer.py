@@ -41,6 +41,16 @@ class GenericTrainerAPI(ABC):
     def get_config(self, **kwargs):
         """Get the current training configuration"""
 
+    @abstractmethod
+    def sample_forward(self, n_points):
+        """Sample points using the model"""
+
+    def reset(self):
+        """Reinitinalize trainer and model. Optional element of the API.
+        Raises an error if not implemented
+        """
+        raise NotImplementedError("reset method not available for this class")
+
 
 class BasicTrainer(ABC):
     """Basic trainer implementation: sample points in target space from a fixed distribution and train over
