@@ -71,10 +71,10 @@ class BasicTrainer(ABC):
         if self.flow.inverse:
             self.flow.invert()
 
-        points = self.latent_prior(n_points)
+        xj = self.latent_prior(n_points)
         with torch.no_grad():
-            points = self.flow(points)[:, :-1]
-        return points
+            xj = self.flow(xj)
+        return xj
 
     def process_loss(self, loss):
         if not isfinite(loss):

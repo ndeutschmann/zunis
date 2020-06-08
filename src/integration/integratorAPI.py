@@ -15,6 +15,18 @@ class SurveyRefineIntegratorAPI(ABC):
         self.model_trainer = abstract_attribute()
 
     @abstractmethod
+    def initialize(self, **kwargs):
+        """Intialization before the whole integration process"""
+
+    @abstractmethod
+    def initialize_refine(self, **kwargs):
+        """Initialization before the survey phase"""
+
+    @abstractmethod
+    def initialize_survey(self, **kwargs):
+        """Initialization before the survey phase"""
+
+    @abstractmethod
     def sample_survey(self, **kwargs):
         """Sample points for a survey step"""
 
@@ -95,7 +107,6 @@ class SurveyRefineIntegratorAPI(ABC):
         integral = integral.cpu().item()
         integral_var = integral_var.cpu().item()
 
-        logger.info(f"Integral: {integral:.3e} +/- {integral_var:.3e}")
 
         self.process_refine_step((x, px, fx), integral, integral_var)
 
@@ -108,7 +119,7 @@ class SurveyRefineIntegratorAPI(ABC):
             finalize_survey_args: dict
 
         """
-        logger.info("Starting the survey phase")
+        logger.info("Initializing the survey phase")
 
         try:
             trainer_config_args = kwargs["trainer_config_args"]
@@ -122,10 +133,18 @@ class SurveyRefineIntegratorAPI(ABC):
             survey_step_args = dict()
 
         try:
+            initialize_survey_args = kwargs["initialize_survey_args"]
+        except KeyError:
+            initialize_survey_args = dict()
+
+        try:
             finalize_survey_args = kwargs["finalize_survey_args"]
         except KeyError:
             finalize_survey_args = dict()
 
+        self.initialize_survey(**initialize_survey_args)
+
+        logger.info("Starting the survey phase")
         for i in range(n_survey_steps):
             self.survey_step(**survey_step_args)
 
@@ -142,7 +161,7 @@ class SurveyRefineIntegratorAPI(ABC):
         finalize_refine_args: dict
         """
 
-        logger.info("Starting the refine phase")
+        logger.info("Initializing the refine phase")
 
         try:
             trainer_config_args = kwargs["trainer_config_args"]
@@ -156,17 +175,25 @@ class SurveyRefineIntegratorAPI(ABC):
             refine_step_args = dict()
 
         try:
+            initialize_refine_args = kwargs["initialize_refine_args"]
+        except KeyError:
+            initialize_refine_args = dict()
+
+        try:
             finalize_refine_args = kwargs["finalize_refine_args"]
         except KeyError:
             finalize_refine_args = dict()
 
+        self.initialize_refine(**initialize_refine_args)
+
+        logger.info("Starting the refine phase")
         for i in range(n_refine_steps):
             self.survey_step(**refine_step_args)
 
         logger.info("Finalizing the refine phase")
         self.finalize_survey(**finalize_refine_args)
 
-    def train(self, n_survey_steps=10, n_refine_steps=10, **kwargs):
+    def integrate(self, n_survey_steps=10, n_refine_steps=10, **kwargs):
         logger.info("Starting integration")
 
         formated_kwargs = self.format_arguments(**kwargs)
