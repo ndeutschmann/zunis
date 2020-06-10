@@ -6,6 +6,7 @@ import torch
 import logging
 
 from src.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer
+from src.models.flows.sampling import UniformSampler
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
             "integral": pd.Series([], dtype="float"),
             "error": pd.Series([], dtype="float"),
             "n_points": pd.Series([], dtype="int"),
-            "stage": pd.Series([], dtype="str")
+            "phase": pd.Series([], dtype="str")
         })
 
     def __init__(self, f, trainer, posterior, n_iter=10, n_iter_survey=None, n_iter_refine=None,
@@ -73,27 +74,31 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
 
         return x, px, fx
 
-    def process_survey_step(self, sample, integral, integral_var, **kwargs):
+    def process_survey_step(self, sample, integral, integral_var, training_record, **kwargs):
         x, px, fx = sample
         n_points = x.shape[0]
-        self.integration_history.append(
+        self.integration_history = self.integration_history.append(
             {"integral": integral,
-             "error": (integral_var / n_points)**0.5,
+             "error": (integral_var / n_points) ** 0.5,
              "n_points": n_points,
-             "phase": "survey"}
+             "phase": "survey",
+             "training record": training_record},
+            ignore_index=True
         )
+        logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
 
     def process_refine_step(self, sample, integral, integral_var, **kwargs):
         x, px, fx = sample
         n_points = x.shape[0]
-        self.integration_history.append(
+        self.integration_history = self.integration_history.append(
             {"integral": integral,
-             "error": (integral_var / n_points)**0.5,
+             "error": (integral_var / n_points) ** 0.5,
              "n_points": n_points,
-             "phase": "refine"}
+             "phase": "refine"},
+            ignore_index=True
         )
 
-        logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points)**0.5:.3e}")
+        logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
 
     def finalize_survey(self, **kwargs):
         pass
@@ -110,9 +115,27 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
         else:
             data = self.integration_history.loc[self.integration_history["phase"] == "refine"]
 
-        result = (data["integral"]*data["n_points"]).sum()
+        result = (data["integral"] * data["n_points"]).sum()
         result /= data["n_points"].sum()
 
-        error = np.sqrt(((data["error"] * data["n_points"])**2).sum() / (data["n_points"].sum())**2)
+        error = np.sqrt(((data["error"] * data["n_points"]) ** 2).sum() / (data["n_points"].sum()) ** 2)
 
         return float(result), float(error), self.integration_history
+
+
+class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
+    def __init__(self, f, trainer, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,
+                 n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
+                 device=torch.device("cpu"), **kwargs):
+        posterior = UniformSampler(d=d, device=device)
+        super(FlatSurveySamplingIntegrator, self).__init__(f=f,
+                                                           trainer=trainer,
+                                                           posterior=posterior,
+                                                           n_iter=n_iter,
+                                                           n_iter_survey=n_iter_survey,
+                                                           n_iter_refine=n_iter_refine,
+                                                           n_points=n_points,
+                                                           n_points_survey=n_points_survey,
+                                                           n_points_refine=n_points_refine,
+                                                           use_survey=use_survey,
+                                                           **kwargs)

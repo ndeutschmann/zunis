@@ -81,3 +81,21 @@ class TrainingRecord(DictWrapper):
 
     def new_epoch(self):
         self["epochs"].append(self.step)
+
+    def __repr__(self):
+        step = self["step"]
+        epoch = len(self["epochs"])
+        metrics = [k for k in self["metrics"] if k != "loss"]
+        if len(metrics) > 0:
+            metric_report = ", metrics: "+str(metrics)
+        else:
+            metric_report = ""
+        try:
+            loss_report = ", loss: "+str(self.loss)
+        except IndexError:
+            loss_report = ""
+
+        return f"{self.__class__.__name__}(step: {step}, epoch: {epoch}{loss_report}{metric_report})"
+
+    def __str__(self):
+        return self.__repr__()

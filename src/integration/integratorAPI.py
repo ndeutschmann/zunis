@@ -81,11 +81,10 @@ class SurveyRefineIntegratorAPI(ABC):
             training_args = dict()
 
         x, px, fx = self.sample_survey(**sampling_args)
-        integral, integral_var = torch.var_mean(px * fx)
+        integral_var, integral = torch.var_mean(fx/px)
         integral = integral.cpu().item()
         integral_var = integral_var.cpu().item()
 
-        logger.info(f"Integral: {integral:.3e} +/- {integral_var:.3e}")
         training_record = self.model_trainer.train_on_batch(x, px, fx, **training_args)
 
         self.process_survey_step((x, px, fx), integral, integral_var, training_record=training_record)
@@ -102,8 +101,8 @@ class SurveyRefineIntegratorAPI(ABC):
         except KeyError:
             sampling_args = dict()
 
-        x, px, fx = self.sample_survey(**sampling_args)
-        integral, integral_var = torch.var_mean(px * fx)
+        x, px, fx = self.sample_refine(**sampling_args)
+        integral_var, integral = torch.var_mean(fx/px)
         integral = integral.cpu().item()
         integral_var = integral_var.cpu().item()
 
@@ -188,10 +187,10 @@ class SurveyRefineIntegratorAPI(ABC):
 
         logger.info("Starting the refine phase")
         for i in range(n_refine_steps):
-            self.survey_step(**refine_step_args)
+            self.refine_step(**refine_step_args)
 
         logger.info("Finalizing the refine phase")
-        self.finalize_survey(**finalize_refine_args)
+        self.finalize_refine(**finalize_refine_args)
 
     def integrate(self, n_survey_steps=10, n_refine_steps=10, **kwargs):
         logger.info("Starting integration")
