@@ -5,10 +5,8 @@ import numpy as np
 import torch
 import logging
 
-from src.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer
+from src.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer, BasicTrainer
 from src.models.flows.sampling import UniformSampler
-
-logger = logging.getLogger(__name__)
 
 
 class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
@@ -28,11 +26,17 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
         })
 
     def __init__(self, f, trainer, posterior, n_iter=10, n_iter_survey=None, n_iter_refine=None,
-                 n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False, **kwargs):
-        super(PosteriorSurveySamplingIntegrator, self).__init__()
+                 n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
+                 verbosity=2, trainer_verbosity=1,  **kwargs):
+        super(PosteriorSurveySamplingIntegrator, self).__init__(verbosity=verbosity, **kwargs)
         self.f = f
+
+        assert isinstance(trainer, BasicTrainer), "This integrator relies on the BasicTrainer API"
+
         self.model_trainer = trainer
         self.posterior = posterior
+
+        self.model_trainer.set_verbosity(trainer_verbosity)
 
         self.n_iter_survey = n_iter_survey if n_iter_survey is not None else n_iter
         self.n_iter_refine = n_iter_refine if n_iter_refine is not None else n_iter
@@ -85,7 +89,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
              "training record": training_record},
             ignore_index=True
         )
-        logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
+        self.logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
 
     def process_refine_step(self, sample, integral, integral_var, **kwargs):
         x, px, fx = sample
@@ -98,7 +102,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
             ignore_index=True
         )
 
-        logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
+        self.logger.info(f"Integral: {integral:.3e} +/- {(integral_var / n_points) ** 0.5:.3e}")
 
     def finalize_survey(self, **kwargs):
         pass
@@ -126,7 +130,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
 class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
     def __init__(self, f, trainer, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
-                 device=torch.device("cpu"), **kwargs):
+                 device=torch.device("cpu"), verbosity=2, trainer_verbosity=1, **kwargs):
         posterior = UniformSampler(d=d, device=device)
         super(FlatSurveySamplingIntegrator, self).__init__(f=f,
                                                            trainer=trainer,
@@ -138,4 +142,6 @@ class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
                                                            n_points_survey=n_points_survey,
                                                            n_points_refine=n_points_refine,
                                                            use_survey=use_survey,
+                                                           verbosity=verbosity,
+                                                           trainer_verbosity=trainer_verbosity,
                                                            **kwargs)

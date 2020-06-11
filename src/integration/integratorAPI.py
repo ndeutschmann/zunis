@@ -2,7 +2,8 @@ import logging
 from better_abc import ABC, abstractmethod, abstract_attribute
 import torch
 
-logger = logging.getLogger(__name__)
+
+from src.utils.logger import set_verbosity as set_verbosity_fct
 
 
 class SurveyRefineIntegratorAPI(ABC):
@@ -11,8 +12,12 @@ class SurveyRefineIntegratorAPI(ABC):
     The interaction with the model is done through the GenericTrainerAPI
     """
 
-    def __init__(self, *args, **kwargs):
+    set_verbosity = set_verbosity_fct
+
+    def __init__(self, *args, verbosity="INFO", **kwargs):
         self.model_trainer = abstract_attribute()
+        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":" )
+        self.set_verbosity(verbosity)
 
     @abstractmethod
     def initialize(self, **kwargs):
@@ -118,7 +123,7 @@ class SurveyRefineIntegratorAPI(ABC):
             finalize_survey_args: dict
 
         """
-        logger.info("Initializing the survey phase")
+        self.logger.info("Initializing the survey phase")
 
         try:
             trainer_config_args = kwargs["trainer_config_args"]
@@ -143,11 +148,11 @@ class SurveyRefineIntegratorAPI(ABC):
 
         self.initialize_survey(**initialize_survey_args)
 
-        logger.info("Starting the survey phase")
+        self.logger.info("Starting the survey phase")
         for i in range(n_survey_steps):
             self.survey_step(**survey_step_args)
 
-        logger.info("Finalizing the survey phase")
+        self.logger.info("Finalizing the survey phase")
         self.finalize_survey(**finalize_survey_args)
 
     def refine(self, n_refine_steps=10, **kwargs):
@@ -160,7 +165,7 @@ class SurveyRefineIntegratorAPI(ABC):
         finalize_refine_args: dict
         """
 
-        logger.info("Initializing the refine phase")
+        self.logger.info("Initializing the refine phase")
 
         try:
             trainer_config_args = kwargs["trainer_config_args"]
@@ -185,15 +190,15 @@ class SurveyRefineIntegratorAPI(ABC):
 
         self.initialize_refine(**initialize_refine_args)
 
-        logger.info("Starting the refine phase")
+        self.logger.info("Starting the refine phase")
         for i in range(n_refine_steps):
             self.refine_step(**refine_step_args)
 
-        logger.info("Finalizing the refine phase")
+        self.logger.info("Finalizing the refine phase")
         self.finalize_refine(**finalize_refine_args)
 
     def integrate(self, n_survey_steps=10, n_refine_steps=10, **kwargs):
-        logger.info("Starting integration")
+        self.logger.info("Starting integration")
 
         formated_kwargs = self.format_arguments(**kwargs)
 

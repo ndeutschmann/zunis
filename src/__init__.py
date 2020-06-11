@@ -3,11 +3,12 @@ import logging
 import sys
 
 # Ensure that no submodule loggers outputs anything, unless explicitly setup by the user
-logging.getLogger(__name__).addHandler(logging.NullHandler())
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.NullHandler())
 
 
-def setup_std_stream_rootlogger(min_level=None, debug=False):
-    """Set the root logger to split output between stdout and stderr
+def setup_std_stream_logger(min_level=None, debug=False):
+    """Set the root logger of this module to split output between stdout and stderr
     Arguments:
         - min_level: minimum level output to stderr. Default is INFO
         - debug: overrides min_level to DEBUG
@@ -27,13 +28,12 @@ def setup_std_stream_rootlogger(min_level=None, debug=False):
         def filter(self, rec):
             return min_level <= rec.levelno < logging.WARNING
 
-    logger = logging.getLogger()
     logger.setLevel(min_level)
 
     h1 = logging.StreamHandler(sys.stdout)
     h1.setLevel(min_level)
     h1.addFilter(InfoFilter())
-    h2 = logging.StreamHandler()
+    h2 = logging.StreamHandler(sys.stderr)
     h2.setLevel(logging.WARNING)
 
     logger.addHandler(h1)

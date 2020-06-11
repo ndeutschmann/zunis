@@ -3,8 +3,8 @@ import torch
 from math import isfinite, ceil
 from better_abc import ABC, abstractmethod, abstract_attribute
 from .training_record import TrainingRecord
+from src.utils.logger import set_verbosity as set_verbosity_fct
 
-logger = logging.getLogger(__name__)
 
 
 class InvalidLossError(ValueError):
@@ -62,10 +62,15 @@ class BasicTrainer(ABC):
     Rationale: the training implementation should be independent from the tracking and from the API
     """
 
-    def __init__(self, flow, latent_prior):
+    set_verbosity = set_verbosity_fct
+
+    def __init__(self, flow, latent_prior, verbosity="INFO"):
         self.flow = flow
         self.latent_prior = latent_prior
         self.loss = abstract_attribute()
+        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":" + hex(id(self)))
+        self.set_verbosity(verbosity)
+
 
     def sample_forward(self, n_points):
         if self.flow.inverse:
@@ -79,7 +84,7 @@ class BasicTrainer(ABC):
     def process_loss(self, loss):
         if not isfinite(loss):
             raise InvalidLossError(f"loss value {loss} is not valid")
-        logger.debug(f"Loss: {loss:.3e}")
+        self.logger.debug(f"Loss: {loss:.3e}")
         return False
 
     def handle_invalid_loss(self, error):
@@ -176,13 +181,13 @@ class BasicTrainer(ABC):
             if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
             gradient step is taken
         """
-        logger.info(f"Training on batch: {x.shape[0]} points")
+        self.logger.info(f"Training on batch: {x.shape[0]} points")
         for epoch in range(n_epochs):
-            logger.info(f"Epoch {epoch + 1}/{n_epochs}")
+            self.logger.info(f"Epoch {epoch + 1}/{n_epochs}")
             try:
                 self.train_step_on_target_batch(x, px, fx, optim, minibatch_size)
             except InvalidLossError as e:
-                logger.error(e)
+                self.logger.error(e)
                 self.handle_invalid_loss(e)
 
     @staticmethod
@@ -233,12 +238,12 @@ class BasicTrainer(ABC):
             if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
             gradient step is taken
         """
-        logger.info(f"Training on {n_batches} independent batches of size {batch_size}")
-        logger.info(f"Performing {n_epochs_per_batch} epochs per batch")
-        logger.info(f"Each epoch applies {int(ceil(batch_size / minibatch_size))} gradient steps")
+        self.logger.info(f"Training on {n_batches} independent batches of size {batch_size}")
+        self.logger.info(f"Performing {n_epochs_per_batch} epochs per batch")
+        self.logger.info(f"Each epoch applies {int(ceil(batch_size / minibatch_size))} gradient steps")
 
         for batch in range(n_batches):
-            logger.info("Generating a new batch of points")
+            self.logger.info("Generating a new batch of points")
             x, px, fx = self.generate_target_batch_from_posterior(batch_size, f, target_posterior)
             self.train_on_target_batch(x, px, fx, optim, n_epochs_per_batch, minibatch_size)
 
@@ -313,7 +318,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
             if key in self.config_keys:
                 self.config[key] = kwargs[key]
             else:
-                logger.error(f"Specified config key {key} is not recognized")
+                self.logger.error(f"Specified config key {key} is not recognized")
                 raise KeyError(f"Config key {key} was not recognized")
 
     def get_config(self):
