@@ -124,6 +124,8 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
 
         error = np.sqrt(((data["error"] * data["n_points"]) ** 2).sum() / (data["n_points"].sum()) ** 2)
 
+        self.logger.info(f"Final result: {float(result):.5e} +/- {float(error):.5e}")
+
         return float(result), float(error), self.integration_history
 
 
