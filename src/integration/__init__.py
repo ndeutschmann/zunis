@@ -19,6 +19,7 @@ class DefaultIntegrator(FlatSurveySamplingIntegrator):
                 minibatch_size = n_points_survey //10
 
         super(DefaultIntegrator, self).__init__(f=f,
+                                                d=d,
                                                 trainer=create_dkl_trainer(d, device=device,
                                                                            n_epochs=n_epochs,
                                                                            minibatch_size=minibatch_size),
@@ -31,4 +32,5 @@ class DefaultIntegrator(FlatSurveySamplingIntegrator):
                                                 use_survey=use_survey,
                                                 verbosity=verbosity,
                                                 trainer_verbosity=trainer_verbosity,
+                                                device=device,
                                                 **kwargs)

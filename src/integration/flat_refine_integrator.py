@@ -134,6 +134,7 @@ class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
         posterior = UniformSampler(d=d, device=device)
         super(FlatSurveySamplingIntegrator, self).__init__(f=f,
                                                            trainer=trainer,
+                                                           d=d,
                                                            posterior=posterior,
                                                            n_iter=n_iter,
                                                            n_iter_survey=n_iter_survey,

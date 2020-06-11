@@ -2,7 +2,6 @@ import logging
 from better_abc import ABC, abstractmethod, abstract_attribute
 import torch
 
-
 from src.utils.logger import set_verbosity as set_verbosity_fct
 
 
@@ -16,7 +15,7 @@ class SurveyRefineIntegratorAPI(ABC):
 
     def __init__(self, *args, verbosity="INFO", **kwargs):
         self.model_trainer = abstract_attribute()
-        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":" )
+        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":")
         self.set_verbosity(verbosity)
 
     @abstractmethod
@@ -86,7 +85,7 @@ class SurveyRefineIntegratorAPI(ABC):
             training_args = dict()
 
         x, px, fx = self.sample_survey(**sampling_args)
-        integral_var, integral = torch.var_mean(fx/px)
+        integral_var, integral = torch.var_mean(fx / px)
         integral = integral.cpu().item()
         integral_var = integral_var.cpu().item()
 
@@ -107,10 +106,9 @@ class SurveyRefineIntegratorAPI(ABC):
             sampling_args = dict()
 
         x, px, fx = self.sample_refine(**sampling_args)
-        integral_var, integral = torch.var_mean(fx/px)
+        integral_var, integral = torch.var_mean(fx / px)
         integral = integral.cpu().item()
         integral_var = integral_var.cpu().item()
-
 
         self.process_refine_step((x, px, fx), integral, integral_var)
 
@@ -221,4 +219,3 @@ class SurveyRefineIntegratorAPI(ABC):
         self.refine(n_refine_steps, **refine_args)
 
         return self.finalize_integration(**finalize_args)
-

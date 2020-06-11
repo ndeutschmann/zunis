@@ -6,14 +6,18 @@ from src.models.flows.sampling import FactorizedGaussianSampler
 
 
 def create_dkl_trainer(d, model_type="realnvp", mask_type="checkerboard", model_params=None,
-                       device=torch.device("cpu"), n_epochs=10, optim=None, **params):
+                       device=torch.device("cpu"), n_epochs=10, optim_class=None, **params):
     """Create a dkl trainer with the a default flow model"""
     if model_params is None:
         model_params = dict()
 
-    if optim is None:
-        optim = torch.optim.Adam(lr=1.e-5)
 
     model = create_hypercube_flow(d, model_type=model_type, mask_type=mask_type, **model_params).to(device)
     prior = FactorizedGaussianSampler(d=d, device=device)
+
+    if optim_class is None:
+        optim = torch.optim.Adam(model.parameters(), lr=1.e-4)
+    else:
+        optim_class(model.parameters())
+
     return BasicStatefulDKLTrainer(model, prior, optim=optim, n_epochs=n_epochs, **params)
