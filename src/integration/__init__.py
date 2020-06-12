@@ -1,12 +1,15 @@
 import logging
 import torch
-from src.integration.flat_refine_integrator import FlatSurveySamplingIntegrator
+from src.integration.flat_survey_integrator import FlatSurveySamplingIntegrator
 from src.training.weighted_dataset.generators import create_dkl_trainer
 
 integration_logger = logging.getLogger(__name__)
 
 
 class DefaultIntegrator(FlatSurveySamplingIntegrator):
+
+    reset_trainer = create_dkl_trainer
+
     def __init__(self, f, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
                  device=torch.device("cpu"), verbosity=2, trainer_verbosity=1, n_epochs=10, minibatch_size=None,
@@ -20,7 +23,7 @@ class DefaultIntegrator(FlatSurveySamplingIntegrator):
 
         super(DefaultIntegrator, self).__init__(f=f,
                                                 d=d,
-                                                trainer=create_dkl_trainer(d, device=device,
+                                                trainer=self.reset_trainer(d, device=device,
                                                                            n_epochs=n_epochs,
                                                                            minibatch_size=minibatch_size,
                                                                            lr=lr,

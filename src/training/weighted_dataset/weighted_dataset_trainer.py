@@ -79,7 +79,7 @@ class BasicTrainer(ABC):
         xj = self.latent_prior(n_points)
         with torch.no_grad():
             xj = self.flow(xj)
-        return xj
+        return xj.detach()
 
     def process_loss(self, loss):
         if not isfinite(loss):
