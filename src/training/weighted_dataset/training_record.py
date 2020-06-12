@@ -27,7 +27,7 @@ class DictWrapper(MutableMapping):
 
 class TrainingRecord(DictWrapper):
     """Dictionary-like object to hold records about a training run"""
-    def __init__(self, metrics=None, metadata=None, config=None, **kwargs):
+    def __init__(self, metrics=None, metadata=None, config=None, alpha=.1, **kwargs):
         super(TrainingRecord, self).__init__()
 
         self.update({
@@ -36,7 +36,12 @@ class TrainingRecord(DictWrapper):
             },
             "epochs": [],
             "step": 0,
+            "loss":None,
+            "best_loss":None
         })
+
+        # Smoothing parameter for the loss running average
+        self.alpha = alpha
 
         if metrics is not None:
             for metric in metrics:
@@ -60,7 +65,7 @@ class TrainingRecord(DictWrapper):
 
     @property
     def loss(self):
-        return self["metrics"]["loss"][-1]
+        return self["last_loss"]
 
     @property
     def step(self):
@@ -75,6 +80,12 @@ class TrainingRecord(DictWrapper):
 
     def log_loss(self, loss):
         self.log_metric(loss, "loss")
+        if self["loss"] is None:
+            self["loss"] = loss
+            self["best_loss"] = loss
+        else:
+            self["loss"] = self["loss"]*(1-self.alpha) + self.alpha*loss
+            self["best_loss"] = min(self["best_loss"], self["loss"] )
 
     def next_step(self):
         self["step"] += 1

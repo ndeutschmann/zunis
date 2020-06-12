@@ -1,10 +1,10 @@
 from .integratorAPI import SurveyRefineIntegratorAPI
-# TODO: change where this class is
 import pandas as pd
 import numpy as np
 import torch
 import logging
 
+# TODO: change where the method we use from this class is
 from src.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer, BasicTrainer
 from src.models.flows.sampling import UniformSampler
 
