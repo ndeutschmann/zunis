@@ -247,7 +247,7 @@ class BasicTrainer(ABC):
 
 
 class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
-    def __init__(self, flow, latent_prior, **kwargs):
+    def __init__(self, flow, latent_prior, max_reloads=0, **kwargs):
         super(BasicStatefulTrainer, self).__init__(flow, latent_prior)
 
         # Setting up the saved configuration accessed through the GenericTrainerAPI
@@ -269,12 +269,31 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
                 self.config[key] = kwargs[key]
 
         self.record = TrainingRecord(checkpoint=self.config["checkpoint"])
+        self.n_reloads = 0
+        self.max_reloads = max_reloads
 
     def process_loss(self, loss):
+        """Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid"""
+
+        # parent class checks that the loss is valid
+        try:
+            output = super(BasicStatefulTrainer, self).process_loss(loss)
+        except InvalidLossError as e:
+            self.logger.error("Caught error:")
+            self.logger.error(e)
+            if "checkpoint" in self.record and self.n_reloads < self.max_reloads:
+                self.logger.error(f"Attempting checkpoint reload {self.n_reloads+1}/{self.max_reloads}")
+                self.flow.load_state_dict(torch.load(self.record["checkpoint"]))
+                self.n_reloads += 1
+                output = False
+            else:
+                self.logger.error("Cannot reset to a previous checkpoint")
+                raise
+
         self.record.log_loss(loss)
         if "checkpoint" in self.record and self.record["loss"] <= self.record["best_loss"]:
-            torch.save({"model_state_dict": self.flow.state_dict()}, self.record["checkpoint"])
-        return super(BasicStatefulTrainer, self).process_loss(loss)
+            torch.save(self.flow.state_dict(), self.record["checkpoint"])
+        return output
 
     def train_step_on_target_minibatch(self, x, px, fx, optim):
         loss = super(BasicStatefulTrainer, self).train_step_on_target_minibatch(x, px, fx, optim)
