@@ -27,7 +27,8 @@ class DictWrapper(MutableMapping):
 
 class TrainingRecord(DictWrapper):
     """Dictionary-like object to hold records about a training run"""
-    def __init__(self, metrics=None, metadata=None, config=None, alpha=.1, **kwargs):
+
+    def __init__(self, metrics=None, metadata=None, config=None, alpha=.1, checkpoint=None, **kwargs):
         super(TrainingRecord, self).__init__()
 
         self.update({
@@ -36,8 +37,8 @@ class TrainingRecord(DictWrapper):
             },
             "epochs": [],
             "step": 0,
-            "loss":None,
-            "best_loss":None
+            "loss": None,
+            "best_loss": None
         })
 
         # Smoothing parameter for the loss running average
@@ -52,6 +53,12 @@ class TrainingRecord(DictWrapper):
 
         if config is not None:
             self["config"] = config
+
+        if checkpoint is not None:
+            # check if the checkpoint is a valid filepath
+            # but does not exist
+            open(str(checkpoint), "x").close()
+            self["checkpoint"] = str(checkpoint)
 
         self.update(kwargs)
 
@@ -84,8 +91,8 @@ class TrainingRecord(DictWrapper):
             self["loss"] = loss
             self["best_loss"] = loss
         else:
-            self["loss"] = self["loss"]*(1-self.alpha) + self.alpha*loss
-            self["best_loss"] = min(self["best_loss"], self["loss"] )
+            self["loss"] = self["loss"] * (1 - self.alpha) + self.alpha * loss
+            self["best_loss"] = min(self["best_loss"], self["loss"])
 
     def next_step(self):
         self["step"] += 1
@@ -98,11 +105,11 @@ class TrainingRecord(DictWrapper):
         epoch = len(self["epochs"])
         metrics = [k for k in self["metrics"] if k != "loss"]
         if len(metrics) > 0:
-            metric_report = ", metrics: "+str(metrics)
+            metric_report = ", metrics: " + str(metrics)
         else:
             metric_report = ""
         try:
-            loss_report = ", loss: "+str(self.loss)
+            loss_report = ", loss: " + str(self.loss)
         except IndexError:
             loss_report = ""
 

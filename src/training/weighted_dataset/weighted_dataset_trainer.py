@@ -6,7 +6,6 @@ from .training_record import TrainingRecord
 from src.utils.logger import set_verbosity as set_verbosity_fct
 
 
-
 class InvalidLossError(ValueError):
     """Value error that indicates something is wrong with a loss value specifically"""
     pass
@@ -70,7 +69,6 @@ class BasicTrainer(ABC):
         self.loss = abstract_attribute()
         self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":" + hex(id(self)))
         self.set_verbosity(verbosity)
-
 
     def sample_forward(self, n_points):
         if self.flow.inverse:
@@ -257,22 +255,25 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         # As a result, only relevant keys are part of the config
 
         # The keys are stored separately so as to be immutable
-        self.config_keys = ("n_epochs", "minibatch_size", "optim")
+        self.config_keys = ("n_epochs", "minibatch_size", "optim", "checkpoint")
 
         self.config = {
             "n_epochs": None,
             "minibatch_size": None,
-            "optim": None
+            "optim": None,
+            "checkpoint": None
         }
 
         for key in kwargs:
             if key in self.config_keys:
                 self.config[key] = kwargs[key]
 
-        self.record = TrainingRecord()
+        self.record = TrainingRecord(checkpoint=self.config["checkpoint"])
 
     def process_loss(self, loss):
         self.record.log_loss(loss)
+        if "checkpoint" in self.record and self.record["loss"] <= self.record["best_loss"]:
+            torch.save({"model_state_dict": self.flow.state_dict()}, self.record["checkpoint"])
         return super(BasicStatefulTrainer, self).process_loss(loss)
 
     def train_step_on_target_minibatch(self, x, px, fx, optim):
