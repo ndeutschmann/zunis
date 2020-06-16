@@ -148,3 +148,4 @@ class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
                                                            verbosity=verbosity,
                                                            trainer_verbosity=trainer_verbosity,
                                                            **kwargs)
+        self.d = d

@@ -11,13 +11,12 @@ def create_dkl_trainer(d, model_type="realnvp", mask_type="checkerboard", model_
     if model_params is None:
         model_params = dict()
 
-
     model = create_hypercube_flow(d, model_type=model_type, mask_type=mask_type, **model_params).to(device)
     prior = FactorizedGaussianSampler(d=d, device=device)
 
     if optim_class is None:
         optim = torch.optim.Adam(model.parameters(), lr=lr)
     else:
-        optim_class(model.parameters(),lr=lr)
+        optim = optim_class(model.parameters(),lr=lr)
 
     return BasicStatefulDKLTrainer(model, prior, optim=optim, n_epochs=n_epochs, **params)
