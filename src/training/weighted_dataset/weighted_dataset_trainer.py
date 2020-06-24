@@ -345,9 +345,23 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         """Return the saved configuration"""
         return self.config
 
-    def train_on_batch(self, x, px, fx, **kwargs):
+    def train_on_batch(self, x, px, fx,  **kwargs):
         """Train on a batch of points using the saved configuration"""
         self.set_config(**kwargs)
         self.record = TrainingRecord(config=self.config)
-        self.train_on_target_batch(x, px, fx, **self.config)
+
+        optim = self.config["optim"]
+        if optim is None:
+            error = ValueError("trainer parameter 'optim' must be set before or at training")
+            self.logger.error(error)
+            raise error
+
+        n_epochs = self.config["n_epochs"]
+        if n_epochs is None:
+            error = ValueError("trainer parameter 'n_epochs' must be set before or at training")
+            self.logger.error(error)
+            raise error
+
+        minibatch_size = self.config["minibatch_size"]
+        self.train_on_target_batch(x, px, fx, optim=optim, n_epochs=n_epochs, minibatch_size=minibatch_size)
         return self.record

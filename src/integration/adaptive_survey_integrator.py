@@ -65,5 +65,6 @@ class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
     def process_survey_step(self, sample, integral, integral_var, training_record, **kwargs):
         super(AdaptiveSurveyIntegrator, self).process_survey_step(sample, integral, integral_var, training_record,
                                                                   **kwargs)
-        if self.survey_switch_condition():
+        if (not self.survey_mode) and self.survey_switch_condition():
+            self.logger.info("Switching sampling mode")
             self.survey_mode = True
