@@ -247,7 +247,7 @@ class BasicTrainer(ABC):
 
 
 class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
-    def __init__(self, flow, latent_prior, max_reloads=0, **kwargs):
+    def __init__(self, flow, latent_prior, checkpoint=None, max_reloads=None, **kwargs):
         super(BasicStatefulTrainer, self).__init__(flow, latent_prior)
 
         # Setting up the saved configuration accessed through the GenericTrainerAPI
@@ -255,22 +255,27 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         # As a result, only relevant keys are part of the config
 
         # The keys are stored separately so as to be immutable
-        self.config_keys = ("n_epochs", "minibatch_size", "optim", "checkpoint")
+        self.config_keys = ("n_epochs", "minibatch_size", "optim")
 
         self.config = {
             "n_epochs": None,
             "minibatch_size": None,
-            "optim": None,
-            "checkpoint": None
+            "optim": None
         }
 
         for key in kwargs:
             if key in self.config_keys:
                 self.config[key] = kwargs[key]
 
-        self.record = TrainingRecord(checkpoint=self.config["checkpoint"])
+        # Checkpointing logic
+        self.checkpoint = checkpoint
         self.n_reloads = 0
-        self.max_reloads = max_reloads
+        if max_reloads is None:
+            self.max_reloads = None if checkpoint is None else 1
+        else:
+            self.max_reloads = max_reloads
+
+        self.record = TrainingRecord(checkpoint=checkpoint, config=self.config)
 
     def process_loss(self, loss):
         """Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid"""
@@ -348,7 +353,13 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
     def train_on_batch(self, x, px, fx,  **kwargs):
         """Train on a batch of points using the saved configuration"""
         self.set_config(**kwargs)
-        self.record = TrainingRecord(config=self.config)
+
+        try:
+            checkpoint = kwargs["checkpoint"]
+        except KeyError:
+            checkpoint = self.checkpoint
+
+        self.record = TrainingRecord(config=self.config, checkpoint=checkpoint)
 
         optim = self.config["optim"]
         if optim is None:

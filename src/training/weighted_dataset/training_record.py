@@ -56,8 +56,8 @@ class TrainingRecord(DictWrapper):
 
         if checkpoint is not None:
             # check if the checkpoint is a valid filepath
-            # but does not exist
-            open(str(checkpoint), "x").close()
+            # delete it if it is not empty
+            open(str(checkpoint), "w+").close()
             self["checkpoint"] = str(checkpoint)
 
         self.update(kwargs)
@@ -72,7 +72,7 @@ class TrainingRecord(DictWrapper):
 
     @property
     def loss(self):
-        return self["last_loss"]
+        return self["loss"]
 
     @property
     def step(self):
