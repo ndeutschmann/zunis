@@ -141,10 +141,10 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
 
     # Gather the left integrals at each edge. See comment about gathering in q_left_integrals
     # for the unsqueeze
-    q_left_integrals = q_left_integrals.gather(2, edges.unsqueeze(-1))
+    q_left_integrals = q_left_integrals.gather(2, edges.unsqueeze(-1)).squeeze(-1)
 
     # Gather the slope at each edge.
-    q = q.gather(2, edges.unsqueeze(-1))
+    q = q.gather(2, edges.unsqueeze(-1)).squeeze(-1)
 
     # Build the output
     x = (y - q_left_integrals) / q + edges * w
@@ -152,6 +152,6 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # Prepare the jacobian
     j = None
     if compute_jacobian:
-        j = 1. / torch.prod(q, 2)
+        j = 1. / torch.prod(q, 1)
 
     return x, j

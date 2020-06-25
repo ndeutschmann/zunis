@@ -7,6 +7,17 @@ integration_logger = logging.getLogger(__name__)
 
 
 class DefaultIntegrator(FlatSurveySamplingIntegrator):
+    """Default integrator for out-of-the-box usage.
+    Basic usage: provide a function f and a dimensionality d.
+    The function must accept batches of points (torch.Tensor) of shape (*,d)
+    in the unit hypercube and output tensors of shape (d,).
+
+    Methods
+    -------
+    integrate(n_survey_steps=10, n_refine_steps=10, **kwargs)
+        Compute the integral of the function using neural importance sampling
+
+    """
 
     reset_trainer = create_dkl_trainer
 
