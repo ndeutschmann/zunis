@@ -1,7 +1,11 @@
-"""Implementation of the piecewie linear coupling cell
+"""Implementation of the piecewise linear coupling cell
 This means that the *variable transform* is piecewise-linear.
 """
 import torch
+
+from ..transforms import InvertibleTransform
+from ..general_coupling import InvertibleCouplingCell
+from src.models.layers.trainable import ArbitraryShapeRectangularDNN
 
 third_dimension_softmax = torch.nn.Softmax(dim=2)
 
@@ -58,10 +62,7 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     # gather defines slope[i, j, k] = q[i, j, mxu[i, j, k]] with k taking only 0 as a value
     # i.e. we say slope[i, j] = q[i, j, mx [i, j]]
     slopes = torch.gather(q, 2, mx.unsqueeze(-1)).squeeze(-1)
-    # We do not ensure the differentiability of the *points*
-    # Only of the jacobians.
-    # It is therefore much cheaper to detach
-    out = out * slopes.detach()
+    out = out * slopes
     # The jacobian is the product of the slopes in all dimensions
     if compute_jacobian:
         j = torch.prod(slopes, 1)
@@ -155,3 +156,114 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
         j = 1. / torch.prod(q, 1)
 
     return x, j
+
+
+class ElementWisePWLinearTransform(InvertibleTransform):
+    """Invertible piecewise-linear transformations over the unit hypercube
+
+    Implements a batched bijective transformation `h from the d-dimensional unit hypercube to itself,
+    in an element-wise fashion (each coordinate transformed independently)
+
+    In each direction, the bijection is a piecewise-linear transform with b bins
+    where the forward transform has evenly spaced bins. The transformation in each bin is
+    actually an affine transformation. The slopes for each direction and each point in the batch
+    are given by an unormalized tensor `q_tilde`. This input is softmax-normalized such that
+    1. h(0) = 0
+    2. h(1) = 1
+    3. h is monotonous
+    4. h is continuous
+
+    for which knowing the slopes in each bin is sufficient (when the abuse of language "linear")
+
+    Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible
+    The inverse is also an element-wise, piece-wise linear transformation,
+    but, of course, with variable input bin sizes (and fixed output bin sizes).
+    """
+
+    forward = staticmethod(piecewise_linear_transform)
+    backward = staticmethod(piecewise_linear_inverse_transform)
+
+
+class GeneralPWLinearCoupling(InvertibleCouplingCell):
+    """Abstract class implementing a coupling cell based on PW linear transformations
+
+    A specific way to predict the parameters of the transform must be implemented
+    in child classes.
+    """
+
+    def __init__(self, *, d, mask):
+        """Generator for the abstract class GeneralPWLinearCoupling
+
+        Parameters
+        ----------
+        d: int
+            dimension of the space
+        mask: list of bool
+            variable mask which variables are transformed (False)
+            or used as parameters of the transform (True)
+
+        """
+        super(GeneralPWLinearCoupling, self).__init__(d=d, transform=ElementWisePWLinearTransform(), mask=mask)
+
+
+class PWLinearCoupling(GeneralPWLinearCoupling):
+    """Piece-wise Linear coupling
+
+    Coupling cell using an element-wise piece-wise linear transformation as a change of
+    variables. The transverse neural network is a rectangular dense neural network
+
+    Notes:
+        Transformation used:
+        `src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform`
+        Neural network used:
+        src.models.layers.trainable.ArbitraryShapeRectangularDNN
+    """
+
+    def __init__(self, *, d, mask,
+                 n_bins,
+                 d_hidden,
+                 n_hidden,
+                 input_activation=None,
+                 hidden_activation=torch.nn.ReLU,
+                 output_activation=None,
+                 use_batch_norm=False):
+        """
+        Generator for PWLinearCoupling
+
+        Parameters
+        ----------
+        d: int
+        mask: list of bool
+            variable mask: which dimension are transformed (False) and which are not (True)
+        n_bins: int
+            number of bins in each dimensions
+        d_hidden: int
+            dimension of the hidden layers of the DNN
+        n_hidden: int
+            number of hidden layers in the DNN
+        input_activation: optional
+            pytorch activation function before feeding into the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        hidden_activation: optional
+            pytorch activation function between hidden layers of the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        output_activation: optional
+            pytorch activation function at the output of the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        use_batch_norm: bool
+            whether batch normalization should be used in the DNN.
+        """
+
+        super(PWLinearCoupling, self).__init__(d=d, mask=mask)
+
+        d_in = sum(mask)
+        d_out = d - d_in
+
+        self.T = ArbitraryShapeRectangularDNN(d_in=d_in,
+                                              out_shape=(d_out, n_bins),
+                                              d_hidden=d_hidden,
+                                              n_hidden=n_hidden,
+                                              input_activation=input_activation,
+                                              hidden_activation=hidden_activation,
+                                              output_activation=output_activation,
+                                              use_batch_norm=use_batch_norm)
