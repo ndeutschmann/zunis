@@ -11,7 +11,7 @@ third_dimension_softmax = torch.nn.Softmax(dim=2)
 
 
 def regularized_third_dimension_softmax(x):
-    out = torch.exp(x) + 1.e-5 * torch.max(x, dim=2).values.unsqueeze(2)
+    out = torch.exp(x) + 0.001*torch.max(x, dim=2).values.unsqueeze(2)
     out = out / torch.sum(out, dim=2).unsqueeze(-1)
     return out
 
@@ -87,7 +87,7 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
 
     # Regularization: points must be strictly within the unit hypercube
     # Use the dtype information from pytorch
-    eps = torch.finfo(out.dtype).eps * 100.
+    eps = torch.finfo(out.dtype).eps
     out = x.clamp(
         min=eps,
         max=1. - eps
@@ -134,7 +134,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     w = 1. / b
 
     # Compute the normalized bin heights by applying a softmax function on the bin dimension
-    q = 1. / w * third_dimension_softmax(q_tilde)
+    q = 1. / w * regularized_third_dimension_softmax(q_tilde)
 
     # Compute the integral over the left-bins in the forward transform.
     # 1. Compute all integrals: cumulative sum of bin height * bin weight.
@@ -165,7 +165,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
 
     # Regularization: points must be strictly within the unit hypercube
     # Use the dtype information from pytorch
-    eps = 100 * torch.finfo(x.dtype).eps
+    eps = torch.finfo(x.dtype).eps
     x = x.clamp(
         min=eps,
         max=1. - eps
