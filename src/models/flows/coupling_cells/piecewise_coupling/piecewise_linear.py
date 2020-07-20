@@ -37,7 +37,7 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
         - `j` is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.
     """
 
-    j = None
+    logj = None
 
     # TODO do a bottom-up assesment of how we handle the differentiability of variables
 
@@ -65,7 +65,8 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     out = out * slopes
     # The jacobian is the product of the slopes in all dimensions
     if compute_jacobian:
-        j = torch.prod(slopes, 1)
+        logj = torch.log(torch.prod(slopes, 1))
+
     del slopes
 
     # Compute the integral over the left-bins.
@@ -78,7 +79,15 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     # 2. Access the correct index to get the left integral of each point and add it to our transformation
     out = out + torch.gather(q_left_integrals, 2, mx.unsqueeze(-1)).squeeze(-1)
 
-    return out, j
+    # Regularization: points must be strictly within the unit hypercube
+    # Use the dtype information from pytorch
+    eps = torch.finfo(out.dtype).eps
+    out = x.clamp(
+        min=eps,
+        max=1. - eps
+    )
+
+    return out, logj
 
 
 def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
@@ -109,8 +118,6 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
         - `j` is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.
     """
 
-    j = None
-
     # TODO do a bottom-up assesment of how we handle the differentiability of variables
 
     # Compute the bin width w
@@ -133,7 +140,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # We can figure out which bin each y belongs to by finding the smallest bin such that
     # y - q_left_integral is positive
 
-    edges = y.unsqueeze(-1) - q_left_integrals
+    edges = (y.unsqueeze(-1) - q_left_integrals).detach()
     # y and q_left_integrals are between 0 and 1 so that their difference is at most 1.
     # By setting the negative values to 2., we know that the smallest value left
     # is the smallest positive
@@ -150,12 +157,19 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # Build the output
     x = (y - q_left_integrals) / q + edges * w
 
-    # Prepare the jacobian
-    j = None
-    if compute_jacobian:
-        j = 1. / torch.prod(q, 1)
+    # Regularization: points must be strictly within the unit hypercube
+    # Use the dtype information from pytorch
+    eps = torch.finfo(x.dtype).eps
+    x = x.clamp(
+        min=eps,
+        max=1. - eps
+    )
 
-    return x, j
+    # Prepare the jacobian
+    logj = None
+    if compute_jacobian:
+        logj = - torch.log(torch.prod(q, 1))
+    return x.detach(), logj
 
 
 class ElementWisePWLinearTransform(InvertibleTransform):
@@ -180,8 +194,8 @@ class ElementWisePWLinearTransform(InvertibleTransform):
     but, of course, with variable input bin sizes (and fixed output bin sizes).
     """
 
-    forward = staticmethod(piecewise_linear_transform)
-    backward = staticmethod(piecewise_linear_inverse_transform)
+    backward = staticmethod(piecewise_linear_transform)
+    forward = staticmethod(piecewise_linear_inverse_transform)
 
 
 class GeneralPWLinearCoupling(InvertibleCouplingCell):
