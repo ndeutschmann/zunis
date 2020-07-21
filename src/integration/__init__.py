@@ -10,7 +10,7 @@ class DefaultIntegrator(FlatSurveySamplingIntegrator):
     """Default integrator for out-of-the-box usage.
     Basic usage: provide a function f and a dimensionality d.
     The function must accept batches of points (torch.Tensor) of shape (*,d)
-    in the unit hypercube and output tensors of shape (d,).
+    in the unit hypercube and output tensors of shape (*,).
 
     Methods
     -------

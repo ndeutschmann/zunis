@@ -7,8 +7,8 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = pytorch_flows
 PYTHON_INTERPRETER = python
-DOC_DIR = docs
-DOC_BUILD_DIR = doc_build
+DOC_DIR = docs/
+DOC_BUILD_DIR = doc_build/
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -53,7 +53,7 @@ static-doc:
 
 ## Install the built documentation
 doc-install:
-	cp -r $(DOC_BUILD_DIR)/_build/html $(DOC_DIR)
+	cp -R $(DOC_BUILD_DIR)/_build/html/ $(DOC_DIR)
 
 
 #################################################################################
