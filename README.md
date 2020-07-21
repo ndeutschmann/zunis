@@ -1,57 +1,36 @@
-pytorch_flows
+Normalizing flows for neural importance sampling
 ==============================
 
-A short description of the project.
+This is a work-in-progress library to provide importance sampling Monte-Carlo integration tools based on
+Neural imporance sampling [[1]](https://arxiv.org/abs/1808.03856). This method uses normalzing flows to optimally sample
+an integrand function in order to evaluate its (multi-dimensional) integral.
 
-Project Organization
-------------
+The goal is to provide a flexible library to integrate black-box functions for which classical methods such as VEGAS do
+not work well due to an unknown or complicated structure which prevents the typical variable change and multi-channelling
+tricks.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+## Usage
+
+For basic uses, a RealNVP-based integrator is provided with default choices and can be created and used as follows:
+
+```
+import torch
+from src.integration import DefaultIntegrator
+
+device = torch.device("cuda")
 
 
---------
+d = 2
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+def f(x):
+    return x[:,0]**2 + x[:,1]**2
+
+integrator = DefaultIntegrator(d=d,f=f,device=device)
+result, uncertainty, history = integrator.integrate()
+```
+
+The function `f` is integrated over the `d`-dimensional unit hypercube and 
+* takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N`
+* returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` 
+
+A more systematic documentation is under construction [here](https://ndeutschmann.github.io/pytorch_flows).
