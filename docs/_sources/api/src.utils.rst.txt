@@ -1,0 +1,16 @@
+src.utils package
+=================
+
+.. automodule:: src.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.utils.function_wrapper
+   src.utils.logger

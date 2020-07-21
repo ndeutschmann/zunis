@@ -43,8 +43,8 @@ The input of flows as we use them is nearly always generated data from some dist
 provided with its log-inverse PDF. As a result, it can be convenient to plug the first layer
 of a flow as a sampling layers that draws points and computes the required PDF</p>
 <dl class="py class">
-<dt id="src.models.flows.sampling.FactorizedFlowPrior">
-<em class="property">class </em><code class="sig-name descname">FactorizedFlowPrior</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowPrior" title="Permalink to this definition">¶</a></dt>
+<dt id="src.models.flows.sampling.FactorizedFlowSampler">
+<em class="property">class </em><code class="sig-name descname">FactorizedFlowSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
 <p>Sample d-dimensional data from a factorized 1D PDF over each dimension
 The 1D PDF is expected to be a pytorch.probability.Distribution object
@@ -53,11 +53,35 @@ but it can be any object that implements the <cite>sample`and `log_prob</cite> m
 respond appropriately to the <cite>.to(device)</cite>. To sample on a device, provide a
 prior initialized with parameters already on the correct device.</p>
 <dl class="py method">
-<dt id="src.models.flows.sampling.FactorizedFlowPrior.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowPrior.forward" title="Permalink to this definition">¶</a></dt>
+<dt id="src.models.flows.sampling.FactorizedFlowSampler.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample n_batch points and stack them with their jacobians</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="src.models.flows.sampling.FactorizedFlowSampler.log_prob">
+<code class="sig-name descname">log_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowSampler.log_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute, point-per-point, the log-PDF of a batch of points</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.models.flows.sampling.FactorizedGaussianSampler">
+<em class="property">class </em><code class="sig-name descname">FactorizedGaussianSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sig</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedGaussianSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#src.models.flows.sampling.FactorizedFlowSampler" title="src.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
+<p>Factorized gaussian prior
+Note that tensorflow distribution objects cannot easily be moved devices so specify the right
+device at initialization.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.models.flows.sampling.UniformSampler">
+<em class="property">class </em><code class="sig-name descname">UniformSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">low</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">high</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.UniformSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#src.models.flows.sampling.FactorizedFlowSampler" title="src.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
+<p>Factorized uniform prior
+Note that tensorflow distribution objects cannot easily be moved devices so specify the right
+device at initialization.</p>
 </dd></dl>
 
 </div>

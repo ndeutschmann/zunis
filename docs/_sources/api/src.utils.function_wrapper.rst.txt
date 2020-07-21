@@ -1,0 +1,7 @@
+src.utils.function\_wrapper module
+==================================
+
+.. automodule:: src.utils.function_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:

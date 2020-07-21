@@ -50,6 +50,12 @@ This implements the universal transform_and_compute_jacobian behavior:
 y = flow(x), - log(j(y)) = - log(j(x)) + log(det(dy_i/dx_j))
 The jacobian is computed naively by using autograd.</p>
 <dl class="py method">
+<dt id="src.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.flow">
+<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a backprop_flow, the transformation is just a pytorch module</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="src.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.transform_and_compute_jacobian">
 <code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the flow transformation and its Jacobian using pytorch.autograd</p>

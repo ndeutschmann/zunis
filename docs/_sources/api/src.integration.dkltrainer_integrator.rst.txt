@@ -1,0 +1,7 @@
+src.integration.dkltrainer\_integrator module
+=============================================
+
+.. automodule:: src.integration.dkltrainer_integrator
+   :members:
+   :undoc-members:
+   :show-inheritance:

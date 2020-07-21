@@ -12,7 +12,9 @@ Subpackages
 .. toctree::
    :maxdepth: 2
 
+   src.models.flows.analytic_flows
    src.models.flows.backprop_jacobian_flows
+   src.models.flows.coupling_cells
 
 Submodules
 ----------
@@ -22,3 +24,4 @@ Submodules
 
    src.models.flows.general_flow
    src.models.flows.sampling
+   src.models.flows.sequential

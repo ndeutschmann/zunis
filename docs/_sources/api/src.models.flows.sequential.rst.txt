@@ -1,0 +1,7 @@
+src.models.flows.sequential module
+==================================
+
+.. automodule:: src.models.flows.sequential
+   :members:
+   :undoc-members:
+   :show-inheritance:

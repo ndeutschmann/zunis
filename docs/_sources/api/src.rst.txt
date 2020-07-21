@@ -12,5 +12,7 @@ Subpackages
 .. toctree::
    :maxdepth: 2
 
+   src.integration
    src.models
-   src.visualization
+   src.training
+   src.utils

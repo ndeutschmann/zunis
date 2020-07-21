@@ -1,0 +1,19 @@
+src.training.weighted\_dataset package
+======================================
+
+.. automodule:: src.training.weighted_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.training.weighted_dataset.dkl_training
+   src.training.weighted_dataset.generators
+   src.training.weighted_dataset.training_record
+   src.training.weighted_dataset.variance_training
+   src.training.weighted_dataset.weighted_dataset_trainer

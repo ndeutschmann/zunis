@@ -1,4 +1,23 @@
 Getting started
 ===============
 
-This is where you describe how to get set up on a clean install.
+The most basic usage of this library is using the default integrator class as follows
+
+.. code-block:: python
+
+    import torch
+    from src.integration import DefaultIntegrator
+
+    device = torch.device("cuda")
+
+    d = 2
+
+    def f(x):
+        return x[:,0]**2 + x[:,1]**2
+
+    integrator = DefaultIntegrator(d=d,f=f,device=device)
+    result, uncertainty, history = integrator.integrate()
+
+The function `f` is integrated over the `d`-dimensional unit hypercube and
+* takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N`
+* returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N`

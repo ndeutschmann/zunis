@@ -1,0 +1,7 @@
+src.training.weighted\_dataset.variance\_training module
+========================================================
+
+.. automodule:: src.training.weighted_dataset.variance_training
+   :members:
+   :undoc-members:
+   :show-inheritance:

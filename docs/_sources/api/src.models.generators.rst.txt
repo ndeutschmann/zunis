@@ -1,0 +1,7 @@
+src.models.generators module
+============================
+
+.. automodule:: src.models.generators
+   :members:
+   :undoc-members:
+   :show-inheritance:

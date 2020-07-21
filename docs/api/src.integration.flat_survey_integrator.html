@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>src.integration.flat_survey_integrator module &#8212; pytorch_flows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.integration.flat_survey_integrator">
+<span id="src-integration-flat-survey-integrator-module"></span><h1>src.integration.flat_survey_integrator module<a class="headerlink" href="#module-src.integration.flat_survey_integrator" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="src.integration.flat_survey_integrator.FlatSurveySamplingIntegrator">
+<em class="property">class </em><code class="sig-name descname">FlatSurveySamplingIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">trainer</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_iter_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_iter_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">n_points_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">trainer_verbosity</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator">
+<em class="property">class </em><code class="sig-name descname">PosteriorSurveySamplingIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">trainer</span></em>, <em class="sig-param"><span class="n">posterior</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_iter_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_iter_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">n_points_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">trainer_verbosity</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="src.integration.integratorAPI.html#src.integration.integratorAPI.SurveyRefineIntegratorAPI" title="src.integration.integratorAPI.SurveyRefineIntegratorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.integration.integratorAPI.SurveyRefineIntegratorAPI</span></code></a></p>
+<p>Most basic integrator:
+Takes a trainer object at initialization and samples from a given distribution in target space
+during the survey phase. The function to integrate is given at initialization.</p>
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.empty_history">
+<em class="property">static </em><code class="sig-name descname">empty_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.empty_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an empty history object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_integration">
+<code class="sig-name descname">finalize_integration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the whole integration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_refine">
+<code class="sig-name descname">finalize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the refine phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_survey">
+<code class="sig-name descname">finalize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intialization before the whole integration process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_refine">
+<code class="sig-name descname">initialize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization before the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_survey">
+<code class="sig-name descname">initialize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization before the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step">
+<code class="sig-name descname">process_refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a refine step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_survey_step">
+<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine">
+<code class="sig-name descname">sample_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points for a refine step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey">
+<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points from target space distribution</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/src.integration.flat_survey_integrator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+src.models.flows.analytic\_flows.element\_wise module
+=====================================================
+
+.. automodule:: src.models.flows.analytic_flows.element_wise
+   :members:
+   :undoc-members:
+   :show-inheritance:

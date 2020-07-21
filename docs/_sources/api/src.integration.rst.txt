@@ -1,0 +1,18 @@
+src.integration package
+=======================
+
+.. automodule:: src.integration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.integration.adaptive_survey_integrator
+   src.integration.dkltrainer_integrator
+   src.integration.flat_survey_integrator
+   src.integration.integratorAPI

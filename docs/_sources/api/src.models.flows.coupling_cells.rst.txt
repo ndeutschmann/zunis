@@ -1,0 +1,25 @@
+src.models.flows.coupling\_cells package
+========================================
+
+.. automodule:: src.models.flows.coupling_cells
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.models.flows.coupling_cells.piecewise_coupling
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   src.models.flows.coupling_cells.general_coupling
+   src.models.flows.coupling_cells.real_nvp
+   src.models.flows.coupling_cells.transforms

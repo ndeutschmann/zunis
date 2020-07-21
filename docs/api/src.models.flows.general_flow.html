@@ -51,10 +51,12 @@ Most generic variable transformation:
 <em class="property">class </em><code class="sig-name descname">GeneralFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.general_flow.GeneralFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>General abstract class for flows</p>
-<dl class="py attribute">
+<dl class="py method">
 <dt id="src.models.flows.general_flow.GeneralFlow.flow">
-<code class="sig-name descname">flow</code><em class="property"> = &lt;better_abc.abc_meta.AbstractAttribute object&gt;</em><a class="headerlink" href="#src.models.flows.general_flow.GeneralFlow.flow" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property">abstract </em><code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.general_flow.GeneralFlow.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the batch of points x  with shape (…,d)
+This is an abstract method that should be overriden</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="src.models.flows.general_flow.GeneralFlow.forward">
@@ -70,7 +72,7 @@ and no jacobian is passed: pure sampling mode.</p>
 <dt id="src.models.flows.general_flow.GeneralFlow.transform_and_compute_jacobian">
 <em class="property">abstract </em><code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.general_flow.GeneralFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the flow transformation and its Jacobian simulatenously on
-xj with xj.shape == (:,d+1)</p>
+xj with xj.shape == (…,d+1)</p>
 <p>This is an abstract method that should be overriden</p>
 </dd></dl>
 

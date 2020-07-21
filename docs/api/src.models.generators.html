@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>src.models.generators module &#8212; pytorch_flows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-src.models.generators">
+<span id="src-models-generators-module"></span><h1>src.models.generators module<a class="headerlink" href="#module-src.models.generators" title="Permalink to this headline">¶</a></h1>
+<p>Tools to build out-of-the box models</p>
+<dl class="py function">
+<dt id="src.models.generators.create_checkerboard_hypercube_realnvp">
+<code class="sig-name descname">create_checkerboard_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_checkerboard_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="src.models.generators.create_hypercube_flow">
+<code class="sig-name descname">create_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">model_type</span><span class="o">=</span><span class="default_value">'realnvp'</span></em>, <em class="sig-param"><span class="n">mask_type</span><span class="o">=</span><span class="default_value">'checkerboard'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_hypercube_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a high-level generator with default behavior</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.models.generators.create_n_ary_hypercube_realnvp">
+<code class="sig-name descname">create_n_ary_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_n_ary_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="src.models.generators.n_ary_mask">
+<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.n_ary_mask" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/src.models.generators.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

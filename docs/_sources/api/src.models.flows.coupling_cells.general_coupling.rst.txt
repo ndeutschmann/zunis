@@ -1,0 +1,7 @@
+src.models.flows.coupling\_cells.general\_coupling module
+=========================================================
+
+.. automodule:: src.models.flows.coupling_cells.general_coupling
+   :members:
+   :undoc-members:
+   :show-inheritance:

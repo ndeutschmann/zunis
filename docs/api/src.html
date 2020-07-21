@@ -38,17 +38,37 @@
             
   <div class="section" id="module-src">
 <span id="src-package"></span><h1>src package<a class="headerlink" href="#module-src" title="Permalink to this headline">¶</a></h1>
-<p>My super nice package</p>
+<p>Library of the Pytorch-Flows project</p>
+<dl class="py function">
+<dt id="src.setup_std_stream_logger">
+<code class="sig-name descname">setup_std_stream_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_level</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.setup_std_stream_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the root logger of this module to split output between stdout and stderr
+:param - min_level: minimum level output to stderr. Default is INFO
+:param - debug: overrides min_level to DEBUG</p>
+<p class="rubric">Notes</p>
+<p>stdout : [min_level, WARNING)
+stderr : [WARNING, +∞)</p>
+</dd></dl>
+
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="src.models.html">src.models package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="src.models.html#subpackages">Subpackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.integration.html">src.integration package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.integration.html#submodules">Submodules</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="src.visualization.html">src.visualization package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="src.visualization.html#submodules">Submodules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="src.models.html">src.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.models.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.models.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.training.html">src.training package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.training.html#subpackages">Subpackages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="src.utils.html">src.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.utils.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
