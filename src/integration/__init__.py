@@ -19,7 +19,7 @@ class DefaultIntegrator(FlatSurveySamplingIntegrator):
 
     """
 
-    reset_trainer = create_dkl_trainer
+    reset_trainer = staticmethod(create_dkl_trainer)
 
     def __init__(self, f, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
