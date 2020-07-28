@@ -82,7 +82,7 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     # Regularization: points must be strictly within the unit hypercube
     # Use the dtype information from pytorch
     eps = torch.finfo(out.dtype).eps
-    out = x.clamp(
+    out = out.clamp(
         min=eps,
         max=1. - eps
     )
