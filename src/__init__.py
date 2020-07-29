@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
-def setup_std_stream_logger(min_level=None, debug=False):
+def setup_std_stream_logger(min_level=None, debug=False, force=True):
     """Set the root logger of this module to split output between stdout and stderr
     Arguments:
         - min_level: minimum level output to stderr. Default is INFO
@@ -36,5 +36,9 @@ def setup_std_stream_logger(min_level=None, debug=False):
     h2 = logging.StreamHandler(sys.stderr)
     h2.setLevel(logging.WARNING)
 
-    logger.addHandler(h1)
-    logger.addHandler(h2)
+    if len(logger.handlers == 1) or force:
+        logger.addHandler(h1)
+        logger.addHandler(h2)
+    else:
+        logger.warning("The logger already has handlers setup none were added.")
+        logger.warning("Use the `force` option to bypass this behavior.")
