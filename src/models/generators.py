@@ -7,24 +7,65 @@ from src.models.flows.analytic_flows.element_wise import InvertibleAnalyticSigmo
 
 
 def n_ary_mask(d, n, offset):
+    """Create a n-ary mask with n entries (a list of bool with each nth entry True)
+
+    Parameters
+    ----------
+    d: int
+        numbers of entries in the mask
+    n: int
+        period of the mask
+    offset: int
+        offset of the True entries
+
+    Returns
+    -------
+    list of bool
+        True/False mask with each nth entry True
+    """
     return [(i + offset) % n == 0 for i in range(d)]
 
 
-def create_n_ary_hypercube_realnvp(d, n=2, repetitions=2, d_hidden=256, n_hidden=16):
+def create_n_ary_hypercube_flow(cell, d, n=2, repetitions=2, **cell_options):
+    """Create a sequential normalizing flow on the d-dimensional unit hypercube based on a given
+    coupling cell with a n-ary mask. Subsequent cells have masks offset by one at each step until
+    all possible masks have been used.
+
+    Parameters
+    ----------
+    cell:
+        coupling cell class
+    d: int
+        dimension of the unit hypercube
+    n:
+        period of the n-ary mask
+    repetitions:
+        how many times a full repetition through all possible masks is repeated
+    cell_options:
+        options to be passed at the coupling cell instantiation
+
+    Returns
+    -------
+    InvertibleSequentialFlow
+    """
     layers = []
     for rep in range(repetitions):
         for i in range(n):
             mask = n_ary_mask(d, n, i)
             layers.append(
-                RealNVP(d=d,
-                        mask=mask,
-                        d_hidden=d_hidden,
-                        n_hidden=n_hidden, ),
+                cell(d=d,
+                     mask=mask,
+                     **cell_options
+                     ),
             )
     layers.append(InvertibleAnalyticSigmoid(d=d))
 
     model = InvertibleSequentialFlow(d, layers)
     return model
+
+
+def create_n_ary_hypercube_realnvp(d, n=2, repetitions=2, d_hidden=256, n_hidden=16):
+    return create_n_ary_hypercube_flow(RealNVP, d, n=n, repetitions=repetitions, d_hidden=d_hidden, n_hidden=n_hidden)
 
 
 def create_checkerboard_hypercube_realnvp(d, repetitions=2, d_hidden=256, n_hidden=16):
