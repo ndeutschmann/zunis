@@ -1,7 +1,7 @@
 """Tools to build out-of-the box models"""
 
 import torch
-from src.models.flows.sequential import InvertibleSequentialFlow
+from src.models.flows.sequential.invertible_sequential import InvertibleSequentialFlow
 from src.models.flows.coupling_cells.real_nvp import RealNVP
 from src.models.flows.analytic_flows.element_wise import InvertibleAnalyticSigmoid
 

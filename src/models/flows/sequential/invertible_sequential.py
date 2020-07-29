@@ -1,5 +1,6 @@
 import torch
-from .general_flow import GeneralFlow
+
+from src.models.flows.general_flow import GeneralFlow
 
 
 class InvertibleSequentialFlow(GeneralFlow):
