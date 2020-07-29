@@ -1,9 +1,10 @@
-"""Implementatin of realNVP: a coupling cell with an affine transform"""
+"""Implementation of realNVP: a coupling cell with an affine transform"""
 
 import torch
 from .general_coupling import InvertibleCouplingCell
 from src.models.layers.trainable import ArbitraryShapeRectangularDNN
 from .transforms import InvertibleTransform
+from src.models.utils import Reshift
 
 
 def element_wise_affine(x, st, compute_jacobian=True):
@@ -40,10 +41,13 @@ def inverse_element_wise_affine(x, st, compute_jacobian=True):
 
 
 class ElementWiseAffineTransform(InvertibleTransform):
+    """Invertible element-wise affine transform"""
     def forward(self, y, st, compute_jacobian=True):
+        """"""
         return element_wise_affine(y, st, compute_jacobian=compute_jacobian)
 
     def backward(self, y, st, compute_jacobian=True):
+        """"""
         return inverse_element_wise_affine(y, st, compute_jacobian=compute_jacobian)
 
 
@@ -76,13 +80,40 @@ class FakeRealNVP(GeneralRealNVP):
 
 
 class RealNVP(GeneralRealNVP):
+    """Real non-volume-preserving coupling cell.
+
+    This implements a bijective mapping R^d -> R^d by transforming some subset of the coordinates
+    defined by the mask through a coordinate-wise affine transformation. As with other coupling cells
+    the parameters of the affine transformation are the output of a neural network taking the un-tranformed
+    coordinates as input."""
     def __init__(self, *, d, mask,
-                 d_hidden,
-                 n_hidden,
-                 input_activation=None,
-                 hidden_activation=torch.nn.ReLU,
+                 d_hidden=256,
+                 n_hidden=8,
+                 input_activation=Reshift,
+                 hidden_activation=torch.nn.LeakyReLU,
                  output_activation=None,
                  use_batch_norm=False):
+        """
+
+        Parameters
+        ----------
+        d: int
+            dimension of the space
+        mask: list of bool
+            mask defining which variables are transformed
+        d_hidden: int, 256
+            width of the neural network
+        n_hidden: int, 8
+            depth of the neural network
+        input_activation
+            activation function applied before going through the neural network
+        hidden_activation
+            activation function applied after each hidden layer of the neural network
+        output_activation
+            activation function applied after the last layer of the neural network
+        use_batch_norm: bool
+            whether to use batch normalization after each hidden layer of the neural network
+        """
         super(RealNVP, self).__init__(d=d, mask=mask)
 
         d_in = sum(mask)
