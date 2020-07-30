@@ -1,29 +1,9 @@
 """Tools to build out-of-the box models"""
 
-import torch
+from src.models.flows.masking import n_ary_mask
 from src.models.flows.sequential.invertible_sequential import InvertibleSequentialFlow
 from src.models.flows.coupling_cells.real_nvp import RealNVP
 from src.models.flows.analytic_flows.element_wise import InvertibleAnalyticSigmoid
-
-
-def n_ary_mask(d, n, offset):
-    """Create a n-ary mask with n entries (a list of bool with each nth entry True)
-
-    Parameters
-    ----------
-    d: int
-        numbers of entries in the mask
-    n: int
-        period of the mask
-    offset: int
-        offset of the True entries
-
-    Returns
-    -------
-    list of bool
-        True/False mask with each nth entry True
-    """
-    return [(i + offset) % n == 0 for i in range(d)]
 
 
 def create_n_ary_hypercube_flow(cell, d, n=2, repetitions=2, **cell_options):
