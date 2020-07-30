@@ -6,6 +6,7 @@ import torch
 from ..transforms import InvertibleTransform
 from ..general_coupling import InvertibleCouplingCell
 from src.models.layers.trainable import ArbitraryShapeRectangularDNN
+from src.models.utils import Reshift
 
 third_dimension_softmax = torch.nn.Softmax(dim=2)
 
@@ -234,11 +235,11 @@ class PWLinearCoupling(GeneralPWLinearCoupling):
     """
 
     def __init__(self, *, d, mask,
-                 n_bins,
-                 d_hidden,
-                 n_hidden,
-                 input_activation=None,
-                 hidden_activation=torch.nn.ReLU,
+                 n_bins=10,
+                 d_hidden=256,
+                 n_hidden=8,
+                 input_activation=Reshift,
+                 hidden_activation=torch.nn.LeakyReLU,
                  output_activation=None,
                  use_batch_norm=False):
         """
