@@ -81,18 +81,39 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
 
         Parameters
         ----------
-        d
-        cell
-        masking
-        input_cell
-        output_cell
-        cell_params
-        input_cell_params
-        output_cell_params
+        d: int
+            dimensionality
+        cell: {"pwlinear", "realnvp"}
+            coupling cell choice
+        masking: {"checkerboard"}
+            masking strategy (more to come)
+        input_cell: optional
+            Transformation before the repeated cell
+        output_cell: optional
+            Transformation after the repeated cell
+        cell_params: dict, optional
+            parameters for the repeated cell
+        input_cell_params: dict, optional
+            parameters for the input_cell
+        output_cell_params: dict, optional
+            parameters for the output_cell
+        masking_options: dict, optional
+            parameters for the masking strategy
         """
-        cell, input_cell, output_cell = self.cells[cell]
+
+        if isinstance(cell, str):
+            cell, input_cell_, output_cell_ = self.cells[cell]
+        else:
+            input_cell_ = None
+            output_cell_ = None
+
+        if input_cell is None:
+            input_cell = input_cell_
+        if output_cell is None:
+            output_cell = output_cell_
         if masking_options is None:
             masking_options = dict()
+
         masks = self.masking[masking](d, **masking_options)
         super(RepeatedCellFlow, self).__init__(d, cell=self.cells, masks=masks,
                                                input_cell=input_cell, output_cell=output_cell,
