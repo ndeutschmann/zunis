@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>src.models.flows.coupling_cells package &#8212; pytorch_flows 0.1 documentation</title>
+    <title>src.models.flows.masking module &#8212; pytorch_flows 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
@@ -17,8 +17,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="src.models.flows.coupling_cells.piecewise_coupling package" href="src.models.flows.coupling_cells.piecewise_coupling.html" />
-    <link rel="prev" title="src.models.flows.backprop_jacobian_flows.simple_backprop_flows module" href="src.models.flows.backprop_jacobian_flows.simple_backprop_flows.html" /> 
+    <link rel="next" title="src.models.flows.sampling module" href="src.models.flows.sampling.html" />
+    <link rel="prev" title="src.models.flows.general_flow module" href="src.models.flows.general_flow.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,10 +30,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="src.models.flows.coupling_cells.piecewise_coupling.html" title="src.models.flows.coupling_cells.piecewise_coupling package"
+          <a href="src.models.flows.sampling.html" title="src.models.flows.sampling module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="src.models.flows.backprop_jacobian_flows.simple_backprop_flows.html" title="src.models.flows.backprop_jacobian_flows.simple_backprop_flows module"
+          <a href="src.models.flows.general_flow.html" title="src.models.flows.general_flow module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
@@ -47,35 +47,53 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-src.models.flows.coupling_cells">
-<span id="src-models-flows-coupling-cells-package"></span><h1>src.models.flows.coupling_cells package<a class="headerlink" href="#module-src.models.flows.coupling_cells" title="Permalink to this headline">¶</a></h1>
-<p>Flows based on coupling cells</p>
-<p>A coupling cell is a variable change x^i = f(y^j) such that there are two variable groups
-M and N such that for all n in N and m in M
-* x^n = y^n
-* x^m = f(x^m,T(x^N)) &lt;- each m transformed indepently and depends on m and all N
-such that f(x,t^N) has a simple derivative wrt x.</p>
-<div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="src.models.flows.coupling_cells.piecewise_coupling.html">src.models.flows.coupling_cells.piecewise_coupling package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="src.models.flows.coupling_cells.piecewise_coupling.html#submodules">Submodules</a></li>
+  <div class="section" id="module-src.models.flows.masking">
+<span id="src-models-flows-masking-module"></span><h1>src.models.flows.masking module<a class="headerlink" href="#module-src.models.flows.masking" title="Permalink to this headline">¶</a></h1>
+<p>Module for the generation of masks for coupling cells</p>
+<dl class="py function">
+<dt id="src.models.flows.masking.n_ary_mask">
+<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a n-ary mask with n entries (a list of bool with each nth entry True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – numbers of entries in the mask</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – period of the mask</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – offset of the True entries</p></li>
 </ul>
-</li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True/False mask with each nth entry True</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.models.flows.masking.n_ary_mask_strategy">
+<code class="sig-name descname">n_ary_mask_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">repetitions</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.masking.n_ary_mask_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an list of masks using the n-ary periodic strategy: every nth entry is True and each next mask is
+offset by one position with respect to the previous one. We loop for a given number of repetitions through all
+possible masks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>n</strong> – periodicity of the mask</p></li>
+<li><p><strong>repetitions</strong> – number of iterations through all possible masks</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="src.models.flows.coupling_cells.general_coupling.html">src.models.flows.coupling_cells.general_coupling module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src.models.flows.coupling_cells.real_nvp.html">src.models.flows.coupling_cells.real_nvp module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src.models.flows.coupling_cells.transforms.html">src.models.flows.coupling_cells.transforms module</a></li>
-</ul>
-</div>
-</div>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of masks</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of list of bool</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -84,25 +102,16 @@ such that f(x,t^N) has a simple derivative wrt x.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">src.models.flows.coupling_cells package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="src.models.flows.backprop_jacobian_flows.simple_backprop_flows.html"
-                        title="previous chapter">src.models.flows.backprop_jacobian_flows.simple_backprop_flows module</a></p>
+  <p class="topless"><a href="src.models.flows.general_flow.html"
+                        title="previous chapter">src.models.flows.general_flow module</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="src.models.flows.coupling_cells.piecewise_coupling.html"
-                        title="next chapter">src.models.flows.coupling_cells.piecewise_coupling package</a></p>
+  <p class="topless"><a href="src.models.flows.sampling.html"
+                        title="next chapter">src.models.flows.sampling module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/src.models.flows.coupling_cells.rst.txt"
+      <li><a href="../_sources/api/src.models.flows.masking.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -130,10 +139,10 @@ such that f(x,t^N) has a simple derivative wrt x.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="src.models.flows.coupling_cells.piecewise_coupling.html" title="src.models.flows.coupling_cells.piecewise_coupling package"
+          <a href="src.models.flows.sampling.html" title="src.models.flows.sampling module"
              >next</a> |</li>
         <li class="right" >
-          <a href="src.models.flows.backprop_jacobian_flows.simple_backprop_flows.html" title="src.models.flows.backprop_jacobian_flows.simple_backprop_flows module"
+          <a href="src.models.flows.general_flow.html" title="src.models.flows.general_flow module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>

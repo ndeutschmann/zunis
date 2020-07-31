@@ -14,6 +14,7 @@ Submodules
 
    src.training.weighted_dataset.dkl_training
    src.training.weighted_dataset.generators
+   src.training.weighted_dataset.stateful_trainer
    src.training.weighted_dataset.training_record
    src.training.weighted_dataset.variance_training
    src.training.weighted_dataset.weighted_dataset_trainer

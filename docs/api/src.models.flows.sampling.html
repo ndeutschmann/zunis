@@ -16,7 +16,9 @@
     <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.models.layers package" href="src.models.layers.html" />
+    <link rel="prev" title="src.models.flows.masking module" href="src.models.flows.masking.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +29,16 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.layers.html" title="src.models.layers package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.models.flows.masking.html" title="src.models.flows.masking module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" >src.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.models.flows.html" accesskey="U">src.models.flows package</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -52,6 +63,7 @@ but it can be any object that implements the <cite>sample`and `log_prob</cite> m
 <p>NB: we provide the 1D prior object explicitly as pytorch distributions don’t
 respond appropriately to the <cite>.to(device)</cite>. To sample on a device, provide a
 prior initialized with parameters already on the correct device.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
 <dt id="src.models.flows.sampling.FactorizedFlowSampler.forward">
 <code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
@@ -73,6 +85,7 @@ prior initialized with parameters already on the correct device.</p>
 <p>Factorized gaussian prior
 Note that tensorflow distribution objects cannot easily be moved devices so specify the right
 device at initialization.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -82,6 +95,7 @@ device at initialization.</p>
 <p>Factorized uniform prior
 Note that tensorflow distribution objects cannot easily be moved devices so specify the right
 device at initialization.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 </dd></dl>
 
 </div>
@@ -92,6 +106,12 @@ device at initialization.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.models.flows.masking.html"
+                        title="previous chapter">src.models.flows.masking module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.models.layers.html"
+                        title="next chapter">src.models.layers package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -122,7 +142,16 @@ device at initialization.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.layers.html" title="src.models.layers package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.models.flows.masking.html" title="src.models.flows.masking module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" >src.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.models.flows.html" >src.models.flows package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

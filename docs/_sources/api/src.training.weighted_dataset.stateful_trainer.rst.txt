@@ -1,0 +1,7 @@
+src.training.weighted\_dataset.stateful\_trainer module
+=======================================================
+
+.. automodule:: src.training.weighted_dataset.stateful_trainer
+   :members:
+   :undoc-members:
+   :show-inheritance:

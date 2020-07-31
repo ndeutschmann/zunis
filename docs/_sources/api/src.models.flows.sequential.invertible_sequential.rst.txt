@@ -1,0 +1,7 @@
+src.models.flows.sequential.invertible\_sequential module
+=========================================================
+
+.. automodule:: src.models.flows.sequential.invertible_sequential
+   :members:
+   :undoc-members:
+   :show-inheritance:

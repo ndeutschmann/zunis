@@ -16,14 +16,15 @@ not work well due to an unknown or complicated structure which prevents the typi
 tricks.
 
 .. _[1]: https://arxiv.org/abs/1808.03856
-Contents:
 
+Contents:
+---------
 .. toctree::
    :maxdepth: 2
 
    getting-started
    commands
-   api/modules
+   api/src
 
 
 
@@ -33,3 +34,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+ 

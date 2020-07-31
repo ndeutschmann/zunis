@@ -16,7 +16,9 @@
     <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.models.utils module" href="src.models.utils.html" />
+    <link rel="prev" title="src.models.layers.trainable module" href="src.models.layers.trainable.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +29,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.utils.html" title="src.models.utils module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.models.layers.trainable.html" title="src.models.layers.trainable module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" accesskey="U">src.models package</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -51,13 +61,33 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.models.generators.create_n_ary_hypercube_realnvp">
-<code class="sig-name descname">create_n_ary_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_n_ary_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="src.models.generators.create_n_ary_hypercube_flow">
+<code class="sig-name descname">create_n_ary_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">cell_options</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_n_ary_hypercube_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a sequential normalizing flow on the d-dimensional unit hypercube based on a given
+coupling cell with a n-ary mask. Subsequent cells have masks offset by one at each step until
+all possible masks have been used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell</strong> – coupling cell class</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the unit hypercube</p></li>
+<li><p><strong>n</strong> – period of the n-ary mask</p></li>
+<li><p><strong>repetitions</strong> – how many times a full repetition through all possible masks is repeated</p></li>
+<li><p><strong>cell_options</strong> – options to be passed at the coupling cell instantiation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.models.flows.sequential.invertible_sequential.html#src.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="src.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">InvertibleSequentialFlow</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
-<dt id="src.models.generators.n_ary_mask">
-<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.n_ary_mask" title="Permalink to this definition">¶</a></dt>
+<dt id="src.models.generators.create_n_ary_hypercube_realnvp">
+<code class="sig-name descname">create_n_ary_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.generators.create_n_ary_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -68,6 +98,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.models.layers.trainable.html"
+                        title="previous chapter">src.models.layers.trainable module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.models.utils.html"
+                        title="next chapter">src.models.utils module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -98,7 +134,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.utils.html" title="src.models.utils module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.models.layers.trainable.html" title="src.models.layers.trainable module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" >src.models package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

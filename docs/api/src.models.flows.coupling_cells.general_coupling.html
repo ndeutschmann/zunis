@@ -16,7 +16,9 @@
     <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.models.flows.coupling_cells.real_nvp module" href="src.models.flows.coupling_cells.real_nvp.html" />
+    <link rel="prev" title="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module" href="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +29,17 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.flows.coupling_cells.real_nvp.html" title="src.models.flows.coupling_cells.real_nvp module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html" title="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" >src.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.models.flows.html" >src.models.flows package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="src.models.flows.coupling_cells.html" accesskey="U">src.models.flows.coupling_cells package</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -44,6 +56,28 @@
 <em class="property">class </em><code class="sig-name descname">GeneralCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">transform</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="src.models.flows.general_flow.html#src.models.flows.general_flow.GeneralFlow" title="src.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Abstract class for coupling cell</p>
+<p>Coupling cell instantiation:
+- mask: boolean Tensor that indicates which variables are passed (y_N) through
+and which are transformed (y_M)
+- transform: function that takes three arguments</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>y_M: the variables that are transformed</p></li>
+<li><p>t: a set of parameters for the transformation</p></li>
+<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>and returns a 2-tuple</dt><dd><ul class="simple">
+<li><p>x_M: the transformed variable batch</p></li>
+<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>T the function that computes the parameters T from y_N</p></li>
+</ul>
+<p>NB:</p>
 <dl class="py method">
 <dt id="src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow">
 <code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow" title="Permalink to this definition">¶</a></dt>
@@ -64,6 +98,28 @@
 <dd><p>Bases: <a class="reference internal" href="#src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">src.models.flows.coupling_cells.general_coupling.GeneralCouplingCell</span></code></a></p>
 <p>An invertible coupling cell works exactly the same as a general coupling cell
 but its transform admits and inverse transformation.</p>
+<p>Coupling cell instantiation:
+- mask: boolean Tensor that indicates which variables are passed (y_N) through
+and which are transformed (y_M)
+- transform: function that takes three arguments</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>y_M: the variables that are transformed</p></li>
+<li><p>t: a set of parameters for the transformation</p></li>
+<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>and returns a 2-tuple</dt><dd><ul class="simple">
+<li><p>x_M: the transformed variable batch</p></li>
+<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>T the function that computes the parameters T from y_N</p></li>
+</ul>
+<p>NB:</p>
 <dl class="py method">
 <dt id="src.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert">
 <code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert" title="Permalink to this definition">¶</a></dt>
@@ -92,6 +148,12 @@ but its transform admits and inverse transformation.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html"
+                        title="previous chapter">src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="src.models.flows.coupling_cells.real_nvp.html"
+                        title="next chapter">src.models.flows.coupling_cells.real_nvp module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -122,7 +184,17 @@ but its transform admits and inverse transformation.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="src.models.flows.coupling_cells.real_nvp.html" title="src.models.flows.coupling_cells.real_nvp module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html" title="src.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="src.html" >src package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="src.models.html" >src.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="src.models.flows.html" >src.models.flows package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="src.models.flows.coupling_cells.html" >src.models.flows.coupling_cells package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

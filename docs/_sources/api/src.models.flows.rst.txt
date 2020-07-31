@@ -15,6 +15,7 @@ Subpackages
    src.models.flows.analytic_flows
    src.models.flows.backprop_jacobian_flows
    src.models.flows.coupling_cells
+   src.models.flows.sequential
 
 Submodules
 ----------
@@ -23,5 +24,5 @@ Submodules
    :maxdepth: 2
 
    src.models.flows.general_flow
+   src.models.flows.masking
    src.models.flows.sampling
-   src.models.flows.sequential
