@@ -52,14 +52,14 @@ class MaskListRepeatedCellFlow(InvertibleSequentialFlow):
         flows = []
         if input_cell is not None:
             assert isinstance(input_cell, InvertibleAnalyticFlow), "The input cell must be an InvertibleAnalyticFlow"
-            flows.append(input_cell(**input_cell_params))
+            flows.append(input_cell(d=d, **input_cell_params))
 
         for mask in masks:
-            flows.append(cell(mask=mask, **cell_params))
+            flows.append(cell(d=d, mask=mask, **cell_params))
 
         if output_cell is not None:
             assert isinstance(output_cell, InvertibleAnalyticFlow), "The output cell must be an InvertibleAnalyticFlow"
-            flows.append(output_cell(**output_cell_params))
+            flows.append(output_cell(d=d, **output_cell_params))
 
         super(MaskListRepeatedCellFlow, self).__init__(d=d, flows=flows)
 
@@ -115,7 +115,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
             masking_options = dict()
 
         masks = self.masking[masking](d, **masking_options)
-        super(RepeatedCellFlow, self).__init__(d, cell=self.cells, masks=masks,
+        super(RepeatedCellFlow, self).__init__(d, cell=cell, masks=masks,
                                                input_cell=input_cell, output_cell=output_cell,
                                                cell_params=cell_params, input_cell_params=input_cell_params,
                                                output_cell_params=output_cell_params)

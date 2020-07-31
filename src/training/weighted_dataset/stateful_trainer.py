@@ -91,6 +91,8 @@ class StatefulTrainer(BasicStatefulTrainer):
 
         # Two options for flows: either use the RepeatedCellFlow interface or pass an actual flow object
         if isinstance(flow, str):
+            if flow_options is None:
+                flow_options = dict()
             flow = RepeatedCellFlow(d=d, cell=flow, **flow_options).to(device)
 
         if optim is None:

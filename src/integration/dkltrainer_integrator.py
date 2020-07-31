@@ -41,8 +41,6 @@ class DKLAdaptiveSurveyIntegrator(AdaptiveSurveyIntegrator):
                                                           trainer_verbosity=trainer_verbosity,
                                                           **kwargs)
 
-        assert isinstance(self.model_trainer, BasicStatefulDKLTrainer)
-
     def survey_switch_condition(self):
         """Check if the loss is negative. This test is used to switch from uniform sampling
         to sampling from the flow in the survey phase.

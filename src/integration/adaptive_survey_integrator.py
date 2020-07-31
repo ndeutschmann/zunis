@@ -36,7 +36,7 @@ class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
 
         # As long as the survey switch condition (see abstractmethod below) is False,
         # This is false
-        self.survey_mode = False
+        self.sample_forward = False
 
     @abstractmethod
     def survey_switch_condition(self):
@@ -46,7 +46,7 @@ class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
     def sample_survey(self, *, n_points=None, f=None, **kwargs):
 
         # Starting mode: sample from the flat distribution in target space
-        if not self.survey_mode:
+        if not self.sample_forward:
             return super(AdaptiveSurveyIntegrator, self).sample_survey(n_points=n_points, f=f, **kwargs)
 
         # When the model is trained enough, sample from it
@@ -65,6 +65,6 @@ class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
     def process_survey_step(self, sample, integral, integral_var, training_record, **kwargs):
         super(AdaptiveSurveyIntegrator, self).process_survey_step(sample, integral, integral_var, training_record,
                                                                   **kwargs)
-        if (not self.survey_mode) and self.survey_switch_condition():
+        if (not self.sample_forward) and self.survey_switch_condition():
             self.logger.info("Switching sampling mode")
-            self.survey_mode = True
+            self.sample_forward = True
