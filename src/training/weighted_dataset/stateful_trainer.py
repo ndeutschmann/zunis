@@ -33,15 +33,16 @@ class StatefulTrainer(BasicStatefulTrainer):
     """Dictionary for the string-based API to define the distribution of the data in latent space"""
 
     def __init__(self, d, loss="variance", flow="pwlinear", flow_prior=None, flow_options=None, prior_options=None,
-                 device=torch.device("cpu"), n_epochs=10, *, optim=None, **kwargs):
+                 device=torch.device("cpu"), n_epochs=10, optim=None, **kwargs):
         """
 
         Parameters
         ----------
         d: int
             dimensionality of the space
-        loss: function
-            loss function
+        loss: str or function
+            loss function. If this argument is a string, it is mapped to a function using
+            :py:attr:`src.training.weighted_dataset.stateful_trainer.loss_map`
         flow: str or :py:class:`src.models.flows.general_flow.GeneralFlow`
             if this variable is a string, it is a cell key used in :py:class:`src.models.flows.sequential.repeated_cell.RepeatedCellFlow`
             otherwise it can be an actual flow model
@@ -86,7 +87,7 @@ class StatefulTrainer(BasicStatefulTrainer):
             flow_prior = self.flow_priors[flow_prior](d=d, device=device, **prior_options)
         else:
             assert isinstance(flow_prior,
-                              FactorizedFlowSampler),\
+                              FactorizedFlowSampler), \
                 "The flow prior must be either None, a string or a FactorizedFlowSampler"
 
         # Two options for flows: either use the RepeatedCellFlow interface or pass an actual flow object
