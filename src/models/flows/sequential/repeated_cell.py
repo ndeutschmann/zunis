@@ -51,14 +51,14 @@ class MaskListRepeatedCellFlow(InvertibleSequentialFlow):
 
         flows = []
         if input_cell is not None:
-            assert isinstance(input_cell, InvertibleAnalyticFlow), "The input cell must be an InvertibleAnalyticFlow"
+            assert issubclass(input_cell, InvertibleAnalyticFlow), "The input cell must be an InvertibleAnalyticFlow"
             flows.append(input_cell(d=d, **input_cell_params))
 
         for mask in masks:
             flows.append(cell(d=d, mask=mask, **cell_params))
 
         if output_cell is not None:
-            assert isinstance(output_cell, InvertibleAnalyticFlow), "The output cell must be an InvertibleAnalyticFlow"
+            assert issubclass(output_cell, InvertibleAnalyticFlow), "The output cell must be an InvertibleAnalyticFlow"
             flows.append(output_cell(d=d, **output_cell_params))
 
         super(MaskListRepeatedCellFlow, self).__init__(d=d, flows=flows)
@@ -72,7 +72,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
              "pwlinear": (PWLinearCoupling, None, None)}
 
     masking = {
-        "checkerboard": partial(n_ary_mask_strategy, n=2, repetitions=2)
+        "checkerboard": partial(n_ary_mask_strategy, n=2, repetitions=1)
     }
 
     def __init__(self, d, cell="pwlinear", masking="checkerboard", *, input_cell=None, output_cell=None,

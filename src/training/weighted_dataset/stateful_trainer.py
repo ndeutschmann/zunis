@@ -60,7 +60,7 @@ class StatefulTrainer(BasicStatefulTrainer):
             device on which to run the model and the sampling
         n_epochs: int
             number of epochs per batch of data during training
-        optim: None or torch.optim.Optimizer
+        optim: None or torch.optim.Optimizer sublcass
             optimizer to use for training. If none, default Adam is used
         """
 
@@ -97,7 +97,9 @@ class StatefulTrainer(BasicStatefulTrainer):
             flow = RepeatedCellFlow(d=d, cell=flow, **flow_options).to(device)
 
         if optim is None:
-            optim = torch.optim.Adam(flow.parameters())
+            optim_ = torch.optim.Adam(flow.parameters())
+        else:
+            optim_ = optim(flow.parameters())
 
-        super(StatefulTrainer, self).__init__(flow, flow_prior, n_epochs=n_epochs, optim=optim, **kwargs)
+        super(StatefulTrainer, self).__init__(flow, flow_prior, n_epochs=n_epochs, optim=optim_, **kwargs)
         self.loss = loss

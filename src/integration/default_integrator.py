@@ -71,7 +71,7 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                             n_iter_refine=n_iter_refine,
                                             n_points=n_points, n_points_survey=n_points_survey,
                                             n_points_refine=n_points_refine, use_survey=use_survey,
-                                            device=torch.device("cpu"), verbosity=verbosity,
+                                            device=device, verbosity=verbosity,
                                             trainer_verbosity=trainer_verbosity)
 
     if survey_strategy == "adaptive_dkl":
@@ -79,7 +79,7 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
             assert loss == "dkl", "The adaptive DKL strategy must be used with the DKL loss"
         return DKLAdaptiveSurveyIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
                                            n_iter_refine=n_iter_refine,
-                                           n_points=100000, n_points_survey=n_points_survey,
+                                           n_points=n_points, n_points_survey=n_points_survey,
                                            n_points_refine=n_points_refine, use_survey=use_survey,
-                                           device=torch.device("cpu"), verbosity=verbosity,
+                                           device=device, verbosity=verbosity,
                                            trainer_verbosity=trainer_verbosity)

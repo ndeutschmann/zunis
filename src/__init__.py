@@ -36,7 +36,7 @@ def setup_std_stream_logger(min_level=None, debug=False, force=True):
     h2 = logging.StreamHandler(sys.stderr)
     h2.setLevel(logging.WARNING)
 
-    if len(logger.handlers == 1) or force:
+    if len(logger.handlers) == 1 or force:
         logger.addHandler(h1)
         logger.addHandler(h2)
     else:

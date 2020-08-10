@@ -4,7 +4,6 @@ import torch
 from .general_coupling import InvertibleCouplingCell
 from src.models.layers.trainable import ArbitraryShapeRectangularDNN
 from .transforms import InvertibleTransform
-from src.models.utils import Reshift
 
 
 def element_wise_affine(x, st, compute_jacobian=True):
@@ -89,7 +88,7 @@ class RealNVP(GeneralRealNVP):
     def __init__(self, *, d, mask,
                  d_hidden=256,
                  n_hidden=8,
-                 input_activation=Reshift,
+                 input_activation=None,
                  hidden_activation=torch.nn.LeakyReLU,
                  output_activation=None,
                  use_batch_norm=False):

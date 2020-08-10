@@ -67,6 +67,7 @@ class BasicVarTrainer(BasicTrainer):
 
 
 class BasicStatefulVarTrainer(BasicStatefulTrainer):
+    """Basic stateful trainer based on the variance loss"""
     def __init__(self, flow, latent_prior, **kwargs):
         super(BasicStatefulVarTrainer, self).__init__(flow, latent_prior, **kwargs)
         self.loss = weighted_variance_loss
