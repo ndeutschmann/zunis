@@ -1,7 +1,0 @@
-src.models.flows.coupling\_cells.real\_nvp module
-=================================================
-
-.. automodule:: src.models.flows.coupling_cells.real_nvp
-   :members:
-   :undoc-members:
-   :show-inheritance:

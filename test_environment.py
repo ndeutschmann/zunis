@@ -34,9 +34,9 @@ def parse_requirements(strs):
             except StopIteration:
                 return
 
-        # The local library editable install is replaced with its name: "src"
+        # The local library editable install is replaced with its name: "zunis"
         if line.strip() in [".", "-e ."]:
-            line = "src"
+            line = "zunis"
 
         yield Requirement(line)
 

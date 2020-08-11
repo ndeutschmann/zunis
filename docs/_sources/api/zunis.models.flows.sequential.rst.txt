@@ -1,0 +1,16 @@
+zunis.models.flows.sequential package
+=====================================
+
+.. automodule:: zunis.models.flows.sequential
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.flows.sequential.invertible_sequential
+   zunis.models.flows.sequential.repeated_cell

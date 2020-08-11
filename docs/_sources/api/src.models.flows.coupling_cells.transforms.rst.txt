@@ -1,7 +1,0 @@
-src.models.flows.coupling\_cells.transforms module
-==================================================
-
-.. automodule:: src.models.flows.coupling_cells.transforms
-   :members:
-   :undoc-members:
-   :show-inheritance:

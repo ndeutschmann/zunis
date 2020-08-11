@@ -1,0 +1,16 @@
+zunis.models.layers package
+===========================
+
+.. automodule:: zunis.models.layers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.layers.activations
+   zunis.models.layers.trainable

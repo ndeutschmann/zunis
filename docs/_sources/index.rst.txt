@@ -23,8 +23,7 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   commands
-   api/src
+   api/zunis
 
 
 

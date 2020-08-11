@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>zunis.training.weighted_dataset.generators module &#8212; pytorch_flows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.training.weighted_dataset.stateful_trainer module" href="zunis.training.weighted_dataset.stateful_trainer.html" />
+    <link rel="prev" title="zunis.training.weighted_dataset.dkl_training module" href="zunis.training.weighted_dataset.dkl_training.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.stateful_trainer.html" title="zunis.training.weighted_dataset.stateful_trainer module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.dkl_training.html" title="zunis.training.weighted_dataset.dkl_training module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.training.html" >zunis.training package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.training.weighted_dataset.html" accesskey="U">zunis.training.weighted_dataset package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.training.weighted_dataset.generators">
+<span id="zunis-training-weighted-dataset-generators-module"></span><h1>zunis.training.weighted_dataset.generators module<a class="headerlink" href="#module-zunis.training.weighted_dataset.generators" title="Permalink to this headline">¶</a></h1>
+<p>Tools to build out-of-the-box trainers</p>
+<dl class="py function">
+<dt id="zunis.training.weighted_dataset.generators.create_dkl_trainer">
+<code class="sig-name descname">create_dkl_trainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">model_type</span><span class="o">=</span><span class="default_value">'realnvp'</span></em>, <em class="sig-param"><span class="n">mask_type</span><span class="o">=</span><span class="default_value">'checkerboard'</span></em>, <em class="sig-param"><span class="n">model_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em>, <em class="sig-param"><span class="n">n_epochs</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">optim_class</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lr</span><span class="o">=</span><span class="default_value">0.0001</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.generators.create_dkl_trainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dkl trainer with the a default flow model</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zunis.training.weighted_dataset.dkl_training.html"
+                        title="previous chapter">zunis.training.weighted_dataset.dkl_training module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zunis.training.weighted_dataset.stateful_trainer.html"
+                        title="next chapter">zunis.training.weighted_dataset.stateful_trainer module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/zunis.training.weighted_dataset.generators.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.stateful_trainer.html" title="zunis.training.weighted_dataset.stateful_trainer module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.dkl_training.html" title="zunis.training.weighted_dataset.dkl_training module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.training.html" >zunis.training package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.training.weighted_dataset.html" >zunis.training.weighted_dataset package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

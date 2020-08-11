@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>zunis.training.weighted_dataset.weighted_dataset_trainer module &#8212; pytorch_flows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.utils package" href="zunis.utils.html" />
+    <link rel="prev" title="zunis.training.weighted_dataset.variance_training module" href="zunis.training.weighted_dataset.variance_training.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.utils.html" title="zunis.utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.variance_training.html" title="zunis.training.weighted_dataset.variance_training module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.training.html" >zunis.training package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.training.weighted_dataset.html" accesskey="U">zunis.training.weighted_dataset package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.training.weighted_dataset.weighted_dataset_trainer">
+<span id="zunis-training-weighted-dataset-weighted-dataset-trainer-module"></span><h1>zunis.training.weighted_dataset.weighted_dataset_trainer module<a class="headerlink" href="#module-zunis.training.weighted_dataset.weighted_dataset_trainer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer">
+<em class="property">class </em><code class="sig-name descname">BasicStatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flow</span></em>, <em class="sig-param"><span class="n">latent_prior</span></em>, <em class="sig-param"><span class="n">checkpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_reloads</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer</span></code></a>, <a class="reference internal" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI" title="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI</span></code></a></p>
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.get_config">
+<code class="sig-name descname">get_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the saved configuration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.process_loss">
+<code class="sig-name descname">process_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.process_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_config">
+<code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the saved configuration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_on_batch">
+<code class="sig-name descname">train_on_batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_on_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train on a batch of points using the saved configuration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_on_target_batches_from_posterior">
+<code class="sig-name descname">train_on_target_batches_from_posterior</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">n_batches</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">n_epochs_per_batch</span></em>, <em class="sig-param"><span class="n">minibatch_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_posterior</span></em>, <em class="sig-param"><span class="n">optim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_on_target_batches_from_posterior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Train over several epochs over several batches with explicit arguments - overriding the current config
+We save the full config of this run here and therefore have a different config format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_step_on_target_batch">
+<code class="sig-name descname">train_step_on_target_batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">optim</span></em>, <em class="sig-param"><span class="n">minibatch_size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_step_on_target_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training function on a fixed batch: iterate once over the whole batch</p>
+<blockquote>
+<div><p>x: batch of points in target space sampled from some PDF p(x)
+px: values of p(x) for the batch
+fx: values of the target (un-normalized) PDF
+optim: pytorch optimizer object
+minibatch_size: Optional. Size of each minibatch for gradient steps.</p>
+</div></blockquote>
+<blockquote>
+<div><p>if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
+gradient step is taken</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_step_on_target_minibatch">
+<code class="sig-name descname">train_step_on_target_minibatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">optim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.train_step_on_target_minibatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform one training set on a minibatch</p>
+<blockquote>
+<div><p>x: batch of points in target space sampled from some PDF p(x)
+px: values of p(x) for the batch
+fx: values of the target (un-normalized) PDF
+optim: pytorch optimizer object</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer">
+<em class="property">class </em><code class="sig-name descname">BasicTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flow</span></em>, <em class="sig-param"><span class="n">latent_prior</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">'INFO'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>Basic trainer implementation: sample points in target space from a fixed distribution and train over
+a fixed number of epochs on each batch, over a fixed number of batches.</p>
+<p>This is the implementation of all training facilities for this training mode at a low level: no automation,
+tracking, checkpointing etc is performed. No state or history is conserved.</p>
+<p>Rationale: the training implementation should be independent from the tracking and from the API</p>
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.compute_loss_no_grad">
+<code class="sig-name descname">compute_loss_no_grad</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.compute_loss_no_grad" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.generate_target_batch_from_posterior">
+<em class="property">static </em><code class="sig-name descname">generate_target_batch_from_posterior</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_points</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">target_posterior</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.generate_target_batch_from_posterior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a batch of training examples in target space from a specified distribution
+Parameters:
+———–</p>
+<blockquote>
+<div><p>n_points: size of the batch
+f: function to evaluate on the sampled points
+target_posterior: distribution from which to sample points in target_space</p>
+</div></blockquote>
+<blockquote>
+<div><dl class="simple">
+<dt>x,px,fx</dt><dd><p>sampled points, sampling distribution PDF values, function values</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_invalid_loss">
+<code class="sig-name descname">handle_invalid_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_invalid_loss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.process_loss">
+<code class="sig-name descname">process_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.process_loss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.sample_forward">
+<code class="sig-name descname">sample_forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_points</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.sample_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.set_verbosity">
+<code class="sig-name descname">set_verbosity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.set_verbosity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_on_target_batch">
+<code class="sig-name descname">train_on_target_batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">optim</span></em>, <em class="sig-param"><span class="n">n_epochs</span></em>, <em class="sig-param"><span class="n">minibatch_size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_on_target_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training function on a fixed batch: train for a fixed number of epochs on each batch</p>
+<blockquote>
+<div><p>x: batch of points in target space sampled from some PDF p(x)
+px: values of p(x) for the batch
+fx: values of the target (un-normalized) PDF
+optim: pytorch optimizer object
+n_epochs: number of iterations over the full batch
+minibatch_size: Optional. Size of each minibatch for gradient steps</p>
+</div></blockquote>
+<blockquote>
+<div><p>if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
+gradient step is taken</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_on_target_batches_from_posterior">
+<code class="sig-name descname">train_on_target_batches_from_posterior</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">n_batches</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">n_epochs_per_batch</span></em>, <em class="sig-param"><span class="n">minibatch_size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">target_posterior</span></em>, <em class="sig-param"><span class="n">optim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_on_target_batches_from_posterior" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Main training function: iterate over a fixed number of batches sampled in target space and</dt><dd><p>train for a fixed number of epochs on each batch</p>
+</dd>
+</dl>
+<blockquote>
+<div><p>f: un-normalized target PDF
+batch_size: number of points per batch
+n_batches: number of batches to train over
+n_epochs_per_batch: number of iterations over each full batch before sampling a new one
+minibatch_size: Optional. Size of each minibatch for gradient steps
+target_posterior: distribution from which points are sampled in target space
+optim: pytorch optimizer object</p>
+</div></blockquote>
+<blockquote>
+<div><p>if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
+gradient step is taken</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_step_on_target_batch">
+<code class="sig-name descname">train_step_on_target_batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">optim</span></em>, <em class="sig-param"><span class="n">minibatch_size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_step_on_target_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training function on a fixed batch: iterate once over the whole batch</p>
+<blockquote>
+<div><p>x: batch of points in target space sampled from some PDF p(x)
+px: values of p(x) for the batch
+fx: values of the target (un-normalized) PDF
+optim: pytorch optimizer object
+minibatch_size: Optional. Size of each minibatch for gradient steps.</p>
+</div></blockquote>
+<blockquote>
+<div><p>if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
+gradient step is taken</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_step_on_target_minibatch">
+<code class="sig-name descname">train_step_on_target_minibatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">optim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.train_step_on_target_minibatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform one training set on a minibatch</p>
+<blockquote>
+<div><p>x: batch of points in target space sampled from some PDF p(x)
+px: values of p(x) for the batch
+fx: values of the target (un-normalized) PDF
+optim: pytorch optimizer object</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI">
+<em class="property">class </em><code class="sig-name descname">GenericTrainerAPI</code><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>Weighted dataset trainer API definition</p>
+<p>The goal of this API specification is to interact with the Integrator</p>
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.get_config">
+<em class="property">abstract </em><code class="sig-name descname">get_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.get_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current training configuration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reinitinalize trainer and model. Optional element of the API.
+Raises an error if not implemented</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.sample_forward">
+<em class="property">abstract </em><code class="sig-name descname">sample_forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_points</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.sample_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points using the model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.set_config">
+<em class="property">abstract </em><code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.set_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set training configuration options</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.train_on_batch">
+<em class="property">abstract </em><code class="sig-name descname">train_on_batch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.train_on_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Training function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>-</em>) – batch of points in target space sampled from a distribution p(x)</p></li>
+<li><p><strong>px</strong> (<em>-</em>) – the corresponding batch of p(x) values</p></li>
+<li><p><strong>fx</strong> (<em>-</em>) – the (un-normalized) target weights</p></li>
+<li><p><strong>kwargs</strong> (<em>-</em>) – trainer-specific options. This overrides the config</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This is not enforced at the level of this API but it is intended that kwargs leads to a call of
+set_config and therefore that these options are saved - at least by default.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.InvalidLossError">
+<em class="property">exception </em><code class="sig-name descname">InvalidLossError</code><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.InvalidLossError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></p>
+<p>Value error that indicates something is wrong with a loss value specifically</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zunis.training.weighted_dataset.variance_training.html"
+                        title="previous chapter">zunis.training.weighted_dataset.variance_training module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zunis.utils.html"
+                        title="next chapter">zunis.utils package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/zunis.training.weighted_dataset.weighted_dataset_trainer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.utils.html" title="zunis.utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="zunis.training.weighted_dataset.variance_training.html" title="zunis.training.weighted_dataset.variance_training module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.training.html" >zunis.training package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.training.weighted_dataset.html" >zunis.training.weighted_dataset package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

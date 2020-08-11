@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>zunis.models.flows.sequential.invertible_sequential module &#8212; pytorch_flows 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/overflow.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.models.flows.sequential.repeated_cell module" href="zunis.models.flows.sequential.repeated_cell.html" />
+    <link rel="prev" title="zunis.models.flows.sequential package" href="zunis.models.flows.sequential.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.models.flows.sequential.repeated_cell.html" title="zunis.models.flows.sequential.repeated_cell module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="zunis.models.flows.sequential.html" title="zunis.models.flows.sequential package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.models.html" >zunis.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.models.flows.html" >zunis.models.flows package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="zunis.models.flows.sequential.html" accesskey="U">zunis.models.flows.sequential package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.sequential.invertible_sequential">
+<span id="zunis-models-flows-sequential-invertible-sequential-module"></span><h1>zunis.models.flows.sequential.invertible_sequential module<a class="headerlink" href="#module-zunis.models.flows.sequential.invertible_sequential" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">
+<em class="property">class </em><code class="sig-name descname">InvertibleSequentialFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">flows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow">
+<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the batch of points x  with shape (…,d)
+This is an abstract method that should be overriden</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert">
+<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian">
+<code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the flow transformation and its Jacobian simulatenously on
+xj with xj.shape == (…,d+1)</p>
+<p>This is an abstract method that should be overriden</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zunis.models.flows.sequential.html"
+                        title="previous chapter">zunis.models.flows.sequential package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zunis.models.flows.sequential.repeated_cell.html"
+                        title="next chapter">zunis.models.flows.sequential.repeated_cell module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/zunis.models.flows.sequential.invertible_sequential.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="zunis.models.flows.sequential.repeated_cell.html" title="zunis.models.flows.sequential.repeated_cell module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="zunis.models.flows.sequential.html" title="zunis.models.flows.sequential package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pytorch_flows 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="zunis.html" >zunis package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="zunis.models.html" >zunis.models package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="zunis.models.flows.html" >zunis.models.flows package</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="zunis.models.flows.sequential.html" >zunis.models.flows.sequential package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+zunis.models.flows package
+==========================
+
+.. automodule:: zunis.models.flows
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.flows.analytic_flows
+   zunis.models.flows.backprop_jacobian_flows
+   zunis.models.flows.coupling_cells
+   zunis.models.flows.sequential
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.flows.general_flow
+   zunis.models.flows.masking
+   zunis.models.flows.sampling

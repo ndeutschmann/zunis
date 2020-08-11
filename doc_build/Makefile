@@ -8,7 +8,7 @@ SPHINXAPIDOC  = sphinx-apidoc
 PAPER         =
 BUILDDIR      = _build
 MODULEDIR     = api
-APIDIR        = ../src
+APIDIR        = ../zunis
 APIOPTS       = -MeT -d 2
 
 # Internal variables.
@@ -43,7 +43,7 @@ help:
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
-	@echo "  apidoc     to use sphinx-apidoc to build module pages from ../src"
+	@echo "  apidoc     to use sphinx-apidoc to build module pages from ../zunis"
 	@echo "  cleanapi   to remove the output of apidoc"
 
 clean:

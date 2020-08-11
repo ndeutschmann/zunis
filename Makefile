@@ -1,4 +1,4 @@
-.PHONY: clean data requirements doc static-doc docinstall
+PHONY: clean data requirements doc static-doc docinstall
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -33,7 +33,7 @@ clean:
 
 ## Lint using flake8
 lint:
-	flake8 src
+	flake8 zunis 
 
 ## Test python environment is setup correctly
 test_environment:
@@ -53,6 +53,7 @@ static-doc:
 
 ## Install the built documentation
 doc-install:
+	rm -rf $(DOC_DIR)
 	cp -R $(DOC_BUILD_DIR)/_build/html/ $(DOC_DIR)
 
 

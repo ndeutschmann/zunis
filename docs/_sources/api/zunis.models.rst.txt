@@ -1,0 +1,25 @@
+zunis.models package
+====================
+
+.. automodule:: zunis.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.flows
+   zunis.models.layers
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.generators
+   zunis.models.utils

@@ -1,7 +1,0 @@
-src.models.layers.activations module
-====================================
-
-.. automodule:: src.models.layers.activations
-   :members:
-   :undoc-members:
-   :show-inheritance:
