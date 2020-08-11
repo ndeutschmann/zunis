@@ -1,11 +1,13 @@
 """High level interface for integration"""
 import torch
+import logging
 
 from .flat_survey_integrator import FlatSurveySamplingIntegrator
 from .dkltrainer_integrator import DKLAdaptiveSurveyIntegrator
 
 from src.training.weighted_dataset.stateful_trainer import StatefulTrainer
 
+logger = logging.getLogger(__name__)
 
 def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_iter_refine=None,
                n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
@@ -65,6 +67,12 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
             trainer_options = dict()
         trainer = StatefulTrainer(d=d, loss=loss, flow=flow, device=device, flow_options=flow_options,
                                   **trainer_options)
+
+    # TODO work out the issue for the variance training with RealNVP
+    if loss == "variance" and flow == "realnvp":
+        logger.warning(f"======================================================")
+        logger.warning(f"Using loss {loss} and flow {flow}. This usually fails.")
+        logger.warning(f"======================================================")
 
     if survey_strategy == "flat":
         return FlatSurveySamplingIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
