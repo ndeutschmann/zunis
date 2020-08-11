@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# pytorch_flows documentation build configuration file, created by
+# zunis documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -13,6 +13,8 @@
 
 import os
 import sys
+
+import sphinx_rtd_theme
 
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -28,7 +30,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc','sphinx.ext.coverage', 'sphinx.ext.napoleon']
+extensions = ['sphinx.ext.autodoc','sphinx.ext.coverage', 'sphinx.ext.napoleon','sphinx_rtd_theme']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -43,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'pytorch_flows'
+project = u'ZüNIS'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -93,7 +95,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -169,7 +171,7 @@ html_css_files = [
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'pytorch_flowsdoc'
+htmlhelp_basename = 'zunisdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -189,9 +191,9 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index',
-     'pytorch_flows.tex',
-     u'pytorch_flows Documentation',
-     u"nicolas deutschmann", 'manual'),
+     'zunis.tex',
+     u'ZüNIS Documentation',
+     u"Nicolas Deutschmann", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -220,8 +222,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pytorch_flows', u'pytorch_flows Documentation',
-     [u"nicolas deutschmann"], 1)
+    ('index', 'zunis', u'ZüNIS Documentation',
+     [u"Nicolas Deutschmann"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -234,9 +236,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'pytorch_flows', u'pytorch_flows Documentation',
-     u"nicolas deutschmann", 'pytorch_flows',
-     'A short description of the project.', 'Miscellaneous'),
+    ('index', 'zunis', u'ZüNIS Documentation',
+     u"Nicolas Deutschmann", 'zunis',
+     'Neural Importance Sampling', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.

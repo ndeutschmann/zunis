@@ -1,0 +1,16 @@
+zunis.utils package
+===================
+
+.. automodule:: zunis.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.utils.function_wrapper
+   zunis.utils.logger

@@ -1,0 +1,15 @@
+zunis.models.flows.coupling\_cells.piecewise\_coupling package
+==============================================================
+
+.. automodule:: zunis.models.flows.coupling_cells.piecewise_coupling
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear

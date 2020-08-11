@@ -1,7 +1,0 @@
-src.models.layers.trainable module
-==================================
-
-.. automodule:: src.models.layers.trainable
-   :members:
-   :undoc-members:
-   :show-inheritance:

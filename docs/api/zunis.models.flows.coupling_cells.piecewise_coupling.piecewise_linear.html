@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module &mdash; ZüNIS 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.models.flows.coupling_cells.general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" />
+    <link rel="prev" title="zunis.models.flows.coupling_cells.piecewise_coupling package" href="zunis.models.flows.coupling_cells.piecewise_coupling.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zunis.models.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZüNIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="zunis.html">zunis package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.html">zunis.models package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.html">zunis.models.flows package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.coupling_cells.html">zunis.models.flows.coupling_cells package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.coupling_cells.piecewise_coupling.html">zunis.models.flows.coupling_cells.piecewise_coupling package</a> &raquo;</li>
+        
+      <li>zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear">
+<span id="zunis-models-flows-coupling-cells-piecewise-coupling-piecewise-linear-module"></span><h1>zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear" title="Permalink to this headline">¶</a></h1>
+<p>Implementation of the piecewise linear coupling cell
+This means that the <em>variable transform</em> is piecewise-linear.</p>
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform">
+<em class="property">class </em><code class="sig-name descname">ElementWisePWLinearTransform</code><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
+<p>Invertible piecewise-linear transformations over the unit hypercube</p>
+<p>Implements a batched bijective transformation <a href="#id1"><span class="problematic" id="id2">`</span></a>h from the d-dimensional unit hypercube to itself,
+in an element-wise fashion (each coordinate transformed independently)</p>
+<p>In each direction, the bijection is a piecewise-linear transform with b bins
+where the forward transform has evenly spaced bins. The transformation in each bin is
+actually an affine transformation. The slopes for each direction and each point in the batch
+are given by an unormalized tensor <cite>q_tilde</cite>. This input is softmax-normalized such that
+1. h(0) = 0
+2. h(1) = 1
+3. h is monotonous
+4. h is continuous</p>
+<p>for which knowing the slopes in each bin is sufficient (when the abuse of language “linear”)</p>
+<p>Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible
+The inverse is also an element-wise, piece-wise linear transformation,
+but, of course, with variable input bin sizes (and fixed output bin sizes).</p>
+<p>Constructor for InvertibleTransform</p>
+<p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.backward">
+<em class="property">static </em><code class="sig-name descname">backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">q_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply an element-wise piecewise-linear transformation to some variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+dimension of the variable space. This variable span the k-dimensional unit
+hypercube</p></li>
+<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
+Normalization is imposed in this function using softmax.</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pair <cite>(y,h)</cite>.
+- <cite>y</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.forward">
+<em class="property">static </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">q_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the inverse of an element-wise piecewise-linear transformation to some variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+dimension of the variable space. This variable span the k-dimensional unit
+hypercube</p></li>
+<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
+Normalization is imposed in this function using softmax.</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pair <cite>(x,h)</cite>.
+- <cite>x</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling">
+<em class="property">class </em><code class="sig-name descname">GeneralPWLinearCoupling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.general_coupling.html#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell</span></code></a></p>
+<p>Abstract class implementing a coupling cell based on PW linear transformations</p>
+<p>A specific way to predict the parameters of the transform must be implemented
+in child classes.</p>
+<p>Generator for the abstract class GeneralPWLinearCoupling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask which variables are transformed (False)
+or used as parameters of the transform (True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling">
+<em class="property">class </em><code class="sig-name descname">PWLinearCoupling</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d</em>, <em class="sig-param">mask</em>, <em class="sig-param">n_bins=10</em>, <em class="sig-param">d_hidden=256</em>, <em class="sig-param">n_hidden=8</em>, <em class="sig-param">input_activation=&lt;class 'zunis.models.utils.Reshift'&gt;</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.LeakyReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling</span></code></a></p>
+<p>Piece-wise Linear coupling</p>
+<p>Coupling cell using an element-wise piece-wise linear transformation as a change of
+variables. The transverse neural network is a rectangular dense neural network</p>
+<p class="rubric">Notes</p>
+<p>Transformation used:
+<cite>zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform</cite>
+Neural network used:
+zunis.models.layers.trainable.ArbitraryShapeRectangularDNN</p>
+<p>Generator for PWLinearCoupling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask: which dimension are transformed (False) and which are not (True)</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em>) – number of bins in each dimensions</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em>) – dimension of the hidden layers of the DNN</p></li>
+<li><p><strong>n_hidden</strong> (<em>int</em>) – number of hidden layers in the DNN</p></li>
+<li><p><strong>input_activation</strong> (<em>optional</em>) – pytorch activation function before feeding into the DNN.
+must be a callable generator without arguments (i.e. a classname or a function)</p></li>
+<li><p><strong>hidden_activation</strong> (<em>optional</em>) – pytorch activation function between hidden layers of the DNN.
+must be a callable generator without arguments (i.e. a classname or a function)</p></li>
+<li><p><strong>output_activation</strong> (<em>optional</em>) – pytorch activation function at the output of the DNN.
+must be a callable generator without arguments (i.e. a classname or a function)</p></li>
+<li><p><strong>use_batch_norm</strong> (<em>bool</em>) – whether batch normalization should be used in the DNN.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.piecewise_linear_inverse_transform">
+<code class="sig-name descname">piecewise_linear_inverse_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">q_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.piecewise_linear_inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the inverse of an element-wise piecewise-linear transformation to some variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+dimension of the variable space. This variable span the k-dimensional unit
+hypercube</p></li>
+<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
+Normalization is imposed in this function using softmax.</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pair <cite>(x,h)</cite>.
+- <cite>x</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.piecewise_linear_transform">
+<code class="sig-name descname">piecewise_linear_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">q_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.piecewise_linear_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply an element-wise piecewise-linear transformation to some variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+dimension of the variable space. This variable span the k-dimensional unit
+hypercube</p></li>
+<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
+Normalization is imposed in this function using softmax.</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pair <cite>(y,h)</cite>.
+- <cite>y</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zunis.models.flows.coupling_cells.general_coupling.html" class="btn btn-neutral float-right" title="zunis.models.flows.coupling_cells.general_coupling module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zunis.models.flows.coupling_cells.piecewise_coupling.html" class="btn btn-neutral float-left" title="zunis.models.flows.coupling_cells.piecewise_coupling package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

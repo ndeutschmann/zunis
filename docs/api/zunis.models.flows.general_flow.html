@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zunis.models.flows.general_flow module &mdash; ZüNIS 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.models.flows.masking module" href="zunis.models.flows.masking.html" />
+    <link rel="prev" title="zunis.models.flows.sequential.repeated_cell module" href="zunis.models.flows.sequential.repeated_cell.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zunis.models.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZüNIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="zunis.html">zunis package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.html">zunis.models package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.html">zunis.models.flows package</a> &raquo;</li>
+        
+      <li>zunis.models.flows.general_flow module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/zunis.models.flows.general_flow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-zunis.models.flows.general_flow">
+<span id="zunis-models-flows-general-flow-module"></span><h1>zunis.models.flows.general_flow module<a class="headerlink" href="#module-zunis.models.flows.general_flow" title="Permalink to this headline">¶</a></h1>
+<p>Implementation of the abstract GeneralFlow class
+Most generic variable transformation:
+- takes in a point x and -log(PDF(x))
+- outputs a transformed point y and - log(PDF(y)) = - log(PDF(x)) + log(dy/dx)</p>
+<p>Reminder:</p>
+<p>dx p(x) = dy q(y) = dx dy/dx q(y)
+=&gt; q(y) = p(x)/(dy/dx)
+=&gt; -log q(y) = -log p(x) + log dy/dx</p>
+<dl class="py class">
+<dt id="zunis.models.flows.general_flow.GeneralFlow">
+<em class="property">class </em><code class="sig-name descname">GeneralFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>General abstract class for flows</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.flows.general_flow.GeneralFlow.flow">
+<em class="property">abstract </em><code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the batch of points x  with shape (…,d)
+This is an abstract method that should be overriden</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.general_flow.GeneralFlow.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the flow transformation on some input xj
+- In training mode, xj.shape == (:,d+1)
+and the last dimension is the log-inverse PDF of x[:,:-1]
+- In eval mode,, xj.shape == (:,d)
+and no jacobian is passed: pure sampling mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.general_flow.GeneralFlow.transform_and_compute_jacobian">
+<em class="property">abstract </em><code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the flow transformation and its Jacobian simulatenously on
+xj with xj.shape == (…,d+1)</p>
+<p>This is an abstract method that should be overriden</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zunis.models.flows.masking.html" class="btn btn-neutral float-right" title="zunis.models.flows.masking module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zunis.models.flows.sequential.repeated_cell.html" class="btn btn-neutral float-left" title="zunis.models.flows.sequential.repeated_cell module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

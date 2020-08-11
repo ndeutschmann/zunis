@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zunis.integration.integratorAPI module &mdash; ZüNIS 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.models package" href="zunis.models.html" />
+    <link rel="prev" title="zunis.integration.flat_survey_integrator module" href="zunis.integration.flat_survey_integrator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zunis.integration.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZüNIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="zunis.html">zunis package</a> &raquo;</li>
+        
+          <li><a href="zunis.integration.html">zunis.integration package</a> &raquo;</li>
+        
+      <li>zunis.integration.integratorAPI module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/zunis.integration.integratorAPI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-zunis.integration.integratorAPI">
+<span id="zunis-integration-integratorapi-module"></span><h1>zunis.integration.integratorAPI module<a class="headerlink" href="#module-zunis.integration.integratorAPI" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI">
+<em class="property">class </em><code class="sig-name descname">SurveyRefineIntegratorAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">'INFO'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>API specification for an integrator that performs a number of survey steps in which
+a flow model is trained and then a number of refine steps in which sampling is done through the model
+The interaction with the model is done through the GenericTrainerAPI</p>
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_integration">
+<em class="property">abstract </em><code class="sig-name descname">finalize_integration</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the whole integration</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_refine">
+<em class="property">abstract </em><code class="sig-name descname">finalize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the refine phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_survey">
+<em class="property">abstract </em><code class="sig-name descname">finalize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the final operations of the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.format_arguments">
+<code class="sig-name descname">format_arguments</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.format_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format keyword arguments passed to the train function in a suitable way
+In this generic API definition, the kwargs must be passed in the correct format
+however for a specific realization, options should be made accessible through keywords
+which will then be sorted into the right structure.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize">
+<em class="property">abstract </em><code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intialization before the whole integration process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_refine">
+<em class="property">abstract </em><code class="sig-name descname">initialize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization before the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_survey">
+<em class="property">abstract </em><code class="sig-name descname">initialize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization before the survey phase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.integrate">
+<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.integrate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_refine_step">
+<em class="property">abstract </em><code class="sig-name descname">process_refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_refine_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a refine step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_survey_step">
+<em class="property">abstract </em><code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.refine">
+<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the refine phase of integration</p>
+<p>Possible keyword arguments:</p>
+<p>trainer_config_args: dict
+refine_step_args: dict
+finalize_refine_args: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.refine_step">
+<code class="sig-name descname">refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.refine_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic refine step: sample points, estimate the integral, its error, train model</p>
+<dl class="simple">
+<dt>possible keyword arguments:</dt><dd><p>sampling_args: dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_refine">
+<em class="property">abstract </em><code class="sig-name descname">sample_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points for a refine step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_survey">
+<em class="property">abstract </em><code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points for a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.set_verbosity">
+<code class="sig-name descname">set_verbosity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.set_verbosity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.survey">
+<code class="sig-name descname">survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a survey phase of integration</p>
+<dl class="simple">
+<dt>possible keyword arguments:</dt><dd><p>trainer_config_args: dict
+survey_step_args: dict
+finalize_survey_args: dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.survey_step">
+<code class="sig-name descname">survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic survey step: sample points, estimate the integral, its error, train model</p>
+<dl class="simple">
+<dt>possible keyword arguments:</dt><dd><p>sampling_args: dict
+training_args: dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zunis.models.html" class="btn btn-neutral float-right" title="zunis.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zunis.integration.flat_survey_integrator.html" class="btn btn-neutral float-left" title="zunis.integration.flat_survey_integrator module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

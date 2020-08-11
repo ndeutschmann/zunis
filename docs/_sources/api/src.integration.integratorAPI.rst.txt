@@ -1,7 +1,0 @@
-src.integration.integratorAPI module
-====================================
-
-.. automodule:: src.integration.integratorAPI
-   :members:
-   :undoc-members:
-   :show-inheritance:

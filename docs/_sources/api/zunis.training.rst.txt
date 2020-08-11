@@ -1,0 +1,15 @@
+zunis.training package
+======================
+
+.. automodule:: zunis.training
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.training.weighted_dataset

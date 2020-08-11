@@ -6,7 +6,7 @@ The most basic usage of this library is using the default integrator class as fo
 .. code-block:: python
 
     import torch
-    from src.integration import DefaultIntegrator
+    from zunis.integration import DefaultIntegrator
 
     device = torch.device("cuda")
 

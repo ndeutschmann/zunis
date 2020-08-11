@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zunis.integration.adaptive_survey_integrator module &mdash; ZüNIS 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.integration.default_integrator module" href="zunis.integration.default_integrator.html" />
+    <link rel="prev" title="zunis.integration package" href="zunis.integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zunis.integration.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZüNIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="zunis.html">zunis package</a> &raquo;</li>
+        
+          <li><a href="zunis.integration.html">zunis.integration package</a> &raquo;</li>
+        
+      <li>zunis.integration.adaptive_survey_integrator module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/zunis.integration.adaptive_survey_integrator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-zunis.integration.adaptive_survey_integrator">
+<span id="zunis-integration-adaptive-survey-integrator-module"></span><h1>zunis.integration.adaptive_survey_integrator module<a class="headerlink" href="#module-zunis.integration.adaptive_survey_integrator" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator">
+<em class="property">class </em><code class="sig-name descname">AdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">trainer</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_iter_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_iter_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">n_points_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">trainer_verbosity</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator</span></code></a></p>
+<p>Adaptive integrator based on a separation between survey and sampling</p>
+<p>Survey: sample points and spend some time training the model
+Refine: sample points using the model and evaluate the integral</p>
+<dl class="simple">
+<dt>Sampling during survey is done in two phases:</dt><dd><ol class="arabic simple">
+<li><p>Sample in the target space (input space of the integrand) using a uniform distribution</p></li>
+<li><p>Sample in the latent space and use the model to sample point in the target space</p></li>
+</ol>
+</dd>
+</dl>
+<p>The switch between the two phases is performed based on a test method - abstract here that checks
+whether the flat distribution does a better job of estimating the loss than the flat distribution</p>
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">
+<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">
+<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points from target space distribution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition">
+<em class="property">abstract </em><code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean valued method that checks if it is time to switch between sampling uniformly
+and using the model</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zunis.integration.default_integrator.html" class="btn btn-neutral float-right" title="zunis.integration.default_integrator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zunis.integration.html" class="btn btn-neutral float-left" title="zunis.integration package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

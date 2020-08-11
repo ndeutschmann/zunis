@@ -1,7 +1,0 @@
-src.integration.adaptive\_survey\_integrator module
-===================================================
-
-.. automodule:: src.integration.adaptive_survey_integrator
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,0 +1,19 @@
+zunis.integration package
+=========================
+
+.. automodule:: zunis.integration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   zunis.integration.adaptive_survey_integrator
+   zunis.integration.default_integrator
+   zunis.integration.dkltrainer_integrator
+   zunis.integration.flat_survey_integrator
+   zunis.integration.integratorAPI

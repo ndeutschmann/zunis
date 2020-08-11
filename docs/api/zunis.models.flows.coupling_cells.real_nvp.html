@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zunis.models.flows.coupling_cells.real_nvp module &mdash; ZüNIS 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="zunis.models.flows.coupling_cells.transforms module" href="zunis.models.flows.coupling_cells.transforms.html" />
+    <link rel="prev" title="zunis.models.flows.coupling_cells.general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zunis.models.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.html#submodules">Submodules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZüNIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="zunis.html">zunis package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.html">zunis.models package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.html">zunis.models.flows package</a> &raquo;</li>
+        
+          <li><a href="zunis.models.flows.coupling_cells.html">zunis.models.flows.coupling_cells package</a> &raquo;</li>
+        
+      <li>zunis.models.flows.coupling_cells.real_nvp module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/zunis.models.flows.coupling_cells.real_nvp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-zunis.models.flows.coupling_cells.real_nvp">
+<span id="zunis-models-flows-coupling-cells-real-nvp-module"></span><h1>zunis.models.flows.coupling_cells.real_nvp module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.real_nvp" title="Permalink to this headline">¶</a></h1>
+<p>Implementation of realNVP: a coupling cell with an affine transform</p>
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform">
+<em class="property">class </em><code class="sig-name descname">ElementWiseAffineTransform</code><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
+<p>Invertible element-wise affine transform</p>
+<p>Constructor for InvertibleTransform</p>
+<p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward">
+<code class="sig-name descname">backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP">
+<em class="property">class </em><code class="sig-name descname">FakeRealNVP</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mask</span></em>, <em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">t</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP</span></code></a></p>
+<p>Fake real NVP with position independent affine parameters
+for basic debugging and training tests</p>
+<p>Coupling cell instantiation:
+- mask: boolean Tensor that indicates which variables are passed (y_N) through
+and which are transformed (y_M)
+- transform: function that takes three arguments</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>y_M: the variables that are transformed</p></li>
+<li><p>t: a set of parameters for the transformation</p></li>
+<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>and returns a 2-tuple</dt><dd><ul class="simple">
+<li><p>x_M: the transformed variable batch</p></li>
+<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>T the function that computes the parameters T from y_N</p></li>
+</ul>
+<p>NB:</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeT">
+<em class="property">class </em><code class="sig-name descname">FakeT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">t</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Fake neural net for the test FakeRealNVP that returns a trainable constant</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeT.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP">
+<em class="property">class </em><code class="sig-name descname">GeneralRealNVP</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.general_coupling.html#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell</span></code></a></p>
+<p>Coupling cell based on affine transforms without a specific parameter prediction function</p>
+<p>Coupling cell instantiation:
+- mask: boolean Tensor that indicates which variables are passed (y_N) through
+and which are transformed (y_M)
+- transform: function that takes three arguments</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>y_M: the variables that are transformed</p></li>
+<li><p>t: a set of parameters for the transformation</p></li>
+<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>and returns a 2-tuple</dt><dd><ul class="simple">
+<li><p>x_M: the transformed variable batch</p></li>
+<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>T the function that computes the parameters T from y_N</p></li>
+</ul>
+<p>NB:</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.RealNVP">
+<em class="property">class </em><code class="sig-name descname">RealNVP</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d</em>, <em class="sig-param">mask</em>, <em class="sig-param">d_hidden=256</em>, <em class="sig-param">n_hidden=8</em>, <em class="sig-param">input_activation=None</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.LeakyReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.RealNVP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP</span></code></a></p>
+<p>Real non-volume-preserving coupling cell.</p>
+<p>This implements a bijective mapping R^d -&gt; R^d by transforming some subset of the coordinates
+defined by the mask through a coordinate-wise affine transformation. As with other coupling cells
+the parameters of the affine transformation are the output of a neural network taking the un-tranformed
+coordinates as input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – mask defining which variables are transformed</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em><em>, </em><em>256</em>) – width of the neural network</p></li>
+<li><p><strong>n_hidden</strong> (<em>int</em><em>, </em><em>8</em>) – depth of the neural network</p></li>
+<li><p><strong>input_activation</strong> – activation function applied before going through the neural network</p></li>
+<li><p><strong>hidden_activation</strong> – activation function applied after each hidden layer of the neural network</p></li>
+<li><p><strong>output_activation</strong> – activation function applied after the last layer of the neural network</p></li>
+<li><p><strong>use_batch_norm</strong> (<em>bool</em>) – whether to use batch normalization after each hidden layer of the neural network</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.element_wise_affine">
+<code class="sig-name descname">element_wise_affine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.element_wise_affine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform x element-wise through an affine function y = exp(s)*x + t
+where s = st[…,0] and t = st[…,1] with s.shape == x.shape == t.shape</p>
+<p>The Jacobian for this transformation is the coordinate-wise product of the scaling factors
+J = prod(es[…,i],i)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine">
+<code class="sig-name descname">inverse_element_wise_affine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform x element-wise through an affine function y = exp(-s)*(x - t)
+where s = st[…,0] and t = st[…,1] with s.shape == x.shape == t.shape
+This is the inverse of <cite>element_wise_affine</cite> above for the same set of parameters st</p>
+<p>The Jacobian for this transformation is the coordinate-wise product of the scaling factors
+J = prod(es[…,i],i)</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="zunis.models.flows.coupling_cells.transforms.html" class="btn btn-neutral float-right" title="zunis.models.flows.coupling_cells.transforms module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zunis.models.flows.coupling_cells.general_coupling.html" class="btn btn-neutral float-left" title="zunis.models.flows.coupling_cells.general_coupling module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

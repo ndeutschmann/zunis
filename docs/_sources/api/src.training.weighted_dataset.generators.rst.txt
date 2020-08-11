@@ -1,7 +1,0 @@
-src.training.weighted\_dataset.generators module
-================================================
-
-.. automodule:: src.training.weighted_dataset.generators
-   :members:
-   :undoc-members:
-   :show-inheritance:
