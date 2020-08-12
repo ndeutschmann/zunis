@@ -58,6 +58,7 @@ qtconsole==4.7.5
 QtPy==1.9.0
 readme-renderer==24.0
 requests==2.24.0
+scipy==1.5.2
 requests-toolbelt==0.9.1
 Send2Trash==1.5.0
 six==1.15.0
