@@ -72,7 +72,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
              "pwlinear": (PWLinearCoupling, None, None)}
 
     masking = {
-        "checkerboard": partial(n_ary_mask_strategy, n=2, repetitions=1)
+        "checkerboard": partial(n_ary_mask_strategy, n=2)
     }
 
     def __init__(self, d, cell="pwlinear", masking="checkerboard", *, input_cell=None, output_cell=None,

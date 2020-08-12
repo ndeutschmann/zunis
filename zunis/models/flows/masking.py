@@ -20,7 +20,8 @@ def n_ary_mask(d, n, offset):
     """
     return [(i + offset) % n == 0 for i in range(d)]
 
-def n_ary_mask_strategy(d,n,repetitions):
+
+def n_ary_mask_strategy(d, n=2, repetitions=1):
     """Generate an list of masks using the n-ary periodic strategy: every nth entry is True and each next mask is
     offset by one position with respect to the previous one. We loop for a given number of repetitions through all
     possible masks.
@@ -29,9 +30,9 @@ def n_ary_mask_strategy(d,n,repetitions):
     ----------
     d: int
         dimensionality of the space
-    n:
+    n: int
         periodicity of the mask
-    repetitions:
+    repetitions: int
         number of iterations through all possible masks
 
     Returns
