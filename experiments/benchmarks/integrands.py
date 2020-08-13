@@ -7,7 +7,7 @@ from math import pi
 from better_abc import ABC, abstractmethod
 
 
-def sanitize_variable(x, device=torch.device("cpu")):
+def sanitize_variable(x, device=None):
     """Prepare input variable for a pytorch function:
     if it is a python numerical variable or a numpy array, then cast it to a tensor
     if it is is a tensor, make a copy to make sure the function cannot be altered from outside
@@ -15,7 +15,7 @@ def sanitize_variable(x, device=torch.device("cpu")):
     Parameters
     ----------
     x: float or np.ndarray or torch.Tensor
-    device: torch.device
+    device: None or torch.device
 
     Returns
     -------
@@ -23,10 +23,14 @@ def sanitize_variable(x, device=torch.device("cpu")):
 
     """
     if isinstance(x, Number) or isinstance(x, np.ndarray):
-        x = torch.tensor(x)
+        if device is None:
+            device = torch.device("cpu")
+        x = torch.tensor(x).to(device)
     else:
         assert isinstance(x, torch.Tensor), "Only numerical types, numpy arrays and torch Tensor accepted"
         x = x.clone().detach()
+        if device is not None:
+            x = x.to(device)
     return x
 
 
@@ -147,7 +151,7 @@ class HyperrectangleVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
 class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
     """Characteristic function of an hypersphere. The hypersphere must fit in the unit hypercube fully"""
 
-    def __init__(self, d, r, c, device=torch.device("cpu")):
+    def __init__(self, d, r, c, device=None):
         """
 
         Parameters
@@ -158,7 +162,7 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
         """
         super(HypersphereVolumeIntegrand, self).__init__(d=d)
         self.r = r
-        self.c = sanitize_variable(c)
+        self.c = sanitize_variable(c, device=device)
 
         assert (self.r > 0), "The radius must be positive"
         assert len(self.c.shape) == 0 or tuple(self.c.shape) == (d,), "The center is either a number or a d-vector"
@@ -167,69 +171,96 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
 
     def inequality(self, x):
         """Check if the points are in the hypersphere"""
-        return ((x - self.c)**2).sum(dim=1).sqrt() <= self.r
+        return ((x - self.c) ** 2).sum(dim=1).sqrt() <= self.r
 
     def integral(self):
         """Compute the volume of the hypersphere in d dimensions"""
-        return self.r**self.d * pi**(self.d/2.) / gamma(self.d/2.)
+        return self.r ** self.d * pi ** (self.d / 2.) / gamma(self.d / 2.)
 
 
-def generate_diagonal_gaussian(mu=0.5, s=0.1, norm=1., device=torch.device("cpu")):
-    """Generate a diagonal gaussian function generation
+class DiagonalGaussianIntegrand(Integrand):
+    """N-dimensional gaussian with a diagonal covariance matrix"""
 
-    Parameters
-    ----------
-    mu: float or torch.Tensor
-     with shape (d,). The position of the mean
-    s: float or torch.Tensor
-     with shape (d,). The std of the gaussian
-    norm: float or torch.Tensor
-     with shape (,)
-    device: torch.device
+    def __init__(self, d, mu=0.5, s=0.1, norm=1., device=None):
+        """
 
-    Returns
-    -------
-    function
-        The gaussian function with mean `mu` and std `s`
+        Parameters
+        ----------
+        mu : float or torch.Tensor
+            Mean of the gaussian. Either a scalar or a vector of size d
+        s: float or torch.Tensor
+            Standard deviation of the gaussian. Either a scalar or a vector of size d
+        norm: float or torch.Tensor
+            Prefactor of the gaussian. Must be a scalar.
+        device: torch.device
+            Default device where the parameters are stored
+        """
+        super(DiagonalGaussianIntegrand, self).__init__(d)
+        self.mu = sanitize_variable(mu, device)
+        self.s = sanitize_variable(s, device)
+        self.norm = sanitize_variable(norm, device)
+        self.default_device = device
+
+        assert len(self.mu.shape) == 0 or tuple(self.mu.shape) == (d,)
+        assert len(self.s.shape) == 0 or tuple(self.s.shape) == (d,)
+        assert len(self.norm.shape) == 0
+
+    def evaluate_integrand(self, x):
+        """Compute the gaussian
+
+        The parameters of the gaussian are sent to the device of the input
+
+        Parameters
+        ----------
+        x: torch.Tensor
+            Batch of points of size (*,d)
+
+        Returns
+        -------
+            torch.Tensor
+        """
+        return self.norm * torch.exp(-((x - self.mu.to(x.device)) / self.s.to(x.device)).square().sum(axis=1))
+
+
+class CamelIntegrand(Integrand):
+    """Camel function: two gaussian peaks on the hyperdiagonal of the unit hypercube
+    at points (0.25, ..., 0.25) and (0.75, ..., 0.75).
     """
 
-    mu = sanitize_variable(mu, device)
-    s = sanitize_variable(s, device)
-    norm = sanitize_variable(norm, device)
+    def __init__(self, d, s1=0.1, norm1=1, s2=0.2, norm2=2, device=None):
+        """
+        Parameters
+        ----------
+        s1: float or torch.Tensor
+            std of the first gaussian. Either a scalar or a vector of size d
+        s2: float or torch.Tensor
+            std of the second gaussian. Either a scalar or a vector of size d
+        norm1: float or torch.Tensor
+            normalization of the first gaussian. Must be a scalar.
+        norm2: float or torch.Tensor
+            normalization of the second gaussian. Must be a scalar.
+        device: default device on which to run the computation
+        """
+        super(CamelIntegrand, self).__init__(d)
+        self.s1 = sanitize_variable(s1, device)
+        self.norm1 = sanitize_variable(norm1, device)
+        self.s2 = sanitize_variable(s2, device)
+        self.norm2 = sanitize_variable(norm2, device)
+        self.default_device = device
 
-    def gaussian(x):
-        """gaussian function"""
-        return norm * torch.exp(-((x - mu.to(x.device)) / s.to(x.device)).square().sum(axis=1))
+        self.hump1 = DiagonalGaussianIntegrand(d, 0.25, s1, norm1, device)
+        self.hump2 = DiagonalGaussianIntegrand(d, 0.75, s2, norm2, device)
 
-    return gaussian
+    def evaluate_integrand(self, x):
+        """Compute the camel function for a batch of points
 
+        Parameters
+        ----------
+        x: torch.Tensor
 
-def generate_camel(s1=0.1, s2=0.1, norm1=0.1, norm2=0.1, device=torch.device("cpu")):
-    """Generate a Pytorch camel function: two gaussian peaks on the unit hypercube
-    situated on the diagonal at (0.25, ..., 0.25) and (0.75, ..., 0.75)
+        Returns
+        -------
+        torch.Tensor
+        """
+        return self.hump1.evaluate_integrand(x)+self.hump2.evaluate_integrand(x)
 
-    Parameters
-    ----------
-    s1:
-        std of the first gaussian
-    s2:
-        std of the second gaussian
-    norm1:
-        normalization of the first gaussian
-    norm2:
-        normalization of the second gaussian
-    device: default device on which to run the computation
-
-    Returns
-    -------
-        function
-            the desired camel function
-    """
-    f1 = generate_diagonal_gaussian(0.25, s1, norm1, device=device)
-    f2 = generate_diagonal_gaussian(0.25, s2, norm2, device=device)
-
-    def camel(x):
-        """camel function"""
-        return f1(x) + f2(x)
-
-    return camel
