@@ -24,6 +24,17 @@ class DictWrapper(MutableMapping):
     def __len__(self):
         return len(self.store)
 
+    def __contains__(self, item):
+        return item in self.store
+
+    def keys(self):
+        """Access the dictionary keys"""
+        return self.store.keys()
+
+    def values(self):
+        """Access the dictionary values"""
+        return self.store.values()
+
 
 class TrainingRecord(DictWrapper):
     """Dictionary-like object to hold records about a training run"""

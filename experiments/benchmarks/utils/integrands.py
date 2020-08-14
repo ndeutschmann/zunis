@@ -175,7 +175,7 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
 
     def integral(self):
         """Compute the volume of the hypersphere in d dimensions"""
-        return self.r ** self.d * pi ** (self.d / 2.) / gamma(self.d / 2.)
+        return float((self.r ** self.d) * (pi ** (self.d / 2.)) / gamma(self.d / 2.+1))
 
 
 class DiagonalGaussianIntegrand(Integrand):
