@@ -1,10 +1,7 @@
 """Computing integrals using Naive Monte Carlo"""
-import logging
 import torch
 from utils.integral_validation import validate_integral, Sampler
 from utils.integrands import Integrand
-
-logger = logging.getLogger(__name__)
 
 
 class FlatSampler(Sampler):
@@ -50,7 +47,7 @@ class FlatSampler(Sampler):
 
 
 def validate_known_integrand_flat(f, d, n_batch=10000, sigma_cutoff=2, device=torch.device("cpu")):
-    """
+    """Validate a known integral using uniform sampling
 
     Parameters
     ----------
