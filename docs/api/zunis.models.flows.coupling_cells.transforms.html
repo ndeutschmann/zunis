@@ -181,7 +181,7 @@
 <p>Abstract definition of invertible transforms for coupling cells</p>
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform">
-<em class="property">class </em><code class="sig-name descname">InvertibleTransform</code><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">InvertibleTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Callable invertible transform which calls self.forward or self.backward depending on self.inverse</p>
 <dl class="py attribute">
@@ -190,7 +190,7 @@
 <dd><p>whether calling the object will use the forward or backward transform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -204,9 +204,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
-<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
+<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of points to transform</p></li>
+<li><p><strong>T</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of parameters for the transformation</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to compute the jacobian or not</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -225,9 +225,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
-<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
+<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of points to transform</p></li>
+<li><p><strong>T</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of parameters for the transformation</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to compute the jacobian or not</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

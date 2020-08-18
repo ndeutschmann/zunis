@@ -157,9 +157,9 @@
             
   <div class="section" id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>The most basic usage of this library is using the default integrator class as follows</p>
+<p>The most basic usage of this library is using the default integrator API as follows</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">DefaultIntegrator</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 
@@ -168,7 +168,7 @@
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">integrator</span> <span class="o">=</span> <span class="n">DefaultIntegrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>

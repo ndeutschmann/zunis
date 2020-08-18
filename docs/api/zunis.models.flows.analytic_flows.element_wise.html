@@ -180,9 +180,14 @@
 <span id="zunis-models-flows-analytic-flows-element-wise-module"></span><h1>zunis.models.flows.analytic_flows.element_wise module<a class="headerlink" href="#module-zunis.models.flows.analytic_flows.element_wise" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid">
-<em class="property">class </em><code class="sig-name descname">AnalyticInverseSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AnalyticInverseSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow" title="zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid.transform_and_compute_jacobian">
 <code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
@@ -195,9 +200,14 @@ xj with xj.shape == (…,d+1)</p>
 
 <dl class="py class">
 <dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid">
-<em class="property">class </em><code class="sig-name descname">AnalyticSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AnalyticSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow" title="zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid.transform_and_compute_jacobian">
 <code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
@@ -210,9 +220,14 @@ xj with xj.shape == (…,d+1)</p>
 
 <dl class="py class">
 <dt id="zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid">
-<em class="property">class </em><code class="sig-name descname">InvertibleAnalyticSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">InvertibleAnalyticSigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow" title="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py function">

@@ -177,7 +177,7 @@
 <span id="zunis-training-weighted-dataset-weighted-dataset-trainer-module"></span><h1>zunis.training.weighted_dataset.weighted_dataset_trainer module<a class="headerlink" href="#module-zunis.training.weighted_dataset.weighted_dataset_trainer" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer">
-<em class="property">class </em><code class="sig-name descname">BasicStatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flow</span></em>, <em class="sig-param"><span class="n">latent_prior</span></em>, <em class="sig-param"><span class="n">checkpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_reloads</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">BasicStatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer</span></code></a>, <a class="reference internal" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI" title="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI</span></code></a></p>
 <dl class="py method">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.get_config">
@@ -243,7 +243,7 @@ optim: pytorch optimizer object</p>
 
 <dl class="py class">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer">
-<em class="property">class </em><code class="sig-name descname">BasicTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flow</span></em>, <em class="sig-param"><span class="n">latent_prior</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">'INFO'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">BasicTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Basic trainer implementation: sample points in target space from a fixed distribution and train over
 a fixed number of epochs on each batch, over a fixed number of batches.</p>
@@ -367,7 +367,7 @@ optim: pytorch optimizer object</p>
 
 <dl class="py class">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI">
-<em class="property">class </em><code class="sig-name descname">GenericTrainerAPI</code><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GenericTrainerAPI</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Weighted dataset trainer API definition</p>
 <p>The goal of this API specification is to interact with the Integrator</p>

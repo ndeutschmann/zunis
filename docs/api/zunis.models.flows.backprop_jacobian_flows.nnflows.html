@@ -181,7 +181,7 @@
 <p>Neural network as a flow</p>
 <dl class="py class">
 <dt id="zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow">
-<em class="property">class </em><code class="sig-name descname">NNFlow</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d</em>, <em class="sig-param">nh</em>, <em class="sig-param">dh</em>, <em class="sig-param">activation_layer_class=&lt;class 'zunis.models.layers.activations.NormBiTanh'&gt;</em>, <em class="sig-param">batch_norm=False</em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">NNFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow" title="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow</span></code></a></p>
 <p>Flow defined as a neural network mapping R^d to R^d.
 Bijectivity is not guaranteed but likely: each linear layer <em>can</em> have rank &gt;= d
@@ -192,6 +192,11 @@ nearly always bijective.</p>
 <p>The layers are organized as follows:
 R^d -[Linear(d,dh), activation]-&gt; R^dh -[(Linear(dh,dh),activation)*nh]-&gt; R^dh -[Linear(dh,d)]-&gt; R^d</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow.weight_init_identity_">
 <code class="sig-name descname">weight_init_identity_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">std</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow.weight_init_identity_" title="Permalink to this definition">¶</a></dt>

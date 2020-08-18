@@ -183,7 +183,7 @@ differentiable pytorch function on an input point. In train mode, the last entry
 input is the logarithm of the inverse PDF at that point.</p>
 <dl class="py class">
 <dt id="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow">
-<em class="property">class </em><code class="sig-name descname">GeneralBackpropJacobianFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GeneralBackpropJacobianFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Abstract class for a flow defined as a general differentiable Pytorch function
 This implements the universal transform_and_compute_jacobian behavior:
@@ -195,6 +195,11 @@ The jacobian is computed naively by using autograd.</p>
 <code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>For a backprop_flow, the transformation is just a pytorch module</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow.transform_and_compute_jacobian">

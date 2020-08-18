@@ -181,7 +181,7 @@
 <p>Abstract class for coupling cells</p>
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell">
-<em class="property">class </em><code class="sig-name descname">GeneralCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">transform</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GeneralCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Abstract class for coupling cell</p>
 <p>Coupling cell instantiation:
@@ -212,6 +212,11 @@ and which are transformed (y_M)
 <dd><p>Apply the variable change on a batch of points y</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian">
 <code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
@@ -222,7 +227,7 @@ and which are transformed (y_M)
 
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell">
-<em class="property">class </em><code class="sig-name descname">InvertibleCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">transform</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">InvertibleCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell</span></code></a></p>
 <p>An invertible coupling cell works exactly the same as a general coupling cell
 but its transform admits and inverse transformation.</p>
@@ -259,6 +264,11 @@ and which are transformed (y_M)
 <code class="sig-name descname">runs_forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.runs_forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the running mode: True if forward and False if backward/inverse</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

@@ -182,26 +182,26 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the integration space</p></li>
-<li><p><strong>survey_strategy</strong> (<em>str</em>) – </p></li>
-<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
-<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
-<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality of the integration space</p></li>
+<li><p><strong>survey_strategy</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – </p></li>
+<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
 <li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
-<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
-<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
-<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
+<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
 not recommended due to uncontrolled correlations in error estimates</p></li>
 <li><p><strong>device</strong> – pytorch device on which to run</p></li>
-<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
+<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
 <li><p><strong>trainer_verbosity</strong> – verbosity level of the trainer</p></li>
-<li><p><strong>loss</strong> (<em>str</em><em> or </em><em>function</em>) – loss function used by the trainer</p></li>
-<li><p><strong>flow</strong> (<em>str</em><em> or </em><em>flow model</em>) – normalizing flow model to use for importance sampling</p></li>
-<li><p><strong>trainer</strong> (None or <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a>) – optional argument to provide a full trainer object - overrides any other trainer or model setup argument</p></li>
-<li><p><strong>trainer_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer</span></code></a>
+<li><p><strong>loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – loss function used by the trainer</p></li>
+<li><p><strong>flow</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">flow</span> <span class="pre">model</span></code>) – normalizing flow model to use for importance sampling</p></li>
+<li><p><strong>trainer</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> or <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a>) – optional argument to provide a full trainer object - overrides any other trainer or model setup argument</p></li>
+<li><p><strong>trainer_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – dictionary of options to pass to the <a class="reference internal" href="zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer</span></code></a>
 created if <cite>trainer</cite> is None</p></li>
-<li><p><strong>flow_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
+<li><p><strong>flow_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – dictionary of options to pass to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
 created by the stateful trainer if <cite>trainer</cite> is None</p></li>
 </ul>
 </dd>

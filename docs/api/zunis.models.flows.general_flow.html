@@ -186,7 +186,7 @@ Most generic variable transformation:
 =&gt; -log q(y) = -log p(x) + log dy/dx</p>
 <dl class="py class">
 <dt id="zunis.models.flows.general_flow.GeneralFlow">
-<em class="property">class </em><code class="sig-name descname">GeneralFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GeneralFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>General abstract class for flows</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
@@ -206,6 +206,11 @@ and the last dimension is the log-inverse PDF of x[:,:-1]
 - In eval mode,, xj.shape == (:,d)
 and no jacobian is passed: pure sampling mode.</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.general_flow.GeneralFlow.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.general_flow.GeneralFlow.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.general_flow.GeneralFlow.transform_and_compute_jacobian">
