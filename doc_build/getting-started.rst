@@ -1,12 +1,12 @@
 Getting started
 ===============
 
-The most basic usage of this library is using the default integrator class as follows
+The most basic usage of this library is using the default integrator API as follows
 
 .. code-block:: python
 
     import torch
-    from zunis.integration import DefaultIntegrator
+    from zunis.integration import Integrator
 
     device = torch.device("cuda")
 
@@ -15,7 +15,7 @@ The most basic usage of this library is using the default integrator class as fo
     def f(x):
         return x[:,0]**2 + x[:,1]**2
 
-    integrator = DefaultIntegrator(d=d,f=f,device=device)
+    integrator = Integrator(d=d,f=f,device=device)
     result, uncertainty, history = integrator.integrate()
 
 The function `f` is integrated over the `d`-dimensional unit hypercube and

@@ -15,7 +15,7 @@ For basic uses, a RealNVP-based integrator is provided with default choices and 
 
 ```
 import torch
-from src.integration import DefaultIntegrator
+from src.integration import Integrator
 
 device = torch.device("cuda")
 
@@ -25,7 +25,7 @@ d = 2
 def f(x):
     return x[:,0]**2 + x[:,1]**2
 
-integrator = DefaultIntegrator(d=d,f=f,device=device)
+integrator = Integrator(d=d,f=f,device=device)
 result, uncertainty, history = integrator.integrate()
 ```
 
@@ -33,4 +33,4 @@ The function `f` is integrated over the `d`-dimensional unit hypercube and
 * takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N`
 * returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` 
 
-A more systematic documentation is under construction [here](https://ndeutschmann.github.io/pytorch_flows).
+A more systematic documentation is under construction [here](https://ndeutschmann.github.io/zunis).
