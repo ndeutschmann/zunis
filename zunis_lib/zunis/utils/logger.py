@@ -13,6 +13,8 @@ verbosity_levels = {0: logging.ERROR,
 
 
 def set_verbosity(obj, level):
+    if level is None:
+        return
     level_key = level
     if isinstance(level, str):
         level_key = level.upper()

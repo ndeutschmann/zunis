@@ -1,3 +1,3 @@
 import logging
 
-logger = logging.getLogger(__name__)
+training_logger = logging.getLogger(__name__)

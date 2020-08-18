@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_iter_refine=None,
                n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
-               device=torch.device("cpu"), verbosity=2, trainer_verbosity=1,
+               device=torch.device("cpu"), verbosity=None, trainer_verbosity=None,
                loss="variance", flow="pwlinear", trainer=None, trainer_options=None, flow_options=None):
     """High level integration API
 

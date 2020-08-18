@@ -27,7 +27,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
 
     def __init__(self, f, trainer, posterior, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
-                 verbosity=2, trainer_verbosity=1,  **kwargs):
+                 verbosity=None, trainer_verbosity=None,  **kwargs):
         super(PosteriorSurveySamplingIntegrator, self).__init__(verbosity=verbosity, **kwargs)
         self.f = f
 

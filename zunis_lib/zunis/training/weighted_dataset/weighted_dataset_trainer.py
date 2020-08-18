@@ -63,7 +63,7 @@ class BasicTrainer(ABC):
 
     set_verbosity = set_verbosity_fct
 
-    def __init__(self, flow, latent_prior, verbosity="INFO"):
+    def __init__(self, flow, latent_prior, verbosity=None):
         self.flow = flow
         self.latent_prior = latent_prior
         self.loss = abstract_attribute()

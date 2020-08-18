@@ -13,9 +13,9 @@ class SurveyRefineIntegratorAPI(ABC):
 
     set_verbosity = set_verbosity_fct
 
-    def __init__(self, *args, verbosity="INFO", **kwargs):
+    def __init__(self, *args, verbosity=None, **kwargs):
         self.model_trainer = abstract_attribute()
-        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__ + ":")
+        self.logger = logging.getLogger(__name__).getChild(self.__class__.__name__)
         self.set_verbosity(verbosity)
 
     @abstractmethod

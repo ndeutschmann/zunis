@@ -1,6 +1,8 @@
 """Library of the Pytorch-Flows project"""
 import logging
 import sys
+from zunis.integration import integration_logger
+from zunis.training import training_logger
 
 # Ensure that no submodule loggers outputs anything, unless explicitly setup by the user
 logger = logging.getLogger(__name__)
