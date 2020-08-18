@@ -8,7 +8,7 @@ SPHINXAPIDOC  = sphinx-apidoc
 PAPER         =
 BUILDDIR      = _build
 MODULEDIR     = api
-APIDIR        = ../zunis
+APIDIR        = ../zunis_lib/zunis
 APIOPTS       = -MeT -d 2
 
 # Internal variables.

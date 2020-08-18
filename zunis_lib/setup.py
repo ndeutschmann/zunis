@@ -11,7 +11,7 @@ setup(
     ],
     version='0.1.0',
     description='Neural Importance Sampling',
-    long_description=open("README.md").read(),
+    long_description=open("../README.md").read(),
     author='Nicolas Deutschmann',
     author_email="nicolas.deutschmann@gmail.com",
     url="https://ndeutschmann.github.io/zunis/",
