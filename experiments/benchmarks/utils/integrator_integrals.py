@@ -55,6 +55,7 @@ class IntegratorSampler(Sampler):
         """
 
         x, px, fx = self.integrator.sample_refine(n_points=n_batch, f=f)
+        return x, px, fx
 
 
 def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, train=True, n_survey_steps=10,
