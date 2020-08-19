@@ -1,15 +1,44 @@
-Normalizing flows for neural importance sampling
+ZüNIS: Normalizing flows for neural importance sampling
 ==============================
 
-This is a work-in-progress library to provide importance sampling Monte-Carlo integration tools based on
-Neural imporance sampling [[1]](https://arxiv.org/abs/1808.03856). This method uses normalzing flows to optimally sample
-an integrand function in order to evaluate its (multi-dimensional) integral.
+ZüNIS (Zürich Neural Importance Sampling) a work-in-progress Pytorch-based library for Monte-Carlo integration
+ based on Neural imporance sampling [[1]](https://arxiv.org/abs/1808.03856), developed at ETH Zürich.
+In simple terms, we use artificial intelligence to compute integrals faster.
 
-The goal is to provide a flexible library to integrate black-box functions for which classical methods such as VEGAS do
-not work well due to an unknown or complicated structure which prevents the typical variable change and multi-channelling
-tricks.
+The goal is to provide a flexible library to integrate black-box functions with a level of automation comparable to the
+VEGAS Library [[2]](https://pypi.org/project/vegas/), while using state-of-the-art methods that go around
+the limitations of existing tools.
 
-## Usage
+## Installation
+
+### Using `pip`
+
+As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
+You can nevertheless install it with pip from this repository as follows:
+```bash
+ pip install 'git+https://github.com/ndeutschmann/zunis#egg=zunis&subdirectory=zunis_lib'
+```
+
+### Setting up a development environment
+
+If you would like to contribute to the library, run the benchmarks or try the examples,
+the easiest is to clone this repository directly and install the extended requirements:
+````bash
+# Clone the repository
+git clone https://github.com/ndeutschmann/zunis.git ./zunis
+# Create a virtual environment (recommended)
+python3.7 -m venv  zunis_venv
+source ./zunis_venv/bin/activate
+pip install --upgrade pip
+# Install the requirements
+cd ./zunis
+pip install -r requirements.txt
+# Run one benchmark (GPU highly recommended)
+cd ./experiments/benchmarks
+python benchmark_hypersphere.py
+````
+
+## Library usage
 
 For basic uses, a RealNVP-based integrator is provided with default choices and can be created and used as follows:
 
@@ -30,7 +59,8 @@ result, uncertainty, history = integrator.integrate()
 ```
 
 The function `f` is integrated over the `d`-dimensional unit hypercube and 
-* takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N`
-* returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` 
+
+* takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N` on `device`
+* returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` on `device`
 
 A more systematic documentation is under construction [here](https://ndeutschmann.github.io/zunis).
