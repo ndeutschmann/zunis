@@ -29,7 +29,8 @@ import sphinx_rtd_theme
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc','sphinx.ext.coverage', 'sphinx.ext.napoleon','sphinx_rtd_theme']
+extensions = ['sphinx.ext.autodoc','sphinx.ext.coverage', 'sphinx.ext.napoleon','sphinx_rtd_theme',
+              'sphinx.ext.linkcode']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -257,3 +258,19 @@ texinfo_documents = [
 # -- Options for Autodoc ------------------------------------------------
 
 autoclass_content = 'both'
+
+# -- LinkCode -------------------
+
+def linkcode_resolve(domain, info):
+    if domain != 'py':
+        return None
+    if not info['module']:
+        return None
+    filename = info['module'].replace('.', '/')
+    file_path = pkgutil.get_loader(info["module"]).get_filename()
+    module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}.py"
+    package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}/__init__.py"
+    if file_path.endswith("__init__.py"):
+        return package_url
+    else:
+        return module_url
