@@ -1,11 +1,18 @@
-"""Library of the Pytorch-Flows project"""
+"""ZuNIS: Neural importance sampling library"""
 import logging
 import sys
-from zunis.integration import integration_logger
-from zunis.training import training_logger
+from zunis.integration import integration_logger as ilogger
+from zunis.training import training_logger as tlogger
+
+
+logger = logging.getLogger(__name__)
+"""Overall parent logger for the Zunis library"""
+logger_integration = ilogger
+"""Overall parent logger for all integration operations"""
+logger_training = tlogger
+"""Overall parent logger for all training operations"""
 
 # Ensure that no submodule loggers outputs anything, unless explicitly setup by the user
-logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
