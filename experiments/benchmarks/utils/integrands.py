@@ -163,11 +163,10 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
         super(HypersphereVolumeIntegrand, self).__init__(d=d)
         self.r = r
         self.c = sanitize_variable(c, device=device)
-
         assert (self.r > 0), "The radius must be positive"
         assert len(self.c.shape) == 0 or tuple(self.c.shape) == (d,), "The center is either a number or a d-vector"
-        assert ((self.c - self.r) > 0.).all().item() and \
-               ((self.c + self.r) < 1.).all().item(), "The full hypersphere must fit in the unit hypercube"
+        assert ((self.c - self.r) > 0.).all().item(), "The full hypersphere must fit in the unit hypercube"
+        assert ((self.c + self.r) < 1.).all().item(), "The full hypersphere must fit in the unit hypercube"
 
     def inequality(self, x):
         """Check if the points are in the hypersphere"""
@@ -175,7 +174,31 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
 
     def integral(self):
         """Compute the volume of the hypersphere in d dimensions"""
-        return float((self.r ** self.d) * (pi ** (self.d / 2.)) / gamma(self.d / 2.+1))
+        return float((self.r ** self.d) * (pi ** (self.d / 2.)) / gamma(self.d / 2. + 1))
+
+
+class RegulatedHyperSphereIntegrand(HypersphereVolumeIntegrand):
+    """Characteristic function of an hypersphere with a small regulating factor.
+    The hypersphere must fit in the unit hypercube fully"""
+
+    def __init__(self, d, r, c, reg=1.e-6, device=None):
+        """
+
+        Parameters
+        ----------
+        d: int
+        r: float
+        c: torch.Tensor or float
+        reg: float
+        """
+        super(RegulatedHyperSphereIntegrand, self).__init__(d, r, c, device)
+        self.reg = reg
+
+    def integral(self):
+        return super(RegulatedHyperSphereIntegrand, self).integral() + self.reg
+
+    def evaluate_integrand(self, x):
+        return super(RegulatedHyperSphereIntegrand, self).evaluate_integrand(x) + self.reg
 
 
 class DiagonalGaussianIntegrand(Integrand):
@@ -262,5 +285,4 @@ class CamelIntegrand(Integrand):
         -------
         torch.Tensor
         """
-        return self.hump1.evaluate_integrand(x)+self.hump2.evaluate_integrand(x)
-
+        return self.hump1.evaluate_integrand(x) + self.hump2.evaluate_integrand(x)
