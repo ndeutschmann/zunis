@@ -41,7 +41,7 @@ class FlatSampler(Sampler):
             device = kwargs["device"]
 
         x = torch.zeros(n_batch, self.d, device=device).uniform_(0., 1.)
-        px = torch.ones(n_batch)
+        px = torch.ones(n_batch, device=device)
         fx = f(x)
         return x, px, fx
 

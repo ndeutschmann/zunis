@@ -54,7 +54,7 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     logger.info(f"Correct result:   {correct_integral:.2e}")
     logger.info(f'Difference:       {100 * integrand.compare_relative(integral):.2f}%')
-    logger.info(f"Significance:     {integrand.compare_relative(integral) / unc:.2f}σ")
+    logger.info(f"Significance:     {integrand.compare_absolute(integral) / unc:.2f}σ")
     result = ComparisonRecord(
         value=integral,
         value_std=unc,
