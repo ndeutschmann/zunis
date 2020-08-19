@@ -15,8 +15,9 @@ logger_training.setLevel(logging.WARNING)
 logger = logging.getLogger("integrator_validation")
 
 if torch.has_cuda:
-    device = torch.device("cuda:7")
-    logger.warning("Using CUDA:7")
+    cuda_ID = 0
+    device = torch.device(f"cuda:{cuda_ID}")
+    logger.warning(f"Using CUDA:{cuda_ID}")
 else:
     device = torch.device("cpu")
     logger.warning("Using the CPU")
