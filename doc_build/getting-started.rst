@@ -1,7 +1,9 @@
 Getting started
 ===============
 
-The most basic usage of this library is using the default integrator API as follows
+The most basic usage of this library is using the default
+:py:func:`Integrator <zunis.integration.default_integrator.Integrator>` API
+as follows
 
 .. code-block:: python
 
