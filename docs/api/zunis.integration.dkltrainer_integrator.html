@@ -31,6 +31,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -38,7 +39,9 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.integration.flat_survey_integrator module" href="zunis.integration.flat_survey_integrator.html" />
-    <link rel="prev" title="zunis.integration.default_integrator module" href="zunis.integration.default_integrator.html" /> 
+    <link rel="prev" title="zunis.integration.default_integrator module" href="zunis.integration.default_integrator.html" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,30 +85,53 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+    
             
             
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="zunis.integration.html#submodules">Submodules</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Library description</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrator.html">Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainer.html">Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flow.html">Normalizing flows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html">zunis.integration.adaptive_survey_integrator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.default_integrator.html">zunis.integration.default_integrator module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">zunis.integration.dkltrainer_integrator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.flat_survey_integrator.html">zunis.integration.flat_survey_integrator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.integratorAPI.html">zunis.integration.integratorAPI module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
 
             
           
+    <p class="caption"><span class="caption-text">Source</span></p>
+    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
+  
         </div>
         
       </div>
@@ -176,7 +202,7 @@
 <p>Survey/Refine integrator based on training models with a DKL trainer</p>
 <dl class="py class">
 <dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator">
-<em class="property">class </em><code class="sig-name descname">DKLAdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">DKLAdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
 <p>Survey/Refine adaptive integrator based on the DKL loss. The loss is the D_KL distance between
 the PDF from a flow model and an un-normalized function, up to non-trainable terms</p>
@@ -190,7 +216,7 @@ this is easy:</p>
 <p>So as soon as the loss is negative, we sample from the flow instead of the uniform distribution.</p>
 <dl class="py method">
 <dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
-<code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the loss is negative. This test is used to switch from uniform sampling
 to sampling from the flow in the survey phase.</p>
 <p>The loss is the distance between the target function and the flow PDF. Since the distance between

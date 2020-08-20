@@ -31,6 +31,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -38,7 +39,9 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.integration package" href="zunis.integration.html" />
-    <link rel="prev" title="Getting started" href="../getting-started.html" /> 
+    <link rel="prev" title="Training Strategies" href="../background/training.html" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,27 +85,46 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+    
             
             
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">zunis package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Library description</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrator.html">Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainer.html">Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flow.html">Normalizing flows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
 
             
           
+    <p class="caption"><span class="caption-text">Source</span></p>
+    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
+  
         </div>
         
       </div>
@@ -166,10 +188,28 @@
             
   <div class="section" id="module-zunis">
 <span id="zunis-package"></span><h1>zunis package<a class="headerlink" href="#module-zunis" title="Permalink to this headline">¶</a></h1>
-<p>Library of the Pytorch-Flows project</p>
+<p>ZuNIS: Neural importance sampling library</p>
+<dl class="py data">
+<dt id="zunis.logger">
+<code class="sig-name descname">logger</code><em class="property"> = &lt;Logger zunis (WARNING)&gt;</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overall parent logger for the Zunis library</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="zunis.logger_integration">
+<code class="sig-name descname">logger_integration</code><em class="property"> = &lt;Logger zunis.integration (WARNING)&gt;</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.logger_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overall parent logger for all integration operations</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="zunis.logger_training">
+<code class="sig-name descname">logger_training</code><em class="property"> = &lt;Logger zunis.training (WARNING)&gt;</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.logger_training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overall parent logger for all training operations</p>
+</dd></dl>
+
 <dl class="py function">
 <dt id="zunis.setup_std_stream_logger">
-<code class="sig-name descname">setup_std_stream_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_level</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.setup_std_stream_logger" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_std_stream_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">min_level</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.setup_std_stream_logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the root logger of this module to split output between stdout and stderr
 :param - min_level: minimum level output to stderr. Default is INFO
 :param - debug: overrides min_level to DEBUG</p>
@@ -215,7 +255,7 @@ stderr : [WARNING, +∞)</p>
         <a href="zunis.integration.html" class="btn btn-neutral float-right" title="zunis.integration package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../getting-started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../background/training.html" class="btn btn-neutral float-left" title="Training Strategies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -31,6 +31,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -38,7 +39,9 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.training.weighted_dataset.training_record module" href="zunis.training.weighted_dataset.training_record.html" />
-    <link rel="prev" title="zunis.training.weighted_dataset.generators module" href="zunis.training.weighted_dataset.generators.html" /> 
+    <link rel="prev" title="zunis.training.weighted_dataset.generators module" href="zunis.training.weighted_dataset.generators.html" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,30 +85,57 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+    
             
             
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.training.html">zunis.training package</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="zunis.training.html#subpackages">Subpackages</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Library description</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integrator.html">Integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainer.html">Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flow.html">Normalizing flows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.training.html">zunis.training package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.training.weighted_dataset.html">zunis.training.weighted_dataset package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="zunis.training.weighted_dataset.dkl_training.html">zunis.training.weighted_dataset.dkl_training module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.training.weighted_dataset.generators.html">zunis.training.weighted_dataset.generators module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">zunis.training.weighted_dataset.stateful_trainer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.training.weighted_dataset.training_record.html">zunis.training.weighted_dataset.training_record module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.training.weighted_dataset.variance_training.html">zunis.training.weighted_dataset.variance_training module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html">zunis.training.weighted_dataset.weighted_dataset_trainer module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
 
             
           
+    <p class="caption"><span class="caption-text">Source</span></p>
+    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
+  
         </div>
         
       </div>
@@ -178,7 +208,7 @@
 <p>Main weighted dataset stateful trainer API class</p>
 <dl class="py class">
 <dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer">
-<em class="property">class </em><code class="sig-name descname">StatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">StatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a></p>
 <p>High-level API for stateful trainers using weighted datasets
 (dataset consisting of tuples of point, function value, point pdf).</p>
@@ -205,20 +235,20 @@ i.e. if <cite>flow_prior</cite> is <cite>None</cite> or a <cite>str</cite></p></
 </dl>
 <dl class="py attribute">
 <dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors">
-<code class="sig-name descname">default_flow_priors</code><em class="property"> = {'pwlinear': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;, 'realnvp': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;}</em><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">default_flow_priors</code><em class="property"> = {'pwlinear': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;, 'realnvp': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary for the string-based API to define the distribution of the data in latent space based on
 the choice of coupling cell</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors">
-<code class="sig-name descname">flow_priors</code><em class="property"> = {'gaussian': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;, 'uniform': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;}</em><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">flow_priors</code><em class="property"> = {'gaussian': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;, 'uniform': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary for the string-based API to define the distribution of the data in latent space</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map">
-<code class="sig-name descname">loss_map</code><em class="property"> = {'dkl': &lt;function weighted_dkl_loss&gt;, 'variance': &lt;function weighted_variance_loss&gt;}</em><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">loss_map</code><em class="property"> = {'dkl': &lt;function weighted_dkl_loss&gt;, 'variance': &lt;function weighted_variance_loss&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary for the string-based API to define the loss function used in training</p>
 </dd></dl>
 
