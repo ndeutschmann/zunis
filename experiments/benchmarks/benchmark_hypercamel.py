@@ -1,7 +1,7 @@
 from functools import partial
 import pandas as pd
 import torch
-from utils.integrands.volume import RegulatedHyperSphereIntegrand
+from utils.integrands.volume import RegulatedHyperSphericalCamel
 from utils.benchmark import benchmark_known_integrand
 from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
 from utils.torch_utils import get_device
@@ -15,23 +15,23 @@ debug = True
 
 
 if debug:
-    logger = get_benchmark_logger_debug("benchmark_hypersphere")
+    logger = get_benchmark_logger_debug("benchmark_hypercamel")
 else:
-    logger = get_benchmark_logger("benchmark_hypersphere")
+    logger = get_benchmark_logger("benchmark_hypercamel")
 
 device = get_device(cuda_ID=0)
 
 
-def benchmark_hypersphere(d, r=0.5, n_batch=100000, lr=1.e-3):
-    """Run a benchmark on a hypersphere integrand"""
+def benchmark_hypercamel(d, r1=0.25, r2=0.25, n_batch=100000, lr=1.e-3):
+    """Run a benchmark on a hypercamel integrand"""
     logger.debug("=" * 72)
-    logger.info(f"Benchmarking the hypersphere integral with d={d} and r={r:.2e}")
+    logger.info(f"Benchmarking the hypercamel integral with d={d}")
     integrand_params = {
-        "r": r,
-        "c": 0.5,
+        "r1": r1,
+        "r2": r2,
         "reg": 1.e-6
     }
-    integrand = RegulatedHyperSphereIntegrand(d, device=device, **integrand_params)
+    integrand = RegulatedHyperSphericalCamel(d, device=device, **integrand_params)
     optim = partial(torch.optim.Adam, lr=lr)
     integrator = Integrator(f=integrand, d=d, device=device, trainer_options={"minibatch_size": 20000, "optim": optim})
 
@@ -45,9 +45,11 @@ if __name__ == "__main__":
     results = pd.DataFrame()
     n_batch = 100000
     for d in [2, 4, 6, 8, 10]:
-        result = benchmark_hypersphere(d, 0.49, n_batch=n_batch)
+        if d >= 8:
+            n_batch*=10
+        result = benchmark_hypercamel(d, n_batch=n_batch)
         results = pd.concat([results, result.as_dataframe()], ignore_index=True)
 
     print(results)
     if not debug:
-        results.to_csv("benchmark_hypersphere.csv", mode="w")
+        results.to_csv("benchmark_hypercamel.csv", mode="w")

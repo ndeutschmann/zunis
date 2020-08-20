@@ -6,7 +6,7 @@ import logging
 
 from utils.integrals import mean_std_integrand
 from utils.comparison_record import ComparisonRecord
-from utils.integrands import KnownIntegrand
+from utils.integrands.abstract import KnownIntegrand
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +50,8 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     _, px, fx = sampler.sample(integrand, n_batch=n_batch)
     integral, std = mean_std_integrand(fx, px)
     unc = std / sqrt(n_batch)
+    if unc == 0.:
+        unc = 1.e-16
     correct_integral = integrand.integral()
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     logger.info(f"Correct result:   {correct_integral:.2e}")

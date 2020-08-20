@@ -4,7 +4,7 @@ import torch
 from functools import partial
 
 from zunis.integration import Integrator
-from utils.integrands import HyperrectangleVolumeIntegrand, HypersphereVolumeIntegrand
+from utils.integrands.volume import HyperrectangleVolumeIntegrand, HypersphereVolumeIntegrand
 from utils.integrator_integrals import validate_integral_integrator
 
 from zunis import logger_integration, logger_training

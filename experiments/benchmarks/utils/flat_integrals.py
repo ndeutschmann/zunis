@@ -1,7 +1,7 @@
 """Computing integrals using Naive Monte Carlo"""
 import torch
 from utils.integral_validation import validate_integral, Sampler
-from utils.integrands import Integrand
+from utils.integrands.abstract import Integrand
 
 
 class FlatSampler(Sampler):

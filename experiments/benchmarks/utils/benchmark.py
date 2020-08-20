@@ -1,15 +1,14 @@
 """Benchmarking functions"""
 import logging
-from utils.torch_utils import get_device
+import torch
 from utils.integrator_integrals import validate_integral_integrator
 from utils.flat_integrals import validate_known_integrand_flat
-from zunis.integration import Integrator
 
 lib_logger = logging.getLogger(__name__)
 
 
 def benchmark_known_integrand(d, integrand, integrator, n_batch=100000,
-                              integrand_params=None, integrator_params=None, logger=None):
+                              integrand_params=None, integrator_params=None, logger=None, device=torch.device("cpu")):
     """
 
     Parameters
@@ -20,6 +19,7 @@ def benchmark_known_integrand(d, integrand, integrator, n_batch=100000,
     integrand_params
     integrator_params
     logger
+    device
 
     Returns
     -------
@@ -33,7 +33,7 @@ def benchmark_known_integrand(d, integrand, integrator, n_batch=100000,
     integrator_result = validate_integral_integrator(integrand, integrator, n_batch=n_batch)
     logger.debug("=" * 72)
     logger.info("Running flat sampler")
-    flat_result = validate_known_integrand_flat(integrand, d=d, n_batch=n_batch)
+    flat_result = validate_known_integrand_flat(integrand, d=d, n_batch=n_batch, device=device)
     logger.debug("=" * 72)
     integrator_result["speedup"] = (flat_result["value_std"] / integrator_result["value_std"]) ** 2
     logger.info(f"speedup: {integrator_result['speedup']}")

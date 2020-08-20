@@ -1,7 +1,7 @@
 from functools import partial
 import pandas as pd
 import torch
-from utils.integrands import HyperrectangleVolumeIntegrand
+from utils.integrands.volume import HyperrectangleVolumeIntegrand
 from utils.benchmark import benchmark_known_integrand
 from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
 from utils.torch_utils import get_device
