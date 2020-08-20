@@ -23,9 +23,9 @@ class IntegratorSampler(Sampler):
         self.integrator = integrator
 
         if train:
-            self.train_integator(n_survey_steps, survey_args)
+            self.train_integrator(n_survey_steps, survey_args)
 
-    def train_integator(self, n_survey_steps, survey_args=None):
+    def train_integrator(self, n_survey_steps, survey_args=None):
         """Train the integrator before sampling
 
         Parameters
