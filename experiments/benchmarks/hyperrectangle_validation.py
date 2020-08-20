@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils.integrands import HyperrectangleVolumeIntegrand
+from utils.integrands.volume import HyperrectangleVolumeIntegrand
 from utils.flat_integrals import validate_known_integrand_flat
 
 dimensions = range(2, 10, 2)

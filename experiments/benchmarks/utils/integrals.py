@@ -1,6 +1,5 @@
 """Facilities for evaluating integrals from a batch of points"""
 import torch
-from zunis.training.weighted_dataset.training_record import DictWrapper
 
 def mean_std_integrand(fx, px):
     """Compute the expectation value and the standard deviation of a function evaluated

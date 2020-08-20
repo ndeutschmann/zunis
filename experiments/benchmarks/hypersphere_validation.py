@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import torch
 import matplotlib.pyplot as plt
-from utils.integrands import HypersphereVolumeIntegrand
+from utils.integrands.volume import HypersphereVolumeIntegrand
 from utils.flat_integrals import validate_known_integrand_flat
 
 
