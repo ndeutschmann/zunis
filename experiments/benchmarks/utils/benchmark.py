@@ -4,11 +4,11 @@ import torch
 from utils.integrator_integrals import validate_integral_integrator
 from utils.flat_integrals import validate_known_integrand_flat
 
-lib_logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
-def benchmark_known_integrand(d, integrand, integrator, n_batch=100000,
-                              integrand_params=None, integrator_params=None, logger=None, device=torch.device("cpu")):
+def benchmark_known_integrand(d, integrand, integrator, n_batch=100000, integrand_params=None, integrator_params=None,
+                              device=torch.device("cpu")):
     """
 
     Parameters
@@ -16,17 +16,15 @@ def benchmark_known_integrand(d, integrand, integrator, n_batch=100000,
     d
     integrand
     integrator
+    n_batch
     integrand_params
     integrator_params
-    logger
     device
 
     Returns
     -------
 
     """
-    if logger is None:
-        logger = lib_logger
 
     logger.debug("=" * 72)
     logger.info("Running integrator")
