@@ -9,7 +9,7 @@ PAPER         =
 BUILDDIR      = _build
 MODULEDIR     = api
 APIDIR        = ../zunis_lib/zunis
-APIOPTS       = -MeT -d 2
+APIOPTS       = -fMeT -d 2
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
