@@ -36,7 +36,7 @@ def benchmark_hypercamel(d, r1=0.25, r2=0.25, n_batch=100000, lr=1.e-3):
     integrator = Integrator(f=integrand, d=d, device=device, trainer_options={"minibatch_size": 20000, "optim": optim})
 
     integrator_result = benchmark_known_integrand(d, integrand, integrator, n_batch=n_batch,
-                                                  integrand_params=integrand_params, logger=logger, device=device)
+                                                  integrand_params=integrand_params, device=device)
 
     return integrator_result
 

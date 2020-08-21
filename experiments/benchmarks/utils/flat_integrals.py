@@ -58,7 +58,7 @@ def validate_known_integrand_flat(f, d, n_batch=10000, sigma_cutoff=2, device=to
 
     Returns
     -------
-       utils.comparison_record.ComparisonRecord
+       utils.record.ComparisonRecord
     """
 
     return validate_integral(f, FlatSampler(d, device), n_batch, sigma_cutoff)

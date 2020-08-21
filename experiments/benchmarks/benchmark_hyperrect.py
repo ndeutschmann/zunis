@@ -33,7 +33,7 @@ def benchmark_hyperrect(d, frac=0.5, n_batch=100000, lr=1.e-3):
     integrator = Integrator(f=integrand, d=d, device=device, trainer_options={"minibatch_size": 20000, "optim": optim})
 
     integrator_result = benchmark_known_integrand(d, integrand, integrator, n_batch=n_batch,
-                                                  integrand_params=integrand_params, logger=logger)
+                                                  integrand_params=integrand_params)
 
     return integrator_result
 
