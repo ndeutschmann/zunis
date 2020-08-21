@@ -23,8 +23,8 @@ Get Started
 
 Do you need to compute an integral *right now* and cannot wait?
 
-1. go to the :doc:`Installation <installation>` page
-2. have a look at our :doc:`Basic Example <basic-example>`
+1. go to the :doc:`Installation <library/installation>` page
+2. have a look at our :doc:`Basic Example <library/basic-example>`
 
 
 API Overview
@@ -32,13 +32,13 @@ API Overview
 
 The ZüNIS library provides three level of abstractions, to allow both high-level and fine-grained control:
 
-1. **Integrators** are the highest level of abstraction and control function integration strategies.
+1. :doc:`Integrators <library/integrator>` are the highest level of abstraction and control function integration strategies.
 They can automate trainer and flow creation.
 
-2. **Trainers** are one level below and steer model training through loss functions, optimizers, sampling etc.
+2. :doc:`Trainers <library/trainer>` are one level below and steer model training through loss functions, optimizers, sampling etc.
 They can automate flow creation.
 
-3. **Normalizing Flows** are neural-network-based bijections from the unit hypercube to itself. They are the
+3. :doc:`Normalizing Flows <library/flow>` are neural-network-based bijections from the unit hypercube to itself. They are the
 actual trainable sampling mechanism that we use to sample points for Monte Carlo integration.
 
 
@@ -99,15 +99,13 @@ If this seems like a problem that machine learning should be able to solve, you 
     Homepage <self>
 
 .. toctree::
-    :caption: Library description
+    :caption: Library
     :maxdepth: 1
     :hidden:
 
-    Installation <installation>
-    Basic example <basic-example>
-    Integrators <integrator>
-    Trainers <trainer>
-    Normalizing flows <flow>
+    Installation <library/installation>
+    Basic example <library/basic-example>
+    Concepts <library/concepts>
 
 .. toctree::
     :caption: Background
@@ -127,4 +125,10 @@ If this seems like a problem that machine learning should be able to solve, you 
     Symbol Index <genindex>
 
 
+.. toctree::
+    :caption: Info
+    :maxdepth: 1
+    :hidden:
 
+    References <references>
+    About <about>

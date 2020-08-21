@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; ZüNIS 0.1 documentation</title>
+  <title>About &mdash; ZüNIS 0.1 documentation</title>
   
 
   
@@ -36,10 +36,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="#" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Basic example" href="basic-example.html" />
-    <link rel="prev" title="ZüNIS documentation" href="index.html" />
+    <link rel="prev" title="References" href="references.html" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   
 </head>
@@ -94,13 +94,11 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Homepage</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Library description</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic-example.html">Basic example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrator.html">Integrators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trainer.html">Trainers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flow.html">Normalizing flows</a></li>
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library/concepts.html">Concepts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -112,6 +110,11 @@
 <li class="toctree-l1"><a class="reference internal" href="api/zunis.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About</a></li>
 </ul>
 
             
@@ -161,14 +164,12 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Installation</li>
+      <li>About</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
-          
         
       </li>
     
@@ -180,39 +181,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="using-pip">
-<h2>Using <cite>pip</cite><a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h2>
-<p>As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
-You can nevertheless install it with pip from this repository as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="s1">&#39;git+https://github.com/ndeutschmann/zunis#egg=zunis&amp;subdirectory=zunis_lib&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="setting-up-a-development-environment">
-<h2>Setting up a development environment<a class="headerlink" href="#setting-up-a-development-environment" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to contribute to the library, run the benchmarks or try the examples,
-the easiest is to clone this repository directly and install the extended requirements:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
-git clone https://github.com/ndeutschmann/zunis.git ./zunis
-<span class="c1"># Create a virtual environment (recommended)</span>
-python3.7 -m venv  zunis_venv
-<span class="nb">source</span> ./zunis_venv/bin/activate
-pip install --upgrade pip
-<span class="c1"># Install the requirements</span>
-<span class="nb">cd</span> ./zunis
-pip install -r requirements.txt
-<span class="c1"># Run one benchmark (GPU highly recommended)</span>
-<span class="nb">cd</span> ./experiments/benchmarks
-python benchmark_hypersphere.py
-</pre></div>
-</div>
-</div>
-<div class="section" id="gpu-support">
-<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this headline">¶</a></h2>
-<p>ZüNIS depends on PyTorch and can therefore run on GPUs - which is strongly recommended for real-life applications.
-Refer to the PyTorch <a class="reference external" href="https://pytorch.org/get-started/">documentation</a> on how to setup your system to enable PyTorch’s CUDA support.</p>
+  <div class="section" id="about">
+<h1>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>This work was developed at the <a class="reference external" href="https://itp.phys.ethz.ch/research/particle.html">Institute For Theoretical Physics</a>, ETH Zurich by</p>
+<ul class="simple">
+<li><p><a class="reference external" href="mailto:notyet">Nicolas Deutschmann</a></p></li>
+<li><p><a class="reference external" href="mailto:notyet">Niklas Götz</a></p></li>
+</ul>
 </div>
 </div>
 
@@ -224,10 +201,8 @@ Refer to the PyTorch <a class="reference external" href="https://pytorch.org/get
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="basic-example.html" class="btn btn-neutral float-right" title="Basic example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="ZüNIS documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-left" title="References" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -236,8 +211,6 @@ Refer to the PyTorch <a class="reference external" href="https://pytorch.org/get
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 
 
     </p>
   </div>

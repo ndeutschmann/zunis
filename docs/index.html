@@ -36,9 +36,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="next" title="Installation" href="library/installation.html" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   
 </head>
@@ -93,13 +94,11 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Homepage</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Library description</span></p>
+<p class="caption"><span class="caption-text">Library</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic-example.html">Basic example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="integrator.html">Integrators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trainer.html">Trainers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flow.html">Normalizing flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library/concepts.html">Concepts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -111,6 +110,11 @@
 <li class="toctree-l1"><a class="reference internal" href="api/zunis.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 </ul>
 
             
@@ -166,8 +170,6 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
-          
         
       </li>
     
@@ -190,18 +192,18 @@ to the VEGAS Library <a class="reference external" href="https://pypi.org/projec
 <span id="overview"></span><h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
 <p>Do you need to compute an integral <em>right now</em> and cannot wait?</p>
 <ol class="arabic simple">
-<li><p>go to the <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> page</p></li>
-<li><p>have a look at our <a class="reference internal" href="basic-example.html"><span class="doc">Basic Example</span></a></p></li>
+<li><p>go to the <a class="reference internal" href="library/installation.html"><span class="doc">Installation</span></a> page</p></li>
+<li><p>have a look at our <a class="reference internal" href="library/basic-example.html"><span class="doc">Basic Example</span></a></p></li>
 </ol>
 </div>
 <div class="section" id="api-overview">
 <h2>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this headline">¶</a></h2>
 <p>The ZüNIS library provides three level of abstractions, to allow both high-level and fine-grained control:</p>
-<p>1. <strong>Integrators</strong> are the highest level of abstraction and control function integration strategies.
+<p>1. <a class="reference internal" href="library/integrator.html"><span class="doc">Integrators</span></a> are the highest level of abstraction and control function integration strategies.
 They can automate trainer and flow creation.</p>
-<p>2. <strong>Trainers</strong> are one level below and steer model training through loss functions, optimizers, sampling etc.
+<p>2. <a class="reference internal" href="library/trainer.html"><span class="doc">Trainers</span></a> are one level below and steer model training through loss functions, optimizers, sampling etc.
 They can automate flow creation.</p>
-<p>3. <strong>Normalizing Flows</strong> are neural-network-based bijections from the unit hypercube to itself. They are the
+<p>3. <a class="reference internal" href="library/flow.html"><span class="doc">Normalizing Flows</span></a> are neural-network-based bijections from the unit hypercube to itself. They are the
 actual trainable sampling mechanism that we use to sample points for Monte Carlo integration.</p>
 <div class="section" id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
@@ -245,6 +247,8 @@ we need to sample the function <span class="math notranslate nohighlight">\(f\)<
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -256,7 +260,7 @@ we need to sample the function <span class="math notranslate nohighlight">\(f\)<
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="library/installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -266,8 +270,6 @@ we need to sample the function <span class="math notranslate nohighlight">\(f\)<
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 
 
     </p>
   </div>

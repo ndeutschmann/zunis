@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Neural Importance Sampling &mdash; ZüNIS 0.1 documentation</title>
+  <title>Integrand functions &mdash; ZüNIS 0.1 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Training Strategies" href="training.html" />
-    <link rel="prev" title="Integrand functions" href="../library/function.html" />
+    <link rel="next" title="Neural Importance Sampling" href="../background/nis.html" />
+    <link rel="prev" title="Normalizing flows" href="flow.html" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   
 </head>
@@ -96,15 +96,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Library</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic-example.html">Basic example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="concepts.html">Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="integrator.html">Integrators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flow.html">Normalizing flows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrand functions</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Neural Importance Sampling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="training.html">Training strategies</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul>
@@ -165,7 +171,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Neural Importance Sampling</li>
+          <li><a href="concepts.html">Concepts</a> &raquo;</li>
+        
+      <li>Integrand functions</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -182,8 +190,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="neural-importance-sampling">
-<h1>Neural Importance Sampling<a class="headerlink" href="#neural-importance-sampling" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="integrand-functions">
+<h1>Integrand functions<a class="headerlink" href="#integrand-functions" title="Permalink to this headline">¶</a></h1>
+<p>The ZüNIS library is a tool to compute integrals and therefore functions are a central element of its API.
+The goal here is to be as agnostic possible as to which functions can be integrated and they are indeed always
+treated as a black box. In particular they do not need to be differentiable, run on a specific device, on a
+specific thread, etc.</p>
+<p>The specifications we enforce are:</p>
+<ol class="arabic simple">
+<li><p>integrals are always computed over a d-dimensional unit hypercube</p></li>
+<li><p>a function is a callable Python object</p></li>
+<li><p>input and output are provided by batch</p></li>
+<li><p>the output must be positive [TEMPORARY]</p></li>
+</ol>
+<p>In specific terms, the input will always be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">x</span></code> with shape <span class="math notranslate nohighlight">\((N, d)\)</span> and values between 0 and 1,
+and the output is expected to be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">y</span></code> with shape <span class="math notranslate nohighlight">\((N,)\)</span>, such that <code class="code docutils literal notranslate"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">f(x[i])</span></code></p>
 </div>
 
 
@@ -194,10 +215,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="training.html" class="btn btn-neutral float-right" title="Training Strategies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../background/nis.html" class="btn btn-neutral float-right" title="Neural Importance Sampling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../library/function.html" class="btn btn-neutral float-left" title="Integrand functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="flow.html" class="btn btn-neutral float-left" title="Normalizing flows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
