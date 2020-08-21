@@ -99,12 +99,14 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     return result
 
 
-def compare_integrals(integrand, sampler1, sampler2, n_batch=10000, sigma_cutoff=2):
+def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2):
     """Compute an integral in two different ways and compare
 
     Parameters
     ----------
-    integrand
+    integrand1: callable
+    integrand2: None callable
+        if not None, use `integrand1` with `sampler1` and `integrand2` with `sampler2`, else use `integrand1` for both
     sampler1
     sampler2
     n_batch
@@ -114,11 +116,13 @@ def compare_integrals(integrand, sampler1, sampler2, n_batch=10000, sigma_cutoff
     -------
 
     """
-    result1 = evaluate_integral(integrand, sampler2, n_batch)
+    result1 = evaluate_integral(integrand1, sampler2, n_batch)
     integral1 = result1["value"]
     unc1 = result1["value_std"]
 
-    result2 = evaluate_integral(integrand, sampler1, n_batch)
+    if integrand2 is None:
+        integrand2 = integrand1
+    result2 = evaluate_integral(integrand2, sampler1, n_batch)
     integral2 = result2["value"]
     unc2 = result2["value_std"]
 
