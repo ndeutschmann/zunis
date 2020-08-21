@@ -3,6 +3,7 @@ from math import sqrt
 import pandas as pd
 from zunis.training.weighted_dataset.training_record import DictWrapper
 
+
 class Record(DictWrapper):
     """Dictionary-like object that can be converted to a pandas dataframe row"""
 
@@ -16,6 +17,7 @@ class Record(DictWrapper):
 
 class EvaluationRecord(Record):
     """Dictionary-like object holding a value and a std"""
+
     def __init__(self, *, value, value_std=0., **kwargs):
         """"""
         store = {
@@ -24,7 +26,7 @@ class EvaluationRecord(Record):
         }
 
         store.update(kwargs)
-        super(ComparisonRecord, self).__init__(store)
+        super(EvaluationRecord, self).__init__(store)
 
 
 class ComparisonRecord(Record):
@@ -58,4 +60,5 @@ class ComparisonRecord(Record):
     def __bool__(self):
         return self["match"]
 
-
+    def __repr__(self):
+        return self.store.__repr__()

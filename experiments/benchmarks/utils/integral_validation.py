@@ -7,6 +7,7 @@ import logging
 from utils.integrals import mean_std_integrand
 from utils.record import ComparisonRecord, EvaluationRecord
 from utils.integrands.abstract import KnownIntegrand
+from utils.vanity import sigma
 
 logger = logging.getLogger(__name__)
 
@@ -42,14 +43,13 @@ def evaluate_integral(integrand, sampler, n_batch=10000):
 
     Returns
     -------
-        ComparisonRecord
+        utils.record.EvaluationRecord
     """
 
     _, px, fx = sampler.sample(integrand, n_batch=n_batch)
     integral, std = mean_std_integrand(fx, px)
     unc = std / sqrt(n_batch)
 
-    correct_integral = integrand.integral()
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     result = EvaluationRecord(
         value=integral,
@@ -67,11 +67,11 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     integrand: utils.integrands.KnownIntegrand
     sampler: Sampler
     n_batch: int
-    sigma_cutoff: numbers.Number
+    sigma_cutoff: float
 
     Returns
     -------
-        ComparisonRecord
+        utils.record.EvaluationRecord
     """
     assert isinstance(integrand, KnownIntegrand)
 
@@ -84,7 +84,7 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     logger.info(f"Correct result:   {correct_integral:.2e}")
     logger.info(f'Difference:       {100 * integrand.compare_relative(integral):.2f}%')
-    logger.info(f"Significance:     {integrand.compare_absolute(integral) / unc:.2f}σ".encode())
+    logger.info(f"Significance:     {integrand.compare_absolute(integral) / unc:.2f}{sigma}")
     result = ComparisonRecord(
         value=integral,
         value_std=unc,
@@ -97,6 +97,48 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     )
 
     return result
+
+
+def compare_integral_result(result1, result2, sigma_cutoff=2):
+    """Compute an integral in two different ways and compare
+
+    Parameters
+    ----------
+    result1: utils.record.EvaluationRecord
+    result2: utils.record.EvaluationRecord
+    sigma_cutoff: float
+
+    Returns
+    -------
+        utils.record.ComparisonRecord
+    """
+    integral1 = result1["value"]
+    unc1 = result1["value_std"]
+
+    integral2 = result2["value"]
+    unc2 = result2["value_std"]
+
+    absum = abs(integral1) + abs(integral2)
+    absdiff = abs(integral1 - integral2)
+    percent_diff = 2 * absdiff / absum
+    diff_unc = sqrt(unc1 ** 2 + unc2 ** 2)
+    sigmas = absdiff / diff_unc
+
+    logger.info(f"Result 1:     {integral1:.2e}+/-{unc1:.2e}")
+    logger.info(f"Result 2:     {integral2:.2e}+/-{unc2:.2e}")
+    logger.info(f"Difference:   {100. * percent_diff:.2f}%")
+    logger.info(f"Significance: {sigmas:.2f}{sigma}")
+
+    return ComparisonRecord(
+        value=result1,
+        target=result2,
+        value_std=unc1,
+        target_std=unc2,
+        sigma_cutoff=sigma_cutoff,
+        sigmas_off=sigmas,
+        percent_difference=100 * percent_diff,
+        match=sigmas <= sigma_cutoff
+    )
 
 
 def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2):
@@ -114,36 +156,11 @@ def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=1
 
     Returns
     -------
-
+        utils.record.ComparisonRecord
     """
     result1 = evaluate_integral(integrand1, sampler2, n_batch)
-    integral1 = result1["value"]
-    unc1 = result1["value_std"]
 
     if integrand2 is None:
         integrand2 = integrand1
     result2 = evaluate_integral(integrand2, sampler1, n_batch)
-    integral2 = result2["value"]
-    unc2 = result2["value_std"]
-
-    absum = abs(result1) + abs(result2)
-    absdiff = abs(result1 - result2)
-    percent_diff = 2 * absdiff / absum
-    diff_unc = sqrt(unc1 ** 2 + unc2 ** 2)
-    sigmas = absdiff / diff_unc
-
-    logger.info(f"Result 1:     {integral1:.2e}+/-{unc1:.2e}")
-    logger.info(f"Result 2:     {integral2:.2e}+/-{unc2:.2e}")
-    logger.info(f"Difference:   {100. * percent_diff:.2f}%")
-    logger.info(f"Significance: {sigmas:.2f}σ".encode())
-
-    return ComparisonRecord(
-        value=result1,
-        target=result2,
-        value_std=unc1,
-        target_std=unc2,
-        sigma_cutoff=sigma_cutoff,
-        sigmas_off=sigmas,
-        percent_difference=100 * percent_diff,
-        match=sigmas <= sigma_cutoff
-    )
+    return compare_integral_result(result1, result2, sigma_cutoff)
