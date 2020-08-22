@@ -1,6 +1,6 @@
 """Facilities to compute, estimate and benchmark integrals performed with Integrator objects"""
 
-from utils.integral_validation import Sampler, validate_integral
+from utils.integral_validation import Sampler, validate_integral, evaluate_integral
 
 
 class IntegratorSampler(Sampler):
@@ -11,7 +11,7 @@ class IntegratorSampler(Sampler):
 
         Parameters
         ----------
-        integrator: zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator
+        integrator: zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator
         train: bool
             whether to train the integrator by running `integrator.survey`
         n_survey_steps: int
@@ -82,3 +82,27 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
 
     sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
     return validate_integral(f, sampler, n_batch, sigma_cutoff)
+
+
+def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=10, survey_args=None):
+    """Validate a known integral using an integrator as a sampler
+
+    Parameters
+    ----------
+    f: utils.integrands.KnownIntegrand
+    integrator: zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator
+    n_batch: int
+    train: bool
+        whether to train the integrator using `integrator.survey`
+    n_survey_steps: int
+        positional `integrator.survey` argument
+    survey_args: None or dict
+        optional keyword-argument dictionary for `integrator.survey`
+
+    Returns
+    -------
+        utils.record.EvaluationRecord
+    """
+    sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
+
+    return evaluate_integral(f, sampler, n_batch)
