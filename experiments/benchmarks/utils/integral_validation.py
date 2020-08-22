@@ -124,19 +124,21 @@ def compare_integral_result(result1, result2, sigma_cutoff=2):
     diff_unc = sqrt(unc1 ** 2 + unc2 ** 2)
     sigmas = absdiff / diff_unc
 
-    logger.info(f"Result 1:     {integral1:.2e}+/-{unc1:.2e}")
-    logger.info(f"Result 2:     {integral2:.2e}+/-{unc2:.2e}")
-    logger.info(f"Difference:   {100. * percent_diff:.2f}%")
-    logger.info(f"Significance: {sigmas:.2f}{sigma}")
+    logger.info(f"Result 1:             {integral1:.2e}+/-{unc1:.2e}")
+    logger.info(f"Result 2:             {integral2:.2e}+/-{unc2:.2e}")
+    logger.info(f"Difference:           {100. * percent_diff:.2f}%")
+    logger.info(f"Significance:         {sigmas:.2f}{sigma}")
+    logger.info(f"Variance ratio (2/1): {(unc2/unc1)**2:.2e}")
 
     return ComparisonRecord(
-        value=result1,
-        target=result2,
+        value=integral1,
+        target=integral2,
         value_std=unc1,
         target_std=unc2,
         sigma_cutoff=sigma_cutoff,
         sigmas_off=sigmas,
         percent_difference=100 * percent_diff,
+        variance_ratio=(unc2/unc1)**2,
         match=sigmas <= sigma_cutoff
     )
 

@@ -35,10 +35,7 @@ class VegasSampler(Sampler):
         -------
             x, px: tuple of float
                 point and its pdf
-        # TODO: despite shuffling, this is still seemingly giving a slightly wrong result
-        # TODO: Need to fix
         """
-        #raise NotImplementedError("Correct this")
         if self.point_iterator is None:
             self.reset_point_iterator()
         try:

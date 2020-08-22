@@ -35,10 +35,11 @@ def vgaussian(x):
 
 
 integrator = Integrator(d=2, f=gaussian, device=device)
-vintegrator = vegas.Integrator([[0, 1], [0, 1]], nhcube_batch=100000)
+vintegrator = vegas.Integrator([[0, 1], [0, 1]], max_nhcube=1)
 
-integrator_result = evaluate_integral_integrator(gaussian, integrator, n_batch=100000, survey_args={"n_points": 100000})
+integrator_result = evaluate_integral_integrator(gaussian, integrator, n_batch=100000, survey_args={"n_points": 100000,
+                                                                                                    "n_epochs":50})
 
-vegas_result = evaluate_integral_vegas(vgaussian, vintegrator,n_batch=100000, n_batch_survey=100000)
+vegas_result = evaluate_integral_vegas(vgaussian, vintegrator, n_batch=100000, n_batch_survey=100000)
 
-print(compare_integral_result(integrator_result, vegas_result,sigma_cutoff=2))
+print(compare_integral_result(integrator_result, vegas_result,sigma_cutoff=3).as_dataframe())

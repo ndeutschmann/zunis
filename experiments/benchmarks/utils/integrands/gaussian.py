@@ -20,6 +20,10 @@ class DiagonalGaussianIntegrand(Integrand):
             Prefactor of the gaussian. Must be a scalar.
         device: torch.device
             Default device where the parameters are stored
+
+        Notes
+        -----
+        Correct value in 2D with standard params: 0.031415898(81)
         """
         super(DiagonalGaussianIntegrand, self).__init__(d)
         self.mu = sanitize_variable(mu, device)
