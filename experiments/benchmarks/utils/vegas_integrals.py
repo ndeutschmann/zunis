@@ -24,6 +24,10 @@ class VegasSampler(Sampler):
         if train:
             self.train_integrator(n_survey_steps, n_batch)
 
+    def reset_point_iterator(self):
+        self.actual_n_batch = len(list(self.integrator.random()))
+        self.point_iterator = self.integrator.random()
+
     def get_point(self):
         """Sample a single point from the vegas integrator with point pdfs normalized to 1.
 
@@ -34,22 +38,18 @@ class VegasSampler(Sampler):
         # TODO: despite shuffling, this is still seemingly giving a slightly wrong result
         # TODO: Need to fix
         """
-        raise NotImplementedError("Correct this")
+        #raise NotImplementedError("Correct this")
         if self.point_iterator is None:
-            lr = list(self.integrator.random())
-            shuffle(lr)
-            self.actual_n_batch = len(lr)
-            self.point_iterator = iter(lr)
+            self.reset_point_iterator()
         try:
             x, wx = next(self.point_iterator)
         except StopIteration:
-            lr = list(self.integrator.random())
-            shuffle(lr)
-            self.actual_n_batch = len(lr)
-            self.point_iterator = iter(lr)
-
+            self.reset_point_iterator()
             x, wx = next(self.point_iterator)
-        x = np.asarray(x)
+        # x is originally a view: map it to an array
+        # furthermore the C backend of vegas.Integrator.random
+        # reuses the same location in memory to store points: we need to copy
+        x = np.asarray(x).copy()
         wx = float(np.asarray(wx))*self.actual_n_batch
         return x, 1 / wx
 
@@ -65,7 +65,7 @@ class VegasSampler(Sampler):
         """
         self.integrator(self.integrand, nitn=n_survey_steps, neval=n_batch)
         # integrating changes how points are sampled, the iterator should be reset
-        self.point_iterator = None
+        self.reset_point_iterator()
 
     def sample(self, f, n_batch=10000, *args, **kwargs):
         """
@@ -90,7 +90,7 @@ class VegasSampler(Sampler):
             pxs.append(pxi)
         x = np.array(xs)
         px = torch.tensor(pxs)
-        fx = torch.tensor(f(x))
+        fx = f(x)
         x = torch.tensor(x)
 
         return x, px, fx
@@ -116,5 +116,6 @@ def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_s
         utils.record.EvaluationRecord
     """
     sampler = VegasSampler(integrator, f, train=train, n_survey_steps=n_survey_steps, n_batch=n_batch_survey)
+    sampler.reset_point_iterator()
 
     return evaluate_integral(f, sampler, n_batch)
