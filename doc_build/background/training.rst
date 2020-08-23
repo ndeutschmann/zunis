@@ -2,8 +2,8 @@ Training Strategies
 ###################
 
 
-Variance Training
-*****************
+Variance Loss
+*************
 
 As defined in the :doc:`normalizing flows <nis>` section, our model consists of
 
@@ -115,3 +115,53 @@ The description of the two possible PDFs used for sampling point datasets for ba
 that there is a "best of both worlds" options: use uniform sampling at the beginning of training, where the model
 is random and possibly poorly conditioned to evaluate the integal, and later switch to sampling from the frozen model
 after it has sufficiently improved.
+
+The strategy that we use to time the switch between the two sampling PDFs is to compare the current loss to the loss
+that we would obtain replacing our model by a uniform model:
+
+.. math::
+    x_i &\sim \text{Uniform}(x)\\
+    \hat{\cal L}_\text{backward}^\text{flat model} &= \frac{1}{N} \sum_{i=0}^N f(x_i)^2
+
+If the actual loss is smaller than this quantity, then our model does a better job than the flat distribution
+at estimating the integral and we therefore switch sampling mode.
+
+
+Kullback-Leibler Distance Loss
+******************************
+
+A commonly used loss for normalizing flows is the `Kullback-Leiber divergence`_ (:math:`D_\text{KL}`), which is an
+information-theoretic distance measure between probability distribution. For two PDFs :math:`p` and :math:`q`,
+the :math:`D_\text{KL}` is defined as
+
+.. math::
+    D_\text{KL}(p|q) = \int dx p(x) \log \frac{p(x)}{q(x)},
+
+which has a minimum when :math:`p=q` as can be easily shown.
+
+In our case, we do not actually have the target PDF, but we the target function :math:`f`, which is un-normalized. The target
+PDF is actually :math:`p(x) = f(x)/I`, where :math:`I` is our desired integral. We do, however not need to know the value of :math:`I` to optimize
+our model for this loss:
+
+.. math::
+    D_\text{KL}(p|q) &= \int dx \frac{f(x)}{I} \log \frac{p(x)}{I} - \frac{f(x)}{I} \log q(x)\\
+    &\propto   - \int dx f(x) \log q(x) + \text{terms independent on }q
+
+While the true minimum of the :math:`D_\text{KL}` loss is the same as the variance loss, they do yield
+different practical results. It should be clear that the variance should be the standard choice for
+the typical user: it optimizes directly the metric that controls the convergence speed of the integrand
+estimator. If one compares the variance loss and the :math:`D_\text{KL}` loss, it appears that the variance loss
+gives relatively more weight to points where $f$ is very large - which is sensible due to how these affect the
+integral estimates. This means that, for practical applications, it is more likely for models trained using the
+:math:`D_\text{KL}` loss to correctly approximate the desired PDF in regions where the function is smaller.
+This is less-than-optimal for direct integral estimation, but can have useful applications, especially if one wants to
+re-use models trained on the full domain to compute integrals on limited sub-regions,
+as can be the case in High-Energy-Physics when one considers loose- and tight-cut observables.
+
+The same discussion as for the variance loss can be had for converting the integral loss to an estimator defined
+on an estimator defined on a sample of point: we can define forward training by sampling points from the model itself
+or backward training by sampling in target space using an arbitrary PDF. Adaptive backward training can of course
+also be realized, all the more easier since the switching condition corresponds to testing the sign of the loss:
+if the model were a flat distribution, it would have unit PDF and therefore 0 loss.
+
+.. _Kullback-Leiber divergence: https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
