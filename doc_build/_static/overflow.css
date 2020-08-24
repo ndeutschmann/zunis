@@ -3,3 +3,18 @@
 body {
     hyphens: auto;
 }
+
+p.under-construction {
+    text-align: center;
+    color: dimgray;
+    font-size: xx-large;
+    background-color: lightgray;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+i.fa-exclamation-triangle {
+    color: darkorange;
+}
