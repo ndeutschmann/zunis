@@ -57,3 +57,29 @@ class KnownIntegrand(Integrand, ABC):
             raise ValueError("Only accepted methods are 'relative' and 'absolute")
 
 
+class RegulatedIntegrand(Integrand):
+    """Integrand deriving from another one and adding a small constant
+    regulating factor
+
+    This is a Mixin class. Have a look at the following references:
+    `[1]`_ `[2]`_
+
+    .. _[1]: https://stackoverflow.com/a/50465583
+    .. _[2]: https://rhettinger.wordpress.com/2011/05/26/super-considered-super/
+    """
+
+    def __init__(self, reg, *args, **kwargs):
+        self.reg = reg
+        super().__init__(*args, **kwargs)
+
+    def evaluate_integrand(self, x):
+        return super().evaluate_integrand(x) + self.reg
+
+
+class RegulatedKnownIntegrand(RegulatedIntegrand, KnownIntegrand):
+    """Integrand deriving from another known one and adding a small constant
+    regulating factor"""
+
+    def integral(self):
+        return super().integral() + self.reg
+
