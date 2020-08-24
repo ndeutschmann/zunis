@@ -41,8 +41,9 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.models.flows.sampling module" href="zunis.models.flows.sampling.html" />
     <link rel="prev" title="zunis.models.flows.general_flow module" href="zunis.models.flows.general_flow.html" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +87,7 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-    
+
             
             
               
@@ -141,9 +142,9 @@
 
             
           
-    <p class="caption"><span class="caption-text">Source</span></p>
-    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
-  
+<p class="caption"><span class="caption-text">Source</span></p>
+<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
+
         </div>
         
       </div>
@@ -207,11 +208,30 @@
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
            <div itemprop="articleBody">
             
   <div class="section" id="module-zunis.models.flows.masking">
 <span id="zunis-models-flows-masking-module"></span><h1>zunis.models.flows.masking module<a class="headerlink" href="#module-zunis.models.flows.masking" title="Permalink to this headline">¶</a></h1>
 <p>Module for the generation of masks for coupling cells</p>
+<dl class="py function">
+<dt id="zunis.models.flows.masking.maximal_masking_strategy">
+<code class="sig-name descname">maximal_masking_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a list of masks using the maximally complex option:
+(not really but within the reasonable options)</p>
+<p>Each variable is transformed using all the others as parameters, looping
+over all variables. The size of the model is therefore linear with the
+number of dimensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of dimensions</p></li>
+<li><p><strong>repetitions</strong> – number of repetitions</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt id="zunis.models.flows.masking.n_ary_mask">
 <code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
@@ -262,6 +282,8 @@ possible masks.</p>
            </div>
            
           </div>
+
+
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">

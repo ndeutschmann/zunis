@@ -41,8 +41,9 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.models.flows.coupling_cells.transforms module" href="zunis.models.flows.coupling_cells.transforms.html" />
     <link rel="prev" title="zunis.models.flows.coupling_cells.general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +87,7 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-    
+
             
             
               
@@ -141,9 +142,9 @@
 
             
           
-    <p class="caption"><span class="caption-text">Source</span></p>
-    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
-  
+<p class="caption"><span class="caption-text">Source</span></p>
+<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
+
         </div>
         
       </div>
@@ -209,6 +210,7 @@
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
            <div itemprop="articleBody">
             
   <div class="section" id="module-zunis.models.flows.coupling_cells.real_nvp">
@@ -239,28 +241,16 @@
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP</span></code></a></p>
 <p>Fake real NVP with position independent affine parameters
 for basic debugging and training tests</p>
-<p>Coupling cell instantiation:
-- mask: boolean Tensor that indicates which variables are passed (y_N) through
-and which are transformed (y_M)
-- transform: function that takes three arguments</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>y_M: the variables that are transformed</p></li>
-<li><p>t: a set of parameters for the transformation</p></li>
-<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
-</ul>
-</div></blockquote>
-<dl class="simple">
-<dt>and returns a 2-tuple</dt><dd><ul class="simple">
-<li><p>x_M: the transformed variable batch</p></li>
-<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
+<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
+given some parameters.</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
 </dd>
 </dl>
-<ul class="simple">
-<li><p>T the function that computes the parameters T from y_N</p></li>
-</ul>
-<p>NB:</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training">
 <code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training" title="Permalink to this definition">¶</a></dt>
@@ -291,28 +281,16 @@ and which are transformed (y_M)
 <em class="property">class </em><code class="sig-name descname">GeneralRealNVP</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.general_coupling.html#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell</span></code></a></p>
 <p>Coupling cell based on affine transforms without a specific parameter prediction function</p>
-<p>Coupling cell instantiation:
-- mask: boolean Tensor that indicates which variables are passed (y_N) through
-and which are transformed (y_M)
-- transform: function that takes three arguments</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>y_M: the variables that are transformed</p></li>
-<li><p>t: a set of parameters for the transformation</p></li>
-<li><p>compute_jacobian: a bool deciding whether the jacobian should be computed</p></li>
-</ul>
-</div></blockquote>
-<dl class="simple">
-<dt>and returns a 2-tuple</dt><dd><ul class="simple">
-<li><p>x_M: the transformed variable batch</p></li>
-<li><p>log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
+<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
+given some parameters.</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
 </dd>
 </dl>
-<ul class="simple">
-<li><p>T the function that computes the parameters T from y_N</p></li>
-</ul>
-<p>NB:</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training">
 <code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training" title="Permalink to this definition">¶</a></dt>
@@ -375,6 +353,8 @@ J = prod(es[…,i],i)</p>
            </div>
            
           </div>
+
+
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">

@@ -41,8 +41,9 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.models.flows.general_flow module" href="zunis.models.flows.general_flow.html" />
     <link rel="prev" title="zunis.models.flows.sequential.invertible_sequential module" href="zunis.models.flows.sequential.invertible_sequential.html" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +87,7 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-    
+
             
             
               
@@ -141,9 +142,9 @@
 
             
           
-    <p class="caption"><span class="caption-text">Source</span></p>
-    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
-  
+<p class="caption"><span class="caption-text">Source</span></p>
+<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
+
         </div>
         
       </div>
@@ -209,6 +210,7 @@
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
            <div itemprop="articleBody">
             
   <div class="section" id="module-zunis.models.flows.sequential.repeated_cell">
@@ -252,7 +254,8 @@ This is meant as a higher-level API to generate boilerplate models based on arch
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality</p></li>
 <li><p><strong>cell</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;pwlinear&quot;,</span> <span class="pre">&quot;realnvp&quot;}</span></code>) – coupling cell choice</p></li>
-<li><p><strong>masking</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;checkerboard&quot;}</span></code>) – masking strategy (more to come)</p></li>
+<li><p><strong>masking</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;checkerboard&quot;,</span> <span class="pre">&quot;maximal&quot;}</span></code>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
+and <a class="reference internal" href="zunis.models.flows.masking.html#module-zunis.models.flows.masking" title="zunis.models.flows.masking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">masking</span></code></a></p></li>
 <li><p><strong>input_cell</strong> (<em>optional</em>) – Transformation before the repeated cell</p></li>
 <li><p><strong>output_cell</strong> (<em>optional</em>) – Transformation after the repeated cell</p></li>
 <li><p><strong>cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <em>optional</em>) – parameters for the repeated cell</p></li>
@@ -269,7 +272,7 @@ This is meant as a higher-level API to generate boilerplate models based on arch
 
 <dl class="py attribute">
 <dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking">
-<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2)}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2), 'maximal': &lt;function maximal_masking_strategy&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -285,6 +288,8 @@ This is meant as a higher-level API to generate boilerplate models based on arch
            </div>
            
           </div>
+
+
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
