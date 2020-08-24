@@ -22,10 +22,14 @@ class GenericTrainerAPI(ABC):
         """Training function
 
         Arguments:
-            - x: batch of points in target space sampled from a distribution p(x)
-            - px: the corresponding batch of p(x) values
-            - fx: the (un-normalized) target weights
-            - kwargs: trainer-specific options. This overrides the config
+            - x:
+                batch of points in target space sampled from a distribution p(x)
+            - px:
+                the corresponding batch of p(x) values
+            - fx:
+                the (un-normalized) target weights
+            - kwargs:
+                trainer-specific options. This overrides the config
 
         Notes:
             This is not enforced at the level of this API but it is intended that kwargs leads to a call of
@@ -105,12 +109,16 @@ class BasicTrainer(ABC):
     def train_step_on_target_minibatch(self, x, px, fx, optim):
         """Perform one training set on a minibatch
 
-        Parameters:
-        -----------
-            x: batch of points in target space sampled from some PDF p(x)
-            px: values of p(x) for the batch
-            fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer object
+        Parameters
+        ----------
+            x:
+                batch of points in target space sampled from some PDF p(x)
+            px:
+                values of p(x) for the batch
+            fx:
+                values of the target (un-normalized) PDF
+            optim:
+                pytorch optimizer object
         """
         if not self.flow.inverse:
             self.flow.invert()
@@ -131,16 +139,21 @@ class BasicTrainer(ABC):
     def train_step_on_target_batch(self, x, px, fx, optim, minibatch_size=None):
         """Training function on a fixed batch: iterate once over the whole batch
 
-        Parameters:
-        -----------
-            x: batch of points in target space sampled from some PDF p(x)
-            px: values of p(x) for the batch
-            fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer object
-            minibatch_size: Optional. Size of each minibatch for gradient steps.
+        Parameters
+        ----------
+            x: torch.Tensor
+                batch of points in target space sampled from some PDF p(x)
+            px: torch.Tensor
+                values of p(x) for the batch
+            fx: torch.Tensor
+                values of the target (un-normalized) PDF
+            optim: torch.optim.Optimize
+                pytorch optimizer object
+            minibatch_size: None or int
+                Optional. Size of each minibatch for gradient steps.
 
-        Notes:
-        ------
+        Notes
+        -----
             if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
             gradient step is taken
         """
@@ -165,17 +178,23 @@ class BasicTrainer(ABC):
     def train_on_target_batch(self, x, px, fx, optim, n_epochs, minibatch_size=None):
         """Training function on a fixed batch: train for a fixed number of epochs on each batch
 
-        Parameters:
-        -----------
-            x: batch of points in target space sampled from some PDF p(x)
-            px: values of p(x) for the batch
-            fx: values of the target (un-normalized) PDF
-            optim: pytorch optimizer object
-            n_epochs: number of iterations over the full batch
-            minibatch_size: Optional. Size of each minibatch for gradient steps
+        Parameters
+        ----------
+            x:
+                batch of points in target space sampled from some PDF p(x)
+            px:
+                values of p(x) for the batch
+            fx:
+                values of the target (un-normalized) PDF
+            optim:
+                pytorch optimizer object
+            n_epochs:
+                number of iterations over the full batch
+            minibatch_size:
+                Optional. Size of each minibatch for gradient steps
 
-        Notes:
-        ------
+        Notes
+        -----
             if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
             gradient step is taken
         """
@@ -191,16 +210,20 @@ class BasicTrainer(ABC):
     @staticmethod
     def generate_target_batch_from_posterior(n_points, f, target_posterior):
         """Generate a batch of training examples in target space from a specified distribution
-        Parameters:
-        -----------
-            n_points: size of the batch
-            f: function to evaluate on the sampled points
-            target_posterior: distribution from which to sample points in target_space
 
-        Returns:
-        --------
-            x,px,fx
-                sampled points, sampling distribution PDF values, function values
+        Parameters
+        ----------
+            n_points:
+                size of the batch
+            f:
+                function to evaluate on the sampled points
+            target_posterior:
+                distribution from which to sample points in target_space
+
+        Returns
+        -------
+            tuple of torch.Tensor
+                (x,px,fx): sampled points, sampling distribution PDF values, function values
         """
         xlpx = target_posterior(n_points)
         x = xlpx[:, :-1]
@@ -221,18 +244,24 @@ class BasicTrainer(ABC):
         """Main training function: iterate over a fixed number of batches sampled in target space and
          train for a fixed number of epochs on each batch
 
-        Parameters:
-        -----------
-            f: un-normalized target PDF
-            batch_size: number of points per batch
-            n_batches: number of batches to train over
-            n_epochs_per_batch: number of iterations over each full batch before sampling a new one
-            minibatch_size: Optional. Size of each minibatch for gradient steps
+        Parameters
+        ----------
+            f:
+                un-normalized target PDF
+            batch_size:
+                number of points per batch
+            n_batches:
+                number of batches to train over
+            n_epochs_per_batch:
+                number of iterations over each full batch before sampling a new one
+            minibatch_size:
+                Optional. Size of each minibatch for gradient steps
             target_posterior: distribution from which points are sampled in target space
-            optim: pytorch optimizer object
+            optim:
+                pytorch optimizer object
 
-        Notes:
-        ------
+        Notes
+        -----
             if minibatch_size is unset (or None), then it is set to the size of the full batch and a single
             gradient step is taken
         """

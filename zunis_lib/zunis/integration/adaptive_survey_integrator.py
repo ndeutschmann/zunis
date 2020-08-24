@@ -6,14 +6,20 @@ from .flat_survey_integrator import FlatSurveySamplingIntegrator
 class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
     """Adaptive integrator based on a separation between survey and sampling
 
-    Survey: sample points and spend some time training the model
-    Refine: sample points using the model and evaluate the integral
+    Survey:
+        Sample points and spend some time training the model
 
-    Sampling during survey is done in two phases:
+        Sampling is done in two phases:
+
         1. Sample in the target space (input space of the integrand) using a uniform distribution
         2. Sample in the latent space and use the model to sample point in the target space
-    The switch between the two phases is performed based on a test method - abstract here that checks
-    whether the flat distribution does a better job of estimating the loss than the flat distribution
+
+
+        The switch between the two phases is performed based on a test method - abstract here - that checks
+        whether the flat distribution does a better job of estimating the loss than the flat distribution
+
+    Refine:
+        Sample points using the trained model and evaluate the integral
     """
 
     def __init__(self, f, trainer, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,

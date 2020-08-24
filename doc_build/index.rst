@@ -82,7 +82,7 @@ We can therefore define an estimator for :math:`I` by sampling :math:`N` points 
 The standard deviation of this estimator :math:`\hat{I}_N` is
 
 .. math::
-    \sigma\left[\hat{I}\right] = \frac{1}{\sqrt{N}}\left(\underset{x \sim p(x)}{\sigma}\left[  \frac{f(x)}{p(x)}\right]\right)
+    \sigma\left[\hat{I}_N\right] = \frac{1}{\sqrt{N}}\left(\underset{x \sim p(x)}{\sigma}\left[  \frac{f(x)}{p(x)}\right]\right)
 
 and the name of the game is to find a :math:`p(x)` that minimizes this quantity in order to minimize the number of times
 we need to sample the function :math:`f` to attain a given uncertainty on our integral estimation.

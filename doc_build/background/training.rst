@@ -156,7 +156,7 @@ integral estimates. This means that, for practical applications, it is more like
 :math:`D_\text{KL}` loss to correctly approximate the desired PDF in regions where the function is smaller.
 This is less-than-optimal for direct integral estimation, but can have useful applications, especially if one wants to
 re-use models trained on the full domain to compute integrals on limited sub-regions,
-as can be the case in High-Energy-Physics when one considers loose- and tight-cut observables.
+as can be the case in High-Energy Physics when one considers loose- and tight-cut observables.
 
 The same discussion as for the variance loss can be had for converting the integral loss to an estimator defined
 on an estimator defined on a sample of point: we can define forward training by sampling points from the model itself

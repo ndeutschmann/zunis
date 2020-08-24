@@ -176,7 +176,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
 class ElementWisePWLinearTransform(InvertibleTransform):
     """Invertible piecewise-linear transformations over the unit hypercube
 
-    Implements a batched bijective transformation `h from the d-dimensional unit hypercube to itself,
+    Implements a batched bijective transformation `h` from the d-dimensional unit hypercube to itself,
     in an element-wise fashion (each coordinate transformed independently)
 
     In each direction, the bijection is a piecewise-linear transform with b bins

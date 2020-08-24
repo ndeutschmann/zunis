@@ -5,33 +5,33 @@ from better_abc import abstract_attribute
 from zunis.models.flows.general_flow import GeneralFlow
 from .transforms import InvertibleTransform
 
+
 def not_list(l):
     """Return the element wise negation of a list of booleans"""
-    assert all([isinstance(it,bool) for it in l])
+    assert all([isinstance(it, bool) for it in l])
     return [not it for it in l]
 
 
 class GeneralCouplingCell(GeneralFlow):
     """Abstract class for coupling cell"""
-    def __init__(self, *, d, transform, mask):
-        """Coupling cell instantiation:
-        - mask: boolean Tensor that indicates which variables are passed (y_N) through
-        and which are transformed (y_M)
-        - transform: function that takes three arguments
-            - y_M: the variables that are transformed
-            - t: a set of parameters for the transformation
-            - compute_jacobian: a bool deciding whether the jacobian should be computed
-        and returns a 2-tuple
-            - x_M: the transformed variable batch
-            - log_j: the log-Jacobian batch if compute_jacobian, None otherwise        Transform
-        - T the function that computes the parameters T from y_N
 
-        NB:
+    def __init__(self, *, d, transform, mask):
+        """
+        Parameters
+        ----------
+        d: int
+            dimension of the space
+        transform: function or :py:class:`InvertibleTransform <zunis.models.flows.coupling_cells.transforms.InvertibleTransform>`
+            bijective variable transform that maps the unit hypercube (in `d-sum(mask)` dimensions) to itself
+            given some parameters. It should have the same signature as
+            :py:meth:`InvertibleTransform.forward <zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward>`
+        mask: list of bool
+            indicates which variables are passed (y_N) through and which are transformed (y_M)
         """
         super(GeneralCouplingCell, self).__init__(d=d)
 
-        self.mask = mask+[False]
-        self.mask_complement = not_list(mask)+[False]
+        self.mask = mask + [False]
+        self.mask_complement = not_list(mask) + [False]
         self.transform = transform
         self.T = abstract_attribute()
 
@@ -43,7 +43,7 @@ class GeneralCouplingCell(GeneralFlow):
 
         x = torch.zeros_like(yj).to(yj.device)
         x[..., self.mask] = y_n
-        x[..., self.mask_complement], log_jy = self.transform(y_m, self.T(y_n),compute_jacobian=True)
+        x[..., self.mask_complement], log_jy = self.transform(y_m, self.T(y_n), compute_jacobian=True)
         x[..., -1] = log_j + log_jy
         return x
 
@@ -54,7 +54,7 @@ class GeneralCouplingCell(GeneralFlow):
 
         x = torch.zeros_like(y).to(y.device)
         x[..., self.mask] = y_n
-        x[..., self.mask_complement], _ = self.transform(y_m, self.T(y_n),compute_jacobian=False)
+        x[..., self.mask_complement], _ = self.transform(y_m, self.T(y_n), compute_jacobian=False)
 
         return x
 
@@ -65,6 +65,16 @@ class InvertibleCouplingCell(GeneralCouplingCell):
     """
 
     def __init__(self, *, d, transform, mask):
+        """
+        Parameters
+        ----------
+        d: int
+            dimension of the space
+        transform: :py:class:`InvertibleTransform <zunis.models.flows.coupling_cells.transforms.InvertibleTransform>`
+            bijective variable transform that maps the unit hypercube (in `d-sum(mask)` dimensions) to itself
+            given some parameters.
+        mask: list of bool
+            indicates which variables are passed (y_N) through and which are transformed (y_M)"""
         assert isinstance(transform, InvertibleTransform)
         super(InvertibleCouplingCell, self).__init__(d=d, transform=transform, mask=mask)
 
