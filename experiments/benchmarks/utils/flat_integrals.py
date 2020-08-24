@@ -1,6 +1,6 @@
 """Computing integrals using Naive Monte Carlo"""
 import torch
-from utils.integral_validation import validate_integral, Sampler
+from utils.integral_validation import validate_integral, evaluate_integral, Sampler
 from utils.integrands.abstract import Integrand
 
 
@@ -54,7 +54,8 @@ def validate_known_integrand_flat(f, d, n_batch=10000, sigma_cutoff=2, device=to
     f: utils.integrands.KnownIntegrand
     d: int
     n_batch: int
-    sigma_cutoff: numbers.Number
+    sigma_cutoff: float
+    device: torch.device
 
     Returns
     -------
@@ -62,3 +63,21 @@ def validate_known_integrand_flat(f, d, n_batch=10000, sigma_cutoff=2, device=to
     """
 
     return validate_integral(f, FlatSampler(d, device), n_batch, sigma_cutoff)
+
+
+def evaluate_integral_flat(f, d, n_batch=10000, device=torch.device("cpu")):
+    """Evaluate an integral using uniform sampling
+
+    Parameters
+    ----------
+    f: utils.integrands.KnownIntegrand
+    d: int
+    n_batch: int
+    device: torch.device
+
+    Returns
+    -------
+       utils.record.EvaluationRecord
+    """
+
+    return evaluate_integral(f, FlatSampler(d, device), n_batch)

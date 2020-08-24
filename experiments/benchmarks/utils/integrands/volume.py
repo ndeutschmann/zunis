@@ -5,7 +5,7 @@ from better_abc import ABC
 from scipy.special import gamma
 
 from utils.integrands import sanitize_variable
-from utils.integrands.abstract import Integrand, KnownIntegrand
+from utils.integrands.abstract import Integrand, KnownIntegrand, RegulatedKnownIntegrand
 
 
 class VolumeIntegrand(Integrand, ABC):
@@ -98,28 +98,12 @@ class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
         return float((self.r ** self.d) * (pi ** (self.d / 2.)) / gamma(self.d / 2. + 1))
 
 
-class RegulatedHyperSphereIntegrand(HypersphereVolumeIntegrand):
+class RegulatedHyperSphereIntegrand(RegulatedKnownIntegrand, HypersphereVolumeIntegrand):
     """Characteristic function of an hypersphere with a small regulating factor.
     The hypersphere must fit in the unit hypercube fully"""
 
-    def __init__(self, d, r, c, reg=1.e-6, device=None):
-        """
-
-        Parameters
-        ----------
-        d: int
-        r: float
-        c: torch.Tensor or float
-        reg: float
-        """
-        super(RegulatedHyperSphereIntegrand, self).__init__(d, r, c, device)
-        self.reg = reg
-
-    def integral(self):
-        return super(RegulatedHyperSphereIntegrand, self).integral() + self.reg
-
-    def evaluate_integrand(self, x):
-        return super(RegulatedHyperSphereIntegrand, self).evaluate_integrand(x) + self.reg
+    def __init__(self, d, r, c, reg, device=None):
+        super().__init__(reg, d, r, c, device=device)
 
 
 class RegulatedHyperSphericalCamel(KnownIntegrand):

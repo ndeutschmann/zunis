@@ -1,7 +1,7 @@
 import torch
 
 from utils.integrands import sanitize_variable
-from utils.integrands.abstract import Integrand
+from utils.integrands.abstract import Integrand, RegulatedIntegrand
 
 
 class DiagonalGaussianIntegrand(Integrand):
@@ -50,6 +50,32 @@ class DiagonalGaussianIntegrand(Integrand):
             torch.Tensor
         """
         return self.norm * torch.exp(-((x - self.mu.to(x.device)) / self.s.to(x.device)).square().sum(axis=1))
+
+
+class RegulatedDiagonalGaussianIntegrand(RegulatedIntegrand, DiagonalGaussianIntegrand):
+    """N-dimensional regulated gaussian with a diagonal covariance matrix"""
+
+    def __init__(self, d, mu=0.5, s=0.1, norm=1., reg=1.e-6, device=None):
+        """
+
+        Parameters
+        ----------
+        mu : float or torch.Tensor
+            Mean of the gaussian. Either a scalar or a vector of size d
+        s: float or torch.Tensor
+            Standard deviation of the gaussian. Either a scalar or a vector of size d
+        norm: float or torch.Tensor
+            Prefactor of the gaussian. Must be a scalar.
+        reg: float
+            regularization constant
+        device: torch.device
+            Default device where the parameters are stored
+
+        Notes
+        -----
+        Correct value in 2D with standard params: 0.031416898(81)
+        """
+        super().__init__(reg, d, mu=mu, s=s, norm=norm, device=device)
 
 
 class CamelIntegrand(Integrand):
