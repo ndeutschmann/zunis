@@ -1,0 +1,11 @@
+{% extends "!layout.html" %}
+
+  {% block extrahead %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  {% endblock %}
+
+  {% block menu %}
+    {{ super() }}
+    <p class="caption"><span class="caption-text">Source</span></p>
+    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
+  {% endblock %}

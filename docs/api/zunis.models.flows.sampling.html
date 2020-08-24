@@ -31,14 +31,18 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis.models.layers package" href="zunis.models.layers.html" />
-    <link rel="prev" title="zunis.models.flows.masking module" href="zunis.models.flows.masking.html" /> 
+    <link rel="prev" title="zunis.models.flows.masking module" href="zunis.models.flows.masking.html" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,31 +86,64 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+    
             
             
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">zunis package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="zunis.models.html#subpackages">Subpackages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.html#submodules">Submodules</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.flows.html">zunis.models.flows package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.analytic_flows.html">zunis.models.flows.analytic_flows package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.html">zunis.models.flows.backprop_jacobian_flows package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.coupling_cells.html">zunis.models.flows.coupling_cells package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.sequential.html">zunis.models.flows.sequential package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.general_flow.html">zunis.models.flows.general_flow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.masking.html">zunis.models.flows.masking module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">zunis.models.flows.sampling module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.layers.html">zunis.models.layers package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.generators.html">zunis.models.generators module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.utils.html">zunis.models.utils module</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 
             
           
+    <p class="caption"><span class="caption-text">Source</span></p>
+    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
+  
         </div>
         
       </div>
@@ -161,8 +198,6 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/api/zunis.models.flows.sampling.rst.txt" rel="nofollow"> View page source</a>
-          
         
       </li>
     
@@ -182,7 +217,7 @@ provided with its log-inverse PDF. As a result, it can be convenient to plug the
 of a flow as a sampling layers that draws points and computes the required PDF</p>
 <dl class="py class">
 <dt id="zunis.models.flows.sampling.FactorizedFlowSampler">
-<em class="property">class </em><code class="sig-name descname">FactorizedFlowSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">FactorizedFlowSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
 <p>Sample d-dimensional data from a factorized 1D PDF over each dimension
 The 1D PDF is expected to be a pytorch.probability.Distribution object
@@ -193,26 +228,26 @@ prior initialized with parameters already on the correct device.</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
 <dt id="zunis.models.flows.sampling.FactorizedFlowSampler.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample n_batch points and stack them with their jacobians</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.sampling.FactorizedFlowSampler.log_prob">
-<code class="sig-name descname">log_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.log_prob" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">log_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.log_prob" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute, point-per-point, the log-PDF of a batch of points</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.models.flows.sampling.FactorizedFlowSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="zunis.models.flows.sampling.FactorizedGaussianSampler">
-<em class="property">class </em><code class="sig-name descname">FactorizedGaussianSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sig</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">FactorizedGaussianSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sig</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
 <p>Factorized gaussian prior
 Note that tensorflow distribution objects cannot easily be moved devices so specify the right
@@ -220,14 +255,14 @@ device at initialization.</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.sampling.FactorizedGaussianSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="zunis.models.flows.sampling.UniformSampler">
-<em class="property">class </em><code class="sig-name descname">UniformSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">low</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">high</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">UniformSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">low</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">high</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
 <p>Factorized uniform prior
 Note that tensorflow distribution objects cannot easily be moved devices so specify the right
@@ -235,7 +270,7 @@ device at initialization.</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.sampling.UniformSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -262,8 +297,6 @@ device at initialization.</p>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 
 
     </p>
   </div>

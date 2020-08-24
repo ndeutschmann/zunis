@@ -21,5 +21,6 @@ as follows
     result, uncertainty, history = integrator.integrate()
 
 The function `f` is integrated over the `d`-dimensional unit hypercube and
+
 * takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N` on `device`
 * returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` on `device`
