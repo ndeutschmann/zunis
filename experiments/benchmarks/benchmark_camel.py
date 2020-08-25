@@ -63,4 +63,4 @@ if __name__ == "__main__":
 
     print(results)
     if not debug:
-        results.to_csv("benchmark_camel.csv", mode="w")
+        results.to_pickle("benchmark_camel.bz2")

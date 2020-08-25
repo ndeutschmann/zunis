@@ -52,4 +52,4 @@ if __name__ == "__main__":
 
     print(results)
     if not debug:
-        results.to_csv("benchmark_hypercamel.csv", mode="w")
+        results.to_pickle("benchmark_hypercamel.bz2")

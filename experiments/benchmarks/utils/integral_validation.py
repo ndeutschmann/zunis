@@ -1,6 +1,7 @@
 """Generic facilities to validate integrals"""
 from better_abc import ABC, abstractmethod
 from math import sqrt
+import pandas as pd
 
 import logging
 
@@ -31,8 +32,19 @@ class Sampler(ABC):
             x,px,fx: points, pdfs, function values
         """
 
+    def get_history(self):
+        """Return stored training history from the sampler
+        This abstract class has no training history and returns an empty history
 
-def evaluate_integral(integrand, sampler, n_batch=10000):
+        Returns
+        -------
+            pandas.Dataframe
+                empty dataframe
+        """
+        return pd.DataFrame()
+
+
+def evaluate_integral(integrand, sampler, n_batch=10000, keep_history=False):
     """Evaluate an integral
 
     Parameters
@@ -40,6 +52,7 @@ def evaluate_integral(integrand, sampler, n_batch=10000):
     integrand: utils.integrands.KnownIntegrand
     sampler: Sampler
     n_batch: int
+    keep_history: bool
 
     Returns
     -------
@@ -56,10 +69,13 @@ def evaluate_integral(integrand, sampler, n_batch=10000):
         value_std=unc,
     )
 
+    if keep_history:
+        result["history"] = sampler.get_history()
+
     return result
 
 
-def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
+def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2, keep_history=False):
     """Compute the integral and check whether it matches the known value
 
     Parameters
@@ -68,6 +84,7 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     sampler: Sampler
     n_batch: int
     sigma_cutoff: float
+    keep_history: bool
 
     Returns
     -------
@@ -75,7 +92,7 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
     """
     assert isinstance(integrand, KnownIntegrand)
 
-    eval_result = evaluate_integral(integrand, sampler, n_batch)
+    eval_result = evaluate_integral(integrand, sampler, n_batch, keep_history=keep_history)
     integral = eval_result["value"]
     unc = eval_result["value_std"]
     if unc == 0.:
@@ -96,10 +113,13 @@ def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2):
         match=integrand.compare_absolute(integral) / unc <= sigma_cutoff
     )
 
+    if keep_history:
+        result["history"] = eval_result["history"]
+
     return result
 
 
-def compare_integral_result(result1, result2, sigma_cutoff=2):
+def compare_integral_result(result1, result2, sigma_cutoff=2, keep_history=False):
     """Compute an integral in two different ways and compare
 
     Parameters
@@ -107,6 +127,7 @@ def compare_integral_result(result1, result2, sigma_cutoff=2):
     result1: utils.record.EvaluationRecord
     result2: utils.record.EvaluationRecord
     sigma_cutoff: float
+    keep_history: bool
 
     Returns
     -------
@@ -130,7 +151,7 @@ def compare_integral_result(result1, result2, sigma_cutoff=2):
     logger.info(f"Significance:         {sigmas:.2f}{sigma}")
     logger.info(f"Variance ratio (2/1): {(unc2/unc1)**2:.2e}")
 
-    return ComparisonRecord(
+    result = ComparisonRecord(
         value=integral1,
         target=integral2,
         value_std=unc1,
@@ -139,11 +160,27 @@ def compare_integral_result(result1, result2, sigma_cutoff=2):
         sigmas_off=sigmas,
         percent_difference=100 * percent_diff,
         variance_ratio=(unc2/unc1)**2,
-        match=sigmas <= sigma_cutoff
+        match=sigmas <= sigma_cutoff,
     )
 
+    if keep_history:
+        try:
+            history1 = result1["history"]
+        except KeyError:
+            logger.warning(f"No history available in the first record: {result1}")
+            history1 = None
+        try:
+            history2 = result2["history"]
+        except KeyError:
+            logger.warning(f"No history available in the second record: {result2}")
+            history2 = None
+        result["value_history"] = history1
+        result["target_history"] = history2
 
-def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2):
+    return result
+
+
+def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2, keep_history=False):
     """Compute an integral in two different ways and compare
 
     Parameters
@@ -151,18 +188,19 @@ def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=1
     integrand1: callable
     integrand2: None callable
         if not None, use `integrand1` with `sampler1` and `integrand2` with `sampler2`, else use `integrand1` for both
-    sampler1
-    sampler2
-    n_batch
-    sigma_cutoff
+    sampler1: Sampler
+    sampler2: Sampler
+    n_batch: int
+    sigma_cutoff: float
+    keep_history: bool
 
     Returns
     -------
         utils.record.ComparisonRecord
     """
-    result1 = evaluate_integral(integrand1, sampler2, n_batch)
+    result1 = evaluate_integral(integrand1, sampler2, n_batch, keep_history=keep_history)
 
     if integrand2 is None:
         integrand2 = integrand1
-    result2 = evaluate_integral(integrand2, sampler1, n_batch)
-    return compare_integral_result(result1, result2, sigma_cutoff)
+    result2 = evaluate_integral(integrand2, sampler1, n_batch, keep_history=keep_history)
+    return compare_integral_result(result1, result2, sigma_cutoff, keep_history=keep_history)

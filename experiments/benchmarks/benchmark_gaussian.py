@@ -36,7 +36,8 @@ def benchmark_gaussian(d, s=0.3):
     def vgaussian(x):
         return gaussian(torch.tensor(x).to(device)).cpu()
 
-    integrator = Integrator(d=d, f=gaussian, device=device, flow_options={"masking_options": {"repetitions": 2}})
+    integrator = Integrator(d=d, f=gaussian, device=device, flow_options={"masking_options": {"repetitions": 2},
+                                                                          "cell_params": {"n_bins": 50}})
     vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
 
     integrator_result = evaluate_integral_integrator(gaussian, integrator, n_batch=100000,
@@ -62,4 +63,4 @@ if __name__ == "__main__":
 
     print(results)
     if not debug:
-        results.to_csv("benchmark_gaussian.csv", mode="w")
+        results.to_pickle("benchmark_gaussian.bz2")
