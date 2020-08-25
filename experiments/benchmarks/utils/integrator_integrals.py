@@ -57,9 +57,18 @@ class IntegratorSampler(Sampler):
         x, px, fx = self.integrator.sample_refine(n_points=n_batch, f=f)
         return x, px, fx
 
+    def get_history(self):
+        """Get the integrator's training history
+
+        Returns
+        -------
+            pandas.Dataframe
+        """
+        return self.integrator.integration_history
+
 
 def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, train=True, n_survey_steps=10,
-                                 survey_args=None):
+                                 survey_args=None, keep_history=False):
     """Validate a known integral using an integrator as a sampler
 
     Parameters
@@ -74,6 +83,8 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
         positional `integrator.survey` argument
     survey_args: None or dict
         optional keyword-argument dictionary for `integrator.survey`
+    keep_history: bool
+        whether to keep track of the training history
 
     Returns
     -------
@@ -81,10 +92,11 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
     """
 
     sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
-    return validate_integral(f, sampler, n_batch, sigma_cutoff)
+    return validate_integral(f, sampler, n_batch, sigma_cutoff, keep_history=keep_history)
 
 
-def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=10, survey_args=None):
+def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=10, survey_args=None,
+                                 keep_history=False):
     """Validate a known integral using an integrator as a sampler
 
     Parameters
@@ -98,6 +110,8 @@ def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_sur
         positional `integrator.survey` argument
     survey_args: None or dict
         optional keyword-argument dictionary for `integrator.survey`
+    keep_history: bool
+        whether to keep track of the training history
 
     Returns
     -------
@@ -105,4 +119,4 @@ def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_sur
     """
     sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
 
-    return evaluate_integral(f, sampler, n_batch)
+    return evaluate_integral(f, sampler, n_batch, keep_history=keep_history)
