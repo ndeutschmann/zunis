@@ -160,6 +160,12 @@ class BasicTrainer(ABC):
         n_points = x.shape[0]
         if minibatch_size is None:
             minibatch_size = n_points
+        elif isinstance(minibatch_size, float) and 0 < minibatch_size <= 1.:
+            minibatch_size = int(minibatch_size * x.shape[0])
+        else:
+            assert isinstance(minibatch_size,
+                              int) and minibatch_size > 0, f"minibatch size must be None, a float in ]0,1] or a " \
+                                                           f"positive int. Got {type(minibatch_size)}"
 
         begin = 0
         while begin < n_points:
@@ -316,7 +322,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
             self.logger.error("Caught error:")
             self.logger.error(e)
             if "checkpoint" in self.record and self.n_reloads < self.max_reloads:
-                self.logger.error(f"Attempting checkpoint reload {self.n_reloads+1}/{self.max_reloads}")
+                self.logger.error(f"Attempting checkpoint reload {self.n_reloads + 1}/{self.max_reloads}")
                 self.flow.load_state_dict(torch.load(self.record["checkpoint"]))
                 self.n_reloads += 1
                 output = False
@@ -379,7 +385,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         """Return the saved configuration"""
         return self.config
 
-    def train_on_batch(self, x, px, fx,  **kwargs):
+    def train_on_batch(self, x, px, fx, **kwargs):
         """Train on a batch of points using the saved configuration"""
         self.set_config(**kwargs)
 
@@ -397,6 +403,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
             raise error
 
         n_epochs = self.config["n_epochs"]
+        self.logger.debug(f"n_epochs in trainer: {n_epochs}")
         if n_epochs is None:
             error = ValueError("trainer parameter 'n_epochs' must be set before or at training")
             self.logger.error(error)
