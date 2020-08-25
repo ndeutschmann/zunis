@@ -47,3 +47,24 @@ def n_ary_mask_strategy(d, n=2, repetitions=1):
             masks.append(n_ary_mask(d, n, i))
 
     return masks
+
+
+def maximal_masking_strategy(d, repetitions=1):
+    """Generate a list of masks using the maximally complex option:
+    (not really but within the reasonable options)
+
+    Each variable is transformed using all the others as parameters, looping
+    over all variables. The size of the model is therefore linear with the
+    number of dimensions
+
+    Parameters
+    ----------
+    d: int
+        number of dimensions
+    repetitions:
+        number of repetitions
+
+    Returns
+    -------
+
+    """

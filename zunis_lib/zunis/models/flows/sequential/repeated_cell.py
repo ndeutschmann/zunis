@@ -5,7 +5,7 @@ import torch
 from .invertible_sequential import InvertibleSequentialFlow
 from zunis.models.flows.coupling_cells.general_coupling import InvertibleCouplingCell
 from zunis.models.flows.analytic_flows.analytic_flow import InvertibleAnalyticFlow
-from ..masking import n_ary_mask_strategy
+from ..masking import n_ary_mask_strategy, maximal_masking_strategy
 
 from zunis.models.flows.coupling_cells.real_nvp import RealNVP
 from zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear import PWLinearCoupling
@@ -72,7 +72,8 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
              "pwlinear": (PWLinearCoupling, None, None)}
 
     masking = {
-        "checkerboard": partial(n_ary_mask_strategy, n=2)
+        "checkerboard": partial(n_ary_mask_strategy, n=2),
+        "maximal": maximal_masking_strategy
     }
 
     def __init__(self, d, cell="pwlinear", masking="checkerboard", *, input_cell=None, output_cell=None,
@@ -85,8 +86,9 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
             dimensionality
         cell: {"pwlinear", "realnvp"}
             coupling cell choice
-        masking: {"checkerboard"}
-            masking strategy (more to come)
+        masking: {"checkerboard", "maximal"}
+            masking strategy. See :py:attr:`RepeatedCellFlow.masking <zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking>`
+            and :py:mod:`masking <zunis.models.flows.masking>`
         input_cell: optional
             Transformation before the repeated cell
         output_cell: optional

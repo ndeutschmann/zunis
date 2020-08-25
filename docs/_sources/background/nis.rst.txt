@@ -1,4 +1,4 @@
-.. Neural Importance Sampling
+:todo:
 
 Neural Importance Sampling
 ##########################

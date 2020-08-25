@@ -41,8 +41,9 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zunis package" href="../api/zunis.html" />
     <link rel="prev" title="Neural Importance Sampling" href="nis.html" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +87,7 @@
         
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-    
+
             
             
               
@@ -120,9 +121,9 @@
 
             
           
-    <p class="caption"><span class="caption-text">Source</span></p>
-    <a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i>  Github repository</a>
-  
+<p class="caption"><span class="caption-text">Source</span></p>
+<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
+
         </div>
         
       </div>
@@ -180,16 +181,145 @@
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+
            <div itemprop="articleBody">
             
   <div class="section" id="training-strategies">
 <h1>Training Strategies<a class="headerlink" href="#training-strategies" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="variance-loss">
+<h2>Variance Loss<a class="headerlink" href="#variance-loss" title="Permalink to this headline">¶</a></h2>
+<p>As defined in the <a class="reference internal" href="nis.html"><span class="doc">normalizing flows</span></a> section, our model consists of</p>
+<ol class="arabic simple">
+<li><p>a PDF over the latent space</p></li>
+<li><p>a trainable bijection from the latent space to the target space.</p></li>
+</ol>
+<p>Together they allow us to sample points <span class="math notranslate nohighlight">\(x\)</span> from the model distribution <span class="math notranslate nohighlight">\(q(x)\)</span> which is
+also known for every sampled point.</p>
+<p>Our goal is to maximize the integration speed of our integral estimator, i.e. to find the <span class="math notranslate nohighlight">\(q\)</span> that minimizes</p>
+<div class="math notranslate nohighlight">
+\[\underset{x\sim q(x)}{\sigma} \left[\frac{f(x)}{q(x)}\right] =\int dx q(x) \left( \left(\frac{f(x)}{q(x)} \right)^2 - I^2\right),\]</div>
+<p>Where <span class="math notranslate nohighlight">\(I\)</span> is our desired integral. Note that, because <span class="math notranslate nohighlight">\(q\)</span> is a normalized PDF,
+the second term in the integral is independent of it and we can limit ourselves to minimizing the first term only:</p>
+<div class="math notranslate nohighlight">
+\[{\cal L} = \int dx q(x) \left(\frac{f(x)}{q(x)}\right)^2.\]</div>
+<p>As an integral this is not a tractable loss function defined on a sample of points, we must build an estimator
+for it, and the multiple possibilities yield different ways of training the model</p>
+<div class="section" id="forward-training">
+<h3>Forward Training<a class="headerlink" href="#forward-training" title="Permalink to this headline">¶</a></h3>
+<p>The most straightforward way to formulate an estimator for the loss <span class="math notranslate nohighlight">\({\cal L}\)</span> is to take it at face value
+as an expectation value over <span class="math notranslate nohighlight">\(q\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[{\cal L} = \underset{x \sim q(x)}{\mathbb{E}} \left[\left(\frac{f(x)}{q(x)}\right)^2\right]\]</div>
+<p>We can therefore sample a collection of points <span class="math notranslate nohighlight">\(\left\{x_i\right\}_{i=1\dots N}\)</span> from our model,
+which will be distributed according to <span class="math notranslate nohighlight">\(q\)</span> and build the estimator</p>
+<div class="math notranslate nohighlight">
+\[\hat{\cal L}_\text{forward} = \frac{1}{N} \sum_{i=0}^N \left(\frac{f(x_i)}{q(x_i)}\right)^2\]</div>
+<p>of which we can compute the gradient with respects to the parameters of <span class="math notranslate nohighlight">\(q\)</span> and use a standard optimization
+technique to attempt reaching a minimum. Note that there are actually two sources of dependence on <span class="math notranslate nohighlight">\(q\)</span>:
+the first is the explicit PDF in the denominator, and the second is in each actual point <span class="math notranslate nohighlight">\(x_i\)</span>,
+which is obtained by sampling in latent space and mapping them with our model.</p>
+<p>A more explicit way of formulating this training strategy is therefore that we sample points
+<span class="math notranslate nohighlight">\(\left\{y_i\right\}_{i=1\dots N}\)</span> in latent space from the latent space PDF <span class="math notranslate nohighlight">\(q_y\)</span> and map them to a set
+<span class="math notranslate nohighlight">\(\left\{x_i\right\}_{i=1\dots N}\)</span> of points in latent space using our transformation <span class="math notranslate nohighlight">\(Q\)</span> and evaluate</p>
+<div class="math notranslate nohighlight">
+\[\hat{\cal L}_\text{forward} = \frac{1}{N} \sum_{i=0}^N \left(\frac{f\left(Q\left(y_i\right)\right)}{q(Q(y_i))}\right)^2\]</div>
+<p>While this method is the most straightforward, it carries several downsides</p>
+<ol class="arabic simple">
+<li><p>It is susceptible to the initialization of the model. If <span class="math notranslate nohighlight">\(q\)</span> is poorly sampled, it could avoid exploring relevant regions.</p></li>
+<li><p>It requires resampling new points and re-evaluate the function at each gradient step.</p></li>
+</ol>
+<p>On the other hand, once a decent model has been learned, this approach ensures that most point being sampled
+are in the relevant regions where the function is enhanced, thus ensuring good end-time performance.</p>
+</div>
+<div class="section" id="backward-training">
+<h3>Backward Training<a class="headerlink" href="#backward-training" title="Permalink to this headline">¶</a></h3>
+<p>As a solution to the drawbacks of the forward training method, we formulate an alternative approach in which we reinterpret the loss integral. Let us consider a different PDF <span class="math notranslate nohighlight">\(p\)</span> over the target space, then</p>
+<div class="math notranslate nohighlight">
+\[{\cal L} = \int dx q(x) \left(\frac{f(x)}{q(x)}\right)^2 = \int dx p(x) \frac{f(x)^2}{p(x)q(x)},\]</div>
+<p>which we now interpret as a different expectation value:</p>
+<div class="math notranslate nohighlight">
+\[{\cal L} = \underset{x \sim p(x)}{\mathbb{E}} \left[\frac{f(x)^2}{p(x)q(x)}\right]\]</div>
+<p>For which an estimator is constructed by sampling a collection of points <span class="math notranslate nohighlight">\(\left\{x_i\right\}_{i=1\dots N}\)</span> from <span class="math notranslate nohighlight">\(p\)</span> and evaluating</p>
+<div class="math notranslate nohighlight">
+\[\hat{\cal L}_\text{backward} = \frac{1}{N} \sum_{i=0}^N \frac{f(x_i)^2}{p(x_i)q(x_i)}\]</div>
+<p>Now the sample of points is independent from <span class="math notranslate nohighlight">\(q\)</span> and we can therefore</p>
+<ol class="arabic simple">
+<li><p>ensure both that our distribution <span class="math notranslate nohighlight">\(p\)</span> has a good coverage over the whole space</p></li>
+<li><p>run multiple gradient descent steps using the same batch of points</p></li>
+</ol>
+<p>Note that another practical advantage of this approach is that it yields a simpler computational graph
+for the loss function, leading to a reduced memory usage at training time.</p>
+<p>From which distribution should we <span class="math notranslate nohighlight">\(p\)</span> sample? In practice, we use two standard choices:</p>
+<ol class="arabic simple">
+<li><p>a uniform distribution, which ensures that all corners of the integration domain are covered</p></li>
+<li><p>a frozen copy of the normalizing flow.</p></li>
+</ol>
+<p>The second option can be thought of a similar to the two version of the state-action value model
+used in deep-Q learning. When sampling, we freeze the weights of the model and think of it a just any other
+PDF on target space <span class="math notranslate nohighlight">\(p(x)\)</span> and draw a collection of points from it. We then keep training for a while on this sample,
+meaning that the sample becomes progressively less representative of the distribution defined by the model.
+Nevertheless, as long as this distribution does not veer too far off the evolving model, it is likely to provide
+a good estimate of the ideal loss integral.</p>
+</div>
+<div class="section" id="adaptive-backward-training">
+<h3>Adaptive Backward Training<a class="headerlink" href="#adaptive-backward-training" title="Permalink to this headline">¶</a></h3>
+<p>The description of the two possible PDFs used for sampling point datasets for backward training should make it clear
+that there is a “best of both worlds” options: use uniform sampling at the beginning of training, where the model
+is random and possibly poorly conditioned to evaluate the integal, and later switch to sampling from the frozen model
+after it has sufficiently improved.</p>
+<p>The strategy that we use to time the switch between the two sampling PDFs is to compare the current loss to the loss
+that we would obtain replacing our model by a uniform model:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_i &amp;\sim \text{Uniform}(x)\\
+\hat{\cal L}_\text{backward}^\text{flat model} &amp;= \frac{1}{N} \sum_{i=0}^N f(x_i)^2\end{split}\]</div>
+<p>If the actual loss is smaller than this quantity, then our model does a better job than the flat distribution
+at estimating the integral and we therefore switch sampling mode.</p>
+</div>
+</div>
+<div class="section" id="kullback-leibler-distance-loss">
+<h2>Kullback-Leibler Distance Loss<a class="headerlink" href="#kullback-leibler-distance-loss" title="Permalink to this headline">¶</a></h2>
+<p>A commonly used loss for normalizing flows is the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback-Leiber divergence</a> (<span class="math notranslate nohighlight">\(D_\text{KL}\)</span>), which is an
+information-theoretic distance measure between probability distribution. For two PDFs <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>,
+the <span class="math notranslate nohighlight">\(D_\text{KL}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[D_\text{KL}(p|q) = \int dx p(x) \log \frac{p(x)}{q(x)},\]</div>
+<p>which has a minimum when <span class="math notranslate nohighlight">\(p=q\)</span> as can be easily shown.</p>
+<p>In our case, we do not actually have the target PDF, but we the target function <span class="math notranslate nohighlight">\(f\)</span>, which is un-normalized. The target
+PDF is actually <span class="math notranslate nohighlight">\(p(x) = f(x)/I\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is our desired integral. We do, however not need to know the value of <span class="math notranslate nohighlight">\(I\)</span> to optimize
+our model for this loss:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}D_\text{KL}(p|q) &amp;= \int dx \frac{f(x)}{I} \log \frac{p(x)}{I} - \frac{f(x)}{I} \log q(x)\\
+&amp;\propto   - \int dx f(x) \log q(x) + \text{terms independent on }q\end{split}\]</div>
+<p>While the true minimum of the <span class="math notranslate nohighlight">\(D_\text{KL}\)</span> loss is the same as the variance loss, they do yield
+different practical results. It should be clear that the variance should be the standard choice for
+the typical user: it optimizes directly the metric that controls the convergence speed of the integrand
+estimator. If one compares the variance loss and the <span class="math notranslate nohighlight">\(D_\text{KL}\)</span> loss, it appears that the variance loss
+gives relatively more weight to points where $f$ is very large - which is sensible due to how these affect the
+integral estimates. This means that, for practical applications, it is more likely for models trained using the
+<span class="math notranslate nohighlight">\(D_\text{KL}\)</span> loss to correctly approximate the desired PDF in regions where the function is smaller.
+This is less-than-optimal for direct integral estimation, but can have useful applications, especially if one wants to
+re-use models trained on the full domain to compute integrals on limited sub-regions,
+as can be the case in High-Energy Physics when one considers loose- and tight-cut observables.</p>
+<p>The same discussion as for the variance loss can be had for converting the integral loss to an estimator defined
+on an estimator defined on a sample of point: we can define forward training by sampling points from the model itself
+or backward training by sampling in target space using an arbitrary PDF. Adaptive backward training can of course
+also be realized, all the more easier since the switching condition corresponds to testing the sign of the loss:
+if the model were a flat distribution, it would have unit PDF and therefore 0 loss.</p>
+</div>
 </div>
 
 
            </div>
            
           </div>
+
+<p class="under-construction">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    This page is still under construction
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+</p>
+
+
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
