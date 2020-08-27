@@ -5,7 +5,14 @@ import click
 
 
 class PythonLiteralOption(click.Option):
-    """Option allowing a python literal to be passed as a string which is then parsed"""
+    """Option allowing a python literal to be passed as a string which is then parsed
+
+    Notes
+    -----
+    Small variation on a `solution`_ proposed by stackoverflow user Stephen Rauch
+
+    .. _solution: https://stackoverflow.com/a/47730333
+    """
 
     def type_cast_value(self, ctx, value):
         try:
