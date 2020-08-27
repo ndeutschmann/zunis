@@ -1,8 +1,7 @@
 """Tools to store benchmark results"""
 from math import sqrt
 import pandas as pd
-from zunis.training.weighted_dataset.training_record import DictWrapper
-
+from dictwrapper import DictWrapper
 
 class Record(DictWrapper):
     """Dictionary-like object that can be converted to a pandas dataframe row"""
