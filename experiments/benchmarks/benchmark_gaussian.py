@@ -31,12 +31,11 @@ def benchmark_gaussian(d, s=0.3, n_batch=100000, logger=None, device=torch.devic
 
     integrator_config = conf.get_default_integrator_config()
     integrator_config["n_points_survey"] = 100000
-    integrator_config["flow_options"]["cell_params"]["n_bins"] = 50
-    integrator_config["trainer_options"]["n_epochs"] = 50
+    integrator_config["n_bins"] = 50
+    integrator_config["n_epochs"] = 50
     integrator_args = conf.create_integrator_args(integrator_config)
 
     integrator = Integrator(d=d, f=gaussian, device=device, **integrator_args)
-
     vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
 
     integrator_result = evaluate_integral_integrator(gaussian, integrator, n_batch=n_batch)
@@ -50,9 +49,8 @@ def benchmark_gaussian(d, s=0.3, n_batch=100000, logger=None, device=torch.devic
     result["d"] = d
     result["s"] = s
 
-    flat_config = conf.flatten_config(integrator_config)
     result = result.merge(
-        pd.DataFrame([flat_config.values()], columns=flat_config.keys()),
+        integrator_config.as_dataframe(),
         left_index=True,
         right_index=True
     )
@@ -62,7 +60,8 @@ def benchmark_gaussian(d, s=0.3, n_batch=100000, logger=None, device=torch.devic
 
 def run_benchmark(dimensions, sigmas, debug, cuda):
     if debug:
-        logger = get_benchmark_logger_debug("benchmark_gaussian", zunis_integration_level=logging.DEBUG, zunis_training_level=logging.DEBUG, zunis_level=logging.DEBUG)
+        logger = get_benchmark_logger_debug("benchmark_gaussian", zunis_integration_level=logging.DEBUG,
+                                            zunis_training_level=logging.DEBUG, zunis_level=logging.DEBUG)
     else:
         logger = get_benchmark_logger("benchmark_gaussian")
 
