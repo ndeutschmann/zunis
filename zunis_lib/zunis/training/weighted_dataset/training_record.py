@@ -1,4 +1,3 @@
-from collections.abc import MutableMapping
 from dictwrapper import DictWrapper
 
 

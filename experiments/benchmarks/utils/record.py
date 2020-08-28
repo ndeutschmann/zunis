@@ -3,15 +3,9 @@ from math import sqrt
 import pandas as pd
 from dictwrapper import DictWrapper
 
+
 class Record(DictWrapper):
     """Dictionary-like object that can be converted to a pandas dataframe row"""
-
-    def as_dataframe(self):
-        """Represent the data as a pandas Dataframe with a single row"""
-        return pd.DataFrame(
-            [self.values()],
-            columns=self.keys()
-        )
 
 
 class EvaluationRecord(Record):
