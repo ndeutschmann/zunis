@@ -8,10 +8,16 @@ dl.field-list {
     word-break: break-all;
 }
 
+div.body {
+    min-width: 230px;
+}
+
 div.sphinxsidebar h3 {
     font-weight: normal;
     color: #000;
 }
+
+
 
 
 div.sphinxsidebar p {
@@ -31,7 +37,7 @@ div.sphinxsidebar ul {
 }
 
 div.sphinxsidebar ul.local-nav {
-    word-wrap: break-word!important;
+    word-wrap: break-word !important;
 }
 
 div.sphinxsidebar ul.local-nav ul {
@@ -71,4 +77,19 @@ p.under-construction {
 
 i.fa-exclamation-triangle {
     color: darkorange;
+}
+
+@media (max-width: 875px) {
+    div.sphinxsidebar p.caption{
+        color: gray;
+    }
+    div.sphinxsidebar h3 {
+        color: gray;
+    }
+}
+
+@media (max-width: 450px) {
+    div.body {
+        font-size: 14px;
+    }
 }

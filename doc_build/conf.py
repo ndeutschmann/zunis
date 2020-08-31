@@ -100,9 +100,9 @@ html_theme = 'alabaster'
 # documentation.
 html_theme_options = {
     "page_width": "1200px",
-    "extra_nav_links": {"<i class=\"fa fa-github\" aria-hidden=\"true\"></i> Github Repository": "https://github.com/ndeutschmann/zunis/"},
-    "fixed_sidebar":"true"
-
+    "extra_nav_links": {
+        "<i class=\"fa fa-github\" aria-hidden=\"true\"></i> Github Repository":
+            "https://github.com/ndeutschmann/zunis/"},
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
