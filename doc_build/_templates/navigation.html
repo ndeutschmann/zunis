@@ -16,7 +16,7 @@
     <span class="caption-text">Navigation</span>
 </p>
 <ul class="local-nav">
-{% if not parents %}
+{% if not parents and pagename != "index" %}
     <li><a href="/index.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Homepage</a></li>
 {% endif %}
 

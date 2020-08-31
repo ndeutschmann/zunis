@@ -80,6 +80,14 @@ i.fa-exclamation-triangle {
 }
 
 @media (max-width: 875px) {
+    div.sphinxsidebar {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    
     div.sphinxsidebar p.caption{
         color: gray;
     }
