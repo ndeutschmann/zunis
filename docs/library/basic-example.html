@@ -23,10 +23,52 @@
     <link rel="prev" title="Installation" href="installation.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="basic-example">
+<h1>Basic example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
+<p>The most basic usage of this library is using the default
+<a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">Integrator</span></code></a> API
+as follows</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The function <cite>f</cite> is integrated over the <cite>d</cite>-dimensional unit hypercube and</p>
+<ul class="simple">
+<li><p>takes <cite>torch.Tensor</cite> batched inputs with shape <cite>(N,d)</cite> for arbitrary batch size <cite>N</cite> on <cite>device</cite></p></li>
+<li><p>returns <cite>torch.Tensor</cite> batched inputs with shape <cite>(N,)</cite> for arbitrary batch size <cite>N</cite> on <cite>device</cite></p></li>
+</ul>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -119,48 +161,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="basic-example">
-<h1>Basic example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
-<p>The most basic usage of this library is using the default
-<a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">Integrator</span></code></a> API
-as follows</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
-
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-
-<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>The function <cite>f</cite> is integrated over the <cite>d</cite>-dimensional unit hypercube and</p>
-<ul class="simple">
-<li><p>takes <cite>torch.Tensor</cite> batched inputs with shape <cite>(N,d)</cite> for arbitrary batch size <cite>N</cite> on <cite>device</cite></p></li>
-<li><p>returns <cite>torch.Tensor</cite> batched inputs with shape <cite>(N,)</cite> for arbitrary batch size <cite>N</cite> on <cite>device</cite></p></li>
-</ul>
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

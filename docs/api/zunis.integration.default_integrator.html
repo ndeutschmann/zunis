@@ -23,10 +23,71 @@
     <link rel="prev" title="zunis.integration.adaptive_survey_integrator module" href="zunis.integration.adaptive_survey_integrator.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.integration.default_integrator">
+<span id="zunis-integration-default-integrator-module"></span><h1>zunis.integration.default_integrator module<a class="headerlink" href="#module-zunis.integration.default_integrator" title="Permalink to this headline">¶</a></h1>
+<p>High level interface for integration</p>
+<dl class="py function">
+<dt id="zunis.integration.default_integrator.Integrator">
+<code class="sig-name descname">Integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">survey_strategy</span><span class="o">=</span><span class="default_value">'flat'</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_iter_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_iter_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">n_points_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">trainer_verbosity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss</span><span class="o">=</span><span class="default_value">'variance'</span></em>, <em class="sig-param"><span class="n">flow</span><span class="o">=</span><span class="default_value">'pwlinear'</span></em>, <em class="sig-param"><span class="n">trainer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">trainer_options</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">flow_options</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/default_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.default_integrator.Integrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>High level integration API</p>
+<p>This is a factory method that instantiates the relevant Integrator subclass based on the options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the integration space</p></li>
+<li><p><strong>survey_strategy</strong> (<em>str</em>) – </p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
+<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
+<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
+not recommended due to uncontrolled correlations in error estimates</p></li>
+<li><p><strong>device</strong> – pytorch device on which to run</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
+<li><p><strong>trainer_verbosity</strong> – verbosity level of the trainer</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em> or </em><em>function</em>) – loss function used by the trainer</p></li>
+<li><p><strong>flow</strong> (<em>str</em><em> or </em><em>flow model</em>) – normalizing flow model to use for importance sampling</p></li>
+<li><p><strong>trainer</strong> (None or <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a>) – optional argument to provide a full trainer object - overrides any other trainer or model setup argument</p></li>
+<li><p><strong>trainer_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer</span></code></a>
+created if <cite>trainer</cite> is None</p></li>
+<li><p><strong>flow_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
+created by the stateful trainer if <cite>trainer</cite> is None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>subclass of <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -138,67 +199,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.integration.default_integrator">
-<span id="zunis-integration-default-integrator-module"></span><h1>zunis.integration.default_integrator module<a class="headerlink" href="#module-zunis.integration.default_integrator" title="Permalink to this headline">¶</a></h1>
-<p>High level interface for integration</p>
-<dl class="py function">
-<dt id="zunis.integration.default_integrator.Integrator">
-<code class="sig-name descname">Integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">survey_strategy</span><span class="o">=</span><span class="default_value">'flat'</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_iter_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_iter_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">n_points_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_points_refine</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em>, <em class="sig-param"><span class="n">verbosity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">trainer_verbosity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">loss</span><span class="o">=</span><span class="default_value">'variance'</span></em>, <em class="sig-param"><span class="n">flow</span><span class="o">=</span><span class="default_value">'pwlinear'</span></em>, <em class="sig-param"><span class="n">trainer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">trainer_options</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">flow_options</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/default_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.default_integrator.Integrator" title="Permalink to this definition">¶</a></dt>
-<dd><p>High level integration API</p>
-<p>This is a factory method that instantiates the relevant Integrator subclass based on the options</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the integration space</p></li>
-<li><p><strong>survey_strategy</strong> (<em>str</em>) – </p></li>
-<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
-<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
-<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
-<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
-<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
-<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
-<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
-not recommended due to uncontrolled correlations in error estimates</p></li>
-<li><p><strong>device</strong> – pytorch device on which to run</p></li>
-<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
-<li><p><strong>trainer_verbosity</strong> – verbosity level of the trainer</p></li>
-<li><p><strong>loss</strong> (<em>str</em><em> or </em><em>function</em>) – loss function used by the trainer</p></li>
-<li><p><strong>flow</strong> (<em>str</em><em> or </em><em>flow model</em>) – normalizing flow model to use for importance sampling</p></li>
-<li><p><strong>trainer</strong> (None or <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a>) – optional argument to provide a full trainer object - overrides any other trainer or model setup argument</p></li>
-<li><p><strong>trainer_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer</span></code></a>
-created if <cite>trainer</cite> is None</p></li>
-<li><p><strong>flow_options</strong> (<em>dict</em>) – dictionary of options to pass to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
-created by the stateful trainer if <cite>trainer</cite> is None</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>subclass of <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

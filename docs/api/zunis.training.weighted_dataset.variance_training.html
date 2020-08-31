@@ -23,10 +23,81 @@
     <link rel="prev" title="zunis.training.weighted_dataset.training_record module" href="zunis.training.weighted_dataset.training_record.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.training.weighted_dataset.variance_training">
+<span id="zunis-training-weighted-dataset-variance-training-module"></span><h1>zunis.training.weighted_dataset.variance_training module<a class="headerlink" href="#module-zunis.training.weighted_dataset.variance_training" title="Permalink to this headline">¶</a></h1>
+<p>Optimization of invertible flows in the weighted dataset problem using the DKL loss</p>
+<p>Reminder: we have a dataset (x,p(x),f(x)) such that
+- x ~ p(x)
+- we want to learn a model that draws points according to f(x),
+which is positive, and known up to normalization</p>
+<p>We want to optimize a function q(x) such that doing importance sampling to compute f(x)
+with it minimizes the variance.</p>
+<p>The variance of the importance sampling estimator is our proto-loss</p>
+<dl class="simple">
+<dt>pL(f,q) =  ∫ dx q(x) (f(x)/q(x))^2 - (∫ dx q(x) f(x)/q(x))^2</dt><dd><p>=  ∫ dx (f(x)^2/q(x)) - I(f)^2</p>
+</dd>
+</dl>
+<p>where I(f) is the integral we want to compute and is independent of q, so our real loss is</p>
+<p>L(f,q) = ∫ dx f(x)^2/q(x)</p>
+<p>Which we further can compute using importance sampling from p(x):</p>
+<p>L(f,q) = ∫ dx p(x) f(x)^2/q(x)/p(x)</p>
+<p>Which we can compute from our dataset as the expectation value</p>
+<p>L(f,q) = E(f(x)^2/(q(x) p(x)), x~p(x)</p>
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.variance_training.BasicStatefulVarTrainer">
+<em class="property">class </em><code class="sig-name descname">BasicStatefulVarTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.BasicStatefulVarTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a></p>
+<p>Basic stateful trainer based on the variance loss</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.variance_training.BasicVarTrainer">
+<em class="property">class </em><code class="sig-name descname">BasicVarTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.BasicVarTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer</span></code></a></p>
+<p>Basic trainer based on the variance loss</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.training.weighted_dataset.variance_training.weighted_variance_loss">
+<code class="sig-name descname">weighted_variance_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">logqx</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.weighted_variance_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Proxy variance loss for the integral of a function f using importance sampling from q,
+but where the variance is estimated with importance sampling from p.</p>
+<p>We want to optimize a function q(x) such that doing importance sampling to compute f(x)
+with it minimizes the variance.</p>
+<p>The variance of the importance sampling estimator is our proto-loss</p>
+<dl class="simple">
+<dt>pL(f,q) =  ∫ dx q(x) (f(x)/q(x))^2 - (∫ dx q(x) f(x)/q(x))^2</dt><dd><p>=  ∫ dx (f(x)^2/q(x)) - I(f)^2</p>
+</dd>
+</dl>
+<p>where I(f) is the integral we want to compute and is independent of q, so our real loss is</p>
+<p>L(f,q) = ∫ dx f(x)^2/q(x)</p>
+<p>Which we further can compute using importance sampling from p(x):</p>
+<p>L(f,q) = ∫ dx p(x) f(x)^2/q(x)/p(x)</p>
+<p>Which we can compute from our dataset as the expectation value</p>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,77 +211,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.training.weighted_dataset.variance_training">
-<span id="zunis-training-weighted-dataset-variance-training-module"></span><h1>zunis.training.weighted_dataset.variance_training module<a class="headerlink" href="#module-zunis.training.weighted_dataset.variance_training" title="Permalink to this headline">¶</a></h1>
-<p>Optimization of invertible flows in the weighted dataset problem using the DKL loss</p>
-<p>Reminder: we have a dataset (x,p(x),f(x)) such that
-- x ~ p(x)
-- we want to learn a model that draws points according to f(x),
-which is positive, and known up to normalization</p>
-<p>We want to optimize a function q(x) such that doing importance sampling to compute f(x)
-with it minimizes the variance.</p>
-<p>The variance of the importance sampling estimator is our proto-loss</p>
-<dl class="simple">
-<dt>pL(f,q) =  ∫ dx q(x) (f(x)/q(x))^2 - (∫ dx q(x) f(x)/q(x))^2</dt><dd><p>=  ∫ dx (f(x)^2/q(x)) - I(f)^2</p>
-</dd>
-</dl>
-<p>where I(f) is the integral we want to compute and is independent of q, so our real loss is</p>
-<p>L(f,q) = ∫ dx f(x)^2/q(x)</p>
-<p>Which we further can compute using importance sampling from p(x):</p>
-<p>L(f,q) = ∫ dx p(x) f(x)^2/q(x)/p(x)</p>
-<p>Which we can compute from our dataset as the expectation value</p>
-<p>L(f,q) = E(f(x)^2/(q(x) p(x)), x~p(x)</p>
-<dl class="py class">
-<dt id="zunis.training.weighted_dataset.variance_training.BasicStatefulVarTrainer">
-<em class="property">class </em><code class="sig-name descname">BasicStatefulVarTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.BasicStatefulVarTrainer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a></p>
-<p>Basic stateful trainer based on the variance loss</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.training.weighted_dataset.variance_training.BasicVarTrainer">
-<em class="property">class </em><code class="sig-name descname">BasicVarTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.BasicVarTrainer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer</span></code></a></p>
-<p>Basic trainer based on the variance loss</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.training.weighted_dataset.variance_training.weighted_variance_loss">
-<code class="sig-name descname">weighted_variance_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">px</span></em>, <em class="sig-param"><span class="n">logqx</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/variance_training.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.variance_training.weighted_variance_loss" title="Permalink to this definition">¶</a></dt>
-<dd><p>Proxy variance loss for the integral of a function f using importance sampling from q,
-but where the variance is estimated with importance sampling from p.</p>
-<p>We want to optimize a function q(x) such that doing importance sampling to compute f(x)
-with it minimizes the variance.</p>
-<p>The variance of the importance sampling estimator is our proto-loss</p>
-<dl class="simple">
-<dt>pL(f,q) =  ∫ dx q(x) (f(x)/q(x))^2 - (∫ dx q(x) f(x)/q(x))^2</dt><dd><p>=  ∫ dx (f(x)^2/q(x)) - I(f)^2</p>
-</dd>
-</dl>
-<p>where I(f) is the integral we want to compute and is independent of q, so our real loss is</p>
-<p>L(f,q) = ∫ dx f(x)^2/q(x)</p>
-<p>Which we further can compute using importance sampling from p(x):</p>
-<p>L(f,q) = ∫ dx p(x) f(x)^2/q(x)/p(x)</p>
-<p>Which we can compute from our dataset as the expectation value</p>
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

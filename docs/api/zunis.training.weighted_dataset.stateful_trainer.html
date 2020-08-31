@@ -23,10 +23,79 @@
     <link rel="prev" title="zunis.training.weighted_dataset.generators module" href="zunis.training.weighted_dataset.generators.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.training.weighted_dataset.stateful_trainer">
+<span id="zunis-training-weighted-dataset-stateful-trainer-module"></span><h1>zunis.training.weighted_dataset.stateful_trainer module<a class="headerlink" href="#module-zunis.training.weighted_dataset.stateful_trainer" title="Permalink to this headline">¶</a></h1>
+<p>Main weighted dataset stateful trainer API class</p>
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer">
+<em class="property">class </em><code class="sig-name descname">StatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a></p>
+<p>High-level API for stateful trainers using weighted datasets
+(dataset consisting of tuples of point, function value, point pdf).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em> or </em><em>function</em>) – loss function. If this argument is a string, it is mapped to a function using
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.loss_map</span></code></p></li>
+<li><p><strong>flow</strong> (str or <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a>) – if this variable is a string, it is a cell key used in <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
+otherwise it can be an actual flow model</p></li>
+<li><p><strong>flow_prior</strong> (None or str or <a class="reference internal" href="zunis.models.flows.sampling.html#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a>) – PDF used for sampling latent space. If None (default) then use the “natural choice” defined
+in the class variable <a class="reference internal" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors"><code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors</span></code></a>
+A string argument will be mapped using <a class="reference internal" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors"><code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors</span></code></a></p></li>
+<li><p><strong>flow_options</strong> (<em>None</em><em> or </em><em>dict</em>) – options to be passed to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a> model if
+<cite>flow</cite> is a string</p></li>
+<li><p><strong>prior_options</strong> (<em>None</em><em> or </em><em>dict</em>) – options to be passed to the latent prior constructor if a “natural choice” prior is used
+i.e. if <cite>flow_prior</cite> is <cite>None</cite> or a <cite>str</cite></p></li>
+<li><p><strong>device</strong> – device on which to run the model and the sampling</p></li>
+<li><p><strong>n_epochs</strong> (<em>int</em>) – number of epochs per batch of data during training</p></li>
+<li><p><strong>optim</strong> (<em>None</em><em> or </em><em>torch.optim.Optimizer sublcass</em>) – optimizer to use for training. If none, default Adam is used</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors">
+<code class="sig-name descname">default_flow_priors</code><em class="property"> = {'pwlinear': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;, 'realnvp': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary for the string-based API to define the distribution of the data in latent space based on
+the choice of coupling cell</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors">
+<code class="sig-name descname">flow_priors</code><em class="property"> = {'gaussian': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;, 'uniform': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary for the string-based API to define the distribution of the data in latent space</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map">
+<code class="sig-name descname">loss_map</code><em class="property"> = {'dkl': &lt;function weighted_dkl_loss&gt;, 'variance': &lt;function weighted_variance_loss&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary for the string-based API to define the loss function used in training</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,75 +209,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.training.weighted_dataset.stateful_trainer">
-<span id="zunis-training-weighted-dataset-stateful-trainer-module"></span><h1>zunis.training.weighted_dataset.stateful_trainer module<a class="headerlink" href="#module-zunis.training.weighted_dataset.stateful_trainer" title="Permalink to this headline">¶</a></h1>
-<p>Main weighted dataset stateful trainer API class</p>
-<dl class="py class">
-<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer">
-<em class="property">class </em><code class="sig-name descname">StatefulTrainer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer" title="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer</span></code></a></p>
-<p>High-level API for stateful trainers using weighted datasets
-(dataset consisting of tuples of point, function value, point pdf).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
-<li><p><strong>loss</strong> (<em>str</em><em> or </em><em>function</em>) – loss function. If this argument is a string, it is mapped to a function using
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.loss_map</span></code></p></li>
-<li><p><strong>flow</strong> (str or <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a>) – if this variable is a string, it is a cell key used in <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a>
-otherwise it can be an actual flow model</p></li>
-<li><p><strong>flow_prior</strong> (None or str or <a class="reference internal" href="zunis.models.flows.sampling.html#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a>) – PDF used for sampling latent space. If None (default) then use the “natural choice” defined
-in the class variable <a class="reference internal" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors"><code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors</span></code></a>
-A string argument will be mapped using <a class="reference internal" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors"><code class="xref py py-attr docutils literal notranslate"><span class="pre">zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors</span></code></a></p></li>
-<li><p><strong>flow_options</strong> (<em>None</em><em> or </em><em>dict</em>) – options to be passed to the <a class="reference internal" href="zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow</span></code></a> model if
-<cite>flow</cite> is a string</p></li>
-<li><p><strong>prior_options</strong> (<em>None</em><em> or </em><em>dict</em>) – options to be passed to the latent prior constructor if a “natural choice” prior is used
-i.e. if <cite>flow_prior</cite> is <cite>None</cite> or a <cite>str</cite></p></li>
-<li><p><strong>device</strong> – device on which to run the model and the sampling</p></li>
-<li><p><strong>n_epochs</strong> (<em>int</em>) – number of epochs per batch of data during training</p></li>
-<li><p><strong>optim</strong> (<em>None</em><em> or </em><em>torch.optim.Optimizer sublcass</em>) – optimizer to use for training. If none, default Adam is used</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors">
-<code class="sig-name descname">default_flow_priors</code><em class="property"> = {'pwlinear': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;, 'realnvp': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.default_flow_priors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary for the string-based API to define the distribution of the data in latent space based on
-the choice of coupling cell</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors">
-<code class="sig-name descname">flow_priors</code><em class="property"> = {'gaussian': &lt;class 'zunis.models.flows.sampling.FactorizedGaussianSampler'&gt;, 'uniform': &lt;class 'zunis.models.flows.sampling.UniformSampler'&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.flow_priors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary for the string-based API to define the distribution of the data in latent space</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map">
-<code class="sig-name descname">loss_map</code><em class="property"> = {'dkl': &lt;function weighted_dkl_loss&gt;, 'variance': &lt;function weighted_variance_loss&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/stateful_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary for the string-based API to define the loss function used in training</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

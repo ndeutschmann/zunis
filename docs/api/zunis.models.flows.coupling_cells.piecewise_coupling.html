@@ -23,10 +23,49 @@
     <link rel="prev" title="zunis.models.flows.coupling_cells package" href="zunis.models.flows.coupling_cells.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.coupling_cells.piecewise_coupling">
+<span id="zunis-models-flows-coupling-cells-piecewise-coupling-package"></span><h1>zunis.models.flows.coupling_cells.piecewise_coupling package<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.piecewise_coupling" title="Permalink to this headline">¶</a></h1>
+<p>Piecewise coupling cells
+Coupling cells whose transform f is defined as the primitive of a function g
+such that
+* f(0) = 0
+* f(1) = 1
+* g(y,t^N) &gt; 0
+* g is a piecewise-simple function</p>
+<p>e.g.: g can be a positive, piecewise constant function, whose step heights are
+the outputs of a neural network taking the y^N as input, properly normalized to
+integrate to 1.</p>
+<p>Throughout this sub-package, “PW” stands for piecewise.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -142,45 +181,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.coupling_cells.piecewise_coupling">
-<span id="zunis-models-flows-coupling-cells-piecewise-coupling-package"></span><h1>zunis.models.flows.coupling_cells.piecewise_coupling package<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.piecewise_coupling" title="Permalink to this headline">¶</a></h1>
-<p>Piecewise coupling cells
-Coupling cells whose transform f is defined as the primitive of a function g
-such that
-* f(0) = 0
-* f(1) = 1
-* g(y,t^N) &gt; 0
-* g is a piecewise-simple function</p>
-<p>e.g.: g can be a positive, piecewise constant function, whose step heights are
-the outputs of a neural network taking the y^N as input, properly normalized to
-integrate to 1.</p>
-<p>Throughout this sub-package, “PW” stands for piecewise.</p>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module</a></li>
-</ul>
-</div>
-</div>
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

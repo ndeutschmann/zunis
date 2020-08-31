@@ -23,10 +23,107 @@
     <link rel="prev" title="zunis.models.flows.coupling_cells.real_nvp module" href="zunis.models.flows.coupling_cells.real_nvp.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.coupling_cells.transforms">
+<span id="zunis-models-flows-coupling-cells-transforms-module"></span><h1>zunis.models.flows.coupling_cells.transforms module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.transforms" title="Permalink to this headline">¶</a></h1>
+<p>Abstract definition of invertible transforms for coupling cells</p>
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform">
+<em class="property">class </em><code class="sig-name descname">InvertibleTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>Callable invertible transform which calls self.forward or self.backward depending on self.inverse</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse">
+<code class="sig-name descname">inverse</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether calling the object will use the forward or backward transform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Constructor for InvertibleTransform</p>
+<p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward">
+<em class="property">abstract </em><code class="sig-name descname">backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract backward transform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
+<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>(z,j)</cite> where the first tensor is the batch of transformed points and the second is the batch of jacobians</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor, torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward">
+<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract forward transform</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
+<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>(z,j)</cite> where the first tensor is the batch of transformed points and the second is the batch of jacobians</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor, torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert">
+<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flip the <cite>inverse</cite> attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -142,103 +239,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.coupling_cells.transforms">
-<span id="zunis-models-flows-coupling-cells-transforms-module"></span><h1>zunis.models.flows.coupling_cells.transforms module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.transforms" title="Permalink to this headline">¶</a></h1>
-<p>Abstract definition of invertible transforms for coupling cells</p>
-<dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform">
-<em class="property">class </em><code class="sig-name descname">InvertibleTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
-<p>Callable invertible transform which calls self.forward or self.backward depending on self.inverse</p>
-<dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse">
-<code class="sig-name descname">inverse</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse" title="Permalink to this definition">¶</a></dt>
-<dd><p>whether calling the object will use the forward or backward transform</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<p>Constructor for InvertibleTransform</p>
-<p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward">
-<em class="property">abstract </em><code class="sig-name descname">backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Abstract backward transform</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
-<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><cite>(z,j)</cite> where the first tensor is the batch of transformed points and the second is the batch of jacobians</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple of torch.Tensor, torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward">
-<em class="property">abstract </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Abstract forward transform</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – batch of points to transform</p></li>
-<li><p><strong>T</strong> (<em>torch.Tensor</em>) – batch of parameters for the transformation</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em>) – whether to compute the jacobian or not</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><cite>(z,j)</cite> where the first tensor is the batch of transformed points and the second is the batch of jacobians</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tuple of torch.Tensor, torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert">
-<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flip the <cite>inverse</cite> attribute</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

@@ -23,10 +23,82 @@
     <link rel="prev" title="zunis.training.weighted_dataset.stateful_trainer module" href="zunis.training.weighted_dataset.stateful_trainer.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.training.weighted_dataset.training_record">
+<span id="zunis-training-weighted-dataset-training-record-module"></span><h1>zunis.training.weighted_dataset.training_record module<a class="headerlink" href="#module-zunis.training.weighted_dataset.training_record" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord">
+<em class="property">class </em><code class="sig-name descname">TrainingRecord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">checkpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dictwrapper.wrapper.DictWrapper</span></code></p>
+<p>Dictionary-like object to hold records about a training run</p>
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.epoch">
+<em class="property">property </em><code class="sig-name descname">epoch</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.epoch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.log_loss">
+<code class="sig-name descname">log_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.log_loss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.log_metric">
+<code class="sig-name descname">log_metric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">metric</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.log_metric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.loss">
+<em class="property">property </em><code class="sig-name descname">loss</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.loss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.losses">
+<em class="property">property </em><code class="sig-name descname">losses</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.losses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">
+<em class="property">property </em><code class="sig-name descname">metrics</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.new_epoch">
+<code class="sig-name descname">new_epoch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.new_epoch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.next_step">
+<code class="sig-name descname">next_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.next_step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.step">
+<em class="property">property </em><code class="sig-name descname">step</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.step" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,78 +212,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.training.weighted_dataset.training_record">
-<span id="zunis-training-weighted-dataset-training-record-module"></span><h1>zunis.training.weighted_dataset.training_record module<a class="headerlink" href="#module-zunis.training.weighted_dataset.training_record" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord">
-<em class="property">class </em><code class="sig-name descname">TrainingRecord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">checkpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dictwrapper.wrapper.DictWrapper</span></code></p>
-<p>Dictionary-like object to hold records about a training run</p>
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.epoch">
-<em class="property">property </em><code class="sig-name descname">epoch</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.epoch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.log_loss">
-<code class="sig-name descname">log_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.log_loss" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.log_metric">
-<code class="sig-name descname">log_metric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">metric</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.log_metric" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.loss">
-<em class="property">property </em><code class="sig-name descname">loss</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.loss" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.losses">
-<em class="property">property </em><code class="sig-name descname">losses</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.losses" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">
-<em class="property">property </em><code class="sig-name descname">metrics</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.new_epoch">
-<code class="sig-name descname">new_epoch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.new_epoch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.next_step">
-<code class="sig-name descname">next_step</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.next_step" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.training.weighted_dataset.training_record.TrainingRecord.step">
-<em class="property">property </em><code class="sig-name descname">step</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/training_record.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.training_record.TrainingRecord.step" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

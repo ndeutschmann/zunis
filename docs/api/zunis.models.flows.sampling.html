@@ -23,10 +23,94 @@
     <link rel="prev" title="zunis.models.flows.masking module" href="zunis.models.flows.masking.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.sampling">
+<span id="zunis-models-flows-sampling-module"></span><h1>zunis.models.flows.sampling module<a class="headerlink" href="#module-zunis.models.flows.sampling" title="Permalink to this headline">¶</a></h1>
+<p>Sampling layers
+The input of flows as we use them is nearly always generated data from some distribution
+provided with its log-inverse PDF. As a result, it can be convenient to plug the first layer
+of a flow as a sampling layers that draws points and computes the required PDF</p>
+<dl class="py class">
+<dt id="zunis.models.flows.sampling.FactorizedFlowSampler">
+<em class="property">class </em><code class="sig-name descname">FactorizedFlowSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Sample d-dimensional data from a factorized 1D PDF over each dimension
+The 1D PDF is expected to be a pytorch.probability.Distribution object
+but it can be any object that implements the <cite>sample`and `log_prob</cite> methods.</p>
+<p>NB: we provide the 1D prior object explicitly as pytorch distributions don’t
+respond appropriately to the <cite>.to(device)</cite>. To sample on a device, provide a
+prior initialized with parameters already on the correct device.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample n_batch points and stack them with their jacobians</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.log_prob">
+<code class="sig-name descname">log_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.log_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute, point-per-point, the log-PDF of a batch of points</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.sampling.FactorizedGaussianSampler">
+<em class="property">class </em><code class="sig-name descname">FactorizedGaussianSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sig</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
+<p>Factorized gaussian prior
+Note that tensorflow distribution objects cannot easily be moved devices so specify the right
+device at initialization.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.sampling.FactorizedGaussianSampler.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.sampling.UniformSampler">
+<em class="property">class </em><code class="sig-name descname">UniformSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">low</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">high</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
+<p>Factorized uniform prior
+Note that tensorflow distribution objects cannot easily be moved devices so specify the right
+device at initialization.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py attribute">
+<dt id="zunis.models.flows.sampling.UniformSampler.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,90 +224,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.sampling">
-<span id="zunis-models-flows-sampling-module"></span><h1>zunis.models.flows.sampling module<a class="headerlink" href="#module-zunis.models.flows.sampling" title="Permalink to this headline">¶</a></h1>
-<p>Sampling layers
-The input of flows as we use them is nearly always generated data from some distribution
-provided with its log-inverse PDF. As a result, it can be convenient to plug the first layer
-of a flow as a sampling layers that draws points and computes the required PDF</p>
-<dl class="py class">
-<dt id="zunis.models.flows.sampling.FactorizedFlowSampler">
-<em class="property">class </em><code class="sig-name descname">FactorizedFlowSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">prior_1d</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
-<p>Sample d-dimensional data from a factorized 1D PDF over each dimension
-The 1D PDF is expected to be a pytorch.probability.Distribution object
-but it can be any object that implements the <cite>sample`and `log_prob</cite> methods.</p>
-<p>NB: we provide the 1D prior object explicitly as pytorch distributions don’t
-respond appropriately to the <cite>.to(device)</cite>. To sample on a device, provide a
-prior initialized with parameters already on the correct device.</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
-<dl class="py method">
-<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample n_batch points and stack them with their jacobians</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.log_prob">
-<code class="sig-name descname">log_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.log_prob" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute, point-per-point, the log-PDF of a batch of points</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.flows.sampling.FactorizedFlowSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedFlowSampler.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.models.flows.sampling.FactorizedGaussianSampler">
-<em class="property">class </em><code class="sig-name descname">FactorizedGaussianSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">mu</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sig</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
-<p>Factorized gaussian prior
-Note that tensorflow distribution objects cannot easily be moved devices so specify the right
-device at initialization.</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
-<dl class="py attribute">
-<dt id="zunis.models.flows.sampling.FactorizedGaussianSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.FactorizedGaussianSampler.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.models.flows.sampling.UniformSampler">
-<em class="property">class </em><code class="sig-name descname">UniformSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">low</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">high</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sampling.FactorizedFlowSampler" title="zunis.models.flows.sampling.FactorizedFlowSampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sampling.FactorizedFlowSampler</span></code></a></p>
-<p>Factorized uniform prior
-Note that tensorflow distribution objects cannot easily be moved devices so specify the right
-device at initialization.</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
-<dl class="py attribute">
-<dt id="zunis.models.flows.sampling.UniformSampler.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sampling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sampling.UniformSampler.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

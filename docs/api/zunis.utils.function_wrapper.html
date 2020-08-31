@@ -23,10 +23,66 @@
     <link rel="prev" title="zunis.utils package" href="zunis.utils.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.utils.function_wrapper">
+<span id="zunis-utils-function-wrapper-module"></span><h1>zunis.utils.function_wrapper module<a class="headerlink" href="#module-zunis.utils.function_wrapper" title="Permalink to this headline">¶</a></h1>
+<p>Function wrappers to provide API-compatible functions</p>
+<dl class="py function">
+<dt id="zunis.utils.function_wrapper.wrap_compact_arguments_function">
+<code class="sig-name descname">wrap_compact_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_compact_arguments_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a function that evaluates on a sequence of arguments with values in compact intervals provided
+as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries and
+return a function that evaluates on pytorch batches in the unit hypercube,
+weighted by the proper Jacobian factor to preserve integrals.</p>
+<p>Explicitly: f(x_1,x_2,…,x_N) where x_i are numbers in [dimensions[i][0], dimensions[i][1]] returns a single float.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.utils.function_wrapper.wrap_hypercube_arguments_function">
+<code class="sig-name descname">wrap_hypercube_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_hypercube_arguments_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a function that evaluates on a sequence of arguments with values in the unit hypercube and
+return a function that evaluates on pytorch batches in the unit hypercube,
+weighted by the proper Jacobian factor to preserve integrals.</p>
+<p>Explicitly: f(x_1,x_2,…,x_N) where x_i are numbers in [0, 1] returns a single float.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.utils.function_wrapper.wrap_numpy_compact_batch_function">
+<code class="sig-name descname">wrap_numpy_compact_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_compact_batch_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a function that evaluates on numpy batches with values in compact intervals provided
+as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries.
+and return a function that evaluates on pytorch batches in the unit hypercube,
+weighted by the proper Jacobian factor to preserve integrals.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function">
+<code class="sig-name descname">wrap_numpy_hypercube_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a function that evaluates on numpy batches with values in the unit hypercube
+and return a function that evaluates on pytorch batches in the unit hypercube</p>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -138,62 +194,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.utils.function_wrapper">
-<span id="zunis-utils-function-wrapper-module"></span><h1>zunis.utils.function_wrapper module<a class="headerlink" href="#module-zunis.utils.function_wrapper" title="Permalink to this headline">¶</a></h1>
-<p>Function wrappers to provide API-compatible functions</p>
-<dl class="py function">
-<dt id="zunis.utils.function_wrapper.wrap_compact_arguments_function">
-<code class="sig-name descname">wrap_compact_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_compact_arguments_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take a function that evaluates on a sequence of arguments with values in compact intervals provided
-as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries and
-return a function that evaluates on pytorch batches in the unit hypercube,
-weighted by the proper Jacobian factor to preserve integrals.</p>
-<p>Explicitly: f(x_1,x_2,…,x_N) where x_i are numbers in [dimensions[i][0], dimensions[i][1]] returns a single float.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.utils.function_wrapper.wrap_hypercube_arguments_function">
-<code class="sig-name descname">wrap_hypercube_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_hypercube_arguments_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take a function that evaluates on a sequence of arguments with values in the unit hypercube and
-return a function that evaluates on pytorch batches in the unit hypercube,
-weighted by the proper Jacobian factor to preserve integrals.</p>
-<p>Explicitly: f(x_1,x_2,…,x_N) where x_i are numbers in [0, 1] returns a single float.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.utils.function_wrapper.wrap_numpy_compact_batch_function">
-<code class="sig-name descname">wrap_numpy_compact_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_compact_batch_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take a function that evaluates on numpy batches with values in compact intervals provided
-as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries.
-and return a function that evaluates on pytorch batches in the unit hypercube,
-weighted by the proper Jacobian factor to preserve integrals.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function">
-<code class="sig-name descname">wrap_numpy_hypercube_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take a function that evaluates on numpy batches with values in the unit hypercube
-and return a function that evaluates on pytorch batches in the unit hypercube</p>
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

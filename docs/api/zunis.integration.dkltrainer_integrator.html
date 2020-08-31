@@ -23,10 +23,56 @@
     <link rel="prev" title="zunis.integration.default_integrator module" href="zunis.integration.default_integrator.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.integration.dkltrainer_integrator">
+<span id="zunis-integration-dkltrainer-integrator-module"></span><h1>zunis.integration.dkltrainer_integrator module<a class="headerlink" href="#module-zunis.integration.dkltrainer_integrator" title="Permalink to this headline">¶</a></h1>
+<p>Survey/Refine integrator based on training models with a DKL trainer</p>
+<dl class="py class">
+<dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator">
+<em class="property">class </em><code class="sig-name descname">DKLAdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
+<p>Survey/Refine adaptive integrator based on the DKL loss. The loss is the D_KL distance between
+the PDF from a flow model and an un-normalized function, up to non-trainable terms</p>
+<p>Explicitly:</p>
+<p>L(f,q) = - int dx f(x) log(q(x))</p>
+<p>This integrator is adaptive in the sense that survey batches are sampled from the flat distribution in
+the target space (the domain of f and q) until the learned q distribution is a better approximation of
+the normalized target function f than the flat distribution. Since our target space is the unit hypercube,
+this is easy:</p>
+<p>L(f, uniform) = 0.</p>
+<p>So as soon as the loss is negative, we sample from the flow instead of the uniform distribution.</p>
+<dl class="py method">
+<dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
+<code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the loss is negative. This test is used to switch from uniform sampling
+to sampling from the flow in the survey phase.</p>
+<p>The loss is the distance between the target function and the flow PDF. Since the distance between
+the target function and the uniform function, a negative loss indicates that flow is doing better.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -138,52 +184,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.integration.dkltrainer_integrator">
-<span id="zunis-integration-dkltrainer-integrator-module"></span><h1>zunis.integration.dkltrainer_integrator module<a class="headerlink" href="#module-zunis.integration.dkltrainer_integrator" title="Permalink to this headline">¶</a></h1>
-<p>Survey/Refine integrator based on training models with a DKL trainer</p>
-<dl class="py class">
-<dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator">
-<em class="property">class </em><code class="sig-name descname">DKLAdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
-<p>Survey/Refine adaptive integrator based on the DKL loss. The loss is the D_KL distance between
-the PDF from a flow model and an un-normalized function, up to non-trainable terms</p>
-<p>Explicitly:</p>
-<p>L(f,q) = - int dx f(x) log(q(x))</p>
-<p>This integrator is adaptive in the sense that survey batches are sampled from the flat distribution in
-the target space (the domain of f and q) until the learned q distribution is a better approximation of
-the normalized target function f than the flat distribution. Since our target space is the unit hypercube,
-this is easy:</p>
-<p>L(f, uniform) = 0.</p>
-<p>So as soon as the loss is negative, we sample from the flow instead of the uniform distribution.</p>
-<dl class="py method">
-<dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
-<code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if the loss is negative. This test is used to switch from uniform sampling
-to sampling from the flow in the survey phase.</p>
-<p>The loss is the distance between the target function and the flow PDF. Since the distance between
-the target function and the uniform function, a negative loss indicates that flow is doing better.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

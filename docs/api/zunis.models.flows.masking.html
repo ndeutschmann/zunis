@@ -23,10 +23,93 @@
     <link rel="prev" title="zunis.models.flows.general_flow module" href="zunis.models.flows.general_flow.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.masking">
+<span id="zunis-models-flows-masking-module"></span><h1>zunis.models.flows.masking module<a class="headerlink" href="#module-zunis.models.flows.masking" title="Permalink to this headline">¶</a></h1>
+<p>Module for the generation of masks for coupling cells</p>
+<dl class="py function">
+<dt id="zunis.models.flows.masking.maximal_masking_strategy">
+<code class="sig-name descname">maximal_masking_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a list of masks using the maximally complex option:
+(not really but within the reasonable options)</p>
+<p>Each variable is transformed using all the others as parameters, looping
+over all variables. The size of the model is therefore linear with the
+number of dimensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – number of dimensions</p></li>
+<li><p><strong>repetitions</strong> – number of repetitions</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.masking.n_ary_mask">
+<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a n-ary mask with n entries (a list of bool with each nth entry True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – numbers of entries in the mask</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – period of the mask</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – offset of the True entries</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True/False mask with each nth entry True</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.masking.n_ary_mask_strategy">
+<code class="sig-name descname">n_ary_mask_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an list of masks using the n-ary periodic strategy: every nth entry is True and each next mask is
+offset by one position with respect to the previous one. We loop for a given number of repetitions through all
+possible masks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – periodicity of the mask</p></li>
+<li><p><strong>repetitions</strong> (<em>int</em>) – number of iterations through all possible masks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of masks</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of list of bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,89 +223,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.masking">
-<span id="zunis-models-flows-masking-module"></span><h1>zunis.models.flows.masking module<a class="headerlink" href="#module-zunis.models.flows.masking" title="Permalink to this headline">¶</a></h1>
-<p>Module for the generation of masks for coupling cells</p>
-<dl class="py function">
-<dt id="zunis.models.flows.masking.maximal_masking_strategy">
-<code class="sig-name descname">maximal_masking_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a list of masks using the maximally complex option:
-(not really but within the reasonable options)</p>
-<p>Each variable is transformed using all the others as parameters, looping
-over all variables. The size of the model is therefore linear with the
-number of dimensions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – number of dimensions</p></li>
-<li><p><strong>repetitions</strong> – number of repetitions</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.flows.masking.n_ary_mask">
-<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a n-ary mask with n entries (a list of bool with each nth entry True)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – numbers of entries in the mask</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – period of the mask</p></li>
-<li><p><strong>offset</strong> (<em>int</em>) – offset of the True entries</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True/False mask with each nth entry True</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.flows.masking.n_ary_mask_strategy">
-<code class="sig-name descname">n_ary_mask_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask_strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate an list of masks using the n-ary periodic strategy: every nth entry is True and each next mask is
-offset by one position with respect to the previous one. We loop for a given number of repetitions through all
-possible masks.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – periodicity of the mask</p></li>
-<li><p><strong>repetitions</strong> (<em>int</em>) – number of iterations through all possible masks</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>list of masks</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of list of bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

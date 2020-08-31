@@ -23,10 +23,97 @@
     <link rel="prev" title="zunis.models.flows.sequential.invertible_sequential module" href="zunis.models.flows.sequential.invertible_sequential.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.sequential.repeated_cell">
+<span id="zunis-models-flows-sequential-repeated-cell-module"></span><h1>zunis.models.flows.sequential.repeated_cell module<a class="headerlink" href="#module-zunis.models.flows.sequential.repeated_cell" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow">
+<em class="property">class </em><code class="sig-name descname">MaskListRepeatedCellFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.sequential.invertible_sequential.html#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow</span></code></a></p>
+<p>Sequential normalizing flow based on repeating a single coupling cell type
+with each a different mask as a sequence of transformations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>cell</strong> – callable that yields an instance of zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell
+the coupling cell to be repeated.</p></li>
+<li><p><strong>masks</strong> (<em>list of lists of bool</em>) – list of masks for each flow in the cell. The order is from latent space to target space</p></li>
+<li><p><strong>input_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an input. Typically to deform the input space to be suited to the repeated cell</p></li>
+<li><p><strong>output_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an output. Typically to deform the input space to be suited to the repeated cell</p></li>
+<li><p><strong>cell_params</strong> (<em>dict</em>) – parameters of the cell</p></li>
+<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>None</em>) – parameters of the input cell</p></li>
+<li><p><strong>output_cell_params</strong> (<em>dict</em>) – parameters of the output cell</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow">
+<em class="property">class </em><code class="sig-name descname">RepeatedCellFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow</span></code></a></p>
+<p>Repeated cell flow: a sequential model with a coupling cell model
+This is meant as a higher-level API to generate boilerplate models based on architecture and masking strategy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality</p></li>
+<li><p><strong>cell</strong> (<em>{&quot;pwlinear&quot;</em><em>, </em><em>&quot;realnvp&quot;}</em>) – coupling cell choice</p></li>
+<li><p><strong>masking</strong> (<em>{&quot;checkerboard&quot;</em><em>, </em><em>&quot;maximal&quot;}</em>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
+and <a class="reference internal" href="zunis.models.flows.masking.html#module-zunis.models.flows.masking" title="zunis.models.flows.masking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">masking</span></code></a></p></li>
+<li><p><strong>input_cell</strong> (<em>optional</em>) – Transformation before the repeated cell</p></li>
+<li><p><strong>output_cell</strong> (<em>optional</em>) – Transformation after the repeated cell</p></li>
+<li><p><strong>cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the repeated cell</p></li>
+<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the input_cell</p></li>
+<li><p><strong>output_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the output_cell</p></li>
+<li><p><strong>masking_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the masking strategy</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells">
+<code class="sig-name descname">cells</code><em class="property"> = {'pwlinear': (&lt;class 'zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling'&gt;, None, None), 'realnvp': (&lt;class 'zunis.models.flows.coupling_cells.real_nvp.RealNVP'&gt;, None, &lt;class 'zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid'&gt;)}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking">
+<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2), 'maximal': &lt;function maximal_masking_strategy&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -142,93 +229,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.sequential.repeated_cell">
-<span id="zunis-models-flows-sequential-repeated-cell-module"></span><h1>zunis.models.flows.sequential.repeated_cell module<a class="headerlink" href="#module-zunis.models.flows.sequential.repeated_cell" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow">
-<em class="property">class </em><code class="sig-name descname">MaskListRepeatedCellFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.sequential.invertible_sequential.html#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow</span></code></a></p>
-<p>Sequential normalizing flow based on repeating a single coupling cell type
-with each a different mask as a sequence of transformations</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
-<li><p><strong>cell</strong> – callable that yields an instance of zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell
-the coupling cell to be repeated.</p></li>
-<li><p><strong>masks</strong> (<em>list of lists of bool</em>) – list of masks for each flow in the cell. The order is from latent space to target space</p></li>
-<li><p><strong>input_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an input. Typically to deform the input space to be suited to the repeated cell</p></li>
-<li><p><strong>output_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an output. Typically to deform the input space to be suited to the repeated cell</p></li>
-<li><p><strong>cell_params</strong> (<em>dict</em>) – parameters of the cell</p></li>
-<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>None</em>) – parameters of the input cell</p></li>
-<li><p><strong>output_cell_params</strong> (<em>dict</em>) – parameters of the output cell</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt id="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow">
-<em class="property">class </em><code class="sig-name descname">RepeatedCellFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow" title="zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.sequential.repeated_cell.MaskListRepeatedCellFlow</span></code></a></p>
-<p>Repeated cell flow: a sequential model with a coupling cell model
-This is meant as a higher-level API to generate boilerplate models based on architecture and masking strategy</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality</p></li>
-<li><p><strong>cell</strong> (<em>{&quot;pwlinear&quot;</em><em>, </em><em>&quot;realnvp&quot;}</em>) – coupling cell choice</p></li>
-<li><p><strong>masking</strong> (<em>{&quot;checkerboard&quot;</em><em>, </em><em>&quot;maximal&quot;}</em>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
-and <a class="reference internal" href="zunis.models.flows.masking.html#module-zunis.models.flows.masking" title="zunis.models.flows.masking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">masking</span></code></a></p></li>
-<li><p><strong>input_cell</strong> (<em>optional</em>) – Transformation before the repeated cell</p></li>
-<li><p><strong>output_cell</strong> (<em>optional</em>) – Transformation after the repeated cell</p></li>
-<li><p><strong>cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the repeated cell</p></li>
-<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the input_cell</p></li>
-<li><p><strong>output_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the output_cell</p></li>
-<li><p><strong>masking_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the masking strategy</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells">
-<code class="sig-name descname">cells</code><em class="property"> = {'pwlinear': (&lt;class 'zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling'&gt;, None, None), 'realnvp': (&lt;class 'zunis.models.flows.coupling_cells.real_nvp.RealNVP'&gt;, None, &lt;class 'zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid'&gt;)}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking">
-<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2), 'maximal': &lt;function maximal_masking_strategy&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

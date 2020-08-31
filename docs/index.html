@@ -22,10 +22,95 @@
     <link rel="next" title="Installation" href="library/installation.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="zunis-documentation">
+<h1>ZüNIS documentation<a class="headerlink" href="#zunis-documentation" title="Permalink to this headline">¶</a></h1>
+<p>ZüNIS (Zürich Neural Importance Sampling) a work-in-progress Pytorch-based library for Monte-Carlo integration
+based on Neural imporance sampling <a class="reference external" href="https://arxiv.org/abs/1808.03856">[1]</a>, developed at ETH Zürich.
+In simple terms, we use artificial intelligence to compute integrals faster.</p>
+<p>The goal is to provide a flexible library to integrate black-box functions with a level of automation comparable
+to the VEGAS Library <a class="reference external" href="https://pypi.org/project/vegas/">[2]</a>, while using state-of-the-art methods that go around the limitations of existing tools.</p>
+<div class="section" id="get-started">
+<span id="overview"></span><h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<p>Do you need to compute an integral <em>right now</em> and cannot wait?</p>
+<ol class="arabic simple">
+<li><p>go to the <a class="reference internal" href="library/installation.html"><span class="doc">Installation</span></a> page</p></li>
+<li><p>have a look at our <a class="reference internal" href="library/basic-example.html"><span class="doc">Basic Example</span></a></p></li>
+</ol>
+</div>
+<div class="section" id="api-overview">
+<h2>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this headline">¶</a></h2>
+<p>The ZüNIS library provides three level of abstractions, to allow both high-level and fine-grained control:</p>
+<p>1. <a class="reference internal" href="library/integrator.html"><span class="doc">Integrators</span></a> are the highest level of abstraction and control function integration strategies.
+They can automate trainer and flow creation.</p>
+<p>2. <a class="reference internal" href="library/trainer.html"><span class="doc">Trainers</span></a> are one level below and steer model training through loss functions, optimizers, sampling etc.
+They can automate flow creation.</p>
+<p>3. <a class="reference internal" href="library/flow.html"><span class="doc">Normalizing Flows</span></a> are neural-network-based bijections from the unit hypercube to itself. They are the
+actual trainable sampling mechanism that we use to sample points for Monte Carlo integration.</p>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<p>The ZüNIS library is a tool to compute integrals and therefore functions are a central element of its API.
+The goal here is to be as agnostic possible as to which functions can be integrated and they are indeed always
+treated as a black box. In particular they do not need to be differentiable, run on a specific device, on a
+specific thread, etc.</p>
+<p>The specifications we enforce are:</p>
+<ol class="arabic simple">
+<li><p>integrals are always computed over a d-dimensional unit hypercube</p></li>
+<li><p>a function is a callable Python object</p></li>
+<li><p>input and output are provided by batch</p></li>
+<li><p>the output must be positive [TEMPORARY]</p></li>
+</ol>
+<p>In specific terms, the input will always be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">x</span></code> with shape <span class="math notranslate nohighlight">\((N, d)\)</span> and values between 0 and 1,
+and the output is expected to be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">y</span></code> with shape <span class="math notranslate nohighlight">\((N,)\)</span>, such that <code class="code docutils literal notranslate"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">f(x[i])</span></code></p>
+</div>
+</div>
+<div class="section" id="importance-sampling">
+<h2>Importance sampling<a class="headerlink" href="#importance-sampling" title="Permalink to this headline">¶</a></h2>
+<p>ZüNIS is a tool to compute integrals by <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_integration#Importance_sampling">importance sampling</a> Monte Carlo estimation. This means that we have a
+function <span class="math notranslate nohighlight">\(f\)</span> defined over some multi-dimensional space <span class="math notranslate nohighlight">\(\Omega\)</span> and we want to compute</p>
+<div class="math notranslate nohighlight">
+\[I = \int_\Omega dx f(x)\]</div>
+<p>The importance sampling approach is based on the observation that
+for any non-zero probability distribution function <span class="math notranslate nohighlight">\(p\)</span> over <span class="math notranslate nohighlight">\(\Omega\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[I = \underset{x \sim p(x) } {\mathbb{E}}\frac{f(x)}{p(x)}\]</div>
+<p>We can therefore define an estimator for <span class="math notranslate nohighlight">\(I\)</span> by sampling <span class="math notranslate nohighlight">\(N\)</span> points from <span class="math notranslate nohighlight">\(\Omega\)</span>.
+The standard deviation of this estimator <span class="math notranslate nohighlight">\(\hat{I}_N\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left[\hat{I}_N\right] = \frac{1}{\sqrt{N}}\left(\underset{x \sim p(x)}{\sigma}\left[  \frac{f(x)}{p(x)}\right]\right)\]</div>
+<p>and the name of the game is to find a <span class="math notranslate nohighlight">\(p(x)\)</span> that minimizes this quantity in order to minimize the number of times
+we need to sample the function <span class="math notranslate nohighlight">\(f\)</span> to attain a given uncertainty on our integral estimation.</p>
+<p>If this seems like a problem that machine learning should be able to solve, you are indeed onto something.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="#">ZüNIS</a></h1>
@@ -117,91 +202,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="zunis-documentation">
-<h1>ZüNIS documentation<a class="headerlink" href="#zunis-documentation" title="Permalink to this headline">¶</a></h1>
-<p>ZüNIS (Zürich Neural Importance Sampling) a work-in-progress Pytorch-based library for Monte-Carlo integration
-based on Neural imporance sampling <a class="reference external" href="https://arxiv.org/abs/1808.03856">[1]</a>, developed at ETH Zürich.
-In simple terms, we use artificial intelligence to compute integrals faster.</p>
-<p>The goal is to provide a flexible library to integrate black-box functions with a level of automation comparable
-to the VEGAS Library <a class="reference external" href="https://pypi.org/project/vegas/">[2]</a>, while using state-of-the-art methods that go around the limitations of existing tools.</p>
-<div class="section" id="get-started">
-<span id="overview"></span><h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
-<p>Do you need to compute an integral <em>right now</em> and cannot wait?</p>
-<ol class="arabic simple">
-<li><p>go to the <a class="reference internal" href="library/installation.html"><span class="doc">Installation</span></a> page</p></li>
-<li><p>have a look at our <a class="reference internal" href="library/basic-example.html"><span class="doc">Basic Example</span></a></p></li>
-</ol>
-</div>
-<div class="section" id="api-overview">
-<h2>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this headline">¶</a></h2>
-<p>The ZüNIS library provides three level of abstractions, to allow both high-level and fine-grained control:</p>
-<p>1. <a class="reference internal" href="library/integrator.html"><span class="doc">Integrators</span></a> are the highest level of abstraction and control function integration strategies.
-They can automate trainer and flow creation.</p>
-<p>2. <a class="reference internal" href="library/trainer.html"><span class="doc">Trainers</span></a> are one level below and steer model training through loss functions, optimizers, sampling etc.
-They can automate flow creation.</p>
-<p>3. <a class="reference internal" href="library/flow.html"><span class="doc">Normalizing Flows</span></a> are neural-network-based bijections from the unit hypercube to itself. They are the
-actual trainable sampling mechanism that we use to sample points for Monte Carlo integration.</p>
-<div class="section" id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
-<p>The ZüNIS library is a tool to compute integrals and therefore functions are a central element of its API.
-The goal here is to be as agnostic possible as to which functions can be integrated and they are indeed always
-treated as a black box. In particular they do not need to be differentiable, run on a specific device, on a
-specific thread, etc.</p>
-<p>The specifications we enforce are:</p>
-<ol class="arabic simple">
-<li><p>integrals are always computed over a d-dimensional unit hypercube</p></li>
-<li><p>a function is a callable Python object</p></li>
-<li><p>input and output are provided by batch</p></li>
-<li><p>the output must be positive [TEMPORARY]</p></li>
-</ol>
-<p>In specific terms, the input will always be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">x</span></code> with shape <span class="math notranslate nohighlight">\((N, d)\)</span> and values between 0 and 1,
-and the output is expected to be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">y</span></code> with shape <span class="math notranslate nohighlight">\((N,)\)</span>, such that <code class="code docutils literal notranslate"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">f(x[i])</span></code></p>
-</div>
-</div>
-<div class="section" id="importance-sampling">
-<h2>Importance sampling<a class="headerlink" href="#importance-sampling" title="Permalink to this headline">¶</a></h2>
-<p>ZüNIS is a tool to compute integrals by <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_integration#Importance_sampling">importance sampling</a> Monte Carlo estimation. This means that we have a
-function <span class="math notranslate nohighlight">\(f\)</span> defined over some multi-dimensional space <span class="math notranslate nohighlight">\(\Omega\)</span> and we want to compute</p>
-<div class="math notranslate nohighlight">
-\[I = \int_\Omega dx f(x)\]</div>
-<p>The importance sampling approach is based on the observation that
-for any non-zero probability distribution function <span class="math notranslate nohighlight">\(p\)</span> over <span class="math notranslate nohighlight">\(\Omega\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[I = \underset{x \sim p(x) } {\mathbb{E}}\frac{f(x)}{p(x)}\]</div>
-<p>We can therefore define an estimator for <span class="math notranslate nohighlight">\(I\)</span> by sampling <span class="math notranslate nohighlight">\(N\)</span> points from <span class="math notranslate nohighlight">\(\Omega\)</span>.
-The standard deviation of this estimator <span class="math notranslate nohighlight">\(\hat{I}_N\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[\sigma\left[\hat{I}_N\right] = \frac{1}{\sqrt{N}}\left(\underset{x \sim p(x)}{\sigma}\left[  \frac{f(x)}{p(x)}\right]\right)\]</div>
-<p>and the name of the game is to find a <span class="math notranslate nohighlight">\(p(x)\)</span> that minimizes this quantity in order to minimize the number of times
-we need to sample the function <span class="math notranslate nohighlight">\(f\)</span> to attain a given uncertainty on our integral estimation.</p>
-<p>If this seems like a problem that machine learning should be able to solve, you are indeed onto something.</p>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-</div>
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

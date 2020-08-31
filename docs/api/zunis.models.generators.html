@@ -23,10 +23,72 @@
     <link rel="prev" title="zunis.models.layers.trainable module" href="zunis.models.layers.trainable.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.generators">
+<span id="zunis-models-generators-module"></span><h1>zunis.models.generators module<a class="headerlink" href="#module-zunis.models.generators" title="Permalink to this headline">¶</a></h1>
+<p>Tools to build out-of-the box models</p>
+<dl class="py function">
+<dt id="zunis.models.generators.create_checkerboard_hypercube_realnvp">
+<code class="sig-name descname">create_checkerboard_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_checkerboard_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.generators.create_hypercube_flow">
+<code class="sig-name descname">create_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">model_type</span><span class="o">=</span><span class="default_value">'realnvp'</span></em>, <em class="sig-param"><span class="n">mask_type</span><span class="o">=</span><span class="default_value">'checkerboard'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_hypercube_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a high-level generator with default behavior</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.generators.create_n_ary_hypercube_flow">
+<code class="sig-name descname">create_n_ary_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">cell_options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_n_ary_hypercube_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a sequential normalizing flow on the d-dimensional unit hypercube based on a given
+coupling cell with a n-ary mask. Subsequent cells have masks offset by one at each step until
+all possible masks have been used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cell</strong> – coupling cell class</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the unit hypercube</p></li>
+<li><p><strong>n</strong> – period of the n-ary mask</p></li>
+<li><p><strong>repetitions</strong> – how many times a full repetition through all possible masks is repeated</p></li>
+<li><p><strong>cell_options</strong> – options to be passed at the coupling cell instantiation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="zunis.models.flows.sequential.invertible_sequential.html#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">InvertibleSequentialFlow</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.generators.create_n_ary_hypercube_realnvp">
+<code class="sig-name descname">create_n_ary_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_n_ary_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -138,68 +200,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.generators">
-<span id="zunis-models-generators-module"></span><h1>zunis.models.generators module<a class="headerlink" href="#module-zunis.models.generators" title="Permalink to this headline">¶</a></h1>
-<p>Tools to build out-of-the box models</p>
-<dl class="py function">
-<dt id="zunis.models.generators.create_checkerboard_hypercube_realnvp">
-<code class="sig-name descname">create_checkerboard_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_checkerboard_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.generators.create_hypercube_flow">
-<code class="sig-name descname">create_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">model_type</span><span class="o">=</span><span class="default_value">'realnvp'</span></em>, <em class="sig-param"><span class="n">mask_type</span><span class="o">=</span><span class="default_value">'checkerboard'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_hypercube_flow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provide a high-level generator with default behavior</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.generators.create_n_ary_hypercube_flow">
-<code class="sig-name descname">create_n_ary_hypercube_flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">cell_options</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_n_ary_hypercube_flow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a sequential normalizing flow on the d-dimensional unit hypercube based on a given
-coupling cell with a n-ary mask. Subsequent cells have masks offset by one at each step until
-all possible masks have been used.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cell</strong> – coupling cell class</p></li>
-<li><p><strong>d</strong> (<em>int</em>) – dimension of the unit hypercube</p></li>
-<li><p><strong>n</strong> – period of the n-ary mask</p></li>
-<li><p><strong>repetitions</strong> – how many times a full repetition through all possible masks is repeated</p></li>
-<li><p><strong>cell_options</strong> – options to be passed at the coupling cell instantiation</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="zunis.models.flows.sequential.invertible_sequential.html#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">InvertibleSequentialFlow</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.generators.create_n_ary_hypercube_realnvp">
-<code class="sig-name descname">create_n_ary_hypercube_realnvp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">d_hidden</span><span class="o">=</span><span class="default_value">256</span></em>, <em class="sig-param"><span class="n">n_hidden</span><span class="o">=</span><span class="default_value">16</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/generators.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.generators.create_n_ary_hypercube_realnvp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

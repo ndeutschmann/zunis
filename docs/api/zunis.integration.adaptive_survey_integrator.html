@@ -23,10 +23,69 @@
     <link rel="prev" title="zunis.integration package" href="zunis.integration.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.integration.adaptive_survey_integrator">
+<span id="zunis-integration-adaptive-survey-integrator-module"></span><h1>zunis.integration.adaptive_survey_integrator module<a class="headerlink" href="#module-zunis.integration.adaptive_survey_integrator" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator">
+<em class="property">class </em><code class="sig-name descname">AdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator</span></code></a></p>
+<p>Adaptive integrator based on a separation between survey and sampling</p>
+<dl>
+<dt>Survey:</dt><dd><p>Sample points and spend some time training the model</p>
+<p>Sampling is done in two phases:</p>
+<ol class="arabic simple">
+<li><p>Sample in the target space (input space of the integrand) using a uniform distribution</p></li>
+<li><p>Sample in the latent space and use the model to sample point in the target space</p></li>
+</ol>
+<p>The switch between the two phases is performed based on a test method - abstract here - that checks
+whether the flat distribution does a better job of estimating the loss than the flat distribution</p>
+</dd>
+<dt>Refine:</dt><dd><p>Sample points using the trained model and evaluate the integral</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">
+<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">
+<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points from target space distribution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition">
+<em class="property">abstract </em><code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean valued method that checks if it is time to switch between sampling uniformly
+and using the model</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -138,65 +197,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.integration.adaptive_survey_integrator">
-<span id="zunis-integration-adaptive-survey-integrator-module"></span><h1>zunis.integration.adaptive_survey_integrator module<a class="headerlink" href="#module-zunis.integration.adaptive_survey_integrator" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator">
-<em class="property">class </em><code class="sig-name descname">AdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator</span></code></a></p>
-<p>Adaptive integrator based on a separation between survey and sampling</p>
-<dl>
-<dt>Survey:</dt><dd><p>Sample points and spend some time training the model</p>
-<p>Sampling is done in two phases:</p>
-<ol class="arabic simple">
-<li><p>Sample in the target space (input space of the integrand) using a uniform distribution</p></li>
-<li><p>Sample in the latent space and use the model to sample point in the target space</p></li>
-</ol>
-<p>The switch between the two phases is performed based on a test method - abstract here - that checks
-whether the flat distribution does a better job of estimating the loss than the flat distribution</p>
-</dd>
-<dt>Refine:</dt><dd><p>Sample points using the trained model and evaluate the integral</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">
-<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process the result of a survey step</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">
-<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample points from target space distribution</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition">
-<em class="property">abstract </em><code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Boolean valued method that checks if it is time to switch between sampling uniformly
-and using the model</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

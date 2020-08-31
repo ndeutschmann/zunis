@@ -23,10 +23,62 @@
     <link rel="prev" title="ZüNIS documentation" href="../index.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-pip">
+<h2>Using <cite>pip</cite><a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h2>
+<p>As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
+You can nevertheless install it with pip from this repository as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="s1">&#39;git+https://github.com/ndeutschmann/zunis#egg=zunis&amp;subdirectory=zunis_lib&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-a-development-environment">
+<h2>Setting up a development environment<a class="headerlink" href="#setting-up-a-development-environment" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to contribute to the library, run the benchmarks or try the examples,
+the easiest is to clone this repository directly and install the extended requirements:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git clone https://github.com/ndeutschmann/zunis.git ./zunis
+<span class="c1"># Create a virtual environment (recommended)</span>
+python3.7 -m venv  zunis_venv
+<span class="nb">source</span> ./zunis_venv/bin/activate
+pip install --upgrade pip
+<span class="c1"># Install the requirements</span>
+<span class="nb">cd</span> ./zunis
+pip install -r requirements.txt
+<span class="c1"># Run one benchmark (GPU highly recommended)</span>
+<span class="nb">cd</span> ./experiments/benchmarks
+python benchmark_hypersphere.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="gpu-support">
+<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this headline">¶</a></h2>
+<p>ZüNIS depends on PyTorch and can therefore run on GPUs - which is strongly recommended for real-life applications.
+Refer to the PyTorch <a class="reference external" href="https://pytorch.org/get-started/">documentation</a> on how to setup your system to enable PyTorch’s CUDA support.</p>
+</div>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -124,58 +176,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="using-pip">
-<h2>Using <cite>pip</cite><a class="headerlink" href="#using-pip" title="Permalink to this headline">¶</a></h2>
-<p>As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
-You can nevertheless install it with pip from this repository as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="s1">&#39;git+https://github.com/ndeutschmann/zunis#egg=zunis&amp;subdirectory=zunis_lib&#39;</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="setting-up-a-development-environment">
-<h2>Setting up a development environment<a class="headerlink" href="#setting-up-a-development-environment" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to contribute to the library, run the benchmarks or try the examples,
-the easiest is to clone this repository directly and install the extended requirements:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
-git clone https://github.com/ndeutschmann/zunis.git ./zunis
-<span class="c1"># Create a virtual environment (recommended)</span>
-python3.7 -m venv  zunis_venv
-<span class="nb">source</span> ./zunis_venv/bin/activate
-pip install --upgrade pip
-<span class="c1"># Install the requirements</span>
-<span class="nb">cd</span> ./zunis
-pip install -r requirements.txt
-<span class="c1"># Run one benchmark (GPU highly recommended)</span>
-<span class="nb">cd</span> ./experiments/benchmarks
-python benchmark_hypersphere.py
-</pre></div>
-</div>
-</div>
-<div class="section" id="gpu-support">
-<h2>GPU Support<a class="headerlink" href="#gpu-support" title="Permalink to this headline">¶</a></h2>
-<p>ZüNIS depends on PyTorch and can therefore run on GPUs - which is strongly recommended for real-life applications.
-Refer to the PyTorch <a class="reference external" href="https://pytorch.org/get-started/">documentation</a> on how to setup your system to enable PyTorch’s CUDA support.</p>
-</div>
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

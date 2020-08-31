@@ -23,10 +23,74 @@
     <link rel="prev" title="zunis.models.layers.activations module" href="zunis.models.layers.activations.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.layers.trainable">
+<span id="zunis-models-layers-trainable-module"></span><h1>zunis.models.layers.trainable module<a class="headerlink" href="#module-zunis.models.layers.trainable" title="Permalink to this headline">¶</a></h1>
+<p>Trainable layers</p>
+<dl class="py class">
+<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN">
+<em class="property">class </em><code class="sig-name descname">ArbitraryShapeRectangularDNN</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d_in</em>, <em class="sig-param">out_shape</em>, <em class="sig-param">d_hidden</em>, <em class="sig-param">n_hidden</em>, <em class="sig-param">input_activation=None</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.ReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Rectangular DNN with the output layer reshaped to a given shape</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.layers.trainable.OverallAffineLayer">
+<em class="property">class </em><code class="sig-name descname">OverallAffineLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">10.0</span></em>, <em class="sig-param"><span class="n">delta</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Learnable overall affine transformation
+f(x) = alpha x + delta</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt id="zunis.models.layers.trainable.OverallAffineLayer.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output of the OverallAffineLayer</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.layers.trainable.OverallAffineLayer.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.layers.trainable.create_rectangular_dnn">
+<code class="sig-name descname">create_rectangular_dnn</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d_in</em>, <em class="sig-param">d_out</em>, <em class="sig-param">d_hidden</em>, <em class="sig-param">n_hidden</em>, <em class="sig-param">input_activation=None</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.ReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.create_rectangular_dnn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -140,70 +204,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.layers.trainable">
-<span id="zunis-models-layers-trainable-module"></span><h1>zunis.models.layers.trainable module<a class="headerlink" href="#module-zunis.models.layers.trainable" title="Permalink to this headline">¶</a></h1>
-<p>Trainable layers</p>
-<dl class="py class">
-<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN">
-<em class="property">class </em><code class="sig-name descname">ArbitraryShapeRectangularDNN</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d_in</em>, <em class="sig-param">out_shape</em>, <em class="sig-param">d_hidden</em>, <em class="sig-param">n_hidden</em>, <em class="sig-param">input_activation=None</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.ReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
-<p>Rectangular DNN with the output layer reshaped to a given shape</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
-<dl class="py method">
-<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.forward" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.models.layers.trainable.OverallAffineLayer">
-<em class="property">class </em><code class="sig-name descname">OverallAffineLayer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">10.0</span></em>, <em class="sig-param"><span class="n">delta</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
-<p>Learnable overall affine transformation
-f(x) = alpha x + delta</p>
-<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
-<dl class="py method">
-<dt id="zunis.models.layers.trainable.OverallAffineLayer.forward">
-<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Output of the OverallAffineLayer</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.layers.trainable.OverallAffineLayer.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.OverallAffineLayer.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.layers.trainable.create_rectangular_dnn">
-<code class="sig-name descname">create_rectangular_dnn</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">d_in</em>, <em class="sig-param">d_out</em>, <em class="sig-param">d_hidden</em>, <em class="sig-param">n_hidden</em>, <em class="sig-param">input_activation=None</em>, <em class="sig-param">hidden_activation=&lt;class 'torch.nn.modules.activation.ReLU'&gt;</em>, <em class="sig-param">output_activation=None</em>, <em class="sig-param">use_batch_norm=False</em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/layers/trainable.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.layers.trainable.create_rectangular_dnn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       

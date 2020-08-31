@@ -23,10 +23,107 @@
     <link rel="prev" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear module" href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            
+  <div class="section" id="module-zunis.models.flows.coupling_cells.general_coupling">
+<span id="zunis-models-flows-coupling-cells-general-coupling-module"></span><h1>zunis.models.flows.coupling_cells.general_coupling module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.general_coupling" title="Permalink to this headline">¶</a></h1>
+<p>Abstract class for coupling cells</p>
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell">
+<em class="property">class </em><code class="sig-name descname">GeneralCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
+<p>Abstract class for coupling cell</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>transform</strong> (function or <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
+given some parameters. It should have the same signature as
+<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InvertibleTransform.forward</span></code></a></p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow">
+<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the variable change on a batch of points y</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian">
+<code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yj</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the variable change on a batch of points y and compute the jacobian</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell">
+<em class="property">class </em><code class="sig-name descname">InvertibleCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell</span></code></a></p>
+<p>An invertible coupling cell works exactly the same as a general coupling cell
+but its transform admits and inverse transformation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
+given some parameters.</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert">
+<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the running mode from forward to inverse (invert the change of variable)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.runs_forward">
+<code class="sig-name descname">runs_forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.runs_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the running mode: True if forward and False if backward/inverse</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training">
+<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.coupling_cells.general_coupling.not_list">
+<code class="sig-name descname">not_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">l</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.not_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the element wise negation of a list of booleans</p>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
@@ -142,103 +239,8 @@
 
         </div>
       </div>
-<div class="documentwrapper">
-    <div class="bodywrapper">
-        
-
-        <div class="body" role="main">
-            
-  <div class="section" id="module-zunis.models.flows.coupling_cells.general_coupling">
-<span id="zunis-models-flows-coupling-cells-general-coupling-module"></span><h1>zunis.models.flows.coupling_cells.general_coupling module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.general_coupling" title="Permalink to this headline">¶</a></h1>
-<p>Abstract class for coupling cells</p>
-<dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell">
-<em class="property">class </em><code class="sig-name descname">GeneralCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
-<p>Abstract class for coupling cell</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
-<li><p><strong>transform</strong> (function or <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
-given some parameters. It should have the same signature as
-<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InvertibleTransform.forward</span></code></a></p></li>
-<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow">
-<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.flow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply the variable change on a batch of points y</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian">
-<code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yj</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply the variable change on a batch of points y and compute the jacobian</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell">
-<em class="property">class </em><code class="sig-name descname">InvertibleCouplingCell</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.GeneralCouplingCell</span></code></a></p>
-<p>An invertible coupling cell works exactly the same as a general coupling cell
-but its transform admits and inverse transformation.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
-<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
-given some parameters.</p></li>
-<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert">
-<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.invert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change the running mode from forward to inverse (invert the change of variable)</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.runs_forward">
-<code class="sig-name descname">runs_forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.runs_forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check the running mode: True if forward and False if backward/inverse</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell.training" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt id="zunis.models.flows.coupling_cells.general_coupling.not_list">
-<code class="sig-name descname">not_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">l</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/general_coupling.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.general_coupling.not_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the element wise negation of a list of booleans</p>
-</dd></dl>
-
-</div>
-
-
-
-            <!-- Render the warning message if using meta tag `:todo:` -->
-            
-        </div>
-        
+      <div class="clearer"></div>
     </div>
-</div>
-    <div class="clearer"></div>
-  </div>
     <div class="footer">
       
       
