@@ -1,0 +1,37 @@
+{{ toctree(includehidden=theme_sidebar_includehidden, collapse=theme_sidebar_collapse) }}
+
+{% if theme_extra_nav_links %}
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    {% for text, uri in theme_extra_nav_links.items() %}
+    <li class="toctree-l1"><a href="{{ uri }}">{{ text }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if parents or next or prev %}
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+    {% if parents %}
+    {% set parent_title = parents[0].title.split(".")[-1] %}
+    <li><a href="{{parents[0].link}}"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;{{ parent_title }}</a></li>
+    {% endif %}
+    {% if prev or next %}
+<!--    <ul>-->
+        {% if prev and parents and prev.link != parents[0].link %}
+        {% set prev_title = prev.title.split(".")[-1] %}
+        <li><a href="{{ prev.link|e }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;{{ prev_title }}</a></li>
+        {% endif %}
+        {% if next %}
+        {% set next_title = next.title.split(".")[-1] %}
+        <li><a href="{{ next.link|e }}"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;{{ next_title }}</a></li>
+        {% endif %}
+<!--    </ul>-->
+    {% endif %}
+</ul>
+{% endif %}

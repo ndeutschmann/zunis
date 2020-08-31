@@ -93,14 +93,7 @@ If this seems like a problem that machine learning should be able to solve, you 
 
 
 .. toctree::
-    :maxdepth: 1
-    :hidden:
-
-    Homepage <self>
-
-.. toctree::
     :caption: Library
-    :maxdepth: 1
     :hidden:
 
     Installation <library/installation>
@@ -109,16 +102,16 @@ If this seems like a problem that machine learning should be able to solve, you 
 
 .. toctree::
     :caption: Background
-    :maxdepth: 1
     :hidden:
+    :maxdepth: 1
 
     Neural Importance Sampling <background/nis>
     Training strategies <background/training>
 
 .. toctree::
     :caption: Documentation
-    :maxdepth: 1
     :hidden:
+    :maxdepth: 3
 
     API Documentation <api/zunis>
     Module Hierarchy <py-modindex>
@@ -127,7 +120,6 @@ If this seems like a problem that machine learning should be able to solve, you 
 
 .. toctree::
     :caption: Info
-    :maxdepth: 1
     :hidden:
 
     References <references>
