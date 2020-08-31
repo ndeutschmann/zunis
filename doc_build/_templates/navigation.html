@@ -12,11 +12,15 @@
 </ul>
 {% endif %}
 
-{% if parents or next or prev %}
 <p class="caption">
     <span class="caption-text">Navigation</span>
 </p>
 <ul class="local-nav">
+{% if not parents %}
+    <li><a href="/index.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Homepage</a></li>
+{% endif %}
+
+{% if parents or next or prev %}
     {% if parents %}
     {% set parent_title = parents[0].title.split(".")[-1] %}
     <li><a href="{{parents[0].link}}"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;{{ parent_title }}</a></li>
@@ -33,5 +37,5 @@
         {% endif %}
 <!--    </ul>-->
     {% endif %}
-</ul>
 {% endif %}
+</ul>
