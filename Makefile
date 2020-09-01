@@ -1,4 +1,4 @@
-.PHONY: clean data requirements doc static-doc docinstall
+.PHONY: clean data requirements doc static-doc docinstall serve
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -47,6 +47,9 @@ doc-install:
 	rm -rf $(DOC_DIR)
 	cp -R $(DOC_BUILD_DIR)/_build/html/ $(DOC_DIR)
 	touch $(DOC_DIR)/.nojekyll
+
+serve:
+	$(MAKE) serve -C $(DOC_BUILD_DIR)
 
 
 #################################################################################
