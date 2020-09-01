@@ -3,7 +3,6 @@ Concepts
 
 .. toctree::
     :hidden:
-    :maxdepth: 1
 
     Integrators <integrator>
     Trainers <trainer>

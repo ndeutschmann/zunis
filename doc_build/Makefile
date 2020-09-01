@@ -20,7 +20,8 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 .PHONY: help clean html dirhtml singlehtml pickle json\
  htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext\
- apidoc cleanapi
+ apidoc cleanapi\
+ serve
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -55,9 +56,9 @@ cleanapi:
 apidoc:
 	$(SPHINXAPIDOC) -f $(APIOPTS) -o $(MODULEDIR) $(APIDIR)
 
-
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	perl -pi -e  "s/zunis\.(?:[a-zA-Z0-9_]*[.])*([a-zA-Z0-9_]+) (package|module)/\1 \2/g" $(BUILDDIR)/html/$(MODULEDIR)/*.html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
@@ -166,3 +167,6 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
+
+serve:
+	python -m http.server 8080 --directory $(BUILDDIR)/html

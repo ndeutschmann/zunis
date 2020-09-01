@@ -1,101 +1,89 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>zunis.integration package &mdash; ZüNIS 0.1 documentation</title>
-  
 
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>integration package &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="zunis.integration.adaptive_survey_integrator module" href="zunis.integration.adaptive_survey_integrator.html" />
+    <link rel="next" title="adaptive_survey_integrator module" href="zunis.integration.adaptive_survey_integrator.html" />
     <link rel="prev" title="zunis package" href="zunis.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-</head>
+  </head><body>
+  
 
-<body class="wy-body-for-nav">
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
 
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
-          
-
-          
-          </a>
-
-          
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                </a>
+            </p>
             
-            
-              <div class="version">
-                0.1
-              </div>
-            
-          
+  <div class="section" id="module-zunis.integration">
+<span id="zunis-integration-package"></span><h1>integration package<a class="headerlink" href="#module-zunis.integration" title="Permalink to this headline">¶</a></h1>
+<p>Integration package using neural importance sampling</p>
+<p>The main API is exposed as <a class="reference internal" href="zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a></p>
+<dl class="py data">
+<dt id="zunis.integration.integration_logger">
+<code class="sig-name descname">integration_logger</code><em class="property"> = &lt;Logger zunis.integration (WARNING)&gt;</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.integration_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overall parent logger for all integration operations</p>
+</dd></dl>
 
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html">adaptive_survey_integrator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.integration.default_integrator.html">default_integrator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.integration.dkltrainer_integrator.html">dkltrainer_integrator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.integration.flat_survey_integrator.html">flat_survey_integrator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.integration.integratorAPI.html">integratorAPI module</a></li>
+</ul>
+</div>
+</div>
 </div>
 
-          
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
         </div>
-
         
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
 
-            
-            
-              
-            
-            
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
-</ul>
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
 <p class="caption"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
@@ -110,17 +98,13 @@
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">zunis.integration package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html">zunis.integration.adaptive_survey_integrator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.default_integrator.html">zunis.integration.default_integrator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.dkltrainer_integrator.html">zunis.integration.dkltrainer_integrator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.flat_survey_integrator.html">zunis.integration.flat_survey_integrator module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.integratorAPI.html">zunis.integration.integratorAPI module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">integration package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -132,151 +116,84 @@
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
 
-            
-          
-<p class="caption"><span class="caption-text">Source</span></p>
-<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
-
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">ZüNIS</a>
-        
-      </nav>
 
 
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="zunis.html">zunis package</a> &raquo;</li>
-        
-      <li>zunis.integration package</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-
-           <div itemprop="articleBody">
-            
-  <div class="section" id="module-zunis.integration">
-<span id="zunis-integration-package"></span><h1>zunis.integration package<a class="headerlink" href="#module-zunis.integration" title="Permalink to this headline">¶</a></h1>
-<p>Integration package using neural importance sampling</p>
-<p>The main API is exposed as <a class="reference internal" href="zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a></p>
-<dl class="py data">
-<dt id="zunis.integration.integration_logger">
-<code class="sig-name descname">integration_logger</code><em class="property"> = &lt;Logger zunis.integration (WARNING)&gt;</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/__init__.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.integration_logger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Overall parent logger for all integration operations</p>
-</dd></dl>
-
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html">zunis.integration.adaptive_survey_integrator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.integration.default_integrator.html">zunis.integration.default_integrator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.integration.dkltrainer_integrator.html">zunis.integration.dkltrainer_integrator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.integration.flat_survey_integrator.html">zunis.integration.flat_survey_integrator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.integration.integratorAPI.html">zunis.integration.integratorAPI module</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="zunis.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;zunis package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        
+        <li><a href="zunis.integration.adaptive_survey_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;adaptive_survey_integrator module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="zunis.html">zunis package</a><ul>
+      <li>Previous: <a href="zunis.html" title="previous chapter">zunis package</a></li>
+      <li>Next: <a href="zunis.integration.adaptive_survey_integrator.html" title="next chapter">adaptive_survey_integrator module</a></li>
+  </ul></li>
+  </ul></li>
 </ul>
 </div>
-</div>
-</div>
-
-
-           </div>
-           
-          </div>
-
-
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="zunis.integration.adaptive_survey_integrator.html" class="btn btn-neutral float-right" title="zunis.integration.adaptive_survey_integrator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="zunis.html" class="btn btn-neutral float-left" title="zunis package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
     </div>
-  
+</div>
+<script>$('#searchbox').show(0);</script>
 
-  <hr/>
 
-  <div role="contentinfo">
-    <p>
 
-    </p>
-  </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-</footer>
+
+
+
 
         </div>
       </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
 
-    </section>
-
-  </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
     
-   
 
-</body>
+    
+  </body>
 </html>

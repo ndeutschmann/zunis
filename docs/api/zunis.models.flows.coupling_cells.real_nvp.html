@@ -1,220 +1,46 @@
 
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>zunis.models.flows.coupling_cells.real_nvp module &mdash; ZüNIS 0.1 documentation</title>
-  
 
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/overflow.css" type="text/css" />
-
-  
-  
-  
-  
-
-  
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>real_nvp module &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="zunis.models.flows.coupling_cells.transforms module" href="zunis.models.flows.coupling_cells.transforms.html" />
-    <link rel="prev" title="zunis.models.flows.coupling_cells.general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" />
+    <link rel="next" title="transforms module" href="zunis.models.flows.coupling_cells.transforms.html" />
+    <link rel="prev" title="general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-</head>
-
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ZüNIS
-          
-
-          
-          </a>
-
-          
-            
-            
-              <div class="version">
-                0.1
-              </div>
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Homepage</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Library</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Background</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.flows.html">zunis.models.flows package</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.analytic_flows.html">zunis.models.flows.analytic_flows package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.html">zunis.models.flows.backprop_jacobian_flows package</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="zunis.models.flows.coupling_cells.html">zunis.models.flows.coupling_cells package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.sequential.html">zunis.models.flows.sequential package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.general_flow.html">zunis.models.flows.general_flow module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.masking.html">zunis.models.flows.masking module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="zunis.models.flows.sampling.html">zunis.models.flows.sampling module</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.layers.html">zunis.models.layers package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.generators.html">zunis.models.generators module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.utils.html">zunis.models.utils module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Info</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
-</ul>
-
-            
-          
-<p class="caption"><span class="caption-text">Source</span></p>
-<a href="https://www.github.com/ndeutschmann/zunis"><i class="fa fa-github-alt"></i> Github repository</a>
-
-        </div>
-        
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">ZüNIS</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="zunis.html">zunis package</a> &raquo;</li>
-        
-          <li><a href="zunis.models.html">zunis.models package</a> &raquo;</li>
-        
-          <li><a href="zunis.models.flows.html">zunis.models.flows package</a> &raquo;</li>
-        
-          <li><a href="zunis.models.flows.coupling_cells.html">zunis.models.flows.coupling_cells package</a> &raquo;</li>
-        
-      <li>zunis.models.flows.coupling_cells.real_nvp module</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-        
-      </li>
-    
-  </ul>
-
+  </head><body>
   
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
 
-           <div itemprop="articleBody">
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                </a>
+            </p>
             
   <div class="section" id="module-zunis.models.flows.coupling_cells.real_nvp">
-<span id="zunis-models-flows-coupling-cells-real-nvp-module"></span><h1>zunis.models.flows.coupling_cells.real_nvp module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.real_nvp" title="Permalink to this headline">¶</a></h1>
+<span id="zunis-models-flows-coupling-cells-real-nvp-module"></span><h1>real_nvp module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.real_nvp" title="Permalink to this headline">¶</a></h1>
 <p>Implementation of realNVP: a coupling cell with an affine transform</p>
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform">
@@ -244,10 +70,10 @@ for basic debugging and training tests</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
 <li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
 given some parameters.</p></li>
-<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
 </dd>
 </dl>
@@ -284,10 +110,10 @@ given some parameters.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
 <li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <cite>d-sum(mask)</cite> dimensions) to itself
 given some parameters.</p></li>
-<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
 </dd>
 </dl>
@@ -310,14 +136,14 @@ coordinates as input.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
-<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – mask defining which variables are transformed</p></li>
-<li><p><strong>d_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">256</span></code>) – width of the neural network</p></li>
-<li><p><strong>n_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">8</span></code>) – depth of the neural network</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – mask defining which variables are transformed</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em><em>, </em><em>256</em>) – width of the neural network</p></li>
+<li><p><strong>n_hidden</strong> (<em>int</em><em>, </em><em>8</em>) – depth of the neural network</p></li>
 <li><p><strong>input_activation</strong> – activation function applied before going through the neural network</p></li>
 <li><p><strong>hidden_activation</strong> – activation function applied after each hidden layer of the neural network</p></li>
 <li><p><strong>output_activation</strong> – activation function applied after the last layer of the neural network</p></li>
-<li><p><strong>use_batch_norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use batch normalization after each hidden layer of the neural network</p></li>
+<li><p><strong>use_batch_norm</strong> (<em>bool</em>) – whether to use batch normalization after each hidden layer of the neural network</p></li>
 </ul>
 </dd>
 </dl>
@@ -350,59 +176,145 @@ J = prod(es[…,i],i)</p>
 </div>
 
 
-           </div>
-           
-          </div>
 
-
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="zunis.models.flows.coupling_cells.transforms.html" class="btn btn-neutral float-right" title="zunis.models.flows.coupling_cells.transforms module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="zunis.models.flows.coupling_cells.general_coupling.html" class="btn btn-neutral float-left" title="zunis.models.flows.coupling_cells.general_coupling module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
     </div>
-  
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
 
-  <hr/>
 
-  <div role="contentinfo">
-    <p>
 
-    </p>
-  </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-</footer>
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="zunis.models.flows.coupling_cells.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;coupling_cells package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="zunis.models.flows.coupling_cells.general_coupling.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;general_coupling module</a></li>
+        
+        
+        
+        <li><a href="zunis.models.flows.coupling_cells.transforms.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;transforms module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="zunis.html">zunis package</a><ul>
+  <li><a href="zunis.models.html">models package</a><ul>
+  <li><a href="zunis.models.flows.html">flows package</a><ul>
+  <li><a href="zunis.models.flows.coupling_cells.html">coupling_cells package</a><ul>
+      <li>Previous: <a href="zunis.models.flows.coupling_cells.general_coupling.html" title="previous chapter">general_coupling module</a></li>
+      <li>Next: <a href="zunis.models.flows.coupling_cells.transforms.html" title="next chapter">transforms module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
 
         </div>
       </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
 
-    </section>
-
-  </div>
-  
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script>
-
-  
-  
     
-   
 
-</body>
+    
+  </body>
 </html>

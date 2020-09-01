@@ -14,8 +14,6 @@
 import os
 import sys
 import pkgutil
-import sphinx_rtd_theme
-
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -29,7 +27,7 @@ import sphinx_rtd_theme
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc','sphinx.ext.coverage', 'sphinx.ext.napoleon','sphinx_rtd_theme',
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon',
               'sphinx.ext.linkcode']
 
 # Add any paths that contain templates here, relative to this directory.
@@ -95,15 +93,16 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-
-## These are ReadTheDocs Options
 html_theme_options = {
-    "titles_only":True,
+    "page_width": "1200px",
+    "extra_nav_links": {
+        "<i class=\"fa fa-github\" aria-hidden=\"true\"></i> Github Repository":
+            "https://github.com/ndeutschmann/zunis/"},
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -123,14 +122,14 @@ html_theme_options = {
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-# html_favicon = None
+html_favicon = "_static/img/favicon-v2.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 html_css_files = [
-    'overflow.css',
+    'custom.css'
 ]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
@@ -142,7 +141,16 @@ html_css_files = [
 # html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-# html_sidebars = {}
+# Alabaster custom settings
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -176,7 +184,6 @@ html_show_copyright = False
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'zunisdoc'
-
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -259,6 +266,7 @@ texinfo_documents = [
 
 autoclass_content = 'both'
 
+
 # -- LinkCode -------------------
 
 def linkcode_resolve(domain, info):
@@ -274,6 +282,7 @@ def linkcode_resolve(domain, info):
         return package_url
     else:
         return module_url
+
 
 # -- Meta Info --------------------
 
