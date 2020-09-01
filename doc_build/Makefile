@@ -56,9 +56,9 @@ cleanapi:
 apidoc:
 	$(SPHINXAPIDOC) -f $(APIOPTS) -o $(MODULEDIR) $(APIDIR)
 
-
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	perl -pi -e  "s/zunis\.(?:[a-zA-Z0-9_]*[.])*([a-zA-Z0-9_]+) (package|module)/\1 \2/g" $(BUILDDIR)/html/$(MODULEDIR)/*.html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
