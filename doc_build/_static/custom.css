@@ -94,6 +94,29 @@ i.fa-exclamation-triangle {
     div.sphinxsidebar h3 {
         color: gray;
     }
+
+
+}
+
+#mobileanchor {
+    background-color: #333333;
+    padding: 0;
+    margin: 0;
+}
+
+#mobilelink {
+    font-size: 14px;
+    text-align: right;
+    width: 100%;
+}
+
+@media (min-width: 875px) {
+    #mobileanchor {
+        display: none;
+    }
+    #mobilelink {
+        display: none;
+    }
 }
 
 @media (max-width: 450px) {
