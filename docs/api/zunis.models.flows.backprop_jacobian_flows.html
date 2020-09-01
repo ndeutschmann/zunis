@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zunis.models.flows.backprop_jacobian_flows package &#8212; ZüNIS 0.1 documentation</title>
+    <title>backprop_jacobian_flows package &#8212; ZüNIS 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -19,11 +19,10 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow module" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html" />
-    <link rel="prev" title="zunis.models.flows.analytic_flows.element_wise module" href="zunis.models.flows.analytic_flows.element_wise.html" />
+    <link rel="next" title="general_backprop_j_flow module" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html" />
+    <link rel="prev" title="element_wise module" href="zunis.models.flows.analytic_flows.element_wise.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
 
   </head><body>
   
@@ -34,16 +33,21 @@
         
 
         <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                </a>
+            </p>
             
   <div class="section" id="module-zunis.models.flows.backprop_jacobian_flows">
-<span id="zunis-models-flows-backprop-jacobian-flows-package"></span><h1>zunis.models.flows.backprop_jacobian_flows package<a class="headerlink" href="#module-zunis.models.flows.backprop_jacobian_flows" title="Permalink to this headline">¶</a></h1>
+<span id="zunis-models-flows-backprop-jacobian-flows-package"></span><h1>backprop_jacobian_flows package<a class="headerlink" href="#module-zunis.models.flows.backprop_jacobian_flows" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html">zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.nnflows.html">zunis.models.flows.backprop_jacobian_flows.nnflows module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.html">zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html">general_backprop_j_flow module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.nnflows.html">nnflows module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.html">simple_backprop_flows module</a></li>
 </ul>
 </div>
 </div>
@@ -68,6 +72,8 @@
 
 
 
+<hr id="mobileanchor">
+
 <p class="caption"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
@@ -83,10 +89,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">zunis.integration package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">zunis.models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">zunis.training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">zunis.utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">models package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
 </ul>
 </li>
 </ul>
@@ -113,14 +119,16 @@
 </ul>
 
 
-
 <p class="caption">
     <span class="caption-text">Navigation</span>
 </p>
 <ul class="local-nav">
+
+
+
     
     
-    <li><a href="zunis.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;zunis package</a></li>
+    <li><a href="zunis.models.flows.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;flows package</a></li>
     
     
 <!--    <ul>-->
@@ -134,16 +142,16 @@
         
 <!--    </ul>-->
     
-</ul>
-<div class="relations">
+
+</ul><div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
-  <li><a href="zunis.models.html">zunis.models package</a><ul>
-  <li><a href="zunis.models.flows.html">zunis.models.flows package</a><ul>
-      <li>Previous: <a href="zunis.models.flows.analytic_flows.element_wise.html" title="previous chapter">zunis.models.flows.analytic_flows.element_wise module</a></li>
-      <li>Next: <a href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html" title="next chapter">zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow module</a></li>
+  <li><a href="zunis.models.html">models package</a><ul>
+  <li><a href="zunis.models.flows.html">flows package</a><ul>
+      <li>Previous: <a href="zunis.models.flows.analytic_flows.element_wise.html" title="previous chapter">element_wise module</a></li>
+      <li>Next: <a href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html" title="next chapter">general_backprop_j_flow module</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
