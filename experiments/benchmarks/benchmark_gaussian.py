@@ -31,9 +31,9 @@ def benchmark_gaussian(d, s=0.3, n_batch=100000, logger=None, device=torch.devic
         return gaussian(torch.tensor(x).to(device)).cpu()
 
     integrator_config = conf.get_default_integrator_config()
-    integrator_config["n_points_survey"] = 1000
+    integrator_config["n_points_survey"] = 100000
     integrator_config["n_bins"] = 50
-    integrator_config["n_epochs"] = 1
+    integrator_config["n_epochs"] = 50
     integrator_args = conf.create_integrator_args(integrator_config)
 
     integrator = Integrator(d=d, f=gaussian, device=device, **integrator_args)
@@ -77,7 +77,7 @@ def run_benchmark(dimensions, sigmas, debug, cuda):
     print(results)
     if not debug:
         sql_dtypes = conf.loaders.get_sql_types()
-        append_dataframe_to_sqlite(results, dbname="benchmark_gaussian.db", dtypes=sql_dtypes)
+        append_dataframe_to_sqlite(results, dbname="benchmarks.db", tablename="gaussian", dtypes=sql_dtypes)
 
 
 cli = click.Command("cli", callback=run_benchmark, params=[
