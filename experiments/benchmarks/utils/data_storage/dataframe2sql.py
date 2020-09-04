@@ -27,7 +27,7 @@ def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes
     dataframe.to_sql(tablename, con=engine, index=False, if_exists="append", dtype=dtypes)
 
 
-def read_results(dbname="", tablename="results", type_config=None):
+def read_pkl_sql(dbname="", tablename="results", type_config=None):
     """Read results from a SQLite database to a dataframe and reconstruct pickled objects
 
     Parameters
@@ -53,3 +53,5 @@ def read_results(dbname="", tablename="results", type_config=None):
                 except pickle.UnpicklingError as e:
                     logger.error(f"Could not unpickle column {key}, leaving it as-is")
                     logger.error(e)
+
+    return df
