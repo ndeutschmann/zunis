@@ -16,4 +16,3 @@ Typical process:
 from .configuration import Configuration
 from .loaders import get_default_integrator_config, get_optim_from_config, create_integrator_args
 
-import utils.config.config_sql as sql

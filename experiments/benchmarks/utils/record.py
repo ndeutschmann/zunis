@@ -1,6 +1,5 @@
 """Tools to store benchmark results"""
 from math import sqrt
-import pandas as pd
 from dictwrapper import DictWrapper
 
 
