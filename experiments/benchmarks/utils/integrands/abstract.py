@@ -7,7 +7,7 @@ from better_abc import ABC
 class Integrand(ABC):
     """Abstract class to define integrands for testing the integration library"""
 
-    def __init__(self, d):
+    def __init__(self, d, *args, **kwargs):
         self.d = d
 
     @abstractmethod
