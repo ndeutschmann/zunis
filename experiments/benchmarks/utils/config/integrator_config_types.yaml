@@ -1,0 +1,20 @@
+flow: str
+flow_options:
+  cell_params:
+    d_hidden: int
+    n_bins: int
+    n_hidden: int
+  masking: str
+  masking_options:
+    repetitions: int
+loss: str
+n_points_survey: int
+trainer_options:
+  minibatch_size: int
+  n_epochs: int
+  optim:
+    optim_cls: str
+    optim_config:
+      betas: object
+      eps: float
+      lr: float
