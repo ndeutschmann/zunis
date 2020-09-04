@@ -22,7 +22,7 @@ def infer_sql_types(config):
     return dict([(key, type_mapping[type(value).__name__]) for key, value in config.items()])
 
 
-def append_record_to_sqlite(record, dbname="", tablename="results", dtypes=None):
+def append_record_to_sqlite(record, dbname="", tablename="results", dtypes=None, log_git_info=True):
     """Append record as a SQLite database row
 
     Parameters
@@ -37,4 +37,4 @@ def append_record_to_sqlite(record, dbname="", tablename="results", dtypes=None)
     if dtypes is None:
         dtypes = infer_sql_types(record)
 
-    append_dataframe_to_sqlite(record.as_dataframe(), dbname, tablename, dtypes)
+    append_dataframe_to_sqlite(record.as_dataframe(), dbname, tablename, dtypes, log_git_info)

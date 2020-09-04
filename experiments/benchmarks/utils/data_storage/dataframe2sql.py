@@ -4,11 +4,12 @@ import pickle
 
 import pandas as pd
 import sqlalchemy as sql
+from utils.repo_info import get_git_summary
 
 logger = logging.getLogger(__name__)
 
 
-def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes=None):
+def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes=None, log_git_info=True):
     """Append dataframe to a SQLite
 
     Parameters
@@ -23,6 +24,14 @@ def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes
 
     if dtypes is None:
         dtypes = dict()
+
+    if log_git_info:
+        git_info = get_git_summary()
+        if "git_info" in dataframe.columns:
+            dataframe["git_info"] = dataframe["git_info"].fillna(git_info)
+        else:
+            dataframe["git_info"] = git_info
+        dtypes["git_info"] = sql.String
 
     dataframe.to_sql(tablename, con=engine, index=False, if_exists="append", dtype=dtypes)
 
