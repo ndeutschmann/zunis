@@ -27,26 +27,26 @@ def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes
     dataframe.to_sql(tablename, con=engine, index=False, if_exists="append", dtype=dtypes)
 
 
-def read_pkl_sql(dbname="", tablename="results", type_config=None):
+def read_pkl_sql(dbname="", tablename="results", dtypes=None):
     """Read results from a SQLite database to a dataframe and reconstruct pickled objects
 
     Parameters
     ----------
     dbname: str
     tablename: str
-    type_config: dict, None
+    dtypes: dict, None
 
     Returns
     -------
-
+        pd.DataFrame
     """
 
     engine = sql.create_engine(f"sqlite:///{dbname}")
 
     df = pd.read_sql(tablename, con=engine)
 
-    if type_config is not None:
-        for key, value in type_config.items():
+    if dtypes is not None:
+        for key, value in dtypes.items():
             if value == sql.PickleType:
                 try:
                     df[key] = df[key].apply(pickle.loads)

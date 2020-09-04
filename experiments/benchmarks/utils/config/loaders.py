@@ -94,7 +94,7 @@ def get_sql_types(type_config=None):
     """
 
     if type_config is None:
-        type_config = Configuration.from_yaml("../config/integrator_config_types.yaml")
+        type_config = Configuration.from_yaml(os.path.join(package_directory, "integrator_config_types.yaml"))
 
     if isinstance(type_config, Configuration):
         type_config = type_config.as_flat_dict()

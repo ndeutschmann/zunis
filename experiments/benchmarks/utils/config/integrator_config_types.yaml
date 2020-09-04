@@ -4,7 +4,7 @@ flow_options:
     d_hidden: int
     n_bins: int
     n_hidden: int
-  masking: int
+  masking: str
   masking_options:
     repetitions: int
 loss: str
