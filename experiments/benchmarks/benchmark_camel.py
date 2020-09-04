@@ -25,7 +25,7 @@ def benchmark_camel(d, s=0.3, n_batch=100000, logger=None, device=torch.device("
 
     @vegas.batchintegrand
     def vcamel(x):
-        return camel(torch.tensor(x).to(device)).cpu()
+        return camel(torch.tensor(x).to(device)).cpu().numpy()
 
     integrator_config = conf.get_default_integrator_config()
     integrator_config["n_points_survey"] = 100000

@@ -28,7 +28,7 @@ def benchmark_gaussian(d, s=0.3, n_batch=100000, logger=None, device=torch.devic
 
     @vegas.batchintegrand
     def vgaussian(x):
-        return gaussian(torch.tensor(x).to(device)).cpu()
+        return gaussian(torch.tensor(x).to(device)).cpu().numpy()
 
     integrator_config = conf.get_default_integrator_config()
     integrator_config["n_points_survey"] = 100000
