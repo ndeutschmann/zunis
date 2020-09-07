@@ -88,6 +88,44 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
     return integrator_result
 
 
+def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=None, n_batch=100000, logger=None,
+                       device=torch.device("cpu")):
+    if logger is None:
+        logger = logging.getLogger(__name__)
+
+    logger.debug("=" * 72)
+    logger.info("Defining integrand")
+    if integrand_params is None:
+        integrand_params = dict()
+    f = integrand(d=d, device=device, **integrand_params)
+    vf = integrand.vegas(device=device)
+
+    logger.debug("=" * 72)
+    logger.info("Defining integrator")
+    if integrator_config is None:
+        integrator_config = get_default_integrator_config()
+    integrator_args = create_integrator_args(integrator_config)
+    integrator = Integrator(f=f, d=d, device=device, **integrator_args)
+
+    vintegrator = vegas.Integrator([[0, 1] * d], max_nhcube=1)
+
+    integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch)
+    vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
+                                           n_batch_survey=integrator_args["n_points_survey"])
+    flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
+
+    result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3).as_dataframe()
+    result["flat_variance_ratio"] = (flat_result["value_std"] / result["value_std"]) ** 2
+
+    if isinstance(integrator_config, NestedMapping):
+        result.update(integrator_config.as_flat_dict())
+    else:
+        result.update(integrator_config)
+
+    result.update(integrand_params)
+    return result
+
+
 def run_benchmark_grid(dimensions, integrand, *,
                        base_integrand_params, base_integrator_config=None,
                        integrand_params_grid=None, integrator_config_grid=None,
