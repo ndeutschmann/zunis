@@ -53,6 +53,7 @@ coverage.xml
 # Sphinx documentation: dynamic build
 doc_build/_build/
 doc_build/api/
+doc_build/benchmarks_api
 
 # PyBuilder
 target/

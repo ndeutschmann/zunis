@@ -18,7 +18,7 @@ import pkgutil
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-# sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('../experiments/benchmarks'))
 
 # -- General configuration -----------------------------------------------------
 
@@ -276,8 +276,12 @@ def linkcode_resolve(domain, info):
         return None
     filename = info['module'].replace('.', '/')
     file_path = pkgutil.get_loader(info["module"]).get_filename()
-    module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}.py"
-    package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}/__init__.py"
+    if info['module'].startswith("zunis"):
+        module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}.py"
+        package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}/__init__.py"
+    if info['module'].startswith("utils"):
+        module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/{filename}.py"
+        package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/{filename}/__init__.py"
     if file_path.endswith("__init__.py"):
         return package_url
     else:
