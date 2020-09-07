@@ -9,6 +9,8 @@ PAPER         =
 BUILDDIR      = _build
 MODULEDIR     = api
 APIDIR        = ../zunis_lib/zunis
+BENCHMARK_MODULEDIR = benchmarks_api
+BENCHMARK_APIDIR = ../experiments/benchmarks/utils
 APIOPTS       = -fMeT -d 2
 
 # Internal variables.
@@ -52,9 +54,11 @@ clean:
 
 cleanapi:
 	-rm -rf $(MODULEDIR)/*
+	-rm -rf $(BENCHMARK_MODULEDIR)
 
 apidoc:
 	$(SPHINXAPIDOC) -f $(APIOPTS) -o $(MODULEDIR) $(APIDIR)
+	$(SPHINXAPIDOC) -f $(APIOPTS) -o $(BENCHMARK_MODULEDIR) $(BENCHMARK_APIDIR)
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
