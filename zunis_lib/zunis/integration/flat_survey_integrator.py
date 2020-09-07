@@ -27,7 +27,7 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
 
     def __init__(self, f, trainer, posterior, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
-                 verbosity=None, trainer_verbosity=None,  **kwargs):
+                 verbosity=None, trainer_verbosity=None, **kwargs):
         super(PosteriorSurveySamplingIntegrator, self).__init__(verbosity=verbosity, **kwargs)
         self.f = f
 
@@ -127,6 +127,21 @@ class PosteriorSurveySamplingIntegrator(SurveyRefineIntegratorAPI):
         self.logger.info(f"Final result: {float(result):.5e} +/- {float(error):.5e}")
 
         return float(result), float(error), self.integration_history
+
+    def survey(self, n_survey_steps=None, **kwargs):
+        if n_survey_steps is None:
+            n_survey_steps = self.n_iter_survey
+        super(PosteriorSurveySamplingIntegrator, self).survey(n_survey_steps=n_survey_steps, **kwargs)
+
+    def refine(self, n_refine_steps=None, **kwargs):
+        if n_refine_steps is None:
+            n_refine_steps = self.n_iter_refine
+        super(PosteriorSurveySamplingIntegrator, self).refine(n_refine_steps=n_refine_steps, **kwargs)
+
+    def integrate(self, n_survey_steps=None, n_refine_steps=None, **kwargs):
+        """Perform the integration"""
+        super(PosteriorSurveySamplingIntegrator, self).integrate(n_survey_steps=n_survey_steps,
+                                                                 n_refine_steps=n_refine_steps, **kwargs)
 
 
 class FlatSurveySamplingIntegrator(PosteriorSurveySamplingIntegrator):
