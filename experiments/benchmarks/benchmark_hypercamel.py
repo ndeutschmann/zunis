@@ -1,55 +1,44 @@
-from functools import partial
-import pandas as pd
-import torch
+import click
+
+from utils.command_line_tools import PythonLiteralOption
+from utils.benchmark import run_benchmark_grid_know_integrand
 from utils.integrands.volume import RegulatedHyperSphericalCamel
-from utils.benchmark import benchmark_known_integrand
-from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
-from utils.torch_utils import get_device
-from zunis.integration import Integrator
-
-#############################################################
-#       DEBUG FLAG: set to False to log and save to file
-#############################################################
-debug = True
-#############################################################
+from utils.config.loaders import get_default_integrator_config, get_sql_types
 
 
-if debug:
-    logger = get_benchmark_logger_debug("benchmark_hypercamel")
-else:
-    logger = get_benchmark_logger("benchmark_hypercamel")
-
-device = get_device(cuda_ID=0)
-
-
-def benchmark_hypercamel(d, r1=0.25, r2=0.25, n_batch=100000, lr=1.e-3):
-    """Run a benchmark on a hypercamel integrand"""
-    logger.debug("=" * 72)
-    logger.info(f"Benchmarking the hypercamel integral with d={d}")
-    integrand_params = {
-        "r1": r1,
-        "r2": r2,
+def hypercamel_benchmark(dimensions=(2, 4, 6, 8), rs=(0.25,), regs=(1.e-6,), debug=True, cuda=0):
+    base_integrand_params = {
+        "r1": 0.25,
+        "r2": 0.25,
         "reg": 1.e-6
     }
-    integrand = RegulatedHyperSphericalCamel(d, device=device, **integrand_params)
-    optim = partial(torch.optim.Adam, lr=lr)
-    integrator = Integrator(f=integrand, d=d, device=device, trainer_options={"minibatch_size": 20000, "optim": optim})
+    integrands_params_grid = {
+        "r1": rs,
+        "r2": rs,
+        "reg": regs
+    }
 
-    integrator_result = benchmark_known_integrand(d, integrand, integrator, n_batch=n_batch,
-                                                  integrand_params=integrand_params, device=device)
+    base_integrator_config = get_default_integrator_config()
+    dtypes = get_sql_types()
 
-    return integrator_result
+    if debug:
+        base_integrator_config["n_epochs"] = 1
+        base_integrator_config["n_iter"] = 1
+
+    run_benchmark_grid_know_integrand(dimensions=dimensions, integrand=RegulatedHyperSphericalCamel,
+                                      base_integrand_params=base_integrand_params,
+                                      base_integrator_config=base_integrator_config,
+                                      integrand_params_grid=integrands_params_grid, integrator_config_grid=None,
+                                      n_batch=100000, debug=debug, cuda=cuda, sql_dtypes=dtypes,
+                                      dbname="benchmarks-debug.db", experiment_name="hypercamel")
 
 
-if __name__ == "__main__":
-    results = pd.DataFrame()
-    n_batch = 100000
-    for d in [2, 4, 6, 8, 10]:
-        if d >= 8:
-            n_batch*=10
-        result = benchmark_hypercamel(d, n_batch=n_batch)
-        results = pd.concat([results, result.as_dataframe()], ignore_index=True)
+cli = click.Command("cli", callback=hypercamel_benchmark, params=[
+    PythonLiteralOption(["--dimensions"], default=[2]),
+    PythonLiteralOption(["--fracs"], default=[0.3, 0.5, 0.7]),
+    click.Option(["--debug/--no-debug"], default=True),
+    click.Option(["--cuda"], default=0, type=int)
+])
 
-    print(results)
-    if not debug:
-        results.to_pickle("benchmark_hypercamel.bz2")
+if __name__ == '__main__':
+    cli()
