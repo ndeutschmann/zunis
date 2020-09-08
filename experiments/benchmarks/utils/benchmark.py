@@ -98,7 +98,7 @@ def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=No
     if integrand_params is None:
         integrand_params = dict()
     f = integrand(d=d, device=device, **integrand_params)
-    vf = integrand.vegas(device=device)
+    vf = f.vegas(device=device)
 
     logger.debug("=" * 72)
     logger.info("Defining integrator")
@@ -107,14 +107,14 @@ def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=No
     integrator_args = create_integrator_args(integrator_config)
     integrator = Integrator(f=f, d=d, device=device, **integrator_args)
 
-    vintegrator = vegas.Integrator([[0, 1] * d], max_nhcube=1)
+    vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
 
     integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch)
     vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                            n_batch_survey=integrator_args["n_points_survey"])
     flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
 
-    result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3).as_dataframe()
+    result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3)
     result["flat_variance_ratio"] = (flat_result["value_std"] / result["value_std"]) ** 2
 
     if isinstance(integrator_config, NestedMapping):
@@ -144,7 +144,7 @@ def run_benchmark_grid(dimensions, integrand, *,
 
     if isinstance(dimensions, int):
         dimensions = [dimensions]
-    assert isinstance(dimensions, Sequence) and all([isinstance(d, int) for d in dimensions]) and len(dimensions)>0,\
+    assert isinstance(dimensions, Sequence) and all([isinstance(d, int) for d in dimensions]) and len(dimensions) > 0, \
         "argument dimensions must be an integer or a list of integers"
 
     if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
@@ -188,11 +188,11 @@ def run_benchmark_grid(dimensions, integrand, *,
         append_dataframe_to_sqlite(results, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
 
 
-def run_benchmark_grid_know_integrand(dimensions, integrand, *,
-                                      base_integrand_params, base_integrator_config=None,
-                                      integrand_params_grid=None, integrator_config_grid=None,
-                                      n_batch=100000, debug=True, cuda=0,
-                                      sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
+def run_benchmark_grid_known_integrand(dimensions, integrand, *,
+                                       base_integrand_params, base_integrator_config=None,
+                                       integrand_params_grid=None, integrator_config_grid=None,
+                                       n_batch=100000, debug=True, cuda=0,
+                                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
     return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
                               base_integrator_config=base_integrator_config,
                               integrand_params_grid=integrand_params_grid,

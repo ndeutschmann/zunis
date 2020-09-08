@@ -9,6 +9,7 @@ flow_options:
     repetitions: int
 loss: str
 n_points_survey: int
+n_iter: int
 trainer_options:
   minibatch_size: int
   n_epochs: int
