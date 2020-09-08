@@ -21,6 +21,7 @@ from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
 from utils.torch_utils import get_device
 from utils.data_storage.dataframe2sql import append_dataframe_to_sqlite
 
+
 # TODO: this should be turned into classes
 
 def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=100000, integrand_params=None, logger=None,
@@ -199,3 +200,16 @@ def run_benchmark_grid_known_integrand(dimensions, integrand, *,
                               integrator_config_grid=integrator_config_grid, n_batch=n_batch, debug=debug, cuda=cuda,
                               sql_dtypes=sql_dtypes, dbname=dbname, experiment_name=experiment_name,
                               benchmark_method=benchmark_known_integrand)
+
+
+def run_benchmark_grid_vegas(dimensions, integrand, *,
+                             base_integrand_params, base_integrator_config=None,
+                             integrand_params_grid=None, integrator_config_grid=None,
+                             n_batch=100000, debug=True, cuda=0,
+                             sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
+    return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
+                              base_integrator_config=base_integrator_config,
+                              integrand_params_grid=integrand_params_grid,
+                              integrator_config_grid=integrator_config_grid, n_batch=n_batch, debug=debug, cuda=cuda,
+                              sql_dtypes=sql_dtypes, dbname=dbname, experiment_name=experiment_name,
+                              benchmark_method=benchmark_vs_vegas)

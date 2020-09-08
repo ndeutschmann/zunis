@@ -18,7 +18,7 @@ class Integrand(ABC):
     def __call__(self, x):
         """Compute the value of the integrand on a batch of points"""
         assert len(x.shape) == 2, f"Shape mismatch, expected (*, {self.d})"
-        assert x.shape[1] == self.d, f"Shape mismatch, expected (*, {self.d})"
+        assert x.shape[1] == self.d, f"Shape mismatch, expected (*, {self.d}), got {tuple(x.shape)}"
         return self.evaluate_integrand(x)
 
     def vegas(self, device=torch.device("cpu")):
