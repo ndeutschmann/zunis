@@ -4,7 +4,6 @@ from functools import partial
 
 import torch
 
-from utils.config import Configuration
 from utils.config.configuration import Configuration
 from utils.data_storage.record2sql import type_mapping
 
@@ -16,17 +15,17 @@ def get_optim_from_config(config=None):
 
     Parameters
     ----------
-    config: dictionary-like, None
+    config: dictionary-like, optional
         dictionary-like object with the following structure:
         {
-            "optim_cls": <optim class name within torch.optim>,
-            "optim_config": <dictionary defining the key-word argument parameters for instantiating that class>
+        "optim_cls": <optim class name within torch.optim>,
+        "optim_config": <dictionary defining the key-word argument parameters for instantiating that class>
         }
         If no argument is given, the default configuration is used (utils/config/optim_config.yaml)
 
     Returns
     -------
-        function
+        :obj:`function`
             a pre-filled optimizer constructor that only needs to be fed the model parameters.
 
     Notes
@@ -55,14 +54,15 @@ def create_integrator_args(config=None):
 
     Parameters
     ----------
-    config: dictionary-like, None
-    Full configuration dictionary for the Integrator function. If none is provided, the default configuration
-    is used.
+    config: dictionary-like, optional
+        Full configuration dictionary for the Integrator function. If none is provided, the default configuration
+        is used.
 
     Returns
     -------
-        dict
-            keyword dictionary ready to be provided as **kwargs to the Integator function
+        :obj:dict
+            keyword dictionary ready to be provided as ``**kwargs`` to the
+            :py:func:`Integrator <zunis.integration.default_integrator.Integrator>` function
     """
     if config is None:
         config = get_default_integrator_config()
@@ -84,13 +84,13 @@ def get_sql_types(type_config=None):
 
     Parameters
     ----------
-    type_config: MutableMapping, None
+    type_config: dictionary-like, optional
         maps parameter names to strings describing data types. Allows MutableMappings (key-value mappings) and
         can accomodate Configuration objects. If no argument is given, the default integrator configuration is used.
 
     Returns
     -------
-        dict
+        :obj:`dict`
     """
 
     if type_config is None:
