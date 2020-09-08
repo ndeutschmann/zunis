@@ -13,7 +13,7 @@ class CircleLineIntegrand(Integrand):
 
     This is a generalization with a n-sphere and maximal diagonal pattern"""
 
-    def __init__(self, d, r=0.3, sig=0.05, device=None):
+    def __init__(self, d, r=0.3, sig=0.05, device=None, *args, **kwargs):
         super(CircleLineIntegrand, self).__init__(d)
         self.sig = sanitize_variable(sig, device)
         self.r = sanitize_variable(r, device)
@@ -49,7 +49,7 @@ class CircleLineIntegrand(Integrand):
 class SineLineIntegrand(Integrand):
     """2D function enhanced on the graph y = sin(2*pi*f*x)"""
 
-    def __init__(self, sig, f=2., device=None):
+    def __init__(self, sig, f=2., device=None, *args, **kwargs):
         """
 
         Parameters
@@ -75,7 +75,7 @@ class SineLineIntegrand(Integrand):
 class SineIntegrand(Integrand):
     """Sinusoidal function with a wave vector along the maximal hyperdiagonal"""
 
-    def __init__(self, f=1., offset=1., device=None):
+    def __init__(self, f=1., offset=1., device=None, *args, **kwargs):
         """
 
         Parameters

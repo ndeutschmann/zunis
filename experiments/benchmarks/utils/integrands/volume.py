@@ -44,7 +44,7 @@ class HyperrectangleVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
     where 0. < frac < 1.
     """
 
-    def __init__(self, d, split_dim=0, frac=0.5):
+    def __init__(self, d, split_dim=0, frac=0.5, *args, **kwargs):
         """
 
         Parameters
@@ -72,7 +72,7 @@ class HyperrectangleVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
 class HypersphereVolumeIntegrand(VolumeIntegrand, KnownIntegrand):
     """Characteristic function of an hypersphere. The hypersphere must fit in the unit hypercube fully"""
 
-    def __init__(self, d, r, c, device=None):
+    def __init__(self, d, r, c, device=None, *args, **kwargs):
         """
 
         Parameters
@@ -102,7 +102,7 @@ class RegulatedHyperSphereIntegrand(RegulatedKnownIntegrand, HypersphereVolumeIn
     """Characteristic function of an hypersphere with a small regulating factor.
     The hypersphere must fit in the unit hypercube fully"""
 
-    def __init__(self, d, r, c, reg, device=None):
+    def __init__(self, d, r, c, reg, device=None, *args, **kwargs):
         super().__init__(reg, d, r, c, device=device)
 
 
@@ -110,7 +110,7 @@ class RegulatedHyperSphericalCamel(KnownIntegrand):
     """Camel function consisting of the sum of two regulated hyperspherical
     volume functions with centers at (0.25, ..., 0.25) and (0.75, ..., 0.75)"""
 
-    def __init__(self, d, r1=0.24, r2=0.24, reg=1.e-6, device=None):
+    def __init__(self, d, r1=0.24, r2=0.24, reg=1.e-6, device=None, *args, **kwargs):
         super(RegulatedHyperSphericalCamel, self).__init__(d=d)
         self.hump1 = RegulatedHyperSphereIntegrand(d, r=r1, c=0.25, reg=reg, device=device)
         self.hump2 = RegulatedHyperSphereIntegrand(d, r=r2, c=0.75, reg=reg, device=device)
