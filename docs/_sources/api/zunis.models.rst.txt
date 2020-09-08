@@ -6,20 +6,23 @@ zunis.models package
    :undoc-members:
    :show-inheritance:
 
-Subpackages
------------
+.. container:: doctitle
+
+   Subpackages
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows
    zunis.models.layers
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.generators
    zunis.models.utils

@@ -35,7 +35,7 @@
         <div class="body" role="main">
             <p id="mobilelink">
                 <a href="#mobileanchor">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
                 </a>
             </p>
             
@@ -48,12 +48,12 @@ This means that the <em>variable transform</em> is piecewise-linear.</p>
 <em class="property">class </em><code class="sig-name descname">ElementWisePWLinearTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_linear.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
 <p>Invertible piecewise-linear transformations over the unit hypercube</p>
-<p>Implements a batched bijective transformation <cite>h</cite> from the d-dimensional unit hypercube to itself,
+<p>Implements a batched bijective transformation <code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
 in an element-wise fashion (each coordinate transformed independently)</p>
 <p>In each direction, the bijection is a piecewise-linear transform with b bins
 where the forward transform has evenly spaced bins. The transformation in each bin is
 actually an affine transformation. The slopes for each direction and each point in the batch
-are given by an unormalized tensor <cite>q_tilde</cite>. This input is softmax-normalized such that
+are given by an unormalized tensor <code class="xref py py-obj docutils literal notranslate"><span class="pre">q_tilde</span></code>. This input is softmax-normalized such that
 1. h(0) = 0
 2. h(1) = 1
 3. h is monotonous
@@ -71,20 +71,20 @@ but, of course, with variable input bin sizes (and fixed output bin sizes).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+<li><p><strong>q_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,b) where b is the number of bins.
 This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <cite>(y,h)</cite>.
-- <cite>y</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(y,h)</span></code>.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -99,20 +99,20 @@ Normalization is imposed in this function using softmax.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+<li><p><strong>q_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,b) where b is the number of bins.
 This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <cite>(x,h)</cite>.
-- <cite>x</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(x,h)</span></code>.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -133,8 +133,8 @@ in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
-<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask which variables are transformed (False)
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – variable mask which variables are transformed (False)
 or used as parameters of the transform (True)</p></li>
 </ul>
 </dd>
@@ -155,25 +155,25 @@ or used as parameters of the transform (True)</p></li>
 variables. The transverse neural network is a rectangular dense neural network</p>
 <p class="rubric">Notes</p>
 <p>Transformation used:
-<cite>zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform</cite>
+<a class="reference internal" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform</span></code></a>
 Neural network used:
 zunis.models.layers.trainable.ArbitraryShapeRectangularDNN</p>
 <p>Generator for PWLinearCoupling</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – </p></li>
-<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask: which dimension are transformed (False) and which are not (True)</p></li>
-<li><p><strong>n_bins</strong> (<em>int</em>) – number of bins in each dimensions</p></li>
-<li><p><strong>d_hidden</strong> (<em>int</em>) – dimension of the hidden layers of the DNN</p></li>
-<li><p><strong>n_hidden</strong> (<em>int</em>) – number of hidden layers in the DNN</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – variable mask: which dimension are transformed (False) and which are not (True)</p></li>
+<li><p><strong>n_bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of bins in each dimensions</p></li>
+<li><p><strong>d_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the hidden layers of the DNN</p></li>
+<li><p><strong>n_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of hidden layers in the DNN</p></li>
 <li><p><strong>input_activation</strong> (<em>optional</em>) – pytorch activation function before feeding into the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
 <li><p><strong>hidden_activation</strong> (<em>optional</em>) – pytorch activation function between hidden layers of the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
 <li><p><strong>output_activation</strong> (<em>optional</em>) – pytorch activation function at the output of the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
-<li><p><strong>use_batch_norm</strong> (<em>bool</em>) – whether batch normalization should be used in the DNN.</p></li>
+<li><p><strong>use_batch_norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether batch normalization should be used in the DNN.</p></li>
 </ul>
 </dd>
 </dl>
@@ -191,20 +191,20 @@ must be a callable generator without arguments (i.e. a classname or a function)<
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+<li><p><strong>q_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,b) where b is the number of bins.
 This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <cite>(x,h)</cite>.
-- <cite>x</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(x,h)</span></code>.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -219,20 +219,20 @@ Normalization is imposed in this function using softmax.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>q_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,b) where b is the number of bins.
+<li><p><strong>q_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,b) where b is the number of bins.
 This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <cite>(y,h)</cite>.
-- <cite>y</cite> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <cite>j</cite> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(y,h)</span></code>.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -276,14 +276,9 @@ Normalization is imposed in this function using softmax.</p></li>
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -333,6 +328,7 @@ Normalization is imposed in this function using softmax.</p></li>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.models.html">models package</a><ul>
   <li><a href="zunis.models.flows.html">flows package</a><ul>
@@ -340,6 +336,7 @@ Normalization is imposed in this function using softmax.</p></li>
   <li><a href="zunis.models.flows.coupling_cells.piecewise_coupling.html">piecewise_coupling package</a><ul>
       <li>Previous: <a href="zunis.models.flows.coupling_cells.piecewise_coupling.html" title="previous chapter">piecewise_coupling package</a></li>
       <li>Next: <a href="zunis.models.flows.coupling_cells.general_coupling.html" title="next chapter">general_coupling module</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -374,7 +371,7 @@ Normalization is imposed in this function using softmax.</p></li>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

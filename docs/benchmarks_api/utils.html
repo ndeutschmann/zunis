@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils package &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="utils.config package" href="utils.config.html" />
+    <link rel="prev" title="zunis.utils.logger module" href="../api/zunis.utils.logger.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="module-utils">
+<span id="utils-package"></span><h1>utils package<a class="headerlink" href="#module-utils" title="Permalink to this headline">¶</a></h1>
+<p>Library of tools for integration benchmarking and validation</p>
+<div class="doctitle docutils container">
+<p>Subpackages</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils.config.html">utils.config package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.data_storage.html">utils.data_storage package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.integrands.html">utils.integrands package</a></li>
+</ul>
+</div>
+<div class="doctitle docutils container">
+<p>Submodules</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils.benchmark.html">utils.benchmark module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.command_line_tools.html">utils.command_line_tools module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.flat_integrals.html">utils.flat_integrals module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.integral_validation.html">utils.integral_validation module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.integrals.html">utils.integrals module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.integrator_integrals.html">utils.integrator_integrals module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.logging.html">utils.logging module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.record.html">utils.record module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.repo_info.html">utils.repo_info module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.torch_utils.html">utils.torch_utils module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.vanity.html">utils.vanity module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.vegas_integrals.html">utils.vegas_integrals module</a></li>
+</ul>
+</div>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Benchmark utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="../docs.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;API Documentation</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="../api/zunis.utils.logger.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;logger module</a></li>
+        
+        
+        
+        <li><a href="utils.config.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;config package</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
+      <li>Previous: <a href="../api/zunis.utils.logger.html" title="previous chapter">zunis.utils.logger module</a></li>
+      <li>Next: <a href="utils.config.html" title="next chapter">utils.config package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -6,11 +6,12 @@ zunis package
    :undoc-members:
    :show-inheritance:
 
-Subpackages
------------
+.. container:: doctitle
+
+   Subpackages
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.integration
    zunis.models
