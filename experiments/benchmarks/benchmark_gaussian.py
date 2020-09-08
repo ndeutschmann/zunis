@@ -10,10 +10,8 @@ from utils.integrands.gaussian import DiagonalGaussianIntegrand
 
 def benchmark_gaussian(dimensions=(2, 4, 6, 8), sigmas=(0.1, 0.3, 0.5, 0.7), db="benchmarks.db", debug=True, cuda=0):
     base_integrand_params = {
-        "s1": 0.5,
-        "s2": 0.5,
-        "norm1": 1.,
-        "norm2": 1.
+        "s": 0.5,
+        "norm": 1.
     }
     integrands_params_grid = {
         "s": sigmas
