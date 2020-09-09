@@ -6,19 +6,22 @@ zunis.models.flows.coupling\_cells package
    :undoc-members:
    :show-inheritance:
 
-Subpackages
------------
+.. container:: doctitle
+
+   Subpackages
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.coupling_cells.piecewise_coupling
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.coupling_cells.general_coupling
    zunis.models.flows.coupling_cells.real_nvp

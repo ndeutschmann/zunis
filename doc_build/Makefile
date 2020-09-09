@@ -11,7 +11,7 @@ MODULEDIR     = api
 APIDIR        = ../zunis_lib/zunis
 BENCHMARK_MODULEDIR = benchmarks_api
 BENCHMARK_APIDIR = ../experiments/benchmarks/utils
-APIOPTS       = -fMeT -d 2
+APIOPTS       = -fMeT -d 1 -t ./_templates
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4

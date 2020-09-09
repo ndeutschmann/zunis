@@ -35,7 +35,7 @@
         <div class="body" role="main">
             <p id="mobilelink">
                 <a href="#mobileanchor">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
                 </a>
             </p>
             
@@ -97,6 +97,12 @@ during the survey phase. The function to integrate is given at initialization.</
 </dd></dl>
 
 <dl class="py method">
+<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.integrate">
+<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the integration</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step">
 <code class="sig-name descname">process_refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the result of a refine step</p>
@@ -109,6 +115,16 @@ during the survey phase. The function to integrate is given at initialization.</
 </dd></dl>
 
 <dl class="py method">
+<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.refine">
+<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.refine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the refine phase of integration</p>
+<p>Possible keyword arguments:</p>
+<p>trainer_config_args: dict
+refine_step_args: dict
+finalize_refine_args: dict</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine">
 <code class="sig-name descname">sample_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points for a refine step</p>
@@ -118,6 +134,18 @@ during the survey phase. The function to integrate is given at initialization.</
 <dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey">
 <code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points from target space distribution</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.survey">
+<code class="sig-name descname">survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a survey phase of integration</p>
+<dl class="simple">
+<dt>possible keyword arguments:</dt><dd><p>trainer_config_args: dict
+survey_step_args: dict
+finalize_survey_args: dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -158,14 +186,9 @@ during the survey phase. The function to integrate is given at initialization.</
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.models.html">models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -218,10 +241,12 @@ during the survey phase. The function to integrate is given at initialization.</
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.integration.html">integration package</a><ul>
       <li>Previous: <a href="zunis.integration.dkltrainer_integrator.html" title="previous chapter">dkltrainer_integrator module</a></li>
       <li>Next: <a href="zunis.integration.integratorAPI.html" title="next chapter">integratorAPI module</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -253,7 +278,7 @@ during the survey phase. The function to integrate is given at initialization.</
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

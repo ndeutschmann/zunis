@@ -111,9 +111,9 @@ If this seems like a problem that machine learning should be able to solve, you 
 .. toctree::
     :caption: Documentation
     :hidden:
-    :maxdepth: 3
+    :maxdepth: 2
 
-    API Documentation <api/zunis>
+    docs
     Module Hierarchy <py-modindex>
     Symbol Index <genindex>
 

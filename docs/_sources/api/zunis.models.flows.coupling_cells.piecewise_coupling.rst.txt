@@ -6,10 +6,12 @@ zunis.models.flows.coupling\_cells.piecewise\_coupling package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear

@@ -43,7 +43,7 @@ class DiagonalGaussianIntegrand(Integrand):
         Parameters
         ----------
         x: torch.Tensor
-            Batch of points of size (*,d)
+            Batch of points of size ```(*,d)```
 
         Returns
         -------

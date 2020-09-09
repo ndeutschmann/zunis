@@ -35,7 +35,7 @@
         <div class="body" role="main">
             <p id="mobilelink">
                 <a href="#mobileanchor">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
                 </a>
             </p>
             
@@ -50,15 +50,15 @@ with each a different mask as a sequence of transformations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality of the space</p></li>
 <li><p><strong>cell</strong> – callable that yields an instance of zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell
 the coupling cell to be repeated.</p></li>
-<li><p><strong>masks</strong> (<em>list of lists of bool</em>) – list of masks for each flow in the cell. The order is from latent space to target space</p></li>
-<li><p><strong>input_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an input. Typically to deform the input space to be suited to the repeated cell</p></li>
-<li><p><strong>output_flow</strong> (<em>, </em><em>None</em>) – flow model to be used as an output. Typically to deform the input space to be suited to the repeated cell</p></li>
-<li><p><strong>cell_params</strong> (<em>dict</em>) – parameters of the cell</p></li>
-<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>None</em>) – parameters of the input cell</p></li>
-<li><p><strong>output_cell_params</strong> (<em>dict</em>) – parameters of the output cell</p></li>
+<li><p><strong>masks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">lists</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – list of masks for each flow in the cell. The order is from latent space to target space</p></li>
+<li><p><strong>input_flow</strong> (, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – flow model to be used as an input. Typically to deform the input space to be suited to the repeated cell</p></li>
+<li><p><strong>output_flow</strong> (, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – flow model to be used as an output. Typically to deform the input space to be suited to the repeated cell</p></li>
+<li><p><strong>cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the cell</p></li>
+<li><p><strong>input_cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – parameters of the input cell</p></li>
+<li><p><strong>output_cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – parameters of the output cell</p></li>
 </ul>
 </dd>
 </dl>
@@ -78,16 +78,16 @@ This is meant as a higher-level API to generate boilerplate models based on arch
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<em>int</em>) – dimensionality</p></li>
-<li><p><strong>cell</strong> (<em>{&quot;pwlinear&quot;</em><em>, </em><em>&quot;realnvp&quot;}</em>) – coupling cell choice</p></li>
-<li><p><strong>masking</strong> (<em>{&quot;checkerboard&quot;</em><em>, </em><em>&quot;maximal&quot;}</em>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
+<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality</p></li>
+<li><p><strong>cell</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;pwlinear&quot;,</span> <span class="pre">&quot;realnvp&quot;}</span></code>) – coupling cell choice</p></li>
+<li><p><strong>masking</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;checkerboard&quot;,</span> <span class="pre">&quot;maximal&quot;}</span></code>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
 and <a class="reference internal" href="zunis.models.flows.masking.html#module-zunis.models.flows.masking" title="zunis.models.flows.masking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">masking</span></code></a></p></li>
 <li><p><strong>input_cell</strong> (<em>optional</em>) – Transformation before the repeated cell</p></li>
 <li><p><strong>output_cell</strong> (<em>optional</em>) – Transformation after the repeated cell</p></li>
-<li><p><strong>cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the repeated cell</p></li>
-<li><p><strong>input_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the input_cell</p></li>
-<li><p><strong>output_cell_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the output_cell</p></li>
-<li><p><strong>masking_options</strong> (<em>dict</em><em>, </em><em>optional</em>) – parameters for the masking strategy</p></li>
+<li><p><strong>cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <em>optional</em>) – parameters for the repeated cell</p></li>
+<li><p><strong>input_cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <em>optional</em>) – parameters for the input_cell</p></li>
+<li><p><strong>output_cell_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <em>optional</em>) – parameters for the output_cell</p></li>
+<li><p><strong>masking_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>, <em>optional</em>) – parameters for the masking strategy</p></li>
 </ul>
 </dd>
 </dl>
@@ -144,14 +144,9 @@ and <a class="reference internal" href="zunis.models.flows.masking.html#module-z
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -204,12 +199,14 @@ and <a class="reference internal" href="zunis.models.flows.masking.html#module-z
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.models.html">models package</a><ul>
   <li><a href="zunis.models.flows.html">flows package</a><ul>
   <li><a href="zunis.models.flows.sequential.html">sequential package</a><ul>
       <li>Previous: <a href="zunis.models.flows.sequential.invertible_sequential.html" title="previous chapter">invertible_sequential module</a></li>
       <li>Next: <a href="zunis.models.flows.general_flow.html" title="next chapter">general_flow module</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -243,7 +240,7 @@ and <a class="reference internal" href="zunis.models.flows.masking.html#module-z
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
