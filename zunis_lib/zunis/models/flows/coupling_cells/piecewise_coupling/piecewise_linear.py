@@ -146,7 +146,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # By setting the negative values to 2., we know that the smallest value left
     # is the smallest positive
     edges[edges < 0] = 2.
-    edges = torch.argmin(edges, dim=2)
+    edges = torch.clamp(torch.argmin(edges, dim=2), 0, b - 1).to(torch.long)
 
     # Gather the left integrals at each edge. See comment about gathering in q_left_integrals
     # for the unsqueeze
