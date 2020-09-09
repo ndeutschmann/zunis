@@ -149,7 +149,7 @@ def compare_integral_result(result1, result2, sigma_cutoff=2, keep_history=False
     logger.info(f"Result 2:             {integral2:.2e}+/-{unc2:.2e}")
     logger.info(f"Difference:           {100. * percent_diff:.2f}%")
     logger.info(f"Significance:         {sigmas:.2f}{sigma}")
-    logger.info(f"Variance ratio (2/1): {(unc2/unc1)**2:.2e}")
+    logger.info(f"Variance ratio (2/1): {(unc2 / unc1) ** 2:.2e}")
 
     result = ComparisonRecord(
         value=integral1,
@@ -159,7 +159,7 @@ def compare_integral_result(result1, result2, sigma_cutoff=2, keep_history=False
         sigma_cutoff=sigma_cutoff,
         sigmas_off=sigmas,
         percent_difference=100 * percent_diff,
-        variance_ratio=(unc2/unc1)**2,
+        variance_ratio=(unc2 / unc1) ** 2,
         match=sigmas <= sigma_cutoff,
     )
 
@@ -180,7 +180,8 @@ def compare_integral_result(result1, result2, sigma_cutoff=2, keep_history=False
     return result
 
 
-def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2, keep_history=False):
+def compare_integrals(integrand1, sampler1, sampler2, integrand2=None, n_batch=10000, sigma_cutoff=2,
+                      keep_history=False):
     """Compute an integral in two different ways and compare
 
     Parameters

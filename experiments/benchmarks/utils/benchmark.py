@@ -194,9 +194,19 @@ def run_benchmark_grid(dimensions, integrand, *,
                     logger.info(f"integrand update: {dict(zip(integrand_grid_keys, integrand_update))}")
                     integrator_config.update(dict(zip(integrator_grid_keys, integrator_update)))
                     integrand_params.update(dict(zip(integrand_grid_keys, integrand_update)))
-                    result = benchmark_method(d, integrand=integrand,
-                                              integrand_params=integrand_params, integrator_config=integrator_config,
-                                              n_batch=n_batch, logger=logger, device=device).as_dataframe()
+
+                    try:
+                        result = benchmark_method(d, integrand=integrand,
+                                                  integrand_params=integrand_params, integrator_config=integrator_config,
+                                                  n_batch=n_batch, logger=logger, device=device).as_dataframe()
+                    except Exception as e:
+                        logger.error(e)
+                        result = NestedMapping()
+                        result.update(integrator_config)
+                        result.update(integrand_params)
+                        result["extra_data"] = e
+                        result = result.as_dataframe()
+
                     if not debug:
                         append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
 
