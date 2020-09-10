@@ -35,15 +35,13 @@ def get_repo_hash(repo=None):
 
 
 def repo_is_dirty(repo=None):
-    """Get the status information of the repository. We collect
-    - the 'dirty' status of the repository (modified tracked files)
-    - the presence of untracked files
-    if either is true, we return "-dirty" to be appended to filenames
-
+    """Get the status information of the repository.
 
     Parameters
     ----------
-    repo: git.Repo, None
+    repo: git.Repo, optional
+        The repository object to inspect, if none is given, the repo containing the working directory (if it exists) is
+        used.
 
     Returns
     -------
@@ -59,7 +57,7 @@ def repo_is_dirty(repo=None):
 
 
 def get_dirt_hash(repo=None):
-    """Get a SHA1 hash of all sources of dirt (modified tracked files or untracked files).
+    """Get a SHA1 hash of all sources of dirt (modified tracked files).
     Explicitly, we collect all such files, hash their contents one by one, concatenate all hashes and
     hash them again (to avoid loading many large files in memory)
 
@@ -82,10 +80,6 @@ def get_dirt_hash(repo=None):
     for changed_file in changed_files:
         with open(os.path.join(repo.working_dir, changed_file), "rb") as cf:
             hashes += sha1(cf.read()).digest()
-
-    for untracked_file in repo.untracked_files:
-        with open(os.path.join(repo.working_dir, untracked_file), "rb") as uf:
-            hashes += sha1(uf.read()).digest()
 
     return sha1(hashes).hexdigest()
 

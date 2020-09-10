@@ -202,6 +202,7 @@ def run_benchmark_grid(dimensions, integrand, *,
                     except Exception as e:
                         logger.error(e)
                         result = NestedMapping()
+                        result["d"] = d
                         result.update(integrator_config)
                         result.update(integrand_params)
                         result["extra_data"] = e
