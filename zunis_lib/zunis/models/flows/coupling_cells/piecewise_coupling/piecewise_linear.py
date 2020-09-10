@@ -5,6 +5,7 @@ import torch
 
 from ..transforms import InvertibleTransform
 from ..general_coupling import InvertibleCouplingCell
+from zunis.utils.exceptions import AvertedCUDARuntimeError
 from zunis.models.layers.trainable import ArbitraryShapeRectangularDNN
 from zunis.models.utils import Reshift
 
@@ -55,6 +56,11 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     # x is in the mx-th bin: x \in [0,1],
     # mx \in [[0,b-1]], so we clamp away the case x == 1
     mx = torch.clamp(torch.floor(b * x), 0, b - 1).to(torch.long)
+    # Need special error handling because trying to index with mx
+    # if it contains nans will lock the GPU. (device-side assert triggered)
+    if torch.any(torch.isnan(mx)).item() or torch.any(mx < 0) or torch.any(mx >= b):
+        raise AvertedCUDARuntimeError("NaN detected in PWLinear bin indexing")
+
     # We compute the output variable in-place
     out = x - mx * w  # alpha (element of [0.,w], the position of x in its bin
 
@@ -147,6 +153,11 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # is the smallest positive
     edges[edges < 0] = 2.
     edges = torch.clamp(torch.argmin(edges, dim=2), 0, b - 1).to(torch.long)
+
+    # Need special error handling because trying to index with mx
+    # if it contains nans will lock the GPU. (device-side assert triggered)
+    if torch.any(torch.isnan(edges)).item() or torch.any(edges < 0) or torch.any(edges >= b):
+        raise AvertedCUDARuntimeError("NaN detected in PWLinear bin indexing")
 
     # Gather the left integrals at each edge. See comment about gathering in q_left_integrals
     # for the unsqueeze
