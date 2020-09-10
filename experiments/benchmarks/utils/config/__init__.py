@@ -13,6 +13,4 @@ Typical process:
     # ... log the flat config somewhere
 
 """
-from .configuration import Configuration
-from .loaders import get_default_integrator_config, get_optim_from_config, create_integrator_args
 

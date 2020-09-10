@@ -91,7 +91,6 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
     -------
         utils.record.ComparisonRecord
     """
-
     sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
     return validate_integral(f, sampler, n_batch, sigma_cutoff, keep_history=keep_history)
 

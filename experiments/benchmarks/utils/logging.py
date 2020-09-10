@@ -5,7 +5,8 @@ import logging
 from zunis import logger as zunis_logger
 from zunis import logger_training as zunis_logger_training
 from zunis import logger_integration as zunis_logger_integration
-
+from hashlib import sha1
+from time import time
 
 def get_benchmark_logger(name="benchmark_logger",
                          zunis_level=logging.WARNING,
@@ -32,7 +33,10 @@ def get_benchmark_logger(name="benchmark_logger",
 
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
-    handler = logging.FileHandler("./" + name + '.log', 'w', 'utf-8')
+    # Get a hash of the current time since the epoch as an identifier of the current process
+    timestamp = sha1(str(time()).encode()).hexdigest()[:7]
+    handler = logging.FileHandler(f"./{name}:{timestamp}.log", 'a', 'utf-8')
+    print(f"Logging into ./{name}:{timestamp}.log")
     handler.setFormatter(logging.Formatter("%(asctime)s %(name)s:%(levelname)s:%(message)s"))
     root_logger.addHandler(handler)
 

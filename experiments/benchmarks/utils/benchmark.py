@@ -86,6 +86,8 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
 
     integrator_result.update(integrand_params)
 
+    integrator_result["d"] = d
+
     return integrator_result
 
 
@@ -124,6 +126,9 @@ def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=No
         result.update(integrator_config)
 
     result.update(integrand_params)
+
+    result["d"] = d
+
     return result
 
 
@@ -148,11 +153,16 @@ def run_benchmark_grid(dimensions, integrand, *,
     assert isinstance(dimensions, Sequence) and all([isinstance(d, int) for d in dimensions]) and len(dimensions) > 0, \
         "argument dimensions must be an integer or a list of integers"
 
+    if sql_dtypes is None:
+        sql_dtypes = get_sql_types()
+
     if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
         result = benchmark_method(dimensions[0], integrand=integrand,
                                   integrand_params=base_integrand_params, integrator_config=base_integrator_config,
                                   n_batch=n_batch, logger=logger, device=device).as_dataframe()
-        results = result
+
+        if not debug:
+            append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
 
     else:
         if integrand_params_grid is None:
@@ -168,25 +178,38 @@ def run_benchmark_grid(dimensions, integrand, *,
 
         integrator_grid_keys = integrator_config_grid.keys()
         integrand_grid_keys = integrand_params_grid.keys()
-
-        integrator_full_grid = product(*integrator_config_grid.values())
-        integrand_full_grid = product(*integrand_params_grid.values())
+        integrator_grid_values = integrator_config_grid.values()
+        integrand_grid_values = integrand_params_grid.values()
 
         for d in dimensions:
+
+            # Need to reset our cartesian product iterator at each pass through
+            integrator_full_grid = product(*integrator_grid_values)
+            integrand_full_grid = product(*integrand_grid_values)
             for integrator_update in integrator_full_grid:
                 for integrand_update in integrand_full_grid:
+                    logger.info("Benchmarking with:")
+                    logger.info(f"d = {d}")
+                    logger.info(f"integrator update: {dict(zip(integrator_grid_keys, integrator_update))}")
+                    logger.info(f"integrand update: {dict(zip(integrand_grid_keys, integrand_update))}")
                     integrator_config.update(dict(zip(integrator_grid_keys, integrator_update)))
                     integrand_params.update(dict(zip(integrand_grid_keys, integrand_update)))
-                    result = benchmark_method(d, integrand=integrand,
-                                              integrand_params=integrand_params, integrator_config=integrator_config,
-                                              n_batch=n_batch, logger=logger, device=device).as_dataframe()
 
-                    results = pd.concat([results, result], ignore_index=True)
+                    try:
+                        result = benchmark_method(d, integrand=integrand,
+                                                  integrand_params=integrand_params, integrator_config=integrator_config,
+                                                  n_batch=n_batch, logger=logger, device=device).as_dataframe()
+                    except Exception as e:
+                        logger.error(e)
+                        result = NestedMapping()
+                        result.update(integrator_config)
+                        result.update(integrand_params)
+                        result["extra_data"] = e
+                        result = result.as_dataframe()
 
-    if not debug:
-        if sql_dtypes is None:
-            sql_dtypes = get_sql_types()
-        append_dataframe_to_sqlite(results, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
+                    if not debug:
+                        append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
+
 
 
 def run_benchmark_grid_known_integrand(dimensions, integrand, *,
