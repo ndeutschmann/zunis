@@ -9,3 +9,6 @@ class AvertedCUDARuntimeError(RuntimeError):
 class NoCheckpoint(RuntimeError):
     """Raised to signify no checkpoint is available for reloading"""
 
+
+class TrainingInterruption(RuntimeError):
+    """Raised when a Trainer determines that the model should no longer be trained"""

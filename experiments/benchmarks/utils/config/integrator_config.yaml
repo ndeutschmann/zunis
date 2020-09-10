@@ -12,6 +12,8 @@ n_points_survey: 10000
 n_iter: 10
 trainer_options:
   minibatch_size: 1.0
+  checkpoint: my_checkpoint.pkl
+  max_reloads: 0
   n_epochs: 50
   optim:
     optim_cls: Adam

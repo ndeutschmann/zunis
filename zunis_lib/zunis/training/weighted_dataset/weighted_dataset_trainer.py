@@ -4,6 +4,7 @@ from math import isfinite, ceil
 from better_abc import ABC, abstractmethod, abstract_attribute
 from .training_record import TrainingRecord
 from zunis.utils.logger import set_verbosity as set_verbosity_fct
+from zunis.utils.exceptions import AvertedCUDARuntimeError, NoCheckpoint, TrainingInterruption
 
 
 class InvalidLossError(ValueError):
@@ -92,6 +93,9 @@ class BasicTrainer(ABC):
     def handle_invalid_loss(self, error):
         raise
 
+    def handle_cuda_error(self, error):
+        raise
+
     def compute_loss_no_grad(self, x, px, fx):
         if not self.flow.inverse:
             self.flow.invert()
@@ -178,7 +182,7 @@ class BasicTrainer(ABC):
             )
             early_stop = self.process_loss(loss)
             if early_stop:
-                break
+                raise TrainingInterruption("Early stopping condition was raised")
             begin = end
 
     def train_on_target_batch(self, x, px, fx, optim, n_epochs, minibatch_size=None):
@@ -210,8 +214,11 @@ class BasicTrainer(ABC):
             try:
                 self.train_step_on_target_batch(x, px, fx, optim, minibatch_size)
             except InvalidLossError as e:
-                self.logger.error(e)
+                self.logger.exception("Invalid loss detected - handling started")
                 self.handle_invalid_loss(e)
+            except AvertedCUDARuntimeError as e:
+                self.logger.exception("CUDA error averted - handling started")
+                self.handle_cuda_error(e)
 
     @staticmethod
     def generate_target_batch_from_posterior(n_points, f, target_posterior):
@@ -316,24 +323,71 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         """Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid"""
 
         # parent class checks that the loss is valid
-        try:
-            output = super(BasicStatefulTrainer, self).process_loss(loss)
-        except InvalidLossError as e:
-            self.logger.error("Caught error:")
-            self.logger.error(e)
-            if "checkpoint" in self.record and self.n_reloads < self.max_reloads:
-                self.logger.error(f"Attempting checkpoint reload {self.n_reloads + 1}/{self.max_reloads}")
-                self.flow.load_state_dict(torch.load(self.record["checkpoint"]))
-                self.n_reloads += 1
-                output = False
-            else:
-                self.logger.error("Cannot reset to a previous checkpoint")
-                raise
+        output = super(BasicStatefulTrainer, self).process_loss(loss)
 
+        # Handle logging and checkpointing
         self.record.log_loss(loss)
         if "checkpoint" in self.record and self.record["loss"] <= self.record["best_loss"]:
             torch.save(self.flow.state_dict(), self.record["checkpoint"])
         return output
+
+    def restore_checkpoint(self):
+        """Restore from a checkpoint if available"""
+        if "checkpoint" in self.record:
+            self.logger.warning("Reloading the latest checkpoint")
+            self.flow.load_state_dict(torch.load(self.record["checkpoint"]))
+        else:
+            raise NoCheckpoint("No checkpoint available")
+
+    def restore_checkpoint_except(self):
+        """Try to to restore from a checkpoint as a response to an exception"""
+        # # TODO DEV remove this debug before pushing
+        # import ipdb
+        # ipdb.set_trace()
+        # # TODO DEV end of debug statement
+        if "checkpoint" in self.record and self.n_reloads < self.max_reloads:
+            self.logger.warning(f"Attempting checkpoint reload {self.n_reloads + 1}/{self.max_reloads}")
+            self.restore_checkpoint()
+            self.n_reloads += 1
+            return True
+        else:
+            self.logger.error("Cannot reset to a previous checkpoint to sidestep exception")
+            return False
+
+    def handle_invalid_loss(self, error):
+        """In case of invalid loss, we try to reload the latest checkpoint"""
+        if self.restore_checkpoint_except():
+            return
+
+        # Otherwise reload the checkpoint and re-raise the error
+        try:
+            self.restore_checkpoint()
+            self.logger.error("Could load the latest checkpoint - interrupting training")
+            interruptor = TrainingInterruption("Invalid loss error interrupted training")
+            self.logger.error(interruptor)
+            raise interruptor
+        except NoCheckpoint:
+            pass
+
+        super(BasicStatefulTrainer, self).handle_invalid_loss(error)
+
+    def handle_cuda_error(self, error):
+        """In case of a cuda error, we try to reload the latest checkpoint"""
+        if self.restore_checkpoint_except():
+            return
+
+        # Otherwise reload the checkpoint and re-raise the error
+        try:
+            self.restore_checkpoint()
+            self.logger.error("Could load the latest checkpoint - interrupting training")
+            interruptor = TrainingInterruption("CUDA error interrupted training")
+            self.logger.error(interruptor)
+            raise interruptor
+        except NoCheckpoint:
+            pass
+
+        super(BasicStatefulTrainer, self).handle_cuda_error(error)
+
 
     def train_step_on_target_minibatch(self, x, px, fx, optim):
         loss = super(BasicStatefulTrainer, self).train_step_on_target_minibatch(x, px, fx, optim)
