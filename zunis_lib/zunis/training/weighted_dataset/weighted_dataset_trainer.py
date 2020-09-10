@@ -1,5 +1,7 @@
 import logging
 import torch
+from copy import deepcopy
+from collections import OrderedDict
 from math import isfinite, ceil
 from better_abc import ABC, abstractmethod, abstract_attribute
 from .training_record import TrainingRecord
@@ -289,7 +291,8 @@ class BasicTrainer(ABC):
 
 
 class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
-    def __init__(self, flow, latent_prior, checkpoint=None, max_reloads=None, **kwargs):
+    def __init__(self, flow, latent_prior, checkpoint=True, checkpoint_on_cuda=True, checkpoint_path=None, max_reloads=None,
+                 **kwargs):
         super(BasicStatefulTrainer, self).__init__(flow, latent_prior)
 
         # Setting up the saved configuration accessed through the GenericTrainerAPI
@@ -311,40 +314,77 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
 
         # Checkpointing logic
         self.checkpoint = checkpoint
+        self.gpu_checkpoint = checkpoint_on_cuda
+        self.checkpoint_data = None
+        self.checkpoint_path = checkpoint_path
         self.n_reloads = 0
         if max_reloads is None:
-            self.max_reloads = None if checkpoint is None else 1
+            self.max_reloads = None if not checkpoint else 1
         else:
             self.max_reloads = max_reloads
 
-        self.record = TrainingRecord(checkpoint=checkpoint, config=self.config)
-
-    def process_loss(self, loss):
-        """Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid"""
-
-        # parent class checks that the loss is valid
-        output = super(BasicStatefulTrainer, self).process_loss(loss)
-
-        # Handle logging and checkpointing
-        self.record.log_loss(loss)
-        if "checkpoint" in self.record and self.record["loss"] <= self.record["best_loss"]:
-            torch.save(self.flow.state_dict(), self.record["checkpoint"])
-        return output
-
-    def restore_checkpoint(self):
-        """Restore from a checkpoint if available"""
-        if "checkpoint" in self.record:
-            self.logger.warning("Reloading the latest checkpoint")
-            self.flow.load_state_dict(torch.load(self.record["checkpoint"]))
+        if self.checkpoint_path is None:
+            self.record = TrainingRecord(config=self.config)
         else:
-            raise NoCheckpoint("No checkpoint available")
+            self.record = TrainingRecord(config=self.config, checkpoint=checkpoint_path)
+
+    def set_checkpoint(self):
+        """Save the current model state as a checkpoint"""
+        if not self.checkpoint:
+            self.logger.error("This trainer cannot save checkpoints")
+            raise AssertionError("This trainer cannot save checkpoints")
+
+        state_dict = deepcopy(self.flow.state_dict())
+        if self.gpu_checkpoint:
+            self.checkpoint_data = state_dict
+        else:
+            self.checkpoint_data = OrderedDict(
+                [(key, value.cpu()) for key, value in state_dict.items()]
+            )
+        if self.checkpoint_path is not None:
+            torch.save(self.checkpoint_data, self.checkpoint_path)
+
+    def restore_checkpoint(self, path=None):
+        """Restore from a checkpoint if available"""
+        # This function is called when something fails
+        # as a result, it should always raise its specific type of error: NoCheckpoint so that the
+        # more important failure cause can be reported
+        # We use logging.exception to still report the local error stack trace in logs
+
+        # If a path is provided, use it and fail otherwise
+        # Use a NoCheckpoint exception to allow whatever error triggered this function to be the main failure cause
+        if path is not None:
+            try:
+                self.flow.load_state_dict(torch.load(path))
+                return
+            except Exception:
+                self.logger.exception(f"Error when loading state dict from file")
+                raise NoCheckpoint(f"Could not load checkpoint from {path}")
+
+        # Default functioning mode: no path specified, use initialization settings
+        # We have to have set the options to keep checkpoints in memory and have saved at least once
+        if self.checkpoint and self.checkpoint_data is not None:
+            self.logger.warning("Reloading the latest checkpoint from memory")
+            try:
+                self.flow.load_state_dict(self.checkpoint_data)
+                return
+            # In case of error, log the stack trace and try loading from disk if possible
+            except Exception:
+                self.logger.exception("Could not load checkpoint from memory")
+            if self.checkpoint_path is not None:
+                self.logger.warning("Trying to load latest checkpoint from disk")
+                try:
+                    self.flow.load_state_dict(torch.load(self.checkpoint_path))
+                    return
+                # Again, if we fail, log the stack trace and raise a NoCheckpoint to allow upstream triage
+                except Exception:
+                    self.logger.exception("Error when loading state dict from file")
+                    raise NoCheckpoint(f"Could not load checkpoint from {self.checkpoint_path}")
+
+        raise NoCheckpoint("No checkpoint available")
 
     def restore_checkpoint_except(self):
         """Try to to restore from a checkpoint as a response to an exception"""
-        # # TODO DEV remove this debug before pushing
-        # import ipdb
-        # ipdb.set_trace()
-        # # TODO DEV end of debug statement
         if "checkpoint" in self.record and self.n_reloads < self.max_reloads:
             self.logger.warning(f"Attempting checkpoint reload {self.n_reloads + 1}/{self.max_reloads}")
             self.restore_checkpoint()
@@ -361,10 +401,11 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
 
         # Otherwise reload the checkpoint and re-raise the error
         try:
+            self.logger.warning("An InvalidLossError could not be sidestepped. Trying to reload checkpoint before interrupting the training")
             self.restore_checkpoint()
-            self.logger.error("Could load the latest checkpoint - interrupting training")
+            self.logger.warning("Could load the latest checkpoint")
             interruptor = TrainingInterruption("Invalid loss error interrupted training")
-            self.logger.error(interruptor)
+            self.logger.error(repr(interruptor))
             raise interruptor
         except NoCheckpoint:
             pass
@@ -378,16 +419,28 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
 
         # Otherwise reload the checkpoint and re-raise the error
         try:
+            self.logger.warning("An AvertedCUDARuntimeError could not be sidestepped. Trying to reload checkpoint before interrupting the training")
             self.restore_checkpoint()
-            self.logger.error("Could load the latest checkpoint - interrupting training")
+            self.logger.warning("Could load the latest checkpoint")
             interruptor = TrainingInterruption("CUDA error interrupted training")
-            self.logger.error(interruptor)
+            self.logger.error(repr(interruptor))
             raise interruptor
         except NoCheckpoint:
             pass
 
         super(BasicStatefulTrainer, self).handle_cuda_error(error)
 
+    def process_loss(self, loss):
+        """Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid"""
+
+        # parent class checks that the loss is valid
+        output = super(BasicStatefulTrainer, self).process_loss(loss)
+
+        # Handle logging and checkpointing
+        self.record.log_loss(loss)
+        if self.checkpoint and self.record["loss"] <= self.record["best_loss"]:
+            self.set_checkpoint()
+        return output
 
     def train_step_on_target_minibatch(self, x, px, fx, optim):
         loss = super(BasicStatefulTrainer, self).train_step_on_target_minibatch(x, px, fx, optim)
@@ -453,14 +506,14 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         optim = self.config["optim"]
         if optim is None:
             error = ValueError("trainer parameter 'optim' must be set before or at training")
-            self.logger.error(error)
+            self.logger.error(repr(error))
             raise error
 
         n_epochs = self.config["n_epochs"]
         self.logger.debug(f"n_epochs in trainer: {n_epochs}")
         if n_epochs is None:
             error = ValueError("trainer parameter 'n_epochs' must be set before or at training")
-            self.logger.error(error)
+            self.logger.error(repr(error))
             raise error
 
         minibatch_size = self.config["minibatch_size"]

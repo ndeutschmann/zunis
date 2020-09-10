@@ -12,7 +12,7 @@ from time import time
 def set_benchmark_logger(name="benchmark_logger",
                          zunis_level=logging.INFO,
                          zunis_integration_level=logging.INFO,
-                         zunis_training_level=logging.INFO):
+                         zunis_training_level=logging.WARNING):
     """Setup an application level logger outputting to file and limit integration/training output
 
     Parameters
