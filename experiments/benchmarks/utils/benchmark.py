@@ -165,7 +165,6 @@ def run_benchmark_grid(dimensions, integrand, *,
             integrand_params_grid = dict()
         if integrator_config_grid is None:
             integrator_config_grid = dict()
-        print(integrator_config_grid)
         if base_integrator_config is None:
             base_integrator_config = get_default_integrator_config()
 
