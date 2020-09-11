@@ -3,7 +3,7 @@ from better_abc import ABC, abstractmethod, abstract_attribute
 import torch
 
 from zunis.utils.logger import set_verbosity as set_verbosity_fct
-
+from zunis.utils.exceptions import TrainingInterruption
 
 class SurveyRefineIntegratorAPI(ABC):
     """API specification for an integrator that performs a number of survey steps in which
@@ -147,8 +147,16 @@ class SurveyRefineIntegratorAPI(ABC):
         self.initialize_survey(**initialize_survey_args)
 
         self.logger.info("Starting the survey phase")
-        for i in range(n_survey_steps):
-            self.survey_step(**survey_step_args)
+        try:
+            for i in range(n_survey_steps):
+                self.survey_step(**survey_step_args)
+        except TrainingInterruption as e:
+            self.logger.debug(" "*72)
+            self.logger.debug("="*72)
+            self.logger.debug(" "*20 + "/!\ This message is important" + " "*23)
+            self.logger.debug("="*72)
+            self.logger.exception("Survey interrupted by a training interruption")
+            self.logger.error("A working checkpoint was loaded successfully and integration can go on.")
 
         self.logger.info("Finalizing the survey phase")
         self.finalize_survey(**finalize_survey_args)

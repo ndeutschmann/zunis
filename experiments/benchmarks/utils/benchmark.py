@@ -17,14 +17,16 @@ from utils.flat_integrals import evaluate_integral_flat
 from utils.flat_integrals import validate_known_integrand_flat
 from utils.integral_validation import compare_integral_result
 from utils.config.loaders import create_integrator_args, get_default_integrator_config, get_sql_types
-from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
+from utils.logging import set_benchmark_logger, set_benchmark_logger_debug
 from utils.torch_utils import get_device
 from utils.data_storage.dataframe2sql import append_dataframe_to_sqlite
+
+logger = logging.getLogger(__name__)
 
 
 # TODO: this should be turned into classes
 
-def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=100000, integrand_params=None, logger=None,
+def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=100000, integrand_params=None,
                               device=torch.device("cpu")):
     """Integrate an known integrand and compare with the theoretical result
 
@@ -48,9 +50,6 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
     -------
 
     """
-    if logger is None:
-        logger = logging.getLogger(__name__)
-
     logger.debug("=" * 72)
     logger.info("Defining integrand")
     if integrand_params is None:
@@ -91,10 +90,8 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
     return integrator_result
 
 
-def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=None, n_batch=100000, logger=None,
+def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
                        device=torch.device("cpu")):
-    if logger is None:
-        logger = logging.getLogger(__name__)
 
     logger.debug("=" * 72)
     logger.info("Defining integrand")
@@ -140,13 +137,12 @@ def run_benchmark_grid(dimensions, integrand, *,
     """Run benchmarks over a grid of parameters for the integrator and the integrand."""
 
     if debug:
-        logger = get_benchmark_logger_debug(experiment_name, zunis_integration_level=logging.DEBUG,
-                                            zunis_training_level=logging.DEBUG, zunis_level=logging.DEBUG)
+        set_benchmark_logger_debug(zunis_integration_level=logging.DEBUG,
+                                   zunis_training_level=logging.DEBUG, zunis_level=logging.DEBUG)
     else:
-        logger = get_benchmark_logger(experiment_name)
+        set_benchmark_logger(experiment_name)
 
     device = get_device(cuda_ID=cuda)
-    results = pd.DataFrame()
 
     if isinstance(dimensions, int):
         dimensions = [dimensions]
@@ -159,7 +155,7 @@ def run_benchmark_grid(dimensions, integrand, *,
     if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
         result = benchmark_method(dimensions[0], integrand=integrand,
                                   integrand_params=base_integrand_params, integrator_config=base_integrator_config,
-                                  n_batch=n_batch, logger=logger, device=device).as_dataframe()
+                                  n_batch=n_batch, device=device).as_dataframe()
 
         if not debug:
             append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
@@ -197,10 +193,11 @@ def run_benchmark_grid(dimensions, integrand, *,
 
                     try:
                         result = benchmark_method(d, integrand=integrand,
-                                                  integrand_params=integrand_params, integrator_config=integrator_config,
-                                                  n_batch=n_batch, logger=logger, device=device).as_dataframe()
+                                                  integrand_params=integrand_params,
+                                                  integrator_config=integrator_config,
+                                                  n_batch=n_batch, device=device).as_dataframe()
                     except Exception as e:
-                        logger.error(e)
+                        logger.exception(e)
                         result = NestedMapping()
                         result["d"] = d
                         result.update(integrator_config)
@@ -210,7 +207,6 @@ def run_benchmark_grid(dimensions, integrand, *,
 
                     if not debug:
                         append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
-
 
 
 def run_benchmark_grid_known_integrand(dimensions, integrand, *,

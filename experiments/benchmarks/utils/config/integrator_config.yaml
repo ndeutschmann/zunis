@@ -12,6 +12,7 @@ n_points_survey: 10000
 n_iter: 10
 trainer_options:
   minibatch_size: 1.0
+  max_reloads: 0
   n_epochs: 50
   optim:
     optim_cls: Adam
@@ -21,3 +22,5 @@ trainer_options:
       - 0.999
       eps: 1.0e-08
       lr: 0.001
+  checkpoint: True
+  checkpoint_on_cuda: True

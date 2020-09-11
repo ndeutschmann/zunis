@@ -8,9 +8,10 @@ from zunis import logger_integration as zunis_logger_integration
 from hashlib import sha1
 from time import time
 
-def get_benchmark_logger(name="benchmark_logger",
-                         zunis_level=logging.WARNING,
-                         zunis_integration_level=logging.WARNING,
+
+def set_benchmark_logger(name="benchmark_logger",
+                         zunis_level=logging.INFO,
+                         zunis_integration_level=logging.INFO,
                          zunis_training_level=logging.WARNING):
     """Setup an application level logger outputting to file and limit integration/training output
 
@@ -44,21 +45,15 @@ def get_benchmark_logger(name="benchmark_logger",
     zunis_logger_integration.setLevel(zunis_integration_level)
     zunis_logger_training.setLevel(zunis_training_level)
 
-    logger = logging.getLogger(name)
-    return logger
 
-
-def get_benchmark_logger_debug(name="benchmark_logger",
-                               zunis_level=logging.WARNING,
-                               zunis_integration_level=logging.WARNING,
-                               zunis_training_level=logging.WARNING):
+def set_benchmark_logger_debug(zunis_level=logging.INFO,
+                               zunis_integration_level=logging.INFO,
+                               zunis_training_level=logging.INFO):
     """Setup an application level logger outputting to stdout for debugging purposes
      and limit integration/training output
 
     Parameters
     ----------
-    name: str
-        name of the benchmark logger and the output file ({name}.log)
     zunis_level: int
         logging level of the zunis logger
     zunis_integration_level: int
@@ -66,10 +61,6 @@ def get_benchmark_logger_debug(name="benchmark_logger",
     zunis_training_level: int
         logging level of the zunis training logger.
 
-    Returns
-    -------
-        logging.Logger
-        desired logger for the benchmark
     """
 
     root_logger = logging.getLogger()
@@ -81,6 +72,3 @@ def get_benchmark_logger_debug(name="benchmark_logger",
     zunis_logger.setLevel(zunis_level)
     zunis_logger_integration.setLevel(zunis_integration_level)
     zunis_logger_training.setLevel(zunis_training_level)
-
-    logger = logging.getLogger(name)
-    return logger
