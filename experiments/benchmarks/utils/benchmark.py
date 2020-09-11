@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 # TODO: this should be turned into classes
 
 def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=100000, integrand_params=None,
-                              device=torch.device("cpu")):
+                              keep_history=False, device=torch.device("cpu")):
     """Integrate an known integrand and compare with the theoretical result
 
     Parameters
@@ -65,7 +65,7 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
 
     logger.debug("=" * 72)
     logger.info("Running integrator")
-    integrator_result = validate_integral_integrator(f, integrator, n_batch=n_batch)
+    integrator_result = validate_integral_integrator(f, integrator, n_batch=n_batch, keep_history=keep_history)
 
     logger.debug("=" * 72)
     logger.info("Running flat sampler")
@@ -91,8 +91,7 @@ def benchmark_known_integrand(d, integrand, integrator_config=None, n_batch=1000
 
 
 def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
-                       device=torch.device("cpu")):
-
+                       keep_history=False, device=torch.device("cpu")):
     logger.debug("=" * 72)
     logger.info("Defining integrand")
     if integrand_params is None:
@@ -109,12 +108,12 @@ def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=No
 
     vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
 
-    integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch)
+    integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch, keep_history=keep_history)
     vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                            n_batch_survey=integrator_args["n_points_survey"])
     flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
 
-    result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3)
+    result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3, keep_history=keep_history)
     result["flat_variance_ratio"] = (flat_result["value_std"] / result["value_std"]) ** 2
 
     if isinstance(integrator_config, NestedMapping):
@@ -133,7 +132,7 @@ def run_benchmark_grid(dimensions, integrand, *,
                        base_integrand_params, base_integrator_config=None,
                        integrand_params_grid=None, integrator_config_grid=None,
                        n_batch=100000, debug=True, cuda=0, benchmark_method,
-                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
+                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark", keep_history=False):
     """Run benchmarks over a grid of parameters for the integrator and the integrand."""
 
     if debug:
@@ -155,7 +154,7 @@ def run_benchmark_grid(dimensions, integrand, *,
     if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
         result = benchmark_method(dimensions[0], integrand=integrand,
                                   integrand_params=base_integrand_params, integrator_config=base_integrator_config,
-                                  n_batch=n_batch, device=device).as_dataframe()
+                                  n_batch=n_batch, device=device, keep_history=keep_history).as_dataframe()
 
         if not debug:
             append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
@@ -194,7 +193,8 @@ def run_benchmark_grid(dimensions, integrand, *,
                         result = benchmark_method(d, integrand=integrand,
                                                   integrand_params=integrand_params,
                                                   integrator_config=integrator_config,
-                                                  n_batch=n_batch, device=device).as_dataframe()
+                                                  n_batch=n_batch, device=device,
+                                                  keep_history=keep_history).as_dataframe()
                     except Exception as e:
                         logger.exception(e)
                         result = NestedMapping()
@@ -212,23 +212,24 @@ def run_benchmark_grid_known_integrand(dimensions, integrand, *,
                                        base_integrand_params, base_integrator_config=None,
                                        integrand_params_grid=None, integrator_config_grid=None,
                                        n_batch=100000, debug=True, cuda=0,
-                                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
+                                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark",
+                                       keep_history=False):
     return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
                               base_integrator_config=base_integrator_config,
                               integrand_params_grid=integrand_params_grid,
                               integrator_config_grid=integrator_config_grid, n_batch=n_batch, debug=debug, cuda=cuda,
                               sql_dtypes=sql_dtypes, dbname=dbname, experiment_name=experiment_name,
-                              benchmark_method=benchmark_known_integrand)
+                              benchmark_method=benchmark_known_integrand, keep_history=keep_history)
 
 
 def run_benchmark_grid_vegas(dimensions, integrand, *,
                              base_integrand_params, base_integrator_config=None,
                              integrand_params_grid=None, integrator_config_grid=None,
                              n_batch=100000, debug=True, cuda=0,
-                             sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark"):
+                             sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark", keep_history=False):
     return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
                               base_integrator_config=base_integrator_config,
                               integrand_params_grid=integrand_params_grid,
                               integrator_config_grid=integrator_config_grid, n_batch=n_batch, debug=debug, cuda=cuda,
                               sql_dtypes=sql_dtypes, dbname=dbname, experiment_name=experiment_name,
-                              benchmark_method=benchmark_vs_vegas)
+                              benchmark_method=benchmark_vs_vegas, keep_history=keep_history)

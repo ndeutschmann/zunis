@@ -37,6 +37,11 @@ def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes
         dataframe["extra_data"] = [()] * len(dataframe)
     dtypes["extra_data"] = sql.types.PickleType
 
+    if "value_history" in dataframe:
+        dtypes["value_history"] = sql.types.PickleType
+    if "target_history" in dataframe:
+        dtypes["target_history"] = sql.types.PickleType
+
     dataframe.to_sql(tablename, con=engine, index=False, if_exists="append", dtype=dtypes)
 
 

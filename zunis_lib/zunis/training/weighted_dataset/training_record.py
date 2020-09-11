@@ -4,7 +4,7 @@ from dictwrapper import DictWrapper
 class TrainingRecord(DictWrapper):
     """Dictionary-like object to hold records about a training run"""
 
-    def __init__(self, metrics=None, metadata=None, config=None, alpha=.1, checkpoint=None, **kwargs):
+    def __init__(self, metrics=None, metadata=None, config=None, alpha=.3, checkpoint=None, **kwargs):
         super(TrainingRecord, self).__init__()
 
         self.update({
