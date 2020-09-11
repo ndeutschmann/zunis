@@ -52,7 +52,7 @@ def repo_is_dirty(repo=None):
     if repo is None:
         repo = get_repo()
 
-    status = repo.is_dirty() or len(repo.untracked_files) != 0
+    status = repo.is_dirty()
     return status
 
 
@@ -76,6 +76,9 @@ def get_dirt_hash(repo=None):
     changed_files = [os.path.join(repo.working_dir, item.a_path) for item in repo.head.commit.diff(None)]
 
     hashes = b""
+
+    if len(changed_files) == 0:
+        return hashes
 
     for changed_file in changed_files:
         with open(os.path.join(repo.working_dir, changed_file), "rb") as cf:
