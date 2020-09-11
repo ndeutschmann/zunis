@@ -19,3 +19,4 @@ trainer_options:
       betas: object
       eps: float
       lr: float
+extra_data: obj

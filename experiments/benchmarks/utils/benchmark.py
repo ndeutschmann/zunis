@@ -165,7 +165,7 @@ def run_benchmark_grid(dimensions, integrand, *,
             integrand_params_grid = dict()
         if integrator_config_grid is None:
             integrator_config_grid = dict()
-
+        print(integrator_config_grid)
         if base_integrator_config is None:
             base_integrator_config = get_default_integrator_config()
 
@@ -181,8 +181,8 @@ def run_benchmark_grid(dimensions, integrand, *,
 
             # Need to reset our cartesian product iterator at each pass through
             integrator_full_grid = product(*integrator_grid_values)
-            integrand_full_grid = product(*integrand_grid_values)
             for integrator_update in integrator_full_grid:
+                integrand_full_grid = product(*integrand_grid_values)
                 for integrand_update in integrand_full_grid:
                     logger.info("Benchmarking with:")
                     logger.info(f"d = {d}")
