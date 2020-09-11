@@ -314,7 +314,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
 
         # Checkpointing logic
         self.checkpoint = checkpoint
-        self.gpu_checkpoint = checkpoint_on_cuda
+        self.checkpoint_on_cuda = checkpoint_on_cuda
         self.checkpoint_data = None
         self.checkpoint_path = checkpoint_path
         self.n_reloads = 0
@@ -335,7 +335,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
             raise AssertionError("This trainer cannot save checkpoints")
 
         state_dict = deepcopy(self.flow.state_dict())
-        if self.gpu_checkpoint:
+        if self.checkpoint_on_cuda:
             self.checkpoint_data = state_dict
         else:
             self.checkpoint_data = OrderedDict(
@@ -497,11 +497,11 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         self.set_config(**kwargs)
 
         try:
-            checkpoint = kwargs["checkpoint"]
+            checkpoint_path = kwargs["checkpoint_path"]
         except KeyError:
-            checkpoint = self.checkpoint
+            checkpoint_path = self.checkpoint_path
 
-        self.record = TrainingRecord(config=self.config, checkpoint=checkpoint)
+        self.record = TrainingRecord(config=self.config, checkpoint=checkpoint_path)
 
         optim = self.config["optim"]
         if optim is None:
