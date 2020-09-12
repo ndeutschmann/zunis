@@ -1,5 +1,24 @@
 """Module for the generation of masks for coupling cells"""
 
+def get_bin(x, n=0):
+    """
+    Get the binary representation of x.
+
+    Parameters
+    ----------
+    x : int
+    n : int
+        Minimum number of digits. If x needs less digits in binary, the rest
+        is filled with zeros.
+
+    Returns
+    -------
+    list of binary digits
+    """
+   
+    y=format(x, 'b').zfill(n)
+    
+    return [int(i) for i in str(y)]
 
 def n_ary_mask(d, n, offset):
     """Create a n-ary mask with n entries (a list of bool with each nth entry True)
@@ -48,6 +67,42 @@ def n_ary_mask_strategy(d, n=2, repetitions=1):
 
     return masks
 
+def iflow_strategy(d, repetitions=1):
+    """Generate a list of masks using the strategy of Gao et al. arXiv:2001.05486 
+
+    The minimal amount of cells will be used to represent all possible correlations
+
+    Parameters
+    ----------
+    d: int
+        number of dimensions
+
+    Returns
+    -------
+    list of list of bool
+        list of masks
+
+    """
+    
+    n=len(get_bin(d-1,0))
+    masks = [1]*2*n*repetitions
+    dims=[int(i) for i in range(d)]
+    
+    
+    dims_bin=[list(x) for x in zip(*list(map(get_bin, dims,[n]*d)))]
+    j=0
+    for k in range(repetitions):
+        for i in range(n):
+            s=dims_bin[i][:]
+            
+            masks[j]=[bool(x) for x in s]
+        
+            masks[j+1]=[not bool(x) for x in s]
+            j=j+2
+    
+    
+    return(masks)
+    
 
 def maximal_masking_strategy(d, repetitions=1):
     """Generate a list of masks using the maximally complex option:

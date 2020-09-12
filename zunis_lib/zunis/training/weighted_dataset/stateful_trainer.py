@@ -63,11 +63,11 @@ class StatefulTrainer(BasicStatefulTrainer):
         optim: None or torch.optim.Optimizer sublcass
             optimizer to use for training. If none, default Adam is used
         """
-
+	
+	
         # The loss function is either a string that points to the loss_map class dictionary or an actual loss function
         if isinstance(loss, str):
             loss = self.loss_map[loss]
-
         # The prior has three options:
         #
         # - None: if we use the string-based interface to define a RepeatedCellFlow, use the associated default prior
@@ -89,13 +89,23 @@ class StatefulTrainer(BasicStatefulTrainer):
             assert isinstance(flow_prior,
                               FactorizedFlowSampler), \
                 "The flow prior must be either None, a string or a FactorizedFlowSampler"
-
+            
+        if 'masking' in kwargs:
+                masking=kwargs["masking"]
+        else:
+            masking=None
+        
+        	
         # Two options for flows: either use the RepeatedCellFlow interface or pass an actual flow object
+        
+      
         if isinstance(flow, str):
             if flow_options is None:
                 flow_options = dict()
-            flow = RepeatedCellFlow(d=d, cell=flow, **flow_options).to(device)
-
+            if masking is None:
+                flow = RepeatedCellFlow(d=d, cell=flow, **flow_options).to(device)
+            else:
+                flow = RepeatedCellFlow(d=d, cell=flow, masking=masking,  **flow_options).to(device)
         if optim is None:
             optim_ = torch.optim.Adam(flow.parameters())
         else:
