@@ -1,0 +1,336 @@
+"""Implementation of the piecewise quadratic coupling cell
+This means that the *variable transform* is piecewise-quadratic.
+"""
+import torch
+
+from ..transforms import InvertibleTransform
+from ..general_coupling import InvertibleCouplingCell
+from zunis.utils.exceptions import AvertedCUDARuntimeError
+from zunis.models.layers.trainable import ArbitraryShapeRectangularDNN
+from zunis.models.utils import Reshift
+
+third_dimension_softmax = torch.nn.Softmax(dim=2)
+
+def modified_softmax (v,w):
+    v=torch.exp(v)
+    vsum=torch.cumsum(v, axis=-1)
+    vnorms=torch.cumsum(torch.mul((v[:,:,:-1]+v[:,:,1:])/2,w),axis=-1)
+    vnorms_tot=Vnorms[:, :, -1].clone() 
+    return torch.div(v,torch.unsqueeze(vnorms_tot,axis=-1)) 
+
+
+def piecewise_quadratic_transform(x, w_tilde, v_tilde, compute_jacobian=True):
+    """Apply an element-wise piecewise-quadratic transformation to some variables
+
+    Parameters
+    ----------
+    x : torch.Tensor
+        a tensor with shape (N,k) where N is the batch dimension while k is the
+        dimension of the variable space. This variable span the k-dimensional unit
+        hypercube
+
+    w_tilde: torch.Tensor
+        is a tensor with shape (N,k,b+1) where b is the number of bins.
+        This contains the un-normalized widths of the bins of the piecewise-constant PDF for dimension k,
+        i.e. q_tilde lives in all of R and we don't impose a constraint on their sum yet.
+        Normalization is imposed in this function using softmax.
+        
+    v_tilde: torch.Tensor
+        is a tensor with shape (N,k,b) where b is the number of bins.
+        This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+        i.e. v_tilde lives in all of R and we don't impose a constraint on their sum yet.
+        Normalization is imposed in this function using a modified softmax.
+
+    compute_jacobian : bool, optional
+        determines whether the jacobian should be compute or None is returned
+
+    Returns
+    -------
+    tuple of torch.Tensor
+        pair `(y,j)`.
+        - `y` is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+        - `j` is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.
+    """
+
+    logj = None
+
+    # TODO do a bottom-up assesment of how we handle the differentiability of variables
+    
+    
+
+    N, k, b = w_tilde.shape
+    Nx, kx = x.shape
+    assert N == Nx and k == kx, "Shape mismatch"
+    
+    w=torch.exp(w)
+    wsum = torch.cumsum(w, axis=-1) 
+    wnorms = torch.unsqueeze(wsum[:, :, -1], axis=-1) 
+    w = w/wnorms
+    wsum=wsum/wnorms
+    wsum_shift=torch.cat((torch.zeros([wsum.shape[0],wsum.shape[1],1]).to(wsum.device, wsum.dtype),wsum),axis=-1)
+    
+    v=modified_softmax(v_tilde, w)
+    
+    #tensor of shape (N,k,b+1) with 0 entry if x is smaller than the cumulated w and 1 if it is bigger
+    #used to find the bin in which x lies
+    finder=torch.where(wsum>torch.unsqueeze(x,axis=-1),torch.zeros_like(wsum),torch.ones_like(wsum))
+    
+    mx=torch.unsqueeze(torch.argmax(torch.cat((torch.zeros([wsum.shape[0],wsum.shape[1],1]).to(wsum.device, wsum.dtype),finder*wsum),axis=-1),axis=-1),-1)
+    # x is in the mx-th bin: x \in [0,1],
+    # mx \in [[0,b-1]], so we clamp away the case x == 1
+    mx = torch.clamp(mx, 0, b - 1).to(torch.long)
+    
+    # Need special error handling because trying to index with mx
+    # if it contains nans will lock the GPU. (device-side assert triggered)
+    if torch.any(torch.isnan(mx)).item() or torch.any(mx < 0) or torch.any(mx >= b):
+        raise AvertedCUDARuntimeError("NaN detected in PWQuad bin indexing")
+    
+    # alpha (element of [0.,1], the position of x in its bin)
+    # gather collects the cumulated with of all bins until the one in which x lies
+    # alpha=(x- Sum_(k=0)^(i-1) w_k)/w_b for x in bin b
+    alphas=torch.div((x-torch.squeeze(torch.gather(wsum_shift,-1,mx),axis=-1)),
+                         torch.squeeze(torch.gather(w,-1,mx),axis=-1))
+    
+    #vw_i= (v_i+1 - v_i)w_i/2 where i is the bin index
+    vw=torch.cat((torch.zeros([v.shape[0],v.shape[1],1]).to(wsum.device, wsum.dtype),
+                                  torch.cumsum(torch.mul((v[:,:,:-1]+v[:,:,1:])/2,w),axis=-1)),axis=-1)
+    
+    #quadratic term
+    out_1=torch.mul((alphas**2)/2,torch.squeeze(torch.mul(torch.gather(v,-1, mx+1)-torch.gather(v,-1, mx),
+                                                        torch.gather(w,-1,mx)),axis=-1))
+    
+    #linear term
+    out_2=torch.mul(torch.mul(alphas,torch.squeeze(torch.gather(v,-1,mx),axis=-1)),
+                            torch.squeeze(torch.gather(w,-1,mx),axis=-1))
+    
+    #constant
+    out_3= torch.squeeze(torch.gather(vw,-1,mx),axis=-1)
+    
+    
+    out=out_1+out_2+out_3
+    
+    #the derivative of this transformation is the linear interpolation between v_i-1 and v_i at alpha
+    #the jacobian is the product of all linear interpolations
+    if compute_jacobian:
+        logj=torch.log(torch.unsqueeze(torch.prod(torch.lerp(torch.squeeze(torch.gather(v,-1,mx),axis=-1),
+                                                torch.squeeze(torch.gather(v,-1,mx+1),axis=-1),alphas), axis=-1),axis=-1))
+       
+    # Regularization: points must be strictly within the unit hypercube
+    # Use the dtype information from pytorch
+    eps = torch.finfo(out.dtype).eps
+    out = out.clamp(
+        min=eps,
+        max=1. - eps
+    )
+
+    return out, logj
+
+
+def piecewise_quadratic_inverse_transform(y, w_tilde, v_tilde, compute_jacobian=True):
+    """
+    Apply the inverse of an element-wise piecewise-linear transformation to some variables
+
+    Parameters
+    ----------
+    y : torch.Tensor
+        a tensor with shape (N,k) where N is the batch dimension while k is the
+        dimension of the variable space. This variable span the k-dimensional unit
+        hypercube
+
+    w_tilde: torch.Tensor
+        is a tensor with shape (N,k,b+1) where b is the number of bins.
+        This contains the un-normalized widths of the bins of the piecewise-constant PDF for dimension k,
+        i.e. q_tilde lives in all of R and we don't impose a constraint on their sum yet.
+        Normalization is imposed in this function using softmax.
+        
+    v_tilde: torch.Tensor
+        is a tensor with shape (N,k,b) where b is the number of bins.
+        This contains the un-normalized heights of the bins of the piecewise-constant PDF for dimension k,
+        i.e. v_tilde lives in all of R and we don't impose a constraint on their sum yet.
+        Normalization is imposed in this function using a modified softmax.
+
+    compute_jacobian : bool, optional
+        determines whether the jacobian should be compute or None is returned
+
+    Returns
+    -------
+    tuple of torch.Tensor
+        pair `(x,j)`.
+        - `x` is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+        - `j` is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.
+    """
+    
+    logj = None
+
+    # TODO do a bottom-up assesment of how we handle the differentiability of variables
+    
+    
+
+    N, k, b = w_tilde.shape
+    Nx, kx = x.shape
+    assert N == Nx and k == kx, "Shape mismatch"
+    
+    w=torch.exp(w)
+    wsum = torch.cumsum(w, axis=-1) 
+    wnorms = torch.unsqueeze(wsum[:, :, -1], axis=-1) 
+    w = w/wnorms
+    wsum=wsum/wnorms
+    wsum_shift=torch.cat((torch.zeros([wsum.shape[0],wsum.shape[1],1]).to(wsum.device, wsum.dtype),wsum),axis=-1)
+    
+    v=modified_softmax(v_tilde, w)
+    
+    #need to find the bin number for each of the y/x
+    #-> find the last bin such that y is greater than the constant of the quadratic equation
+    
+    #vw_i= (v_i+1 - v_i)w_i/2 where i is the bin index
+    vw=torch.cat((torch.zeros([v.shape[0],v.shape[1],1]).to(wsum.device, wsum.dtype),
+                                  torch.cumsum(torch.mul((v[:,:,:-1]+v[:,:,1:])/2,w),axis=-1)),axis=-1)
+    
+    finder=torch.where(vw>torch.unsqueeze(y,axis=-1),torch.zeros_like(vw),torch.ones_like(vw))
+    
+    mx=torch.unsqueeze(torch.argmax(torch.cat((torch.zeros([vw.shape[0],vw.shape[1],1]).to(vw.device, vw.dtype),finder*vw),axis=-1),axis=-1),-1)
+    # x is in the mx-th bin: x \in [0,1],
+    # mx \in [[0,b-1]], so we clamp away the case x == 1
+    edges = torch.clamp(mx, 0, b - 1).to(torch.long)
+    
+    # Need special error handling because trying to index with mx
+    # if it contains nans will lock the GPU. (device-side assert triggered)
+    if torch.any(torch.isnan(edges)).item() or torch.any(edges < 0) or torch.any(edges >= b):
+        raise AvertedCUDARuntimeError("NaN detected in PWQuad bin indexing")
+    
+    #solve quadratic equation
+    a=0.5*torch.squeeze(torch.mul(torch.gather(v,-1, edges+1)-torch.gather(v,-1, edges),
+                                                        torch.gather(w,-1,edges)),axis=-1)
+    b=torch.mul(torch.squeeze(torch.gather(v,-1,edges),axis=-1),torch.squeeze(torch.gather(w,-1,edges),axis=-1))
+    c= torch.squeeze(torch.gather(vw,-1,edges),axis=-1)
+    
+    d = (b**2) - (4*a*c)
+     assert not torch.any(d<0), "Value error in PWQuad inversion"
+    
+    # find two solutions
+    sol1 = (-b-torch.sqrt(d))/(2*a)
+    sol2 = (-b+torch.sqrt(d))/(2*a)
+    
+    # choose solution which is in the allowed range
+    sol=torch.where(sol1>=0 and sol1<1, sol1, sol2)
+    
+    x=torch.mul(torch.squeeze(torch.gather(w,-1,edges),axis=-1), sol)+torch.squeeze(torch.gather(wsum_shift,-1,edges),axis=-1)
+    
+    eps = torch.finfo(x.dtype).eps
+    x = x.clamp(
+        min=eps,
+        max=1. - eps
+    )
+    
+    if compute_jacobian:
+        logj = - logj=torch.log(torch.unsqueeze(torch.prod(torch.lerp(torch.squeeze(torch.gather(v,-1,edges),axis=-1),
+                                                torch.squeeze(torch.gather(v,-1,edges+1),axis=-1),sol), axis=-1),axis=-1))
+    return x.detach(), logj
+
+
+class ElementWisePWQuadraticTransform(InvertibleTransform):
+    """Invertible piecewise-quadratic transformations over the unit hypercube
+
+    Implements a batched bijective transformation `h` from the d-dimensional unit hypercube to itself,
+    in an element-wise fashion (each coordinate transformed independently)
+
+    In each direction, the bijection is a piecewise-quadratic transform with b bins
+    where the forward transform has bins with adjustable width. The transformation in each bin is
+   then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the 
+    derivative of the transform for each direction and each point of the batch. They are normalized such that: 
+    1. h(0) = 0
+    2. h(1) = 1
+    3. h is monotonous
+    4. h is continuous
+
+    Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible
+    The inverse is also an element-wise, piece-wise quadratic transformation.
+    """
+
+    backward = staticmethod(piecewise_quadratic_transform)
+    forward = staticmethod(piecewise_quadratic_inverse_transform)
+
+
+class GeneralPWQuadraticCoupling(InvertibleCouplingCell):
+    """Abstract class implementing a coupling cell based on PW quadratic transformations
+
+    A specific way to predict the parameters of the transform must be implemented
+    in child classes.
+    """
+
+    def __init__(self, *, d, mask):
+        """Generator for the abstract class GeneralPWQuadraticCoupling
+
+        Parameters
+        ----------
+        d: int
+            dimension of the space
+        mask: list of bool
+            variable mask which variables are transformed (False)
+            or used as parameters of the transform (True)
+
+        """
+        super(GeneralPWQuadraticCoupling, self).__init__(d=d, transform=ElementWisePWQuadraticTransform(), mask=mask)
+
+
+class PWQuadraticCoupling(GeneralPWQuadraticCoupling):
+    """Piece-wise Quadratic coupling
+
+    Coupling cell using an element-wise piece-wise quadratic transformation as a change of
+    variables. The transverse neural network is a rectangular dense neural network
+
+    Notes:
+        Transformation used:
+        `zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform`
+        Neural network used:
+        zunis.models.layers.trainable.ArbitraryShapeRectangularDNN
+    """
+
+    def __init__(self, *, d, mask,
+                 n_bins=10,
+                 d_hidden=256,
+                 n_hidden=8,
+                 input_activation=Reshift,
+                 hidden_activation=torch.nn.LeakyReLU,
+                 output_activation=None,
+                 use_batch_norm=False):
+        """
+        Generator for PWQuadraticCoupling
+
+        Parameters
+        ----------
+        d: int
+        mask: list of bool
+            variable mask: which dimension are transformed (False) and which are not (True)
+        n_bins: int
+            number of bins in each dimensions
+        d_hidden: int
+            dimension of the hidden layers of the DNN
+        n_hidden: int
+            number of hidden layers in the DNN
+        input_activation: optional
+            pytorch activation function before feeding into the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        hidden_activation: optional
+            pytorch activation function between hidden layers of the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        output_activation: optional
+            pytorch activation function at the output of the DNN.
+            must be a callable generator without arguments (i.e. a classname or a function)
+        use_batch_norm: bool
+            whether batch normalization should be used in the DNN.
+        """
+
+        super(PWQuadraticCoupling, self).__init__(d=d, mask=mask)
+
+        d_in = sum(mask)
+        d_out = d - d_in
+
+        self.T = ArbitraryShapeRectangularDNN(d_in=d_in,
+                                              out_shape=(d_out, n_bins),
+                                              d_hidden=d_hidden,
+                                              n_hidden=n_hidden,
+                                              input_activation=input_activation,
+                                              hidden_activation=hidden_activation,
+                                              output_activation=output_activation,
+                                              use_batch_norm=use_batch_norm)
