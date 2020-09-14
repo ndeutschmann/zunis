@@ -1,5 +1,6 @@
 """Benchmarking functions"""
 import logging
+from collections.abc import MutableMapping
 from copy import deepcopy
 from itertools import product
 from collections.abc import Sequence
@@ -9,6 +10,7 @@ import torch
 import vegas
 
 from dictwrapper import NestedMapping
+from utils.config.configuration import Configuration
 from zunis.integration import Integrator
 from utils.integrator_integrals import validate_integral_integrator
 from utils.integrator_integrals import evaluate_integral_integrator
@@ -128,11 +130,90 @@ def benchmark_vs_vegas(d, integrand, integrator_config=None, integrand_params=No
     return result
 
 
+def set_benchmark_grid_config_param(benchmark_grid_config, param, param_value, config):
+    """Set an argument in the configuration dictionary to be provided to `run_benchmark_grid` according to the
+    established hierarchy:
+    1. direct argument value (typically from CLI)
+    2. config file value
+    3. default value - what is already in the config dictionary when entering this function
+
+    Parameters
+    ----------
+    benchmark_grid_config : dict
+        configuration dictionary being constructed. Keys should match the arguments of `run_benchmark_grid`
+    param : str
+        name of the parameter to be set
+    param_value : optional
+        direct argument value for the parameter. Use the configuration dictionary if not provided
+    config : Configuration, optional
+        Configuration nested dictionary for the benchmarking run at hand. If it is not provided or does not specify
+        a value of `param`, use the default value instead.
+    """
+    assert param in benchmark_grid_config, f"A default value must be set for parameter {param}"
+    if param_value is not None:
+        if isinstance(benchmark_grid_config[param], MutableMapping):
+            benchmark_grid_config[param].update(param_value)
+        else:
+            benchmark_grid_config[param] = param_value
+    elif param in config:
+        if isinstance(benchmark_grid_config[param], MutableMapping):
+            benchmark_grid_config[param].update(config[param])
+        else:
+            benchmark_grid_config[param] = config[param]
+
+
+def set_benchmark_grid_config(config=None, dimensions=None, n_batch=None, keep_history=None,
+                              dbname=None, experiment_name=None, cuda=None, debug=None,
+                              default_dimension=(2,), base_integrand_params=()):
+    """Prepare standard arguments for `run_benchmark_grid`
+    The parameter importance hierarchy is:
+    1. CLI arguments (direct arguments to this function)
+    2. config file (filepath given as `config`)
+    3. default values provided as argument
+    """
+    benchmark_config = {
+        "dimensions": default_dimension,
+        "base_integrand_params": base_integrand_params,
+        "base_integrator_config": get_default_integrator_config(),
+        "integrand_params_grid": {},
+        "integrator_config_grid": {},
+        "n_batch": 100000,
+        "keep_history": False,
+        "dbname": None,
+        "experiment_name": "benchmark",
+        "cuda": 0,
+        "debug": True
+    }
+    if config is not None:
+        config = Configuration.from_yaml(config)
+
+    set_benchmark_grid_config_param(benchmark_config, "dimensions", dimensions, config)
+    set_benchmark_grid_config_param(benchmark_config, "keep_history", keep_history, config)
+    # the base_integrand_params is too problem specific to be provided by direct argument/CLI.
+    # Either a default or a config-file input
+    set_benchmark_grid_config_param(benchmark_config, "base_integrand_params", None, config)
+    set_benchmark_grid_config_param(benchmark_config, "base_integrator_config", None, config)
+    # The integrator grid is too unwieldy to be used through direct argument/CLI. Use a config file
+    # Either a default or a config-file input
+    set_benchmark_grid_config_param(benchmark_config, "integrator_config_grid", None, config)
+    # The integrand_params_grid is too problem specific to be provided by direct argument/CLI.
+    # Either a default or a config-file input
+    set_benchmark_grid_config_param(benchmark_config, "integrand_params_grid", None, config)
+
+    set_benchmark_grid_config_param(benchmark_config, "n_batch", n_batch, config)
+    set_benchmark_grid_config_param(benchmark_config, "dbname", dbname, config)
+    set_benchmark_grid_config_param(benchmark_config, "experiment_name", experiment_name, config)
+    set_benchmark_grid_config_param(benchmark_config, "cuda", cuda, config)
+    set_benchmark_grid_config_param(benchmark_config, "debug", debug, config)
+
+    return benchmark_config
+
+
 def run_benchmark_grid(dimensions, integrand, *,
                        base_integrand_params, base_integrator_config=None,
                        integrand_params_grid=None, integrator_config_grid=None,
                        n_batch=100000, debug=True, cuda=0, benchmark_method,
-                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark", keep_history=False):
+                       sql_dtypes=None, dbname=None, experiment_name="benchmark", keep_history=False):
     """Run benchmarks over a grid of parameters for the integrator and the integrand."""
 
     if debug:
@@ -156,7 +237,7 @@ def run_benchmark_grid(dimensions, integrand, *,
                                   integrand_params=base_integrand_params, integrator_config=base_integrator_config,
                                   n_batch=n_batch, device=device, keep_history=keep_history).as_dataframe()
 
-        if not debug:
+        if dbname is not None:
             append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
 
     else:
@@ -204,7 +285,7 @@ def run_benchmark_grid(dimensions, integrand, *,
                         result["extra_data"] = e
                         result = result.as_dataframe()
 
-                    if not debug:
+                    if dbname is not None:
                         append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
 
 
@@ -212,7 +293,7 @@ def run_benchmark_grid_known_integrand(dimensions, integrand, *,
                                        base_integrand_params, base_integrator_config=None,
                                        integrand_params_grid=None, integrator_config_grid=None,
                                        n_batch=100000, debug=True, cuda=0,
-                                       sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark",
+                                       sql_dtypes=None, dbname=None, experiment_name="benchmark",
                                        keep_history=False):
     return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
                               base_integrator_config=base_integrator_config,
@@ -226,7 +307,7 @@ def run_benchmark_grid_vegas(dimensions, integrand, *,
                              base_integrand_params, base_integrator_config=None,
                              integrand_params_grid=None, integrator_config_grid=None,
                              n_batch=100000, debug=True, cuda=0,
-                             sql_dtypes=None, dbname="benchmarks.db", experiment_name="benchmark", keep_history=False):
+                             sql_dtypes=None, dbname=None, experiment_name="benchmark", keep_history=False):
     return run_benchmark_grid(dimensions=dimensions, integrand=integrand, base_integrand_params=base_integrand_params,
                               base_integrator_config=base_integrator_config,
                               integrand_params_grid=integrand_params_grid,
