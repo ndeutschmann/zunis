@@ -1,0 +1,12 @@
+dimensions: [2,4]
+database: benchmarks.db
+experiment_name: camel_grid_scan
+cuda: 0
+integrator_config:
+        n_epochs: 50
+        n_iter: 10
+        n_bins: 50
+integrand_grid:
+        s: [0.3, 0.5]
+integrator_grid:
+        lr: [1.e-3, 1.e-4]

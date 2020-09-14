@@ -12,13 +12,13 @@ class EvaluationRecord(Record):
 
     def __init__(self, *, value, value_std=0., **kwargs):
         """"""
-        store = {
+        data = {
             "value": value,
             "value_std": value_std,
         }
 
-        store.update(kwargs)
-        super(EvaluationRecord, self).__init__(store)
+        data.update(kwargs)
+        super(EvaluationRecord, self).__init__(data)
 
 
 class ComparisonRecord(Record):
@@ -28,15 +28,15 @@ class ComparisonRecord(Record):
 
     def __init__(self, *, value, target, value_std=0., target_std=0., **kwargs):
         """"""
-        store = {
+        data = {
             "value": value,
             "target": target,
             "value_std": value_std,
             "target_std": target_std,
         }
 
-        store.update(kwargs)
-        super(ComparisonRecord, self).__init__(store)
+        data.update(kwargs)
+        super(ComparisonRecord, self).__init__(data)
 
         if "match" not in self:
             if "sigma_cutoff" not in self:
@@ -52,5 +52,3 @@ class ComparisonRecord(Record):
     def __bool__(self):
         return self["match"]
 
-    def __repr__(self):
-        return self.store.__repr__()
