@@ -324,9 +324,9 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
             self.max_reloads = max_reloads
 
         if self.checkpoint_path is None:
-            self.record = TrainingRecord(config=self.config)
+            self.record = TrainingRecord()
         else:
-            self.record = TrainingRecord(config=self.config, checkpoint=checkpoint_path)
+            self.record = TrainingRecord(checkpoint=checkpoint_path)
 
     def set_checkpoint(self):
         """Save the current model state as a checkpoint"""
@@ -501,7 +501,7 @@ class BasicStatefulTrainer(BasicTrainer, GenericTrainerAPI):
         except KeyError:
             checkpoint_path = self.checkpoint_path
 
-        self.record = TrainingRecord(config=self.config, checkpoint=checkpoint_path)
+        self.record = TrainingRecord(checkpoint=checkpoint_path)
 
         optim = self.config["optim"]
         if optim is None:
