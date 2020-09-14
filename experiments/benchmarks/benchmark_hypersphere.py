@@ -21,7 +21,6 @@ def hypersphere_benchmark(dimensions=(2, 4, 6, 8), rs=(0.3, 0.4, 0.5), cs=(0.5,)
     base_integrator_config = get_default_integrator_config()
     dtypes = get_sql_types()
 
-
     if debug:
         base_integrator_config["n_epochs"] = 1
         base_integrator_config["n_iter"] = 1
