@@ -68,9 +68,14 @@ def n_ary_mask_strategy(d, n=2, repetitions=1):
     return masks
 
 def iflow_strategy(d, repetitions=1):
-    """Generate a list of masks using the strategy of Gao et al. arXiv:2001.05486 
+    """Generate a list of masks using the strategy of Gao et al. arXiv:2001.05486.
+    Each dimension is numbered and the number is converted into the binary representation. Then,
+    one bit after another, starting with the most significant bit, is converted into a boolean.
+    This determines wether the dimension is transformed in this cell or not. In order to be 
+    able to test for all correlations, for each mask, the inverse mask is used too. 
+    
 
-    The minimal amount of cells will be used to represent all possible correlations
+    The minimal amount of cells will be used to represent all possible correlations.
 
     Parameters
     ----------
