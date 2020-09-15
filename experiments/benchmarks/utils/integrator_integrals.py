@@ -95,7 +95,7 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
     return validate_integral(f, sampler, n_batch, sigma_cutoff, keep_history=keep_history)
 
 
-def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=10, survey_args=None,
+def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=None, survey_args=None,
                                  keep_history=False):
     """Validate a known integral using an integrator as a sampler
 
@@ -106,8 +106,9 @@ def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_sur
     n_batch: int
     train: bool
         whether to train the integrator using `integrator.survey`
-    n_survey_steps: int
-        positional `integrator.survey` argument
+    n_survey_steps: int, optional
+        positional `integrator.survey` argument. Use the attribute n_iter_survey set at instantiation if not
+        specified.
     survey_args: None or dict
         optional keyword-argument dictionary for `integrator.survey`
     keep_history: bool
