@@ -185,7 +185,7 @@ def set_benchmark_grid_config(config=None, dimensions=None, n_batch=None, keep_h
         "debug": True
     }
     if config is not None:
-        config = Configuration.from_yaml(config)
+        config = Configuration.from_yaml(config, check=False)
 
     set_benchmark_grid_config_param(benchmark_config, "dimensions", dimensions, config)
     set_benchmark_grid_config_param(benchmark_config, "keep_history", keep_history, config)
