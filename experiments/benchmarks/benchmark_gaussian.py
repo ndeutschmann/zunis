@@ -1,43 +1,47 @@
-"""Comparing ZuNIS to VEGAS on gaussian integrals (VEGAS expected to be better)"""
-
+"""Comparing ZuNIS to VEGAS on gaussian integrals"""
 import click
 
+from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
-from utils.benchmark import run_benchmark_grid_vegas
-from utils.config.loaders import get_default_integrator_config, get_sql_types
+from utils.config.loaders import get_sql_types
 from utils.integrands.gaussian import DiagonalGaussianIntegrand
 
 
-def benchmark_gaussian(dimensions=(2, 4, 6, 8), sigmas=(0.1, 0.3, 0.5, 0.7), db="benchmarks.db", debug=True, cuda=0):
-    base_integrand_params = {
-        "s": 0.5,
-        "norm": 1.
-    }
-    integrands_params_grid = {
-        "s": sigmas
-    }
-
-    base_integrator_config = get_default_integrator_config()
+def benchmark_gaussian(dimensions=None, sigmas=None, db=None,
+                    experiment_name=None, debug=None, cuda=None, keep_history=None,
+                    config=None):
     dtypes = get_sql_types()
 
-    if debug:
-        base_integrator_config["n_epochs"] = 1
-        base_integrator_config["n_iter"] = 1
+    # Integrand specific defaults
+    base_integrand_params = {
+        "s": 0.3,
+        "norm": 1.
+    }
 
-    run_benchmark_grid_vegas(dimensions=dimensions, integrand=DiagonalGaussianIntegrand,
-                             base_integrand_params=base_integrand_params,
-                             base_integrator_config=base_integrator_config,
-                             integrand_params_grid=integrands_params_grid, integrator_config_grid=None,
-                             n_batch=100000, debug=debug, cuda=cuda, sql_dtypes=dtypes,
-                             dbname=db, experiment_name="gaussian")
+    benchmarker = VegasRandomHPBenchmarker(n=10)
+
+    benchmark_config = benchmarker.set_benchmark_grid_config(config=config, dimensions=dimensions,
+                                                             keep_history=keep_history,
+                                                             dbname=db, experiment_name=experiment_name, cuda=cuda,
+                                                             debug=debug,
+                                                             base_integrand_params=base_integrand_params)
+
+    # Integrand specific CLI argument mapped to standard API
+    if sigmas is not None:
+        benchmark_config["integrand_params_grid"]["s"] = sigmas
+
+    benchmarker.run(integrand=DiagonalGaussianIntegrand, sql_dtypes=dtypes,
+                    **benchmark_config)
 
 
 cli = click.Command("cli", callback=benchmark_gaussian, params=[
-    PythonLiteralOption(["--dimensions"], default=[2, 4, 6, 8, 10]),
-    PythonLiteralOption(["--sigmas"], default=[0.5, 0.3, 0.1]),
-    click.Option(["--debug/--no-debug"], default=True),
-    click.Option(["--cuda"], default=0, type=int),
-    click.Option(["--db"], default="benchmarks.db", type=str)
+    PythonLiteralOption(["--dimensions"], default=None),
+    PythonLiteralOption(["--sigmas"], default=None),
+    click.Option(["--debug/--no-debug"], default=None, type=bool),
+    click.Option(["--cuda"], default=None, type=int),
+    click.Option(["--db"], default=None, type=str),
+    click.Option(["--experiment_name"], default=None, type=str),
+    click.Option(["--config"], default=None, type=str)
 ])
 
 if __name__ == '__main__':
