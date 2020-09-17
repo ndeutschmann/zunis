@@ -95,4 +95,4 @@ class SineIntegrand(Integrand):
         offset = self.offset.to(x.device)
         f = self.f.to(x.device)
         phase = f * x.sum(dim=-1)
-        return offset + torch.cos(phase)
+        return offset + torch.cos(phase)**2
