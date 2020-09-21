@@ -40,7 +40,6 @@ class GeneralCouplingCell(GeneralFlow):
         y_n = yj[..., self.mask]
         y_m = yj[..., self.mask_complement]
         log_j = yj[..., -1]
-
         x = torch.zeros_like(yj).to(yj.device)
         x[..., self.mask] = y_n
         x[..., self.mask_complement], log_jy = self.transform(y_m, self.T(y_n), compute_jacobian=True)
