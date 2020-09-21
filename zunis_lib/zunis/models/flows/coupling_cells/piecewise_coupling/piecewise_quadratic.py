@@ -52,7 +52,6 @@ def piecewise_quadratic_transform(x, wv_tilde, compute_jacobian=True):
 
     # TODO do a bottom-up assesment of how we handle the differentiability of variables
     
-    print("NORMAL")
     v_tilde=wv_tilde[:,:,:int(np.ceil(wv_tilde.shape[2]/2))]
     w_tilde=wv_tilde[:,:,v_tilde.shape[2]:]
     N, k, b = w_tilde.shape
@@ -163,7 +162,7 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
     
     Nx, kx = y.shape
     assert N == Nx and k == kx, "Shape mismatch"
-    #print("INVERSE")
+    
     w=torch.exp(w_tilde)
     wsum = torch.cumsum(w, axis=-1) 
     wnorms = torch.unsqueeze(wsum[:, :, -1], axis=-1) 
@@ -181,15 +180,12 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
                                   torch.cumsum(torch.mul((v[:,:,:-1]+v[:,:,1:])/2,w),axis=-1)),axis=-1)
     
     finder=torch.where(vw>torch.unsqueeze(y,axis=-1),torch.zeros_like(vw),torch.ones_like(vw))
-    #print(y)
-    #print(vw)
-    #print(finder)
+    
     mx=torch.unsqueeze(torch.argmax(torch.cat((torch.zeros([vw.shape[0],vw.shape[1],1]).to(vw.device, vw.dtype),finder*(vw+1)),axis=-1),axis=-1),-1)-1
-    #print(mx)
+    
     # x is in the mx-th bin: x \in [0,1],
     # mx \in [[0,b-1]], so we clamp away the case x == 1
     edges = torch.clamp(mx, 0, b - 1).to(torch.long)
-    #print(edges)
     # Need special error handling because trying to index with mx
     # if it contains nans will lock the GPU. (device-side assert triggered)
     if torch.any(torch.isnan(edges)).item() or torch.any(edges < 0) or torch.any(edges >= b):
@@ -200,75 +196,30 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
                                                         torch.gather(w,-1,edges)),axis=-1)
     b=torch.mul(torch.squeeze(torch.gather(v,-1,edges),axis=-1),torch.squeeze(torch.gather(w,-1,edges),axis=-1))
     c= torch.squeeze(torch.gather(vw,-1,edges),axis=-1)-y
-    #print("Cmax")
-    #print(torch.max(c))
-    """
-    print("A")
-    print(a)
-
-    print("B")
-    print(b)
-    """
-    #print("C")
-    #print(c)
-    #print("D")
+    
+    #ensure that division by zero is taken care of
+    eps = torch.finfo(a.dtype).eps
+    a=torch.where(torch.abs(a)<eps,eps*torch.sign(a),a)
+    
     d = (b**2) - (2*a*c)
-    #print(d)
     
     assert not torch.any(d<0), "Value error in PWQuad inversion"
     
     # find two solutions
     sol1 = (-b-torch.sqrt(d))/(a)
     sol2 = (-b+torch.sqrt(d))/(a)
-    """
-    print("Res1")
-    print(a*sol1**2+b*sol1+c)
-    print("Res2")
-    print(a*sol2**2+b*sol2+c)
-    """
+    
     # choose solution which is in the allowed range
-    #print("Solutions")
-    #print(sol1)
-    #print(sol2)
-    """
-    print("Overview sol2")
-    print(torch.min(sol2))
-    print(torch.max(sol2))
-    print("Overview sol1")
-    print(torch.min(sol1))
-    print(torch.max(sol1))
-    """
+   
     sol=torch.where((sol1>=0)&(sol1<1), sol1, sol2)
     
     if torch.any(torch.isnan(sol)).item():
-        
-        print("V")
-        print(v)
-        print("W")
-        print(w)
-        mask= (a==0.)
-        new=a[mask]
-        indices=torch.nonzero(mask)
-        print("vmask")
-        print(v[mask])
-        print("wmask")
-        print(w[mask])
         raise AvertedCUDARuntimeError("NaN detected in PWQuad inversion")
     
+    #the solution is the relative position inside the bin. This can be
+    #converted to the absolute position
     x=torch.mul(torch.squeeze(torch.gather(w,-1,edges),axis=-1), sol)+torch.squeeze(torch.gather(wsum_shift,-1,edges),axis=-1)
-    """
-    x1=torch.mul(torch.squeeze(torch.gather(w,-1,edges),axis=-1), sol1)+torch.squeeze(torch.gather(wsum_shift,-1,edges),axis=-1)
     
-    x2=torch.mul(torch.squeeze(torch.gather(w,-1,edges),axis=-1), sol2)+torch.squeeze(torch.gather(wsum_shift,-1,edges),axis=-1)
-    
-    x=torch.where((x1>=0)&(x1<=1), x1, x2)
-    """
-   # sol=torch.where((x1>=0)&(x1<=1), sol1, sol2)
-    """
-    print("Maxmin")
-    print(torch.max(sol))
-    print(torch.min(sol))
-    """
     eps = torch.finfo(x.dtype).eps
     x = x.clamp(
         min=eps,
@@ -278,17 +229,7 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
     if compute_jacobian:
         logj =-torch.squeeze(torch.log(torch.unsqueeze(torch.prod(torch.lerp(torch.squeeze(torch.gather(v,-1,edges),axis=-1),
                                                 torch.squeeze(torch.gather(v,-1,edges+1),axis=-1),sol), axis=-1),axis=-1)),-1)
-    """
-    mask= ((logj<-0.095)|(logj>0.095))
-    new=logj[mask]
-    indices=torch.nonzero(mask)
-    print("logj")
-    print(logj)
-    print("NEW")
-    print(new)
-    print("C")
-    print(c[indices])
-    """
+   
     return x.detach(), logj
 
 

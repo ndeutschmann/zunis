@@ -69,7 +69,8 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
     This is meant as a higher-level API to generate boilerplate models based on architecture and masking strategy
     """
     cells = {"realnvp": (RealNVP, None, InvertibleAnalyticSigmoid),
-             "pwlinear": (PWLinearCoupling, None, None)}
+             "pwlinear": (PWLinearCoupling, None, None)},
+             "pwquad": (PWQuadCoupling, None, None)}
 
     masking = {
         "checkerboard": partial(n_ary_mask_strategy, n=2),
