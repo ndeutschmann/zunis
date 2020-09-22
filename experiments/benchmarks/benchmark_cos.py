@@ -1,21 +1,21 @@
-"""Comparing ZuNIS to VEGAS on gaussian integrals"""
+"""Comparing ZuNIS to VEGAS on camel integrals"""
 import click
 
 from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
 from utils.config.loaders import get_sql_types
-from utils.integrands.gaussian import DiagonalGaussianIntegrand
+from utils.integrands.pretty import SineIntegrand
 
 
-def benchmark_gaussian(dimensions=None, sigmas=None, db=None,
+def benchmark_camel(dimensions=None, db=None,
                     experiment_name=None, debug=None, cuda=None, keep_history=None,
                     config=None):
     dtypes = get_sql_types()
 
     # Integrand specific defaults
     base_integrand_params = {
-        "s": 0.3,
-        "norm": 1.
+        "f": 20,
+        "offset": 0.1
     }
 
     benchmarker = VegasRandomHPBenchmarker(n=10)
@@ -26,17 +26,12 @@ def benchmark_gaussian(dimensions=None, sigmas=None, db=None,
                                                              debug=debug,
                                                              base_integrand_params=base_integrand_params)
 
-    # Integrand specific CLI argument mapped to standard API
-    if sigmas is not None:
-        benchmark_config["integrand_params_grid"]["s"] = sigmas
-
-    benchmarker.run(integrand=DiagonalGaussianIntegrand, sql_dtypes=dtypes,
+    benchmarker.run(integrand=SineIntegrand, sql_dtypes=dtypes,
                     **benchmark_config)
 
 
-cli = click.Command("cli", callback=benchmark_gaussian, params=[
+cli = click.Command("cli", callback=benchmark_camel, params=[
     PythonLiteralOption(["--dimensions"], default=None),
-    PythonLiteralOption(["--sigmas"], default=None),
     click.Option(["--debug/--no-debug"], default=None, type=bool),
     click.Option(["--cuda"], default=None, type=int),
     click.Option(["--db"], default=None, type=str),

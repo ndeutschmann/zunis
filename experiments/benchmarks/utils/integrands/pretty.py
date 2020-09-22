@@ -1,4 +1,4 @@
-"""Pretty low dimensional examples where we clearly beat VEGAS"""
+"""Pretty, low dimensional examples where we clearly beat VEGAS"""
 
 import torch
 from math import pi
@@ -49,7 +49,7 @@ class CircleLineIntegrand(Integrand):
 class SineLineIntegrand(Integrand):
     """2D function enhanced on the graph y = sin(2*pi*f*x)"""
 
-    def __init__(self, sig, f=2., device=None, *args, **kwargs):
+    def __init__(self, d, sig, f=2., device=None, *args, **kwargs):
         """
 
         Parameters
@@ -59,7 +59,7 @@ class SineLineIntegrand(Integrand):
         f: float
             period of the sinus
         """
-        super(SineLineIntegrand, self).__init__(d=2)
+        super(SineLineIntegrand, self).__init__(d=d)
         self.sig = sanitize_variable(sig, device)
         self.f = sanitize_variable(f, device)
 
@@ -75,7 +75,7 @@ class SineLineIntegrand(Integrand):
 class SineIntegrand(Integrand):
     """Sinusoidal function with a wave vector along the maximal hyperdiagonal"""
 
-    def __init__(self, f=1., offset=1., device=None, *args, **kwargs):
+    def __init__(self, d, f=1., offset=1., device=None, *args, **kwargs):
         """
 
         Parameters
@@ -85,7 +85,7 @@ class SineIntegrand(Integrand):
         offset: float
         """
 
-        super(SineIntegrand, self).__init__(d=2)
+        super(SineIntegrand, self).__init__(d=d)
         self.offset = sanitize_variable(offset, device)
         self.f = sanitize_variable(f, device)
 
@@ -95,4 +95,4 @@ class SineIntegrand(Integrand):
         offset = self.offset.to(x.device)
         f = self.f.to(x.device)
         phase = f * x.sum(dim=-1)
-        return offset + torch.cos(phase)
+        return offset + torch.cos(phase) ** 2

@@ -1,9 +1,9 @@
 """Comparing ZuNIS to VEGAS on camel integrals"""
 import click
 
+from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
-from utils.benchmark import run_benchmark_grid_vegas, set_benchmark_grid_config
-from utils.config.loaders import get_default_integrator_config, get_sql_types
+from utils.config.loaders import get_sql_types
 from utils.integrands.gaussian import SymmetricCamelIntegrand
 
 
@@ -17,22 +17,27 @@ def benchmark_camel(dimensions=None, sigmas=None, db=None,
         "s": 0.3,
         "norm": 1.
     }
-    benchmark_config = set_benchmark_grid_config(config=config, dimensions=dimensions, keep_history=keep_history,
-                                                 dbname=db, experiment_name=experiment_name, cuda=cuda, debug=debug,
-                                                 base_integrand_params=base_integrand_params)
+
+    benchmarker = VegasRandomHPBenchmarker(n=10)
+
+    benchmark_config = benchmarker.set_benchmark_grid_config(config=config, dimensions=dimensions,
+                                                             keep_history=keep_history,
+                                                             dbname=db, experiment_name=experiment_name, cuda=cuda,
+                                                             debug=debug,
+                                                             base_integrand_params=base_integrand_params)
 
     # Integrand specific CLI argument mapped to standard API
     if sigmas is not None:
         benchmark_config["integrand_params_grid"]["s"] = sigmas
 
-    run_benchmark_grid_vegas(integrand=SymmetricCamelIntegrand, sql_dtypes=dtypes,
-                             **benchmark_config)
+    benchmarker.run(integrand=SymmetricCamelIntegrand, sql_dtypes=dtypes,
+                    **benchmark_config)
 
 
 cli = click.Command("cli", callback=benchmark_camel, params=[
     PythonLiteralOption(["--dimensions"], default=None),
     PythonLiteralOption(["--sigmas"], default=None),
-    click.Option(["--debug/--no-debug"], default=True),
+    click.Option(["--debug/--no-debug"], default=None, type=bool),
     click.Option(["--cuda"], default=None, type=int),
     click.Option(["--db"], default=None, type=str),
     click.Option(["--experiment_name"], default=None, type=str),
