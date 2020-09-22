@@ -130,7 +130,8 @@ def maximal_masking_strategy(d, repetitions=1):
 
     """
 
-    masks = [[False] * d] * d * repetitions
+    masks = [[False] * d for _ in range(d * repetitions)]
     for r in range(repetitions):
         for i in range(d):
             masks[i + r * d][i] = True
+    return masks
