@@ -9,6 +9,7 @@ from ..masking import n_ary_mask_strategy, maximal_masking_strategy,iflow_strate
 
 from zunis.models.flows.coupling_cells.real_nvp import RealNVP
 from zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear import PWLinearCoupling
+from zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic import PWQuadraticCoupling
 from zunis.models.flows.analytic_flows.element_wise import InvertibleAnalyticSigmoid
 
 
@@ -69,8 +70,8 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
     This is meant as a higher-level API to generate boilerplate models based on architecture and masking strategy
     """
     cells = {"realnvp": (RealNVP, None, InvertibleAnalyticSigmoid),
-             "pwlinear": (PWLinearCoupling, None, None)},
-             "pwquad": (PWQuadCoupling, None, None)}
+             "pwlinear": (PWLinearCoupling, None, None),
+             "pwquad": (PWQuadraticCoupling, None, None)}
 
     masking = {
         "checkerboard": partial(n_ary_mask_strategy, n=2),

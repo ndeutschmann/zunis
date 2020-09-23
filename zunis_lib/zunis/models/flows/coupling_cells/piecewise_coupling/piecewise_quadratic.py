@@ -204,6 +204,7 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
     d = (b**2) - (2*a*c)
     
     assert not torch.any(d<0), "Value error in PWQuad inversion"
+    assert not torch.any(a==0), "Value error in PWQuad inversion, a==0"
     
     # find two solutions
     sol1 = (-b-torch.sqrt(d))/(a)
