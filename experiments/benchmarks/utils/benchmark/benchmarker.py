@@ -1,5 +1,5 @@
 import logging
-import numpy as np
+import random
 from collections import Sequence, MutableMapping
 from copy import deepcopy
 from itertools import product
@@ -242,6 +242,6 @@ class RandomHyperparameterBenchmarker(Benchmarker):
                 for i in range(self.n):
                     integrator_config_update = dict()
                     for param_name, param_grid in integrator_grid.items():
-                        integrator_config_update[param_name] = np.random.choice(param_grid)
+                        integrator_config_update[param_name] = random.choice(param_grid)
                     integrand_config_update = dict(zip(integrand_grid_keys, integrand_update))
                     yield d, integrator_config_update, integrand_config_update
