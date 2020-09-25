@@ -245,3 +245,118 @@ class RandomHyperparameterBenchmarker(Benchmarker):
                         integrator_config_update[param_name] = random.choice(param_grid)
                     integrand_config_update = dict(zip(integrand_grid_keys, integrand_update))
                     yield d, integrator_config_update, integrand_config_update
+
+
+class SequentialIntegratorBenchmarker(Benchmarker):
+    """Benchmark by going through a list of full integrator configurations (as opposed to going through parameters
+    in the configuration independently) and scan over a grid of possible integrands"""
+
+    def generate_config_samples(self, dimensions, integrator_grid, integrand_grid):
+        """Sample over dimensions, integrator and integrand configurations from lists of possible option values.
+
+        Parameters
+        ----------
+        dimensions : List[int]
+            list of dimensions to sample from
+        integrator_grid : Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrator
+        integrand_grid: Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrand
+
+        Yields
+        -------
+        Tuple[int, Dict[str, Any], Dict[str, Any]]
+            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+
+        Notes
+        -----
+
+        The integrator grid is interpreted as a sequence:
+        `integrator_grid = {
+          param1: [v1, v2, ..., vn]
+          param2: [w1, w2, ..., wn]
+        }
+        is scanned as the list of configurations
+        config1 = {param1: v1, param2: w1}
+        config2 = {param1: v2, param2: w2}
+        ...`
+        """
+
+        grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
+        assert len(grid_lengths) == 1, "All integrator paremeter lists must have the same length"
+        grid_length = grid_lengths[0]
+
+        integrand_grid_keys = integrand_grid.keys()
+        integrand_grid_values = integrand_grid.values()
+
+        for d in dimensions:
+            # Need to reset our cartesian product iterator at each pass through
+            integrand_full_grid = product(*integrand_grid_values)
+            for integrand_update in integrand_full_grid:
+                for i in range(grid_length):
+                    integrator_config_update = dict()
+                    for param_name, param_grid in integrator_grid.items():
+                        integrator_config_update[param_name] = param_grid[i]
+                    integrand_config_update = dict(zip(integrand_grid_keys, integrand_update))
+                    yield d, integrator_config_update, integrand_config_update
+
+
+class SequentialBenchmarker(Benchmarker):
+    """Benchmark by going through a list of integrands and matching integrator configurations
+    (as opposed to scanning through parameters for either).
+
+    This is intended for benchmarking integrands on "optimal configurations" found through previous
+    hyper parameter searching.
+    """
+
+    def generate_config_samples(self, dimensions, integrator_grid, integrand_grid):
+        """Sample over dimensions, integrator and integrand configurations from lists of possible option values.
+
+        Parameters
+        ----------
+        dimensions : List[int]
+            list of dimensions to sample from
+        integrator_grid : Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrator
+        integrand_grid: Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrand
+
+        Yields
+        -------
+        Tuple[int, Dict[str, Any], Dict[str, Any]]
+            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+
+        Notes
+        -----
+
+        The integrator grid is interpreted as a sequence:
+        `integrator_grid = {
+          param1: [v1, v2, ..., vn]
+          param2: [w1, w2, ..., wn]
+        }
+        is scanned as the list of configurations
+        config1 = {param1: v1, param2: w1}
+        config2 = {param1: v2, param2: w2}
+        ...`
+        """
+
+        integrator_grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
+        integrand_grid_lengths = list(set([len(param) for param in integrand_grid.values()]))
+
+        assert \
+            len(integrator_grid_lengths) == 1 and \
+            len(integrand_grid_lengths) == 1 and \
+            integrand_grid_lengths[0] == integrand_grid_lengths[0] == len(dimensions), \
+            "The length of all parameter grids must match (integrator, integrand, dimensions)"
+
+        grid_length = integrand_grid_lengths[0]
+
+        for i in range(grid_length):
+            integrator_config_update = dict()
+            integrand_config_update = dict()
+            d = dimensions[i]
+            for param_name, param_grid in integrator_grid.items():
+                integrator_config_update[param_name] = param_grid[i]
+            for param_name, param_grid in integrand_grid.items():
+                integrand_config_update[param_name] = param_grid[i]
+            yield d, integrator_config_update, integrand_config_update
