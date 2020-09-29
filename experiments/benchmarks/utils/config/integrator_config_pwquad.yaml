@@ -1,4 +1,4 @@
-flow: pwlinear
+flow: pwquad
 flow_options:
   cell_params:
     d_hidden: 256
@@ -24,4 +24,3 @@ trainer_options:
       lr: 0.001
   checkpoint: True
   checkpoint_on_cuda: True
-  checkpoint_path: null

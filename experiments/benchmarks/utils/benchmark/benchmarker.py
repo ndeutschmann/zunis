@@ -102,13 +102,14 @@ class Benchmarker(ABC):
         }
         if config is not None and not isinstance(config, Configuration):
             config = Configuration.from_yaml(config, check=False)
-
         self.set_benchmark_grid_config_param(benchmark_config, "dimensions", dimensions, config)
         self.set_benchmark_grid_config_param(benchmark_config, "keep_history", keep_history, config)
         # the base_integrand_params is too problem specific to be provided by direct argument/CLI.
         # Either a default or a config-file input
         self.set_benchmark_grid_config_param(benchmark_config, "base_integrand_params", None, config)
         self.set_benchmark_grid_config_param(benchmark_config, "base_integrator_config", None, config)
+        self.set_benchmark_grid_config_param(benchmark_config["base_integrator_config"], "flow", None, config)
+        self.set_benchmark_grid_config_param(benchmark_config["base_integrator_config"]["flow_options"]["cell_params"], "n_bins", None, config)
         # The integrator grid is too unwieldy to be used through direct argument/CLI. Use a config file
         # Either a default or a config-file input
         self.set_benchmark_grid_config_param(benchmark_config, "integrator_config_grid", None, config)

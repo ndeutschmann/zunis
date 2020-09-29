@@ -87,7 +87,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
         ----------
         d: int
             dimensionality
-        cell: {"pwlinear", "realnvp"}
+        cell: {"pwlinear", "pwquad", "realnvp"}
             coupling cell choice
         masking: {"checkerboard", "maximal"}
             masking strategy. See :py:attr:`RepeatedCellFlow.masking <zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking>`
