@@ -24,3 +24,4 @@ trainer_options:
       lr: 0.001
   checkpoint: True
   checkpoint_on_cuda: True
+  checkpoint_path: null
