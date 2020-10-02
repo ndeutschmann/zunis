@@ -91,8 +91,8 @@ class Benchmarker(ABC):
             "dimensions": default_dimension,
             "base_integrand_params": base_integrand_params,
             "base_integrator_config": get_default_integrator_config(),
-            "integrand_params_grid": {},
-            "integrator_config_grid": {},
+            "integrand_params_grid": None,
+            "integrator_config_grid": None,
             "n_batch": 100000,
             "keep_history": False,
             "dbname": None,
@@ -100,7 +100,7 @@ class Benchmarker(ABC):
             "cuda": 0,
             "debug": True
         }
-        if config is not None:
+        if config is not None and not isinstance(config, Configuration):
             config = Configuration.from_yaml(config, check=False)
 
         self.set_benchmark_grid_config_param(benchmark_config, "dimensions", dimensions, config)
