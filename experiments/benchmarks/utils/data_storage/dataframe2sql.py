@@ -72,4 +72,5 @@ def read_pkl_sql(dbname="", tablename="results", dtypes=None):
                     logger.error(f"Could not unpickle column {key}, leaving it as-is")
                     logger.error(e)
 
+    df.columns = df.columns.astype(str)
     return df

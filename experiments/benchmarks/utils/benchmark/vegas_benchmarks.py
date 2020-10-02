@@ -4,7 +4,8 @@ import torch
 import vegas
 from dictwrapper import NestedMapping
 
-from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker
+from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
+    SequentialBenchmarker
 from utils.config.loaders import get_default_integrator_config, create_integrator_args
 from utils.flat_integrals import evaluate_integral_flat
 from utils.integral_validation import compare_integral_result
@@ -53,7 +54,7 @@ class VegasBenchmarker(Benchmarker):
 
         result["d"] = d
 
-        return result
+        return result, integrator
 
 
 class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):
@@ -62,3 +63,7 @@ class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):
 
 class VegasRandomHPBenchmarker(RandomHyperparameterBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling integrator hyperparameters randomly"""
+
+
+class VegasSequentialBenchmarker(SequentialBenchmarker, VegasBenchmarker):
+    """Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets"""

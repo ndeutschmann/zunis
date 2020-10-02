@@ -35,7 +35,7 @@ class CircleLineIntegrand(Integrand):
 
         return torch.clamp(
             torch.exp(-
-                      (((x - 0.5) ** 2).sum(dim=-1).sqrt() ** 0.5 - r) ** 2 / sig ** 2
+                      (((x - 0.5) ** 2).sum(dim=-1).sqrt() - r) ** 2 / sig ** 2
                       )
             +
             torch.exp(-
