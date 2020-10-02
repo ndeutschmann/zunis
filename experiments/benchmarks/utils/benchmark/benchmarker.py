@@ -149,13 +149,15 @@ class Benchmarker(ABC):
             sql_dtypes = get_sql_types()
 
         if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
-            result = self.benchmark_method(dimensions[0], integrand=integrand,
+            result, integrator = self.benchmark_method(dimensions[0], integrand=integrand,
                                            integrand_params=base_integrand_params,
                                            integrator_config=base_integrator_config,
-                                           n_batch=n_batch, device=device, keep_history=keep_history).as_dataframe()
+                                           n_batch=n_batch, device=device, keep_history=keep_history)
+            result = result.as_dataframe()
 
             if dbname is not None:
                 append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name, dtypes=sql_dtypes)
+            return result, integrator
 
         else:
             if integrand_params_grid is None:
@@ -179,7 +181,7 @@ class Benchmarker(ABC):
                 integrand_params.update(integrand_params_update)
 
                 try:
-                    result = self.benchmark_method(d, integrand=integrand,
+                    result, _ = self.benchmark_method(d, integrand=integrand,
                                                    integrand_params=integrand_params,
                                                    integrator_config=integrator_config,
                                                    n_batch=n_batch, device=device,

@@ -54,7 +54,7 @@ class VegasBenchmarker(Benchmarker):
 
         result["d"] = d
 
-        return result
+        return result, integrator
 
 
 class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):

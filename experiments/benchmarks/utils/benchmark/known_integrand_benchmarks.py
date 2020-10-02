@@ -76,7 +76,7 @@ class KnownIntegrandBenchmarker(Benchmarker):
 
         integrator_result["d"] = d
 
-        return integrator_result
+        return integrator_result, integrator
 
 
 class KnownIntegrandGridBenchmarker(GridBenchmarker, KnownIntegrandBenchmarker):
