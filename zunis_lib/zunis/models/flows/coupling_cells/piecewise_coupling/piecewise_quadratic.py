@@ -182,12 +182,14 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
     #vw_i= (v_i+1 - v_i)w_i/2 where i is the bin index
     vw=torch.cat((torch.zeros([v.shape[0],v.shape[1],1]).to(wsum.device, wsum.dtype),
                                   torch.cumsum(torch.mul((v[:,:,:-1]+v[:,:,1:])/2,w),axis=-1)),axis=-1)
-    
+    # finder is contains 1 where y is smaller then the constant and 0 if it is greater
     finder=torch.where(vw>torch.unsqueeze(y,axis=-1),torch.zeros_like(vw),torch.ones_like(vw))
-    
     eps = torch.finfo(vw.dtype).eps
+    #the bin number can be extracted by finding the last index for which finder is nonzero. As vw 
+    #is increasing, this can be found by searching for the maximum entry of finder*vw. In order to 
+    #get the right result when y is in the first bin and finder is everywhere zero, a small first entry 
+    #is added and mx is reduced by one to account for the shift.
     mx=torch.unsqueeze(torch.argmax(torch.cat((torch.ones([vw.shape[0],vw.shape[1],1]).to(vw.device, vw.dtype)*eps,finder*(vw+1)),axis=-1),axis=-1),-1)-1
-    
     # x is in the mx-th bin: x \in [0,1],
     # mx \in [[0,b-1]], so we clamp away the case x == 1
     edges = torch.clamp(mx, 0, b - 1).to(torch.long)

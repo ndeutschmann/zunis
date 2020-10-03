@@ -1,4 +1,4 @@
-flow: pwlinear
+flow: pwquad
 flow_options:
   cell_params:
     d_hidden: 256
