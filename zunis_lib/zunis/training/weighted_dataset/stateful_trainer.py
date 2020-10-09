@@ -22,7 +22,8 @@ class StatefulTrainer(BasicStatefulTrainer):
 
     default_flow_priors = {
         "realnvp": FactorizedGaussianSampler,
-        "pwlinear": UniformSampler}
+        "pwlinear": UniformSampler,
+        "pwquad": UniformSampler}
     """Dictionary for the string-based API to define the distribution of the data in latent space based on
     the choice of coupling cell"""
 
