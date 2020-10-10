@@ -15,7 +15,7 @@ class PosteriorSurveySamplingIntegrator(BaseIntegrator):
     def __init__(self, f, trainer, posterior, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
                  verbosity=None, trainer_verbosity=None, **kwargs):
-        super(BaseIntegrator, self).__init__(f=f,
+        super(PosteriorSurveySamplingIntegrator, self).__init__(f=f,
                                              n_iter=n_iter,
                                              n_iter_survey=n_iter_survey,
                                              n_iter_refine=n_iter_refine,
