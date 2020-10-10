@@ -16,21 +16,19 @@ class PosteriorSurveySamplingIntegrator(BaseIntegrator):
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
                  verbosity=None, trainer_verbosity=None, **kwargs):
         super(PosteriorSurveySamplingIntegrator, self).__init__(f=f,
-                                             n_iter=n_iter,
-                                             n_iter_survey=n_iter_survey,
-                                             n_iter_refine=n_iter_refine,
-                                             n_points=n_points,
-                                             n_points_survey=n_points_survey,
-                                             n_points_refine=n_points_refine,
-                                             use_survey=use_survey,
-                                             verbosity=verbosity,
-                                             **kwargs)
+                                                                trainer=trainer,
+                                                                trainer_verbosity=trainer_verbosity,
+                                                                n_iter=n_iter,
+                                                                n_iter_survey=n_iter_survey,
+                                                                n_iter_refine=n_iter_refine,
+                                                                n_points=n_points,
+                                                                n_points_survey=n_points_survey,
+                                                                n_points_refine=n_points_refine,
+                                                                use_survey=use_survey,
+                                                                verbosity=verbosity,
+                                                                **kwargs)
 
-        assert isinstance(trainer, BasicTrainer), "This integrator relies on the BasicTrainer API"
-
-        self.model_trainer = trainer
         self.posterior = posterior
-        self.model_trainer.set_verbosity(trainer_verbosity)
 
     def sample_survey(self, *, n_points=None, f=None, **kwargs):
         """Sample points from target space distribution"""

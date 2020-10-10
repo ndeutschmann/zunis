@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import torch
 from zunis.integration.integratorAPI import SurveyRefineIntegratorAPI
+from zunis.training.weighted_dataset.weighted_dataset_trainer import BasicTrainer
 
 
 class BaseIntegrator(SurveyRefineIntegratorAPI):
@@ -18,9 +19,9 @@ class BaseIntegrator(SurveyRefineIntegratorAPI):
             "phase": pd.Series([], dtype="str")
         })
 
-    def __init__(self, f, n_iter=10, n_iter_survey=None, n_iter_refine=None,
+    def __init__(self, f, trainer, n_iter=10, n_iter_survey=None, n_iter_refine=None,
                  n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
-                 verbosity=None, **kwargs):
+                 verbosity=None, trainer_verbosity=None, **kwargs):
         """
 
         Parameters
@@ -45,6 +46,12 @@ class BaseIntegrator(SurveyRefineIntegratorAPI):
         self.n_points_refine = n_points_refine if n_points_refine is not None else n_points
 
         self.use_survey = use_survey
+
+
+        self.model_trainer.set_verbosity(trainer_verbosity)
+        assert isinstance(trainer, BasicTrainer), "This integrator relies on the BasicTrainer API"
+
+        self.model_trainer = trainer
 
         self.integration_history = self.empty_history()
 
