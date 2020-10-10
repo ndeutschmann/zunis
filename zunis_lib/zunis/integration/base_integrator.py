@@ -48,10 +48,9 @@ class BaseIntegrator(SurveyRefineIntegratorAPI):
         self.use_survey = use_survey
 
 
-        self.model_trainer.set_verbosity(trainer_verbosity)
         assert isinstance(trainer, BasicTrainer), "This integrator relies on the BasicTrainer API"
-
         self.model_trainer = trainer
+        self.model_trainer.set_verbosity(trainer_verbosity)
 
         self.integration_history = self.empty_history()
 
