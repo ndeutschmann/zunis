@@ -2,7 +2,7 @@ import torch
 
 # TODO: change where the method we use from this class is
 from zunis.integration.base_integrator import BaseIntegrator
-from zunis.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer, BasicTrainer
+from zunis.training.weighted_dataset.weighted_dataset_trainer import BasicStatefulTrainer
 from zunis.models.flows.sampling import UniformSampler
 
 
