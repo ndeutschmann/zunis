@@ -1,4 +1,8 @@
 """Integrator that does not sample points during the training phase but uses a fixed dataset of points"""
+from collections.abc import Sequence, Mapping
+import pickle
+
+import numpy as np
 import torch
 
 from .base_integrator import BaseIntegrator
@@ -88,3 +92,73 @@ class FixedSampleSurveyIntegrator(BaseIntegrator):
         # Sample n_points indices randomly among the sample_size options with equal probability
         indices = torch.multinomial(torch.ones(sample_size), n_points)
         return x[indices], px[indices], fx[indices]
+
+    def set_sample(self, sample):
+        """Assign a sample to be trained on
+
+        Parameters
+        ----------
+        sample: tuple of torch.Tensor
+            (x,px,fx): sampled points, sampling distribution PDF values, function values
+        """
+        assert len(sample) == 3, "A sample is a Sequence of three elements"
+        for el in sample:
+            assert isinstance(el, torch.Tensor), "All elements of a sample must be tensors"
+        assert sample[0].shape[0] == sample[1].shape[0] == sample[2].shape[0], \
+            "All elements of a sample must share the same batch size"
+        assert len(sample[0].shape) == 2 and len(sample[1].shape) == len(sample[2].shape) == 1, \
+            "Sample shapes must be (n_batch, n_dim), (n_batch), (n_batch)"
+        assert sample[0].shape[1] == self.model_trainer.flow.d, "Number of dimensions must match the flow"
+
+        self.sample = sample
+
+    def set_sample_pickle(self, pickle_path, device=None):
+        """Assign a sample to be trained on from a pickle file
+        The pickle file must either contain a tuple (x,px,fx) of point batch, PDF value batch, function batch
+        or a mapping with keys "x", "px", "fx". In either case, these batches must be valid inputs for torch.tensor
+
+        Parameters
+        ----------
+        pickle_path: str
+            path to the pickle file.
+        device: torch.device, None
+            device on which to send the sample. If none is provided, flow parameter device will be used
+        """
+        with open(pickle_path, "r") as picklefile:
+            pickle_sample = pickle.load(picklefile)
+
+        if device is None:
+            device = next(self.model_trainer.flow.parameters()).device
+
+        if isinstance(pickle_sample, Sequence):
+            self.set_sample([torch.tensor(el).to(device) for el in pickle_sample])
+
+        if isinstance(pickle_sample, Mapping):
+            self.set_sample([
+                torch.tensor(pickle_sample[key]).to(device) for key in ["x", "px", "fx"]
+            ])
+
+        raise TypeError("Pickled sample must be either sequences or mappings")
+
+    def set_sample_csv(self, csv_path, device=None, delimiter=",", dtype=np.float):
+        """Assign a sample to be trained on from a csv file
+        The file must contain equal length rows with at least four columns, all numerical.
+        All columns but the last two are interpreted as point coordinates,
+        the next-to-last is the point PDF and the last is the function value.
+
+        Parameters
+        ----------
+        csv_path: str
+            path to the csv file
+        device: torch.device
+            device to which to send the sample
+        delimiter: str
+            delimiter of the csv file
+        """
+
+        data = np.genfromtxt(csv_path, delimiter=delimiter, dtype=dtype)
+        x = torch.tensor(data[:, :-2]).to(device)
+        px = torch.tensor(data[:, -2]).to(device)
+        fx = torch.tensor(data[:, -1]).to(device)
+
+        self.set_sample((x, px, fx))
