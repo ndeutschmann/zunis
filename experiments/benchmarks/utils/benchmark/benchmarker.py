@@ -9,8 +9,9 @@ import torch
 from better_abc import ABC, abstractmethod
 from dictwrapper import NestedMapping
 
-from utils.config.configuration import Configuration
-from utils.config.loaders import get_sql_types, get_default_integrator_config
+from zunis.utils.config.configuration import Configuration
+from utils.config.loaders import get_sql_types
+from zunis.utils.config.loaders import get_default_integrator_config
 from utils.data_storage.dataframe2sql import append_dataframe_to_sqlite
 from utils.logging import set_benchmark_logger_debug, set_benchmark_logger
 from utils.torch_utils import get_device

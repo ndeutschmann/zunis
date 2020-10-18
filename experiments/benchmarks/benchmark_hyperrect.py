@@ -3,7 +3,8 @@ import click
 from utils.command_line_tools import PythonLiteralOption
 from utils.benchmark import run_benchmark_grid_known_integrand
 from utils.integrands.volume import HyperrectangleVolumeIntegrand
-from utils.config.loaders import get_default_integrator_config, get_sql_types
+from utils.config.loaders import get_sql_types
+from zunis.utils.config.loaders import get_default_integrator_config
 
 
 def hyperrect_benchmark(dimensions=(2, 4, 6, 8), fracs=(0.3, 0.5, 0.7), debug=True, cuda=0):

@@ -4,7 +4,7 @@ import torch
 from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker
-from utils.config.loaders import get_default_integrator_config, create_integrator_args
+from zunis.utils.config.loaders import get_default_integrator_config, create_integrator_args
 from utils.flat_integrals import validate_known_integrand_flat
 from utils.integrator_integrals import validate_integral_integrator
 from zunis.integration import Integrator

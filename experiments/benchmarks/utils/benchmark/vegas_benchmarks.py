@@ -6,7 +6,7 @@ from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
     SequentialBenchmarker
-from utils.config.loaders import get_default_integrator_config, create_integrator_args
+from zunis.utils.config.loaders import get_default_integrator_config, create_integrator_args
 from utils.flat_integrals import evaluate_integral_flat
 from utils.integral_validation import compare_integral_result
 from utils.integrator_integrals import evaluate_integral_integrator

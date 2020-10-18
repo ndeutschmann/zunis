@@ -3,7 +3,8 @@ import click
 from utils.command_line_tools import PythonLiteralOption
 from utils.benchmark import run_benchmark_grid_known_integrand
 from utils.integrands.volume import RegulatedHyperSphericalCamel
-from utils.config.loaders import get_default_integrator_config, get_sql_types
+from utils.config.loaders import get_sql_types
+from zunis.utils.config.loaders import get_default_integrator_config
 
 
 def hypercamel_benchmark(dimensions=(2, 4, 6, 8), rs=(0.25,), regs=(1.e-6,), debug=True, cuda=0):
