@@ -1,0 +1,8 @@
+mg="/home/ngoetz/project/MG5_aMC_v2_8_1"
+mgscript="/home/ngoetz/project/zunis/experiments/benchmarks/benchmark_madgraph/nis_script.mg5"
+name="fortran_output"
+bench="/home/ngoetz/project/zunis/experiments/benchmarks"
+lhapdfdir="/home/ngoetz/project/MG5_aMC_v2_8_1/HEPTools/lhapdf6_py3/share/LHAPDF"
+lhapdf="NNPDF23_nlo_as_0119"
+config="/home/ngoetz/project/zunis/experiments/benchmarks/utils/config/integrator_config_madgraph.yaml"
+lhapdfpath="/home/ngoetz/project/MG5_aMC_v2_8_1/HEPTools/lhapdf6_py3/lib"

@@ -1,0 +1,2 @@
+zunis
+./exec_mc.sh: line 24: ./check_sa_nis.py: No such file or directory

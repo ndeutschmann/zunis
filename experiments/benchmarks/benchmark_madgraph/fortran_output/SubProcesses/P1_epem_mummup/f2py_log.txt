@@ -1,0 +1,161 @@
+touch __init__.py
+f2py -L../../lib/ -ldhelas -lmodel -c  matrix.f -m matrix2py --f77exec=gfortran
+running build
+running config_cc
+unifing config_cc, config, build_clib, build_ext, build commands --compiler options
+running config_fc
+unifing config_fc, config, build_clib, build_ext, build commands --fcompiler options
+running build_src
+build_src
+building extension "matrix2py" sources
+f2py options: []
+f2py:> /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.c
+creating /tmp/tmp_elsi9vd/src.linux-x86_64-3.8
+Reading fortran codes...
+	Reading file 'matrix.f' (format:fix,strict)
+Line #56 in matrix.f:"      PARAMETER (NPOLENTRIES=(NEXTERNAL+1)*6)"
+	determineexprtype: could not determine expressions ('(nexternal+1)*6') type.
+Line #78 in matrix.f:"      DATA (BEAMS_HELAVGFACTOR(I),I=1,2)/2,2/"
+	analyzeline: implied-DO list "(beams_helavgfactor(i),i=1,2)" is not supported. Skipping.
+Line #91 in matrix.f:"      DATA (NHEL(I,   1),I=1,4) /-1, 1,-1, 1/"
+	analyzeline: implied-DO list "(nhel(i,   1),i=1,4)" is not supported. Skipping.
+Line #92 in matrix.f:"      DATA (NHEL(I,   2),I=1,4) /-1, 1,-1,-1/"
+	analyzeline: implied-DO list "(nhel(i,   2),i=1,4)" is not supported. Skipping.
+Line #93 in matrix.f:"      DATA (NHEL(I,   3),I=1,4) /-1, 1, 1, 1/"
+	analyzeline: implied-DO list "(nhel(i,   3),i=1,4)" is not supported. Skipping.
+Line #94 in matrix.f:"      DATA (NHEL(I,   4),I=1,4) /-1, 1, 1,-1/"
+	analyzeline: implied-DO list "(nhel(i,   4),i=1,4)" is not supported. Skipping.
+Line #95 in matrix.f:"      DATA (NHEL(I,   5),I=1,4) /-1,-1,-1, 1/"
+	analyzeline: implied-DO list "(nhel(i,   5),i=1,4)" is not supported. Skipping.
+Line #96 in matrix.f:"      DATA (NHEL(I,   6),I=1,4) /-1,-1,-1,-1/"
+	analyzeline: implied-DO list "(nhel(i,   6),i=1,4)" is not supported. Skipping.
+Line #97 in matrix.f:"      DATA (NHEL(I,   7),I=1,4) /-1,-1, 1, 1/"
+	analyzeline: implied-DO list "(nhel(i,   7),i=1,4)" is not supported. Skipping.
+Line #98 in matrix.f:"      DATA (NHEL(I,   8),I=1,4) /-1,-1, 1,-1/"
+	analyzeline: implied-DO list "(nhel(i,   8),i=1,4)" is not supported. Skipping.
+Line #99 in matrix.f:"      DATA (NHEL(I,   9),I=1,4) / 1, 1,-1, 1/"
+	analyzeline: implied-DO list "(nhel(i,   9),i=1,4)" is not supported. Skipping.
+Line #100 in matrix.f:"      DATA (NHEL(I,  10),I=1,4) / 1, 1,-1,-1/"
+	analyzeline: implied-DO list "(nhel(i,  10),i=1,4)" is not supported. Skipping.
+Line #101 in matrix.f:"      DATA (NHEL(I,  11),I=1,4) / 1, 1, 1, 1/"
+	analyzeline: implied-DO list "(nhel(i,  11),i=1,4)" is not supported. Skipping.
+Line #102 in matrix.f:"      DATA (NHEL(I,  12),I=1,4) / 1, 1, 1,-1/"
+	analyzeline: implied-DO list "(nhel(i,  12),i=1,4)" is not supported. Skipping.
+Line #103 in matrix.f:"      DATA (NHEL(I,  13),I=1,4) / 1,-1,-1, 1/"
+	analyzeline: implied-DO list "(nhel(i,  13),i=1,4)" is not supported. Skipping.
+Line #104 in matrix.f:"      DATA (NHEL(I,  14),I=1,4) / 1,-1,-1,-1/"
+	analyzeline: implied-DO list "(nhel(i,  14),i=1,4)" is not supported. Skipping.
+Line #105 in matrix.f:"      DATA (NHEL(I,  15),I=1,4) / 1,-1, 1, 1/"
+	analyzeline: implied-DO list "(nhel(i,  15),i=1,4)" is not supported. Skipping.
+Line #106 in matrix.f:"      DATA (NHEL(I,  16),I=1,4) / 1,-1, 1,-1/"
+	analyzeline: implied-DO list "(nhel(i,  16),i=1,4)" is not supported. Skipping.
+Line #115 in matrix.f:"      DATA ((POLARIZATIONS(I,J),I=0,NEXTERNAL),J=0,5)/NPOLENTRIES*-1/"
+	analyzeline: implied-DO list "((polarizations(i,j),i=0,nexternal),j=0,5)" is not supported. Skipping.
+	Reading file 'coupl.inc' (format:fix)
+Line #228 in matrix.f:"      DATA (CF(I,  1),I=  1,  1) /    1/"
+	analyzeline: implied-DO list "(cf(i,  1),i=  1,  1)" is not supported. Skipping.
+	Reading file 'coupl.inc' (format:fix)
+Line #290 in matrix.f:"      CALL SETPARA(PATH)  !first call to setup the paramaters    "
+	analyzeline: No name/args pattern found for line.
+Post-processing...
+	Block: matrix2py
+			Block: smatrixhel
+			Block: smatrix
+			Block: matrix
+			Block: get_value
+			Block: initialisemodel
+			Block: is_born_hel_selected
+Post-processing (stage 2)...
+Building modules...
+	Building module "matrix2py"...
+		Constructing wrapper function "smatrixhel"...
+		  ans = smatrixhel(p,hel)
+		Constructing wrapper function "smatrix"...
+		  ans = smatrix(p)
+		Creating wrapper for Fortran function "matrix"("matrix")...
+		Constructing wrapper function "matrix"...
+		  matrix = matrix(p,nhel,ic)
+		Constructing wrapper function "get_value"...
+		  ans = get_value(p,alphas,nhel)
+		Constructing wrapper function "initialisemodel"...
+		  initialisemodel(path)
+		Creating wrapper for Fortran function "is_born_hel_selected"("is_born_hel_selected")...
+		Constructing wrapper function "is_born_hel_selected"...
+		  is_born_hel_selected = is_born_hel_selected(helid)
+		Constructing COMMON block support for "heluserchoice"...
+		  userhel
+		Constructing COMMON block support for "process_nhel"...
+		  nhel
+		Constructing COMMON block support for "born_beam_pol"...
+		  polarizations
+		Constructing COMMON block support for "strong"...
+		  g
+		Constructing COMMON block support for "weak"...
+		  gal
+		Constructing COMMON block support for "rscale"...
+		  mu_r
+		Constructing COMMON block support for "masses"...
+		  mdl_mb,mdl_mt,mdl_mh,mdl_mz,mdl_mta,mdl_mw
+		Constructing COMMON block support for "widths"...
+		  mdl_wt,mdl_wz,mdl_wh,mdl_ww
+		Constructing COMMON block support for "couplings"...
+		  gc_3,gc_50,gc_59
+	Wrote C/API module "matrix2py" to file "/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.c"
+	Fortran 77 wrappers are saved to "/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2py-f2pywrappers.f"
+  adding '/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.c' to sources.
+  adding '/tmp/tmp_elsi9vd/src.linux-x86_64-3.8' to include_dirs.
+copying /home/niklas/.local/lib/python3.8/site-packages/numpy/f2py/src/fortranobject.c -> /tmp/tmp_elsi9vd/src.linux-x86_64-3.8
+copying /home/niklas/.local/lib/python3.8/site-packages/numpy/f2py/src/fortranobject.h -> /tmp/tmp_elsi9vd/src.linux-x86_64-3.8
+  adding '/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2py-f2pywrappers.f' to sources.
+build_src: building npy-pkg config files
+running build_ext
+customize UnixCCompiler
+customize UnixCCompiler using build_ext
+get_default_fcompiler: matching types: '['gnu95', 'intel', 'lahey', 'pg', 'absoft', 'nag', 'vast', 'compaq', 'intele', 'intelem', 'gnu', 'g95', 'pathf95', 'nagfor']'
+customize Gnu95FCompiler
+Found executable /usr/bin/gfortran
+customize Gnu95FCompiler
+customize Gnu95FCompiler using build_ext
+building 'matrix2py' extension
+compiling C sources
+C compiler: x86_64-linux-gnu-gcc -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O2 -Wall -g -fstack-protector-strong -Wformat -Werror=format-security -g -fwrapv -O2 -g -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -fPIC
+
+creating /tmp/tmp_elsi9vd/tmp
+creating /tmp/tmp_elsi9vd/tmp/tmp_elsi9vd
+creating /tmp/tmp_elsi9vd/tmp/tmp_elsi9vd/src.linux-x86_64-3.8
+compile options: '-I/tmp/tmp_elsi9vd/src.linux-x86_64-3.8 -I/home/niklas/.local/lib/python3.8/site-packages/numpy/core/include -I/usr/include/python3.8 -c'
+x86_64-linux-gnu-gcc: /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.c
+x86_64-linux-gnu-gcc: /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.c
+In file included from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/ndarraytypes.h:1822,
+                 from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/ndarrayobject.h:12,
+                 from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.h:13,
+                 from /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.c:16:
+/home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: #warning "Using deprecated NumPy API, disable it with " "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+   17 | #warning "Using deprecated NumPy API, disable it with " \
+      |  ^~~~~~~
+In file included from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/ndarraytypes.h:1822,
+                 from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/ndarrayobject.h:12,
+                 from /home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.h:13,
+                 from /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.c:2:
+/home/niklas/.local/lib/python3.8/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: #warning "Using deprecated NumPy API, disable it with " "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+   17 | #warning "Using deprecated NumPy API, disable it with " \
+      |  ^~~~~~~
+/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.c:169:12: warning: ‘f2py_size’ defined but not used [-Wunused-function]
+  169 | static int f2py_size(PyArrayObject* var, ...)
+      |            ^~~~~~~~~
+compiling Fortran sources
+Fortran f77 compiler: gfortran -Wall -g -ffixed-form -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran f90 compiler: /usr/bin/gfortran -Wall -g -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran fix compiler: /usr/bin/gfortran -Wall -g -ffixed-form -fno-second-underscore -Wall -g -fno-second-underscore -fPIC -O3 -funroll-loops
+compile options: '-I/tmp/tmp_elsi9vd/src.linux-x86_64-3.8 -I/home/niklas/.local/lib/python3.8/site-packages/numpy/core/include -I/usr/include/python3.8 -c'
+gfortran:f77: matrix.f
+gfortran:f77: /tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2py-f2pywrappers.f
+matrix.f:247:17:
+
+  247 |         MATRIX = MATRIX+ZTEMP*DCONJG(JAMP(I))/DENOM(I)
+      |                 1
+Warning: Possible change of value in conversion from COMPLEX(8) to REAL(8) at (1) [-Wconversion]
+/usr/bin/gfortran -Wall -g -Wall -g -shared /tmp/tmp_elsi9vd/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2pymodule.o /tmp/tmp_elsi9vd/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/fortranobject.o /tmp/tmp_elsi9vd/matrix.o /tmp/tmp_elsi9vd/tmp/tmp_elsi9vd/src.linux-x86_64-3.8/matrix2py-f2pywrappers.o -L../../lib/ -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/lib/gcc/x86_64-linux-gnu/9 -ldhelas -lmodel -lgfortran -o ./matrix2py.cpython-38-x86_64-linux-gnu.so
+Removing build directory /tmp/tmp_elsi9vd

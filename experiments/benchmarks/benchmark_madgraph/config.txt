@@ -1,0 +1,8 @@
+mg="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2"
+mgscript="/home/niklas/Desktop/zunis/experiments/benchmarks/benchmark_madgraph/nis_script.mg5"
+name="fortran_output"
+bench="/home/niklas/Desktop/zunis/experiments/benchmarks"
+lhapdfdir="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3/HEPTools/lhapdf6/share/LHAPDF"
+lhapdf="NNPDF23_nlo_as_0119"
+config="/home/niklas/Desktop/zunis/experiments/benchmarks/utils/config/integrator_config_madgraph.yaml"
+lhapdfpath="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2/HEPTools/lhapdf6_py3/lib"
