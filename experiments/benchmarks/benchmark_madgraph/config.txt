@@ -1,8 +1,15 @@
+#This path has to point to the MadGraph5 folder
 mg="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2"
-mgscript="/home/niklas/Desktop/zunis/experiments/benchmarks/benchmark_madgraph/nis_script.mg5"
+#This path has to point to the MadGraph execution script
+mgscript="/home/niklas/Desktop/zunis/experiments/benchmarks/benchmark_madgraph/nis_script_dd.mg5"
+#The name of the folder which will contain the output of Madgraph
 name="fortran_output"
+#The path of the benchmark folder
 bench="/home/niklas/Desktop/zunis/experiments/benchmarks"
-lhapdfdir="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3/HEPTools/lhapdf6/share/LHAPDF"
+#The path containing the LHAPDF executables
+lhapdfdir="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2/HEPTools/lhapdf6_py3"
+#The PDF set to be used
 lhapdf="NNPDF23_nlo_as_0119"
-config="/home/niklas/Desktop/zunis/experiments/benchmarks/utils/config/integrator_config_madgraph.yaml"
-lhapdfpath="/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2/HEPTools/lhapdf6_py3/lib"
+#The config file for zunis
+config="/home/niklas/Desktop/zunis/experiments/benchmarks/benchmark_config_examples/madgraph_grid_config.yaml"
+

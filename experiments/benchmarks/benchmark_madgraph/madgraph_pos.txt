@@ -1,4 +1,0 @@
-/home/niklas/Desktop/Thesis/Thesis_code/MG5_aMC_v3_0_2_py3_2/bin/mg5_aMC.py
-
-Idea: start mg5 with the adress from benchmark and give the running script with --file and full directory
-Then copy the fortran file out and run the bencher like this
