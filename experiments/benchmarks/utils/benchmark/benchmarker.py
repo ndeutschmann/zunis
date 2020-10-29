@@ -186,8 +186,7 @@ class Benchmarker(ABC):
                                                    integrand_params=integrand_params,
                                                    integrator_config=integrator_config,
                                                    n_batch=n_batch, device=device,
-                                                   keep_history=keep_history)
-                    result = result.as_dataframe()
+                                                   keep_history=keep_history).as_dataframe()
                 except Exception as e:
                     logger.exception(e)
                     result = NestedMapping()
