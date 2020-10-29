@@ -22,9 +22,12 @@ class VegasBenchmarker(Benchmarker):
     def benchmark_method(self, d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
                          keep_history=False, device=torch.device("cpu")):
         logger.debug("=" * 72)
+        
+    
         logger.info("Defining integrand")
         if integrand_params is None:
             integrand_params = dict()
+
         f = integrand(d=d, device=device, **integrand_params)
         vf = f.vegas(device=device)
 
@@ -34,7 +37,7 @@ class VegasBenchmarker(Benchmarker):
             integrator_config = get_default_integrator_config()
         integrator_args = create_integrator_args(integrator_config)
         integrator = Integrator(f=f, d=d, device=device, **integrator_args)
-
+        
         vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
 
         integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch, keep_history=keep_history)

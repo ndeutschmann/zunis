@@ -1,5 +1,7 @@
 """Comparing ZuNIS to VEGAS on madgraph integrals"""
 import click
+import sys
+
 from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
 from utils.config.loaders import get_sql_types
@@ -15,8 +17,8 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
     base_integrand_params = {
         "e_cm": 1000,
         "pdf": True,
-        "delr_cut": 0.5,
-        "pt_cut":10,
+        "delr_cut": 0.4,
+        "pt_cut":0.1,
         "rap_maxcut":2.4,
         "process":"",
         "pdf_type":"",
@@ -51,11 +53,13 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         benchmark_config["base_integrand_params"]["pdf_dir"] = pdf_dir
     if lhapdf_dir is not None:
         benchmark_config["base_integrand_params"]["lhapdf_dir"] = lhapdf_dir
-    
-    CS=CrossSection(pdf=benchmark_config["base_integrand_params"]["pdf"], pdf_dir=benchmark_config["base_integrand_params"]["pdf_dir"], lhapdf_dir=benchmark_config["base_integrand_params"]["lhapdf_dir"], process=benchmark_config["base_integrand_params"]["process"])
-    
+        
+    #The integrand is initialised once in order to get the right number of dimensions needed to integrate the process
+    CS=CrossSection(pdf=benchmark_config["base_integrand_params"]["pdf"], pdf_dir=benchmark_config["base_integrand_params"]["pdf_dir"], lhapdf_dir=benchmark_config["base_integrand_params"]["lhapdf_dir"], process=benchmark_config["base_integrand_params"]["process"],pdf_type=benchmark_config["base_integrand_params"]["pdf_type"])
+  
     benchmark_config["dimensions"]=CS.d
     
+ 
     benchmarker.run(integrand=CrossSection, sql_dtypes=dtypes,
                     **benchmark_config)
 

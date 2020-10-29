@@ -1,0 +1,22 @@
+dbname: madgraph.db
+experiment_name: madgraph_iflow_scan
+debug: False
+keep_history: True
+base_integrator_config:
+        n_iter: 10
+        n_bins: 50
+        n_epochs: 50
+        n_points_survey: 100000
+        minibatch_size: 40000
+        checkpoint_on_cuda: False
+        masking: iflow
+        repetitions: 1
+integrand_params_grid:
+        e_cm: [1000]
+        delr_cut: [0.4]
+        pt_cut: [0.1]
+        rap_maxcut: [2.4]
+integrator_config_grid:
+        d_hidden: [128]
+        n_hidden: [8]
+        lr: [ 5.e-4]
