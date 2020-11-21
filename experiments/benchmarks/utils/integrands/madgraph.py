@@ -13,6 +13,7 @@ import numpy as np
 from torchps.flat_phase_space_generator import *
 from utils.integrands.abstract import Integrand
 from utils.integrands import sanitize_variable
+from utils.integrands.mg.parse_params import ParseParams
 
 logger = logging.getLogger(__name__)
 
@@ -52,10 +53,9 @@ class CrossSection(Integrand):
         
         #Try to import LHAPDF. If this is not possible, PDFs are not included
         if self.pdf and lhapdf_dir==None:
-            logger.debug("The directory of the LHAPDF module was not given. PDFs are not included")
+            logger.error("The directory of the LHAPDF module was not given. PDFs are not included")
             self.pdf=False
         if self.pdf:
-            print(lhapdf_dir)
             if lhapdf_dir not in sys.path:
                 sys.path.append(lhapdf_dir)
             try:
@@ -74,8 +74,9 @@ class CrossSection(Integrand):
             sys.path.append(BASE_DIR+"/integrands/mg/"+process)
         try:
             import matrix2py
-        except:
-            logger.debug("The matrix elements could not be imported")
+        except Exception as e:
+            logger.error("The matrix elements could not be imported")
+            logger.debug(e)
             
         self.process=process
         self.E_cm=sanitize_variable(e_cm,device)
@@ -84,93 +85,15 @@ class CrossSection(Integrand):
         self.rap_maxcut=sanitize_variable(rap_maxcut,device)
         self.default_device=device
 
-        #the mapping between particles and pdg-codes
-        names=["d","u","s","c","b","t","g"]
-        pdgs=[1,2,3,4,5,6,21]
+        
         
         #the matrix element needs to be initialised
         matrix2py.initialisemodel(BASE_DIR+"/integrands/mg/"+process+"/param/param_card.dat")
-        
-        #extracting the number of in- and outgoing particles and the masses
-        file = open(BASE_DIR+"/integrands/mg/"+process+"/param/nexternal.inc", "r") 
-        file.readline()
-
-        n_external=file.readline()
-        n_external = int((n_external.split("=")[1]).split(")")[0])
-        file.readline()
-        n_incoming=file.readline()
-        n_incoming = int((n_incoming.split("=")[1]).split(")")[0])
-        file.close
-        
-        file = open(BASE_DIR+"/integrands/mg/"+process+"/param/pmass.inc", "r") 
-        z=file.readlines()
-
-        z=[x.split("=")[1].split("\n")[0] for x in z]
-        z=[x[::-1].split("(")[0][::-1].split(")")[0] for x in z]
-        file.close
-
-        file = open(BASE_DIR+"/integrands/mg/"+process+"/param/param.log", "r")
-        p=file.readlines()
-        file.close
-
-        masses=[0]*len(z)
-        external_masses=[0]*2
-        Gf=  float([i for i in p if " mdl_gf " in i][0].split()[7])
-        aEW=  1/float([i for i in p if " aewm1 " in i][0].split()[7])
-        MZ= float( [i for i in p if " mdl_mz " in i][0].split()[7])
-        
-        for ider,x in enumerate(z):
-            if x=="ZERO":
-                masses[ider]=0.0
-            elif x=="MDL_MW":
-                
-                masses[ider]=np.sqrt(MZ**2/2. + np.sqrt(MZ**4/4. - (aEW*np.pi*MZ**2)/(Gf*np.sqrt(2))))
-            
-            else:
-                res = [i for i in p if " "+x.lower()+" " in i][0]
-                masses[ider]=float(res.split()[7])
-        external_masses[0]=masses[:n_incoming]
-        external_masses[1]=masses[n_incoming:]
-
-        #Parsing the involved particles from the process name and mapping on pdg codes
-        #pdg code 0 refers to color-neutral particles
-        process_name=process.split("P1_")[1]
-        particles=process_name.split("_")[0]
-
-        pdg=[0]*len(external_masses[0])
-        offset1=0
-        offset2=0
-        
-        for ide,x in enumerate(names):
-            ider=ide-offset1-offset2
-            marker=particles.find(x)
-            
-            if marker==0 and (x!='t' or(len(particles)<=2 or (particles[2]!='-' and particles[2]!='+' ))):
-                
-                pdg[offset1]=pdgs[ider]
-                particles=particles[1:]
-                
-                if len(particles)>0 and particles[0]=="x":
-                    pdg[offset1]*=-1
-                    particles=particles[1:]
-                    
-                names.insert(ide,x)
-                offset1+=1
-            
-                
-            
-            elif marker!=-1 and (x!='t' or(len(particles)<=2+marker or (particles[marker+2]!='p' and particles[marker+2]!='m' ))) :
-                particles=particles[:marker]+particles[marker+1 :]
-                pdg[1]=pdgs[ider]
-                
-                if len(particles)>marker and particles[marker]=="x":
-                    particles=particles[:marker]+particles[marker+1 :]
-                    pdg[1]*=-1
-                names.insert(ide,x)
-                offset2+=1
-            if offset1+offset2==2:
-                break
-    
+        #parses the output documents in order to get the correct pdg codes
+        #and masses
+        parser=ParseParams(self.process, BASE_DIR)
+        (pdg, external_masses)=parser.parse()
+ 
         self.pdg=pdg
                 
 
