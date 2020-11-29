@@ -93,3 +93,6 @@ zipp==3.1.0
 better-abc @ git+https://github.com/ndeutschmann/better_abc@6b393a2ae82da68e85f9a960eecbbb98bfd8d143
 dictwrapper @ git+https://github.com/ndeutschmann/dictwrapper
 -e ./zunis_lib
+
+#Packages by NGoetz
+torchps @ git+https://github.com/NGoetz/TorchPS
