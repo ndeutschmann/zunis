@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils.integrals module &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="utils.integrator_integrals module" href="utils.integrator_integrals.html" />
+    <link rel="prev" title="utils.integral_validation module" href="utils.integral_validation.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="module-utils.integrals">
+<span id="utils-integrals-module"></span><h1>utils.integrals module<a class="headerlink" href="#module-utils.integrals" title="Permalink to this headline">¶</a></h1>
+<p>Facilities for evaluating integrals from a batch of points</p>
+<dl class="py function">
+<dt id="utils.integrals.mean_std_integrand">
+<code class="sig-name descname">mean_std_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">px</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrals.mean_std_integrand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the expectation value and the standard deviation of a function evaluated
+on a sample of points taken from a known distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of function values</p></li>
+<li><p><strong>px</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.tensor</span></code>) – batch of PDF values for each of the sampled x</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="utils.html">Benchmark utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="utils.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;utils package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="utils.integral_validation.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;integral_validation module</a></li>
+        
+        
+        
+        <li><a href="utils.integrator_integrals.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;integrator_integrals module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
+  <li><a href="utils.html">utils package</a><ul>
+      <li>Previous: <a href="utils.integral_validation.html" title="previous chapter">utils.integral_validation module</a></li>
+      <li>Next: <a href="utils.integrator_integrals.html" title="next chapter">utils.integrator_integrals module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

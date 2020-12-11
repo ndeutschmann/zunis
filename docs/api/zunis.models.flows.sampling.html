@@ -35,7 +35,7 @@
         <div class="body" role="main">
             <p id="mobilelink">
                 <a href="#mobileanchor">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i> sidebar links
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
                 </a>
             </p>
             
@@ -51,9 +51,9 @@ of a flow as a sampling layers that draws points and computes the required PDF</
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
 <p>Sample d-dimensional data from a factorized 1D PDF over each dimension
 The 1D PDF is expected to be a pytorch.probability.Distribution object
-but it can be any object that implements the <cite>sample`and `log_prob</cite> methods.</p>
+but it can be any object that implements the <code class="xref py py-obj docutils literal notranslate"><span class="pre">sample`and</span> <span class="pre">`log_prob</span></code> methods.</p>
 <p>NB: we provide the 1D prior object explicitly as pytorch distributions don’t
-respond appropriately to the <cite>.to(device)</cite>. To sample on a device, provide a
+respond appropriately to the <code class="xref py py-obj docutils literal notranslate"><span class="pre">to(device)</span></code>. To sample on a device, provide a
 prior initialized with parameters already on the correct device.</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
@@ -141,14 +141,9 @@ device at initialization.</p>
 </ul>
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="zunis.html">API Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="zunis.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="zunis.integration.html">integration package</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="zunis.models.html">models package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.training.html">training package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="zunis.utils.html">utils package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -201,11 +196,13 @@ device at initialization.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.models.html">models package</a><ul>
   <li><a href="zunis.models.flows.html">flows package</a><ul>
       <li>Previous: <a href="zunis.models.flows.masking.html" title="previous chapter">masking module</a></li>
       <li>Next: <a href="zunis.models.layers.html" title="next chapter">layers package</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -238,7 +235,7 @@ device at initialization.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

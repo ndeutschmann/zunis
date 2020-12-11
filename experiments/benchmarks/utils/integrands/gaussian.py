@@ -7,7 +7,7 @@ from utils.integrands.abstract import Integrand, RegulatedIntegrand
 class DiagonalGaussianIntegrand(Integrand):
     """N-dimensional gaussian with a diagonal covariance matrix"""
 
-    def __init__(self, d, mu=0.5, s=0.1, norm=1., device=None):
+    def __init__(self, d, mu=0.5, s=0.1, norm=1., device=None, *args, **kwargs):
         """
 
         Parameters
@@ -43,7 +43,7 @@ class DiagonalGaussianIntegrand(Integrand):
         Parameters
         ----------
         x: torch.Tensor
-            Batch of points of size (*,d)
+            Batch of points of size ```(*,d)```
 
         Returns
         -------
@@ -55,7 +55,7 @@ class DiagonalGaussianIntegrand(Integrand):
 class RegulatedDiagonalGaussianIntegrand(RegulatedIntegrand, DiagonalGaussianIntegrand):
     """N-dimensional regulated gaussian with a diagonal covariance matrix"""
 
-    def __init__(self, d, mu=0.5, s=0.1, norm=1., reg=1.e-6, device=None):
+    def __init__(self, d, mu=0.5, s=0.1, norm=1., reg=1.e-6, device=None, *args, **kwargs):
         """
 
         Parameters
@@ -83,7 +83,7 @@ class CamelIntegrand(Integrand):
     at points (0.25, ..., 0.25) and (0.75, ..., 0.75).
     """
 
-    def __init__(self, d, s1=0.1, norm1=1, s2=0.2, norm2=2, device=None):
+    def __init__(self, d, s1=0.1, norm1=1, s2=0.1, norm2=1, device=None, *args, **kwargs):
         """
         Parameters
         ----------
@@ -119,3 +119,20 @@ class CamelIntegrand(Integrand):
         torch.Tensor
         """
         return self.hump1.evaluate_integrand(x) + self.hump2.evaluate_integrand(x)
+
+
+class SymmetricCamelIntegrand(CamelIntegrand):
+    """Camel integrands with two identical humps"""
+
+    def __init__(self, d, s=0.1, norm=1, device=None, *args, **kwargs):
+        """
+        Parameters
+        ----------
+        s: float or torch.Tensor
+            std of the two gaussians. Either a scalar or a vector of size d
+        norm: float or torch.Tensor
+            normalization of the two gaussians. Must be a scalar.
+        device: default device on which to run the computation
+        """
+
+        super(SymmetricCamelIntegrand, self).__init__(d=d, s1=s, s2=s, norm1=norm, norm2=norm, device=device, *args, **kwargs)

@@ -6,22 +6,25 @@ zunis.models.flows package
    :undoc-members:
    :show-inheritance:
 
-Subpackages
------------
+.. container:: doctitle
+
+   Subpackages
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.analytic_flows
    zunis.models.flows.backprop_jacobian_flows
    zunis.models.flows.coupling_cells
    zunis.models.flows.sequential
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.general_flow
    zunis.models.flows.masking

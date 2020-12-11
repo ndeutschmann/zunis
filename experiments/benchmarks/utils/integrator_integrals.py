@@ -6,7 +6,7 @@ from utils.integral_validation import Sampler, validate_integral, evaluate_integ
 class IntegratorSampler(Sampler):
     """Sampler using an Integrator's sample_refine method"""
 
-    def __init__(self, integrator, train=True, n_survey_steps=10, survey_args=None):
+    def __init__(self, integrator, train=True, n_survey_steps=None, survey_args=None):
         """
 
         Parameters
@@ -14,8 +14,9 @@ class IntegratorSampler(Sampler):
         integrator: zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator
         train: bool
             whether to train the integrator by running `integrator.survey`
-        n_survey_steps: int
-            if train is `True`, how many survey steps to use for training
+        n_survey_steps: int, None
+            if train is `True`, how many survey steps to use for training. If None, use the configuration
+            set at the creation of the Integrator
         survey_args: None or dict
             if train is `True`, additional survey options to pass to `integrator.survey`
         """
@@ -25,7 +26,7 @@ class IntegratorSampler(Sampler):
         if train:
             self.train_integrator(n_survey_steps, survey_args)
 
-    def train_integrator(self, n_survey_steps, survey_args=None):
+    def train_integrator(self, n_survey_steps=None, survey_args=None):
         """Train the integrator before sampling
 
         Parameters
@@ -67,7 +68,7 @@ class IntegratorSampler(Sampler):
         return self.integrator.integration_history
 
 
-def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, train=True, n_survey_steps=10,
+def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, train=True, n_survey_steps=None,
                                  survey_args=None, keep_history=False):
     """Validate a known integral using an integrator as a sampler
 
@@ -90,12 +91,11 @@ def validate_integral_integrator(f, integrator, n_batch=10000, sigma_cutoff=2, t
     -------
         utils.record.ComparisonRecord
     """
-
     sampler = IntegratorSampler(integrator, train=train, n_survey_steps=n_survey_steps, survey_args=survey_args)
     return validate_integral(f, sampler, n_batch, sigma_cutoff, keep_history=keep_history)
 
 
-def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=10, survey_args=None,
+def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_survey_steps=None, survey_args=None,
                                  keep_history=False):
     """Validate a known integral using an integrator as a sampler
 
@@ -106,8 +106,9 @@ def evaluate_integral_integrator(f, integrator, n_batch=10000, train=True, n_sur
     n_batch: int
     train: bool
         whether to train the integrator using `integrator.survey`
-    n_survey_steps: int
-        positional `integrator.survey` argument
+    n_survey_steps: int, optional
+        positional `integrator.survey` argument. Use the attribute n_iter_survey set at instantiation if not
+        specified.
     survey_args: None or dict
         optional keyword-argument dictionary for `integrator.survey`
     keep_history: bool

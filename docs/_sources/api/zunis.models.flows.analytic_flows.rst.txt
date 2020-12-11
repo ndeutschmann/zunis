@@ -6,11 +6,13 @@ zunis.models.flows.analytic\_flows package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.flows.analytic_flows.analytic_flow
    zunis.models.flows.analytic_flows.element_wise

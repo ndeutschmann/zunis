@@ -1,0 +1,7 @@
+utils.config.configuration module
+=================================
+
+.. automodule:: utils.config.configuration
+   :members:
+   :undoc-members:
+   :show-inheritance:

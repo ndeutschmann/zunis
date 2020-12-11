@@ -3,7 +3,7 @@
 import os
 import sqlalchemy as sql
 from collections import defaultdict
-from utils.config.configuration import Configuration
+from zunis.utils.config.configuration import Configuration
 from utils.data_storage.dataframe2sql import append_dataframe_to_sqlite
 
 package_directory = os.path.dirname(os.path.abspath(__file__))

@@ -6,11 +6,13 @@ zunis.integration package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.integration.adaptive_survey_integrator
    zunis.integration.default_integrator

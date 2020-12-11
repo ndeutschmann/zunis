@@ -2,12 +2,13 @@
 from abc import abstractmethod
 
 from better_abc import ABC
-
+import vegas
+import torch
 
 class Integrand(ABC):
     """Abstract class to define integrands for testing the integration library"""
 
-    def __init__(self, d):
+    def __init__(self, d, *args, **kwargs):
         self.d = d
 
     @abstractmethod
@@ -17,8 +18,16 @@ class Integrand(ABC):
     def __call__(self, x):
         """Compute the value of the integrand on a batch of points"""
         assert len(x.shape) == 2, f"Shape mismatch, expected (*, {self.d})"
-        assert x.shape[1] == self.d, f"Shape mismatch, expected (*, {self.d})"
+        assert x.shape[1] == self.d, f"Shape mismatch, expected (*, {self.d}), got {tuple(x.shape)}"
         return self.evaluate_integrand(x)
+
+    def vegas(self, device=torch.device("cpu")):
+        """Turn this integrand into a vegas batch integrand"""
+        @vegas.batchintegrand
+        def vself(x):
+            return self(torch.tensor(x).to(device)).detach().cpu().numpy()
+
+        return vself
 
 
 class KnownIntegrand(Integrand, ABC):

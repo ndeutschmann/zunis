@@ -6,11 +6,13 @@ zunis.models.layers package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.models.layers.activations
    zunis.models.layers.trainable

@@ -18,8 +18,6 @@ div.sphinxsidebar h3 {
 }
 
 
-
-
 div.sphinxsidebar p {
     color: #333;
     font-size: 22px;
@@ -87,10 +85,11 @@ i.fa-exclamation-triangle {
         margin-right: 0;
         width: 100%;
     }
-    
-    div.sphinxsidebar p.caption{
+
+    div.sphinxsidebar p.caption {
         color: gray;
     }
+
     div.sphinxsidebar h3 {
         color: gray;
     }
@@ -114,6 +113,7 @@ i.fa-exclamation-triangle {
     #mobileanchor {
         display: none;
     }
+
     #mobilelink {
         display: none;
     }
@@ -123,4 +123,8 @@ i.fa-exclamation-triangle {
     div.body {
         font-size: 14px;
     }
+}
+
+.doctitle {
+    font-size: 180%;
 }

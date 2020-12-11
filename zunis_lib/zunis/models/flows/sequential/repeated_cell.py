@@ -5,10 +5,11 @@ import torch
 from .invertible_sequential import InvertibleSequentialFlow
 from zunis.models.flows.coupling_cells.general_coupling import InvertibleCouplingCell
 from zunis.models.flows.analytic_flows.analytic_flow import InvertibleAnalyticFlow
-from ..masking import n_ary_mask_strategy, maximal_masking_strategy
+from ..masking import n_ary_mask_strategy, maximal_masking_strategy,iflow_strategy
 
 from zunis.models.flows.coupling_cells.real_nvp import RealNVP
 from zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear import PWLinearCoupling
+from zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic import PWQuadraticCoupling
 from zunis.models.flows.analytic_flows.element_wise import InvertibleAnalyticSigmoid
 
 
@@ -69,11 +70,13 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
     This is meant as a higher-level API to generate boilerplate models based on architecture and masking strategy
     """
     cells = {"realnvp": (RealNVP, None, InvertibleAnalyticSigmoid),
-             "pwlinear": (PWLinearCoupling, None, None)}
+             "pwlinear": (PWLinearCoupling, None, None),
+             "pwquad": (PWQuadraticCoupling, None, None)}
 
     masking = {
         "checkerboard": partial(n_ary_mask_strategy, n=2),
-        "maximal": maximal_masking_strategy
+        "maximal": maximal_masking_strategy,
+        "iflow": iflow_strategy
     }
 
     def __init__(self, d, cell="pwlinear", masking="checkerboard", *, input_cell=None, output_cell=None,
@@ -84,7 +87,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
         ----------
         d: int
             dimensionality
-        cell: {"pwlinear", "realnvp"}
+        cell: {"pwlinear", "pwquad", "realnvp"}
             coupling cell choice
         masking: {"checkerboard", "maximal"}
             masking strategy. See :py:attr:`RepeatedCellFlow.masking <zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking>`
@@ -117,6 +120,7 @@ class RepeatedCellFlow(MaskListRepeatedCellFlow):
             masking_options = dict()
 
         masks = self.masking[masking](d, **masking_options)
+       
         super(RepeatedCellFlow, self).__init__(d, cell=cell, masks=masks,
                                                input_cell=input_cell, output_cell=output_cell,
                                                cell_params=cell_params, input_cell_params=input_cell_params,

@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils.integral_validation module &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="utils.integrals module" href="utils.integrals.html" />
+    <link rel="prev" title="utils.flat_integrals module" href="utils.flat_integrals.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="module-utils.integral_validation">
+<span id="utils-integral-validation-module"></span><h1>utils.integral_validation module<a class="headerlink" href="#module-utils.integral_validation" title="Permalink to this headline">¶</a></h1>
+<p>Generic facilities to validate integrals</p>
+<dl class="py class">
+<dt id="utils.integral_validation.Sampler">
+<em class="property">class </em><code class="sig-name descname">Sampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.Sampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>Sampling tool for integral validation
+that mimics the behavior of sample_survey/sample_refine from Integrators</p>
+<dl class="py method">
+<dt id="utils.integral_validation.Sampler.get_history">
+<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.Sampler.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return stored training history from the sampler
+This abstract class has no training history and returns an empty history</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>empty dataframe</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pandas.Dataframe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utils.integral_validation.Sampler.sample">
+<em class="property">abstract </em><code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.Sampler.sample" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.Integrand</span></code>) – </p></li>
+<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>tuple of torch.Tensor</em></p></li>
+<li><p><strong>x,px,fx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">points</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pdfs</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">function</span> <span class="pre">values</span></code>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.integral_validation.compare_integral_result">
+<code class="sig-name descname">compare_integral_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">result1</span></em>, <em class="sig-param"><span class="n">result2</span></em>, <em class="sig-param"><span class="n">sigma_cutoff</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.compare_integral_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute an integral in two different ways and compare</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result1</strong> (<a class="reference internal" href="utils.record.html#utils.record.EvaluationRecord" title="utils.record.EvaluationRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.record.EvaluationRecord</span></code></a>) – </p></li>
+<li><p><strong>result2</strong> (<a class="reference internal" href="utils.record.html#utils.record.EvaluationRecord" title="utils.record.EvaluationRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.record.EvaluationRecord</span></code></a>) – </p></li>
+<li><p><strong>sigma_cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="utils.record.html#utils.record.ComparisonRecord" title="utils.record.ComparisonRecord">utils.record.ComparisonRecord</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.integral_validation.compare_integrals">
+<code class="sig-name descname">compare_integrals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integrand1</span></em>, <em class="sig-param"><span class="n">sampler1</span></em>, <em class="sig-param"><span class="n">sampler2</span></em>, <em class="sig-param"><span class="n">integrand2</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">sigma_cutoff</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.compare_integrals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute an integral in two different ways and compare</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>integrand1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">callable</span></code>) – </p></li>
+<li><p><strong>integrand2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">None</span> <span class="pre">callable</span></code>) – if not None, use <code class="xref py py-obj docutils literal notranslate"><span class="pre">integrand1</span></code> with <code class="xref py py-obj docutils literal notranslate"><span class="pre">sampler1</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">integrand2</span></code> with <code class="xref py py-obj docutils literal notranslate"><span class="pre">sampler2</span></code>, else use <code class="xref py py-obj docutils literal notranslate"><span class="pre">integrand1</span></code> for both</p></li>
+<li><p><strong>sampler1</strong> (<a class="reference internal" href="#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>) – </p></li>
+<li><p><strong>sampler2</strong> (<a class="reference internal" href="#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>sigma_cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="utils.record.html#utils.record.ComparisonRecord" title="utils.record.ComparisonRecord">utils.record.ComparisonRecord</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.integral_validation.evaluate_integral">
+<code class="sig-name descname">evaluate_integral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integrand</span></em>, <em class="sig-param"><span class="n">sampler</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.evaluate_integral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate an integral</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>integrand</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
+<li><p><strong>sampler</strong> (<a class="reference internal" href="#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="utils.record.html#utils.record.EvaluationRecord" title="utils.record.EvaluationRecord">utils.record.EvaluationRecord</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.integral_validation.validate_integral">
+<code class="sig-name descname">validate_integral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integrand</span></em>, <em class="sig-param"><span class="n">sampler</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">sigma_cutoff</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integral_validation.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integral_validation.validate_integral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the integral and check whether it matches the known value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>integrand</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
+<li><p><strong>sampler</strong> (<a class="reference internal" href="#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>sigma_cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="utils.record.html#utils.record.EvaluationRecord" title="utils.record.EvaluationRecord">utils.record.EvaluationRecord</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="utils.html">Benchmark utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="utils.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;utils package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="utils.flat_integrals.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;flat_integrals module</a></li>
+        
+        
+        
+        <li><a href="utils.integrals.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;integrals module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
+  <li><a href="utils.html">utils package</a><ul>
+      <li>Previous: <a href="utils.flat_integrals.html" title="previous chapter">utils.flat_integrals module</a></li>
+      <li>Next: <a href="utils.integrals.html" title="next chapter">utils.integrals module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

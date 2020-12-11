@@ -33,6 +33,15 @@ def append_dataframe_to_sqlite(dataframe, dbname="", tablename="results", dtypes
             dataframe["git_info"] = git_info
         dtypes["git_info"] = sql.String
 
+    if "extra_data" not in dataframe:
+        dataframe["extra_data"] = [()] * len(dataframe)
+    dtypes["extra_data"] = sql.types.PickleType
+
+    if "value_history" in dataframe:
+        dtypes["value_history"] = sql.types.PickleType
+    if "target_history" in dataframe:
+        dtypes["target_history"] = sql.types.PickleType
+
     dataframe.to_sql(tablename, con=engine, index=False, if_exists="append", dtype=dtypes)
 
 
@@ -58,9 +67,10 @@ def read_pkl_sql(dbname="", tablename="results", dtypes=None):
         for key, value in dtypes.items():
             if value == sql.PickleType:
                 try:
-                    df[key] = df[key].apply(pickle.loads)
-                except pickle.UnpicklingError as e:
+                    df[key] = df[key].apply(lambda x: None if x is None else pickle.loads(x))
+                except (pickle.UnpicklingError, TypeError) as e:
                     logger.error(f"Could not unpickle column {key}, leaving it as-is")
                     logger.error(e)
 
+    df.columns = df.columns.astype(str)
     return df

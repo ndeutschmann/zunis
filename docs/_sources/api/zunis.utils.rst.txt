@@ -6,11 +6,13 @@ zunis.utils package
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+.. container:: doctitle
+
+   Submodules
+
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    zunis.utils.function_wrapper
    zunis.utils.logger

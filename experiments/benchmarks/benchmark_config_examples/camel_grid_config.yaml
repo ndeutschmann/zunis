@@ -1,0 +1,20 @@
+dimensions: [2,4,8,16]
+dbname: benchmarks.db
+experiment_name: camel_iflow_scan
+debug: False
+keep_history: True
+base_integrator_config:
+        n_iter: 10
+        n_bins: 50
+        n_epochs: 50
+        n_points_survey: 100000
+        minibatch_size: 20000
+        checkpoint_on_cuda: False
+        masking: iflow
+        repetitions: 1
+integrand_params_grid:
+        s: [0.3, 0.5]
+integrator_config_grid:
+        d_hidden: [64,128,256]
+        n_hidden: [2,4,6,8,10,12]
+        lr: [1.e-3, 5.e-4, 1.e-4, 5.e-5, 1.e-5]
