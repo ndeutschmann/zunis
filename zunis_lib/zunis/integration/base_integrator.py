@@ -138,5 +138,5 @@ class BaseIntegrator(SurveyRefineIntegratorAPI):
 
     def integrate(self, n_survey_steps=None, n_refine_steps=None, **kwargs):
         """Perform the integration"""
-        super(BaseIntegrator, self).integrate(n_survey_steps=n_survey_steps,
+        return super(BaseIntegrator, self).integrate(n_survey_steps=n_survey_steps,
                                                                  n_refine_steps=n_refine_steps, **kwargs)
