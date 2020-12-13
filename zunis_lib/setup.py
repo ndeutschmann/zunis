@@ -7,8 +7,10 @@ setup(
         "numpy == 1.19.1",
         "pandas == 1.1.0",
         "torch == 1.6.0",
+        "abc_property == 1.0",
+        "dictwrapper == 1.0"
     ],
-    version='0',
+    version='0.2rc1',
     description='Neural Importance Sampling',
     long_description=open("../README.md").read(),
     long_description_content_type="text/markdown",
