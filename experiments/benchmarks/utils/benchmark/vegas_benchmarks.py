@@ -11,6 +11,8 @@ from utils.flat_integrals import evaluate_integral_flat
 from utils.integral_validation import compare_integral_result
 from utils.integrator_integrals import evaluate_integral_integrator
 from utils.vegas_integrals import evaluate_integral_vegas
+from utils.known_integrals import evaluate_known_integral
+from utils.integrands.abstract import KnownIntegrand
 from zunis.integration import Integrator
 
 logger = logging.getLogger(__name__)
@@ -21,6 +23,22 @@ class VegasBenchmarker(Benchmarker):
 
     def benchmark_method(self, d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
                          keep_history=False, device=torch.device("cpu")):
+        """Benchmarking class for comparing with VEGAS
+
+        Parameters
+        ----------
+        d: int
+        integrand: utils.integrands.abstract.Integrand
+        integrator_config: dict
+        integrand_params: dict
+        n_batch: int
+        keep_history: bool
+        device: torch.device
+
+        Returns
+        -------
+            utils.benchmark.vegas_benchmarks.VegasBenchmarker
+        """
         logger.debug("=" * 72)
         logger.info("Defining integrand")
         if integrand_params is None:
@@ -41,9 +59,34 @@ class VegasBenchmarker(Benchmarker):
         vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                                n_batch_survey=integrator_args["n_points_survey"])
         flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
+        if isinstance(f, KnownIntegrand):
+            exact_result = evaluate_known_integral(f)
 
-        result = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3, keep_history=keep_history)
-        result["flat_variance_ratio"] = (flat_result["value_std"] / result["value_std"]) ** 2
+        result_vs_flat = compare_integral_result(integrator_result, flat_result, sigma_cutoff=3,
+                                                 keep_history=keep_history)
+        result_vs_vegas = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3)
+        if isinstance(f, KnownIntegrand):
+            result_vs_exact = compare_integral_result(integrator_result, exact_result, sigma_cutoff=3)
+
+        target_keys = ['target', 'target_std', 'sigma_cutoff', 'sigmas_off', 'percent_difference', 'variance_ratio',
+                       'match']
+
+        for key in target_keys:
+            result_vs_flat["flat_" + key] = result_vs_flat.pop(key)
+            result_vs_vegas["vegas_" + key] = result_vs_vegas.pop(key)
+            if isinstance(f, KnownIntegrand):
+                result_vs_exact["exact_" + key] = result_vs_exact.pop(key)
+
+        common_keys = ["value", "value_std"]
+
+        for key in common_keys:
+            result_vs_vegas.pop(key)
+            if isinstance(f, KnownIntegrand):
+                result_vs_exact.pop(key)
+        result = result_vs_flat
+        result.update(result_vs_vegas)
+        if isinstance(f, KnownIntegrand):
+            result.update(result_vs_exact)
 
         if isinstance(integrator_config, NestedMapping):
             result.update(integrator_config.as_flat_dict())

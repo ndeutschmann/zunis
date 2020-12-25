@@ -4,7 +4,7 @@ import click
 from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
 from utils.config.loaders import get_sql_types
-from utils.integrands.camel import SymmetricCamelIntegrand
+from utils.integrands.camel import KnownSymmetricCamelIntegrand
 
 
 def benchmark_camel(dimensions=None, sigmas=None, db=None,
@@ -31,7 +31,7 @@ def benchmark_camel(dimensions=None, sigmas=None, db=None,
     if sigmas is not None:
         benchmark_config["integrand_params_grid"]["s"] = sigmas
 
-    benchmarker.run(integrand=SymmetricCamelIntegrand, sql_dtypes=dtypes,
+    benchmarker.run(integrand=KnownSymmetricCamelIntegrand, sql_dtypes=dtypes,
                     **benchmark_config)
 
 

@@ -199,7 +199,7 @@ class Benchmarker(ABC):
                     result = result.as_dataframe()
 
                 if dbname is not None:
-                    append_dataframe_to_sqlite(result.as_dataframe(), dbname=dbname, tablename=experiment_name,
+                    append_dataframe_to_sqlite(result, dbname=dbname, tablename=experiment_name,
                                                dtypes=sql_dtypes)
 
 
