@@ -1,5 +1,5 @@
 """Tools to create configuration files for ZuNIS objects"""
-import yaml
+import ruamel.yaml as yaml
 
 from .configuration import Configuration
 from .loaders import get_default_integrator_config
@@ -35,4 +35,4 @@ def create_integrator_config_file(filepath="integator_config.yaml", base_config=
 
     mode = "w" if force else "x"
 
-    yaml.dump(config, open(filepath, mode=mode), Dumper=yaml.Dumper)
+    yaml.dump(config, open(filepath, mode=mode))
