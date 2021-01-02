@@ -10,7 +10,7 @@ setup(
         "abc_property == 1.0",
         "dictwrapper == 1.0"
     ],
-    version='0.2rc1',
+    version='0.2rc2',
     description='Neural Importance Sampling',
     long_description=open("../README.md").read(),
     long_description_content_type="text/markdown",
@@ -19,4 +19,5 @@ setup(
     url="https://ndeutschmann.github.io/zunis/",
     download_url="https://github.com/ndetschmann/zunis",
     license='MIT',
+    include_package_data = True
 )
