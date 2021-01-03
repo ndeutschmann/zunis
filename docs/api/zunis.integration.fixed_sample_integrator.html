@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fixed_sample_integrator module &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="flat_survey_integrator module" href="zunis.integration.flat_survey_integrator.html" />
+    <link rel="prev" title="dkltrainer_integrator module" href="zunis.integration.dkltrainer_integrator.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="module-zunis.integration.fixed_sample_integrator">
+<span id="zunis-integration-fixed-sample-integrator-module"></span><h1>fixed_sample_integrator module<a class="headerlink" href="#module-zunis.integration.fixed_sample_integrator" title="Permalink to this headline">¶</a></h1>
+<p>Integrator that does not sample points during the training phase but uses a fixed dataset of points</p>
+<dl class="py class">
+<dt id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator">
+<em class="property">class </em><code class="sig-name descname">FixedSampleSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator" title="zunis.integration.base_integrator.BaseIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.base_integrator.BaseIntegrator</span></code></a></p>
+<p>Integrator that trains its model during the survey phase using a pre-computed sample provided externally</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">callable</span></code>) – ZuNIS-compatible function</p></li>
+<li><p><strong>trainer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">BasicTrainer</span></code>) – trainer object used to perform the survey</p></li>
+<li><p><strong>sample</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – (x, fx, px): target-space point batch drawn from some PDF p, function value batch, PDF value batch p(x)</p></li>
+<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations (used for both survey and  refine unless specified)</p></li>
+<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for survey</p></li>
+<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for refine</p></li>
+<li><p><strong>n_points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points for both survey and refine unless specified</p></li>
+<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points for survey</p></li>
+<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points for refine</p></li>
+<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the integral estimations from the survey phase. This makes error estimation formally
+incorrect since samples from the refine depend on the survey training, but these correlation can be negligible
+in some cases.</p></li>
+<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – level of verbosity for the integrator-level logger</p></li>
+<li><p><strong>trainer_verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – level of verbosity for the trainer-level logger</p></li>
+<li><p><strong>kwargs</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey">
+<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample points from the internally stored sample</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – size of the batch to select from the sample</p></li>
+<li><p><strong>kwargs</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(x,px,fx): sampled points, sampling distribution PDF values, function values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple of torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample">
+<code class="sig-name descname">set_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a sample to be trained on</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sample</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – (x,px,fx): sampled points, sampling distribution PDF values, function values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv">
+<code class="sig-name descname">set_sample_csv</code><span class="sig-paren">(</span><em class="sig-param">csv_path</em>, <em class="sig-param">device=None</em>, <em class="sig-param">delimiter='</em>, <em class="sig-param">'</em>, <em class="sig-param">dtype=&lt;class 'float'&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a sample to be trained on from a csv file
+The file must contain equal length rows with at least four columns, all numerical.
+All columns but the last two are interpreted as point coordinates,
+the next-to-last is the point PDF and the last is the function value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – path to the csv file</p></li>
+<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – device to which to send the sample</p></li>
+<li><p><strong>delimiter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – delimiter of the csv file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle">
+<code class="sig-name descname">set_sample_pickle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pickle_path</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a sample to be trained on from a pickle file
+The pickle file must either contain a tuple (x,px,fx) of point batch, PDF value batch, function batch
+or a mapping with keys “x”, “px”, “fx”. In either case, these batches must be valid inputs for torch.tensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pickle_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – path to the pickle file.</p></li>
+<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – device on which to send the sample. If none is provided, flow parameter device will be used</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="zunis.integration.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;integration package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="zunis.integration.dkltrainer_integrator.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;dkltrainer_integrator module</a></li>
+        
+        
+        
+        <li><a href="zunis.integration.flat_survey_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;flat_survey_integrator module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
+  <li><a href="zunis.html">zunis package</a><ul>
+  <li><a href="zunis.integration.html">integration package</a><ul>
+      <li>Previous: <a href="zunis.integration.dkltrainer_integrator.html" title="previous chapter">dkltrainer_integrator module</a></li>
+      <li>Next: <a href="zunis.integration.flat_survey_integrator.html" title="next chapter">flat_survey_integrator module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

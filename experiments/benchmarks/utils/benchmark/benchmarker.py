@@ -44,7 +44,6 @@ class Benchmarker(ABC):
         -------
         Tuple[int, Dict[str, Any], Dict[str, Any]]
             triplets (d, integrator_config, integrand_params) that can be used to sample configurations
-
         """
 
     @staticmethod
@@ -269,21 +268,27 @@ class SequentialIntegratorBenchmarker(Benchmarker):
 
         Yields
         -------
-        Tuple[int, Dict[str, Any], Dict[str, Any]]
-            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+            Tuple[int, Dict[str, Any], Dict[str, Any]]
+                triplets (d, integrator_config, integrand_params) that can be used to sample configurations
 
         Notes
         -----
 
         The integrator grid is interpreted as a sequence:
-        `integrator_grid = {
-          param1: [v1, v2, ..., vn]
-          param2: [w1, w2, ..., wn]
-        }
+
+        .. code-block:: python
+
+            integrator_grid = {
+              param1: [v1, v2, ..., vn]
+              param2: [w1, w2, ..., wn]
+            }
+
         is scanned as the list of configurations
-        config1 = {param1: v1, param2: w1}
-        config2 = {param1: v2, param2: w2}
-        ...`
+
+        .. code-block:: python
+
+            config1 = {param1: v1, param2: w1}
+            config2 = {param1: v2, param2: w2}
         """
 
         grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
@@ -327,21 +332,28 @@ class SequentialBenchmarker(Benchmarker):
 
         Yields
         -------
-        Tuple[int, Dict[str, Any], Dict[str, Any]]
-            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+            Tuple[int, Dict[str, Any], Dict[str, Any]]
+                triplets (d, integrator_config, integrand_params) that can be used to sample configurations
 
         Notes
         -----
 
         The integrator grid is interpreted as a sequence:
-        `integrator_grid = {
-          param1: [v1, v2, ..., vn]
-          param2: [w1, w2, ..., wn]
-        }
+
+        .. code-block:: python
+
+            integrator_grid = {
+              param1: [v1, v2, ..., vn]
+              param2: [w1, w2, ..., wn]
+            }
+
         is scanned as the list of configurations
-        config1 = {param1: v1, param2: w1}
-        config2 = {param1: v2, param2: w2}
-        ...`
+
+        .. code-block:: python
+
+            config1 = {param1: v1, param2: w1}
+            config2 = {param1: v2, param2: w2}
+            ...
         """
 
         integrator_grid_lengths = list(set([len(param) for param in integrator_grid.values()]))

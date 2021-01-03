@@ -283,7 +283,7 @@ class ElementWisePWQuadraticTransform(InvertibleTransform):
 
     In each direction, the bijection is a piecewise-quadratic transform with b bins
     where the forward transform has bins with adjustable width. The transformation in each bin is
-   then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the 
+    then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the
     derivative of the transform for each direction and each point of the batch. They are normalized such that: 
     1. h(0) = 0
     2. h(1) = 1

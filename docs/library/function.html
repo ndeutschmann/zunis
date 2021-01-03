@@ -50,7 +50,6 @@ specific thread, etc.</p>
 <li><p>integrals are always computed over a d-dimensional unit hypercube</p></li>
 <li><p>a function is a callable Python object</p></li>
 <li><p>input and output are provided by batch</p></li>
-<li><p>the output must be positive [TEMPORARY]</p></li>
 </ol>
 <p>In specific terms, the input will always be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">x</span></code> with shape <span class="math notranslate nohighlight">\((N, d)\)</span> and values between 0 and 1,
 and the output is expected to be a <code class="code docutils literal notranslate"><span class="pre">torch.Tensor</span></code> object <code class="code docutils literal notranslate"><span class="pre">y</span></code> with shape <span class="math notranslate nohighlight">\((N,)\)</span>, such that <code class="code docutils literal notranslate"><span class="pre">y[i]</span> <span class="pre">=</span> <span class="pre">f(x[i])</span></code></p>

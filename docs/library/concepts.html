@@ -50,6 +50,10 @@ They can automate trainer and flow creation.</p>
 They can automate flow creation.</p>
 <p>3. <a class="reference internal" href="flow.html"><span class="doc">Normalizing Flows</span></a> are neural-network-based bijections from the unit hypercube to itself. They are the
 actual trainable sampling mechanism that we use to sample points for Monte Carlo integration.</p>
+<p>An Integrator contains a Trainer, which contains a Flow. Each level of abstraction can either be instantiated by
+providing it it with an explicit object of the lower level, or using an API which builds the lower-level constructs
+automatically.</p>
+<a class="reference internal image-reference" href="../_images/Abstractions.png"><img alt="../_images/Abstractions.png" src="../_images/Abstractions.png" style="width: 80%;" /></a>
 </div>
 
 

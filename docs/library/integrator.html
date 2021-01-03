@@ -41,6 +41,121 @@
             
   <div class="section" id="integrators">
 <h1>Integrators<a class="headerlink" href="#integrators" title="Permalink to this headline">¶</a></h1>
+<p>Integrators are intended as the main way for standard users to interact with ZuNIS.
+They provide a high-level interface to the functionalities of the library and only optionally require you to know
+to what lower levels of abstractions really entail and what their options correspond.
+At the highest possible level, <a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a>
+allows you to interface with the different types of integrators and comes with sane defaults for each of them.</p>
+<div class="section" id="the-integrator-api">
+<h2>The Integrator API<a class="headerlink" href="#the-integrator-api" title="Permalink to this headline">¶</a></h2>
+<p>The main API to use ZuNIS integrators is
+<a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a>,
+which will instantiate the correct type of integrator and of subcomponents (trainer and flow).
+Only two arguments are necessary to define an integrator with this API: a number
+of dimensions and a <a class="reference internal" href="function.html"><span class="doc">function</span></a> mapping batches of pytorch <code class="code docutils literal notranslate"><span class="pre">Tensors</span></code> into batches of values</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computing the integral is then a matter of calling the
+<a class="reference internal" href="../api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.integrate" title="zunis.integration.base_integrator.BaseIntegrator.integrate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">integrate</span></code></a> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">uncertainty</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># &gt; 6.666e-01 +/- 4.69e-05</span>
+</pre></div>
+</div>
+<p>The main options of <a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a> control some
+high-level choices:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">loss</span></code> controls the loss function used during training. The options are <code class="code docutils literal notranslate"><span class="pre">'variance'</span></code> (default) or <code class="code docutils literal notranslate"><span class="pre">'dkl'</span></code>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">flow</span></code> controls which normalizing flow will be used. The options are <code class="code docutils literal notranslate"><span class="pre">'pwquad'</span></code> (default), <code class="code docutils literal notranslate"><span class="pre">'pwlin'</span></code> and <code class="code docutils literal notranslate"><span class="pre">'realnvp'</span></code>. Without much surprise, this controls which flow class will be used</p></li>
+</ul>
+<p>Furthermore, a few options are used to control administrative things:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">device</span></code> controls where the integration is performed (<em>e.g.</em> <code class="code docutils literal notranslate"><span class="pre">torch.device(&quot;cuda&quot;)</span></code>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">verbosity</span></code> controls the logging verbosity of the integration process</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">trainer_verbosity</span></code> controls the logging verbosity of the training process during the survey stage</p></li>
+</ul>
+<p>Note that by default, the <a class="reference internal" href="../api/zunis.html#zunis.logger" title="zunis.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZuNIS</span> <span class="pre">logger</span></code></a> does not have a handler. Use
+<a class="reference internal" href="../api/zunis.html#zunis.setup_std_stream_logger" title="zunis.setup_std_stream_logger"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.setup_std_stream_logger()</span></code></a> to setup handlers to <code class="code docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="code docutils literal notranslate"><span class="pre">stderr</span></code>.</p>
+<p>Further customization requires one to set specific options for the lower level objects used by the integrator: either
+the <a class="reference internal" href="trainer.html"><span class="doc">Trainer</span></a> or the <a class="reference internal" href="flow.html"><span class="doc">Flow</span></a>, which can be set through <code class="code docutils literal notranslate"><span class="pre">trainer_options</span></code> and <code class="code docutils literal notranslate"><span class="pre">flow_options</span></code>
+respectively.</p>
+<div class="section" id="configuration-files">
+<h3>Configuration files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h3>
+<p>An efficient way of defining specific options for an integrator is to use configuration files which encode the options
+passed to the Integrator API. A good place to get started is the function
+<a class="reference internal" href="../api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.create_integrator_args" title="zunis.utils.config.loaders.create_integrator_args"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_integrator_args</span></code></a> which can be called without arguments
+to get a keyword dictionary with default options</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zunis.utils.config.loaders</span> <span class="kn">import</span> <span class="n">create_integrator_args</span>
+
+<span class="n">kwargs</span> <span class="o">=</span> <span class="n">create_integrator_args</span><span class="p">()</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="c1">#{&#39;flow&#39;: &#39;pwquad&#39;,</span>
+<span class="c1">#&#39;flow_options&#39;: {&#39;cell_params&#39;: {&#39;d_hidden&#39;: 256, &#39;n_bins&#39;: 10, &#39;n_hidden&#39;: 8},</span>
+<span class="c1">#                  &#39;masking&#39;: &#39;iflow&#39;,</span>
+<span class="c1">#                 &#39;masking_options&#39;: {&#39;repetitions&#39;: 2}},</span>
+<span class="c1">#&#39;loss&#39;: &#39;variance&#39;,</span>
+<span class="c1">#&#39;n_iter&#39;: 10,</span>
+<span class="c1">#&#39;n_points_survey&#39;: 10000,</span>
+<span class="c1">#&#39;trainer_options&#39;: {&#39;checkpoint&#39;: True,</span>
+<span class="c1">#                    &#39;checkpoint_on_cuda&#39;: True,</span>
+<span class="c1">#                    &#39;checkpoint_path&#39;: None,</span>
+<span class="c1">#                    &#39;max_reloads&#39;: 0,</span>
+<span class="c1">#                    &#39;minibatch_size&#39;: 1.0,</span>
+<span class="c1">#                    &#39;n_epochs&#39;: 50,</span>
+<span class="c1">#                    &#39;optim&#39;: &lt;class &#39;torch.optim.adam.Adam&#39;&gt;}}</span>
+</pre></div>
+</div>
+<p>This function actually reads a template configuration file <code class="code docutils literal notranslate"><span class="pre">zunis/utils/config/integrator_config.yaml</span></code> by
+calling the function <a class="reference internal" href="../api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.get_default_integrator_config" title="zunis.utils.config.loaders.get_default_integrator_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_integrator_config</span></code></a>.
+A good way to experiment with the settings of Integrators and their subcomponents is to load this default and
+adjust it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unis.utils.config.loaders</span> <span class="kn">import</span> <span class="n">get_default_integrator_config</span>
+<span class="kn">from</span> <span class="nn">zunis.utils.config.loaders</span> <span class="kn">import</span> <span class="n">create_integrator_args</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">get_default_integrator_config</span><span class="p">()</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dkl&#39;</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.e-4</span>
+<span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_bins&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">kwargs</span> <span class="o">=</span> <span class="n">create_integrator_args</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the <a class="reference internal" href="../api/zunis.utils.config.configuration.html#zunis.utils.config.configuration.Configuration" title="zunis.utils.config.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> object generated allows easy
+edition despite its nested structure.</p>
+<p>If you want to fully specify your configuration, you can define your own configuration file and make it a
+<a class="reference internal" href="../api/zunis.utils.config.configuration.html#zunis.utils.config.configuration.Configuration" title="zunis.utils.config.configuration.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> by calling <code class="code docutils literal notranslate"><span class="pre">Configuration.from_yaml</span></code>.</p>
+</div>
+</div>
+<div class="section" id="how-integrators-work">
+<h2>How Integrators work<a class="headerlink" href="#how-integrators-work" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="survey-and-refine-phases">
+<h3>Survey and Refine phases<a class="headerlink" href="#survey-and-refine-phases" title="Permalink to this headline">¶</a></h3>
+<p>All integrators work by first performing a <em>survey phase</em>, in which it optimizes the way it samples points and then a
+<em>refine phase</em>, in which it computes the integral by using its learned sampler. Each phase proceeds through a number
+of steps, which can be set at instantiation or when integrating:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">n_iter_survey</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_iter_refine</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Default values</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">n_survey</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_refine</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Override at integration time</span>
+</pre></div>
+</div>
+<p>For both the survey and the refine phases, using multiple steps is useful to monitor the stability of the training and of
+the integration process: if one step is not within a few standard deviations of the next, either the sampling statistics
+are too low, or something is wrong. For the refine stage, this is the main real advantage of using multiple steps. On the
+other hand, at each new survey step, a new batch of points is re-sampled, which can be useful to mitigate overfitting.</p>
+<p>By default, only the integral estimates obtained during the refine stage are combined to compute the final integral estimate,
+and their combination is performed by taking their average. Indeed, because the model is trained during the survey step,
+the points sampled during the refine stage are correlated in an uncontrolled way with the points used during training.
+Ignoring the survey stage makes all estimates used in the combination independent
+random variables, which permits us to build a formally correct estimator of the variance of the final result.</p>
+</div>
+</div>
 </div>
 
 
@@ -75,7 +190,17 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic-example.html">Basic example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="concepts.html">Concepts</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrators</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-integrator-api">The Integrator API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-files">Configuration files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-integrators-work">How Integrators work</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#survey-and-refine-phases">Survey and Refine phases</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="trainer.html">Trainers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flow.html">Normalizing flows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="function.html">Integrand functions</a></li>

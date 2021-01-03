@@ -112,9 +112,14 @@ edition despite its nested structure.
 If you want to fully specify your configuration, you can define your own configuration file and make it a
 :class:`Configuration <zunis.utils.config.configuration.Configuration>` by calling `Configuration.from_yaml`.
 
-************************
+
+**********************
+How Integrators work
+**********************
+
+
 Survey and Refine phases
-************************
+========================
 
 All integrators work by first performing a *survey phase*, in which it optimizes the way it samples points and then a
 *refine phase*, in which it computes the integral by using its learned sampler. Each phase proceeds through a number

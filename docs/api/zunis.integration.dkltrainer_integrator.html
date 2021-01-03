@@ -19,7 +19,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="flat_survey_integrator module" href="zunis.integration.flat_survey_integrator.html" />
+    <link rel="next" title="fixed_sample_integrator module" href="zunis.integration.fixed_sample_integrator.html" />
     <link rel="prev" title="default_integrator module" href="zunis.integration.default_integrator.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -56,6 +56,22 @@ the normalized target function f than the flat distribution. Since our target sp
 this is easy:</p>
 <p>L(f, uniform) = 0.</p>
 <p>So as soon as the loss is negative, we sample from the flow instead of the uniform distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> – </p></li>
+<li><p><strong>n_iter</strong> – </p></li>
+<li><p><strong>n_iter_survey</strong> – </p></li>
+<li><p><strong>n_iter_refine</strong> – </p></li>
+<li><p><strong>n_points</strong> – </p></li>
+<li><p><strong>n_points_survey</strong> – </p></li>
+<li><p><strong>n_points_refine</strong> – </p></li>
+<li><p><strong>use_survey</strong> – </p></li>
+<li><p><strong>verbosity</strong> – </p></li>
+<li><p><strong>kwargs</strong> – </p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
 <code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
@@ -149,7 +165,7 @@ the target function and the uniform function, a negative loss indicates that flo
         
         
         
-        <li><a href="zunis.integration.flat_survey_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;flat_survey_integrator module</a></li>
+        <li><a href="zunis.integration.fixed_sample_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;fixed_sample_integrator module</a></li>
         
 <!--    </ul>-->
     
@@ -162,7 +178,7 @@ the target function and the uniform function, a negative loss indicates that flo
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.integration.html">integration package</a><ul>
       <li>Previous: <a href="zunis.integration.default_integrator.html" title="previous chapter">default_integrator module</a></li>
-      <li>Next: <a href="zunis.integration.flat_survey_integrator.html" title="next chapter">flat_survey_integrator module</a></li>
+      <li>Next: <a href="zunis.integration.fixed_sample_integrator.html" title="next chapter">fixed_sample_integrator module</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

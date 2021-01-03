@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="utils.data_storage package" href="utils.data_storage.html" />
-    <link rel="prev" title="utils.config.configuration module" href="utils.config.configuration.html" />
+    <link rel="prev" title="utils.config package" href="utils.config.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -42,58 +42,6 @@
   <div class="section" id="module-utils.config.loaders">
 <span id="utils-config-loaders-module"></span><h1>utils.config.loaders module<a class="headerlink" href="#module-utils.config.loaders" title="Permalink to this headline">¶</a></h1>
 <p>Tools for loading configurations</p>
-<dl class="py function">
-<dt id="utils.config.loaders.create_integrator_args">
-<code class="sig-name descname">create_integrator_args</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/config/loaders.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.config.loaders.create_integrator_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the full hierarchy of arguments for an integrator, including an instantiated optimizer</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary-like</span></code>, <em>optional</em>) – Full configuration dictionary for the Integrator function. If none is provided, the default configuration
-is used.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>keyword dictionary ready to be provided as <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> to the
-<a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">Integrator</span></code></a> function</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">obj:dict</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="utils.config.loaders.get_default_integrator_config">
-<code class="sig-name descname">get_default_integrator_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/config/loaders.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.config.loaders.get_default_integrator_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a copy of the full default text-based integrator config</p>
-<p>The default configuration file is situated in utils/config/integrator_config.yaml</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="utils.config.loaders.get_optim_from_config">
-<code class="sig-name descname">get_optim_from_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/config/loaders.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.config.loaders.get_optim_from_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get an optimizer object from a config dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary-like</span></code>, <em>optional</em>) – dictionary-like object with the following structure:
-{
-“optim_cls”: &lt;optim class name within torch.optim&gt;,
-“optim_config”: &lt;dictionary defining the key-word argument parameters for instantiating that class&gt;
-}
-If no argument is given, the default configuration is used (utils/config/optim_config.yaml)</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>a pre-filled optimizer constructor that only needs to be fed the model parameters.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">function</span></code></p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>This function does not instantiate the optimize object, it wraps its constructor with functools.partial
-to pre-fill the optimizer settings with the provided value. Given a model, one then needs to call the output
-on model.parameters()</p>
-</dd></dl>
-
 <dl class="py function">
 <dt id="utils.config.loaders.get_sql_types">
 <code class="sig-name descname">get_sql_types</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type_config</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/config/loaders.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.config.loaders.get_sql_types" title="Permalink to this definition">¶</a></dt>
@@ -190,9 +138,6 @@ can accomodate Configuration objects. If no argument is given, the default integ
 <!--    <ul>-->
         
         
-        <li><a href="utils.config.configuration.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;configuration module</a></li>
-        
-        
         
         <li><a href="utils.data_storage.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;data_storage package</a></li>
         
@@ -206,7 +151,7 @@ can accomodate Configuration objects. If no argument is given, the default integ
   <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="utils.html">utils package</a><ul>
   <li><a href="utils.config.html">utils.config package</a><ul>
-      <li>Previous: <a href="utils.config.configuration.html" title="previous chapter">utils.config.configuration module</a></li>
+      <li>Previous: <a href="utils.config.html" title="previous chapter">utils.config package</a></li>
       <li>Next: <a href="utils.data_storage.html" title="next chapter">utils.data_storage package</a></li>
   </ul></li>
   </ul></li>

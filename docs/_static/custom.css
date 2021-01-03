@@ -128,3 +128,13 @@ i.fa-exclamation-triangle {
 .doctitle {
     font-size: 180%;
 }
+
+
+dl.py.class {
+    padding-bottom: 2em;
+}
+
+dl.py.method {
+    padding-bottom: .5em;
+    padding-top: .5em;
+}

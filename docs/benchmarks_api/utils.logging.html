@@ -43,8 +43,8 @@
 <span id="utils-logging-module"></span><h1>utils.logging module<a class="headerlink" href="#module-utils.logging" title="Permalink to this headline">¶</a></h1>
 <p>Tools for setting up standard logging</p>
 <dl class="py function">
-<dt id="utils.logging.get_benchmark_logger">
-<code class="sig-name descname">get_benchmark_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'benchmark_logger'</span></em>, <em class="sig-param"><span class="n">zunis_level</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">zunis_integration_level</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">zunis_training_level</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/logging.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.logging.get_benchmark_logger" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.logging.set_benchmark_logger">
+<code class="sig-name descname">set_benchmark_logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'benchmark_logger'</span></em>, <em class="sig-param"><span class="n">zunis_level</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">zunis_integration_level</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">zunis_training_level</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/logging.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.logging.set_benchmark_logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup an application level logger outputting to file and limit integration/training output</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -66,8 +66,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="utils.logging.get_benchmark_logger_debug">
-<code class="sig-name descname">get_benchmark_logger_debug</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'benchmark_logger'</span></em>, <em class="sig-param"><span class="n">zunis_level</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">zunis_integration_level</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">zunis_training_level</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/logging.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.logging.get_benchmark_logger_debug" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.logging.set_benchmark_logger_debug">
+<code class="sig-name descname">set_benchmark_logger_debug</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">zunis_level</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">zunis_integration_level</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">zunis_training_level</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/logging.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.logging.set_benchmark_logger_debug" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Setup an application level logger outputting to stdout for debugging purposes</dt><dd><p>and limit integration/training output</p>
 </dd>
@@ -75,18 +75,10 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the benchmark logger and the output file ({name}.log)</p></li>
 <li><p><strong>zunis_level</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – logging level of the zunis logger</p></li>
 <li><p><strong>zunis_integration_level</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – logging level of the zunis integration logger.</p></li>
 <li><p><strong>zunis_training_level</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – logging level of the zunis training logger.</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><em>logging.Logger</em></p></li>
-<li><p><em>desired logger for the benchmark</em></p></li>
-</ul>
-</p>
 </dd>
 </dl>
 </dd></dl>
