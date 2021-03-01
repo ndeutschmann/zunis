@@ -91,7 +91,7 @@ zipp==3.1.0
 
 # My Packages
 better-abc @ git+https://github.com/ndeutschmann/better_abc@6b393a2ae82da68e85f9a960eecbbb98bfd8d143
-dictwrapper @ git+https://github.com/ndeutschmann/dictwrapper
+dictwrapper==1.3
 -e ./zunis_lib
 
 #Packages by NGoetz
