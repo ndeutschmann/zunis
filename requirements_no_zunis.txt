@@ -4,7 +4,7 @@ argon2-cffi==20.1.0
 attrs==19.3.0
 Babel==2.8.0
 backcall==0.2.0
-bleach==3.1.5
+bleach==3.3.0
 certifi==2020.6.20
 cffi==1.14.1
 chardet==3.0.4
@@ -37,7 +37,7 @@ matplotlib==3.3.0
 mistune==0.8.4
 nbconvert==5.6.1
 nbformat==5.0.7
-notebook==6.1.1
+notebook==6.1.5
 numpy==1.19.1
 packaging==20.4
 pandas==1.1.0
@@ -87,4 +87,4 @@ zipp==3.1.0
 
 # My Packages
 better-abc @ git+https://github.com/ndeutschmann/better_abc@6b393a2ae82da68e85f9a960eecbbb98bfd8d143
-dictwrapper @ git+https://github.com/ndeutschmann/dictwrapper
+dictwrapper
