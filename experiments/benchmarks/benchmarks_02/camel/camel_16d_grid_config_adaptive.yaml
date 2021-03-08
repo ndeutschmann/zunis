@@ -1,5 +1,5 @@
 base_integrator_config: {checkpoint_on_cuda: false, masking: iflow, minibatch_size: 20000,
-  n_bins: 50, n_epochs: 50, n_iter: 10, n_points_survey: 100000, repetitions: 1, survey_strategy: adaptive}
+  n_bins: 50, n_epochs: 50, n_iter: 10, n_points_survey: 100000, repetitions: 1, survey_strategy: adaptive_dkl}
 dbname: benchmarks_02/benchmarks.db
 debug: false
 dimensions: [16]
