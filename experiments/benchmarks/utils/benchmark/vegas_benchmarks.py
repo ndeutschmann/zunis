@@ -2,6 +2,7 @@ import logging
 
 import torch
 import vegas
+import datetime
 from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
@@ -55,8 +56,8 @@ class VegasBenchmarker(Benchmarker):
         result.update(integrand_params)
 
         result["d"] = d
-        result["time_zunis"]=(time_switch-start_time_zunis).total_seconds()
-        result["time_vegas"]=(end_time_vegas-time_switch).total_seconds()
+        result["time_zunis"]=(switch_time-start_time_zunis).total_seconds()
+        result["time_vegas"]=(end_time_vegas-switch_time).total_seconds()
 
         return result, integrator
 
