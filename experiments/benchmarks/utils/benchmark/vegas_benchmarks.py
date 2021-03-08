@@ -2,6 +2,7 @@ import logging
 
 import torch
 import vegas
+import datetime
 from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
@@ -54,10 +55,12 @@ class VegasBenchmarker(Benchmarker):
         integrator = Integrator(f=f, d=d, device=device, **integrator_args)
 
         vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
-
+        start_time_zunis=datetime.datetime.utcnow()
         integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch, keep_history=keep_history)
+        switch_time=datetime.datetime.utcnow()
         vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                                n_batch_survey=integrator_args["n_points_survey"])
+        end_time_vegas=datetime.datetime.utcnow()
         flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
         if isinstance(f, KnownIntegrand):
             exact_result = evaluate_known_integral(f)
@@ -96,6 +99,8 @@ class VegasBenchmarker(Benchmarker):
         result.update(integrand_params)
 
         result["d"] = d
+        result["time_zunis"]=(switch_time-start_time_zunis).total_seconds()
+        result["time_vegas"]=(end_time_vegas-switch_time).total_seconds()
 
         return result, integrator
 
