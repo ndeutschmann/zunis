@@ -65,10 +65,16 @@ class VegasBenchmarker(Benchmarker):
         if isinstance(f, KnownIntegrand):
             exact_result = evaluate_known_integral(f)
 
+        logger.info("")
+        logger.info("Integrator (Result 1) vs Flat integrator (Result 2)")
         result_vs_flat = compare_integral_result(integrator_result, flat_result, sigma_cutoff=3,
                                                  keep_history=keep_history)
+        logger.info("")
+        logger.info("Integrator (Result 1) vs VEGAS (Result 2)")
         result_vs_vegas = compare_integral_result(integrator_result, vegas_result, sigma_cutoff=3)
         if isinstance(f, KnownIntegrand):
+            logger.info("")
+            logger.info("Integrator (Result 1) vs exact result (Result 2)")
             result_vs_exact = compare_integral_result(integrator_result, exact_result, sigma_cutoff=3)
 
         target_keys = ['target', 'target_std', 'sigma_cutoff', 'sigmas_off', 'percent_difference', 'variance_ratio',
