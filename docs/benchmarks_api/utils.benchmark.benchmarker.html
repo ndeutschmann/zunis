@@ -80,20 +80,24 @@
 <dt id="utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config">
 <code class="sig-name descname">set_benchmark_grid_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dimensions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dbname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">experiment_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_dimension</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">base_integrand_params</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare standard arguments for <code class="code docutils literal notranslate"><span class="pre">run_benchmark_grid</span></code>
-The parameter importance hierarchy is:
-1. CLI arguments (direct arguments to this function)
-2. config file (filepath given as <code class="code docutils literal notranslate"><span class="pre">config</span></code>)
-3. default values provided as argument</p>
+The parameter importance hierarchy is:</p>
+<ol class="arabic simple">
+<li><p>CLI arguments (direct arguments to this function)</p></li>
+<li><p>config file (filepath given as <code class="code docutils literal notranslate"><span class="pre">config</span></code>)</p></li>
+<li><p>default values provided as argument</p></li>
+</ol>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config_param">
 <em class="property">static </em><code class="sig-name descname">set_benchmark_grid_config_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">benchmark_grid_config</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">param_value</span></em>, <em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config_param" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set an argument in the configuration dictionary to be provided to <code class="code docutils literal notranslate"><span class="pre">run_benchmark_grid</span></code> according to the
-established hierarchy:
-1. direct argument value (typically from CLI)
-2. config file value
-3. default value - what is already in the config dictionary when entering this function</p>
+established hierarchy:</p>
+<ol class="arabic simple">
+<li><p>direct argument value (typically from CLI)</p></li>
+<li><p>config file value</p></li>
+<li><p>default value - what is already in the config dictionary when entering this function</p></li>
+</ol>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

@@ -4,7 +4,7 @@
 Integrators
 ###########
 
-Integrators are intended as the main way for standard users to interact with ZuNIS.
+Integrators are intended as the main way for standard users to interact with ZüNIS.
 They provide a high-level interface to the functionalities of the library and only optionally require you to know
 to what lower levels of abstractions really entail and what their options correspond.
 At the highest possible level, :func:`zunis.integration.Integrator <zunis.integration.default_integrator.Integrator>`
@@ -14,7 +14,7 @@ allows you to interface with the different types of integrators and comes with s
 The Integrator API
 ******************
 
-The main API to use ZuNIS integrators is
+The main API to use ZüNIS integrators is
 :func:`zunis.integration.Integrator <zunis.integration.default_integrator.Integrator>`,
 which will instantiate the correct type of integrator and of subcomponents (trainer and flow).
 Only two arguments are necessary to define an integrator with this API: a number
@@ -51,7 +51,7 @@ Furthermore, a few options are used to control administrative things:
 * `verbosity` controls the logging verbosity of the integration process
 * `trainer_verbosity` controls the logging verbosity of the training process during the survey stage
 
-Note that by default, the :obj:`ZuNIS logger <zunis.logger>` does not have a handler. Use
+Note that by default, the :obj:`ZüNIS logger <zunis.logger>` does not have a handler. Use
 :func:`zunis.setup_std_stream_logger` to setup handlers to `stdout` and `stderr`.
 
 Further customization requires one to set specific options for the lower level objects used by the integrator: either

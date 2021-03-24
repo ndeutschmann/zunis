@@ -41,14 +41,14 @@
             
   <div class="section" id="integrators">
 <h1>Integrators<a class="headerlink" href="#integrators" title="Permalink to this headline">¶</a></h1>
-<p>Integrators are intended as the main way for standard users to interact with ZuNIS.
+<p>Integrators are intended as the main way for standard users to interact with ZüNIS.
 They provide a high-level interface to the functionalities of the library and only optionally require you to know
 to what lower levels of abstractions really entail and what their options correspond.
 At the highest possible level, <a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a>
 allows you to interface with the different types of integrators and comes with sane defaults for each of them.</p>
 <div class="section" id="the-integrator-api">
 <h2>The Integrator API<a class="headerlink" href="#the-integrator-api" title="Permalink to this headline">¶</a></h2>
-<p>The main API to use ZuNIS integrators is
+<p>The main API to use ZüNIS integrators is
 <a class="reference internal" href="../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.integration.Integrator</span></code></a>,
 which will instantiate the correct type of integrator and of subcomponents (trainer and flow).
 Only two arguments are necessary to define an integrator with this API: a number
@@ -80,7 +80,7 @@ high-level choices:</p>
 <li><p><code class="code docutils literal notranslate"><span class="pre">verbosity</span></code> controls the logging verbosity of the integration process</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">trainer_verbosity</span></code> controls the logging verbosity of the training process during the survey stage</p></li>
 </ul>
-<p>Note that by default, the <a class="reference internal" href="../api/zunis.html#zunis.logger" title="zunis.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZuNIS</span> <span class="pre">logger</span></code></a> does not have a handler. Use
+<p>Note that by default, the <a class="reference internal" href="../api/zunis.html#zunis.logger" title="zunis.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZüNIS</span> <span class="pre">logger</span></code></a> does not have a handler. Use
 <a class="reference internal" href="../api/zunis.html#zunis.setup_std_stream_logger" title="zunis.setup_std_stream_logger"><code class="xref py py-func docutils literal notranslate"><span class="pre">zunis.setup_std_stream_logger()</span></code></a> to setup handlers to <code class="code docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="code docutils literal notranslate"><span class="pre">stderr</span></code>.</p>
 <p>Further customization requires one to set specific options for the lower level objects used by the integrator: either
 the <a class="reference internal" href="trainer.html"><span class="doc">Trainer</span></a> or the <a class="reference internal" href="flow.html"><span class="doc">Flow</span></a>, which can be set through <code class="code docutils literal notranslate"><span class="pre">trainer_options</span></code> and <code class="code docutils literal notranslate"><span class="pre">flow_options</span></code>
