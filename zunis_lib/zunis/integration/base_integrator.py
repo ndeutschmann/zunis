@@ -26,16 +26,25 @@ class BaseIntegrator(SurveyRefineIntegratorAPI):
 
         Parameters
         ----------
-        f
-        n_iter
-        n_iter_survey
-        n_iter_refine
-        n_points
-        n_points_survey
-        n_points_refine
-        use_survey
-        verbosity
-        kwargs
+        f: function
+            the function to integrate
+        n_iter: int
+            general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set
+        n_iter_survey: int
+            number of iterations for the survey stage
+        n_iter_refine: int
+            number of iterations for the refine stage
+        n_points:
+            general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set
+        n_points_survey: int
+            number of points per iteration for the survey stage
+        n_points_refine: int
+            number of points per iteration for the refine stage
+        use_survey: bool
+            whether to use the points generated during the survey to compute the final integral
+            not recommended due to uncontrolled correlations in error estimates
+        verbosity: int
+            verbosity level of the integrator
         """
         super(BaseIntegrator, self).__init__(verbosity=verbosity, **kwargs)
         self.f = f

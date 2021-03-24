@@ -50,6 +50,7 @@ class Benchmarker(ABC):
     def set_benchmark_grid_config_param(benchmark_grid_config, param, param_value, config):
         """Set an argument in the configuration dictionary to be provided to `run_benchmark_grid` according to the
         established hierarchy:
+
         1. direct argument value (typically from CLI)
         2. config file value
         3. default value - what is already in the config dictionary when entering this function
@@ -83,6 +84,7 @@ class Benchmarker(ABC):
                                   default_dimension=(2,), base_integrand_params=()):
         """Prepare standard arguments for `run_benchmark_grid`
         The parameter importance hierarchy is:
+
         1. CLI arguments (direct arguments to this function)
         2. config file (filepath given as `config`)
         3. default values provided as argument
