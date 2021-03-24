@@ -13,7 +13,6 @@ The specifications we enforce are:
 1. integrals are always computed over a d-dimensional unit hypercube
 2. a function is a callable Python object
 3. input and output are provided by batch
-4. the output must be positive [TEMPORARY]
 
 In specific terms, the input will always be a :code:`torch.Tensor` object :code:`x` with shape :math:`(N, d)` and values between 0 and 1,
 and the output is expected to be a :code:`torch.Tensor` object :code:`y` with shape :math:`(N,)`, such that :code:`y[i] = f(x[i])`

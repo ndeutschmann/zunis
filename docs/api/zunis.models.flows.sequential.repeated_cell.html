@@ -79,7 +79,7 @@ This is meant as a higher-level API to generate boilerplate models based on arch
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality</p></li>
-<li><p><strong>cell</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;pwlinear&quot;,</span> <span class="pre">&quot;realnvp&quot;}</span></code>) – coupling cell choice</p></li>
+<li><p><strong>cell</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;pwlinear&quot;,</span> <span class="pre">&quot;pwquad&quot;,</span> <span class="pre">&quot;realnvp&quot;}</span></code>) – coupling cell choice</p></li>
 <li><p><strong>masking</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;checkerboard&quot;,</span> <span class="pre">&quot;maximal&quot;}</span></code>) – masking strategy. See <a class="reference internal" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking"><code class="xref py py-attr docutils literal notranslate"><span class="pre">RepeatedCellFlow.masking</span></code></a>
 and <a class="reference internal" href="zunis.models.flows.masking.html#module-zunis.models.flows.masking" title="zunis.models.flows.masking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">masking</span></code></a></p></li>
 <li><p><strong>input_cell</strong> (<em>optional</em>) – Transformation before the repeated cell</p></li>
@@ -93,12 +93,12 @@ and <a class="reference internal" href="zunis.models.flows.masking.html#module-z
 </dl>
 <dl class="py attribute">
 <dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells">
-<code class="sig-name descname">cells</code><em class="property"> = {'pwlinear': (&lt;class 'zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling'&gt;, None, None), 'realnvp': (&lt;class 'zunis.models.flows.coupling_cells.real_nvp.RealNVP'&gt;, None, &lt;class 'zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid'&gt;)}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cells</code><em class="property"> = {'pwlinear': (&lt;class 'zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling'&gt;, None, None), 'pwquad': (&lt;class 'zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling'&gt;, None, None), 'realnvp': (&lt;class 'zunis.models.flows.coupling_cells.real_nvp.RealNVP'&gt;, None, &lt;class 'zunis.models.flows.analytic_flows.element_wise.InvertibleAnalyticSigmoid'&gt;)}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking">
-<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2), 'maximal': &lt;function maximal_masking_strategy&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">masking</code><em class="property"> = {'checkerboard': functools.partial(&lt;function n_ary_mask_strategy&gt;, n=2), 'iflow': &lt;function iflow_strategy&gt;, 'maximal': &lt;function maximal_masking_strategy&gt;}</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/repeated_cell.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.masking" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

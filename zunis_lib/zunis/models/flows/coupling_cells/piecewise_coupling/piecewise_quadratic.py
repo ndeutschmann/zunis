@@ -27,7 +27,7 @@ def piecewise_quadratic_transform(x, wv_tilde, compute_jacobian=True):
     ----------
     x : torch.Tensor
         a tensor with shape (N,k) where N is the batch dimension while k is the
-        dimension of the variable space. This variable span the k-dimensional unit
+        dimension of the variable space. This variable spans the k-dimensional unit
         hypercube
 
     wv_tilde: torch.Tensor
@@ -283,14 +283,14 @@ class ElementWisePWQuadraticTransform(InvertibleTransform):
 
     In each direction, the bijection is a piecewise-quadratic transform with b bins
     where the forward transform has bins with adjustable width. The transformation in each bin is
-   then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the 
+    then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the
     derivative of the transform for each direction and each point of the batch. They are normalized such that: 
     1. h(0) = 0
     2. h(1) = 1
     3. h is monotonous
     4. h is continuous
 
-    Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible
+    Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible.
     The inverse is also an element-wise, piece-wise quadratic transformation.
     """
 
@@ -324,7 +324,7 @@ class PWQuadraticCoupling(GeneralPWQuadraticCoupling):
     """Piece-wise Quadratic coupling
 
     Coupling cell using an element-wise piece-wise quadratic transformation as a change of
-    variables. The transverse neural network is a rectangular dense neural network
+    variables. The transverse neural network is a rectangular dense neural network.
 
     Notes:
         Transformation used:

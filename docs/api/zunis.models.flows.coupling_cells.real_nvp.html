@@ -71,7 +71,7 @@ for basic debugging and training tests</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
-<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <code class="xref py py-obj docutils literal notranslate"><span class="pre">d-sum(mask)</span></code> dimensions) to itself
+<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <code class="code docutils literal notranslate"><span class="pre">d-sum(mask)</span></code> dimensions) to itself
 given some parameters.</p></li>
 <li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
@@ -111,7 +111,7 @@ given some parameters.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
-<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <code class="xref py py-obj docutils literal notranslate"><span class="pre">d-sum(mask)</span></code> dimensions) to itself
+<li><p><strong>transform</strong> (<a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">InvertibleTransform</span></code></a>) – bijective variable transform that maps the unit hypercube (in <code class="code docutils literal notranslate"><span class="pre">d-sum(mask)</span></code> dimensions) to itself
 given some parameters.</p></li>
 <li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – indicates which variables are passed (y_N) through and which are transformed (y_M)</p></li>
 </ul>
@@ -168,7 +168,7 @@ J = prod(es[…,i],i)</p>
 <code class="sig-name descname">inverse_element_wise_affine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">st</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform x element-wise through an affine function y = exp(-s)*(x - t)
 where s = st[…,0] and t = st[…,1] with s.shape == x.shape == t.shape
-This is the inverse of <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.element_wise_affine" title="zunis.models.flows.coupling_cells.real_nvp.element_wise_affine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_wise_affine</span></code></a> above for the same set of parameters st</p>
+This is the inverse of <code class="code docutils literal notranslate"><span class="pre">element_wise_affine</span></code> above for the same set of parameters st</p>
 <p>The Jacobian for this transformation is the coordinate-wise product of the scaling factors
 J = prod(es[…,i],i)</p>
 </dd></dl>

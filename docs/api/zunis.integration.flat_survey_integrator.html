@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="integratorAPI module" href="zunis.integration.integratorAPI.html" />
-    <link rel="prev" title="dkltrainer_integrator module" href="zunis.integration.dkltrainer_integrator.html" />
+    <link rel="prev" title="fixed_sample_integrator module" href="zunis.integration.fixed_sample_integrator.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -45,107 +45,51 @@
 <dt id="zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator">
 <em class="property">class </em><code class="sig-name descname">FlatSurveySamplingIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
+<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+not recommended due to uncontrolled correlations in error estimates</p></li>
+<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
 <dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator">
 <em class="property">class </em><code class="sig-name descname">PosteriorSurveySamplingIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI" title="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.integratorAPI.SurveyRefineIntegratorAPI</span></code></a></p>
-<p>Most basic integrator:
+<dd><p>Bases: <a class="reference internal" href="zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator" title="zunis.integration.base_integrator.BaseIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.base_integrator.BaseIntegrator</span></code></a></p>
+<p>Integrator using a target space posterior to sample during survey:
 Takes a trainer object at initialization and samples from a given distribution in target space
 during the survey phase. The function to integrate is given at initialization.</p>
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.empty_history">
-<em class="property">static </em><code class="sig-name descname">empty_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.empty_history" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an empty history object</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_integration">
-<code class="sig-name descname">finalize_integration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_integration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the final operations of the whole integration</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_refine">
-<code class="sig-name descname">finalize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_refine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the final operations of the refine phase</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_survey">
-<code class="sig-name descname">finalize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_survey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the final operations of the survey phase</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Intialization before the whole integration process</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_refine">
-<code class="sig-name descname">initialize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_refine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialization before the survey phase</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_survey">
-<code class="sig-name descname">initialize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_survey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialization before the survey phase</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.integrate">
-<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.integrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the integration</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step">
-<code class="sig-name descname">process_refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process the result of a refine step</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_survey_step">
-<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Process the result of a survey step</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.refine">
-<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.refine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform the refine phase of integration</p>
-<p>Possible keyword arguments:</p>
-<p>trainer_config_args: dict
-refine_step_args: dict
-finalize_refine_args: dict</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine">
-<code class="sig-name descname">sample_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample points for a refine step</p>
-</dd></dl>
-
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
+<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+not recommended due to uncontrolled correlations in error estimates</p></li>
+<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey">
 <code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points from target space distribution</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.survey">
-<code class="sig-name descname">survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/flat_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.survey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform a survey phase of integration</p>
-<dl class="simple">
-<dt>possible keyword arguments:</dt><dd><p>trainer_config_args: dict
-survey_step_args: dict
-finalize_survey_args: dict</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -228,7 +172,7 @@ finalize_survey_args: dict</p>
 <!--    <ul>-->
         
         
-        <li><a href="zunis.integration.dkltrainer_integrator.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;dkltrainer_integrator module</a></li>
+        <li><a href="zunis.integration.fixed_sample_integrator.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;fixed_sample_integrator module</a></li>
         
         
         
@@ -244,7 +188,7 @@ finalize_survey_args: dict</p>
   <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.integration.html">integration package</a><ul>
-      <li>Previous: <a href="zunis.integration.dkltrainer_integrator.html" title="previous chapter">dkltrainer_integrator module</a></li>
+      <li>Previous: <a href="zunis.integration.fixed_sample_integrator.html" title="previous chapter">fixed_sample_integrator module</a></li>
       <li>Next: <a href="zunis.integration.integratorAPI.html" title="next chapter">integratorAPI module</a></li>
   </ul></li>
   </ul></li>

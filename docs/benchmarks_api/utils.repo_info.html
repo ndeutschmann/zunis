@@ -45,7 +45,7 @@
 <dl class="py function">
 <dt id="utils.repo_info.get_dirt_hash">
 <code class="sig-name descname">get_dirt_hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_dirt_hash" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a SHA1 hash of all sources of dirt (modified tracked files or untracked files).
+<dd><p>Get a SHA1 hash of all sources of dirt (modified tracked files).
 Explicitly, we collect all such files, hash their contents one by one, concatenate all hashes and
 hash them again (to avoid loading many large files in memory)</p>
 <dl class="field-list simple">
@@ -120,13 +120,11 @@ The format is
 <dl class="py function">
 <dt id="utils.repo_info.repo_is_dirty">
 <code class="sig-name descname">repo_is_dirty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.repo_is_dirty" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the status information of the repository. We collect
-- the ‘dirty’ status of the repository (modified tracked files)
-- the presence of untracked files
-if either is true, we return “-dirty” to be appended to filenames</p>
+<dd><p>Get the status information of the repository.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>repo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">git.Repo</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – </p>
+<dd class="field-odd"><p><strong>repo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">git.Repo</span></code>, <em>optional</em>) – The repository object to inspect, if none is given, the repo containing the working directory (if it exists) is
+used.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>whether the repo is dirty</p>
