@@ -19,7 +19,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="general_coupling module" href="zunis.models.flows.coupling_cells.general_coupling.html" />
+    <link rel="next" title="piecewise_quadratic module" href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html" />
     <link rel="prev" title="piecewise_coupling package" href="zunis.models.flows.coupling_cells.piecewise_coupling.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -48,12 +48,12 @@ This means that the <em>variable transform</em> is piecewise-linear.</p>
 <em class="property">class </em><code class="sig-name descname">ElementWisePWLinearTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_linear.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
 <p>Invertible piecewise-linear transformations over the unit hypercube</p>
-<p>Implements a batched bijective transformation <code class="xref py py-obj docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
+<p>Implements a batched bijective transformation <code class="code docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
 in an element-wise fashion (each coordinate transformed independently)</p>
 <p>In each direction, the bijection is a piecewise-linear transform with b bins
 where the forward transform has evenly spaced bins. The transformation in each bin is
 actually an affine transformation. The slopes for each direction and each point in the batch
-are given by an unormalized tensor <code class="xref py py-obj docutils literal notranslate"><span class="pre">q_tilde</span></code>. This input is softmax-normalized such that
+are given by an unormalized tensor <code class="code docutils literal notranslate"><span class="pre">q_tilde</span></code>. This input is softmax-normalized such that
 1. h(0) = 0
 2. h(1) = 1
 3. h is monotonous
@@ -82,9 +82,9 @@ Normalization is imposed in this function using softmax.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(y,h)</span></code>.
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="code docutils literal notranslate"><span class="pre">(y,h)</span></code>.
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="code docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -110,9 +110,9 @@ Normalization is imposed in this function using softmax.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(x,h)</span></code>.
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="code docutils literal notranslate"><span class="pre">(x,h)</span></code>.
+- <code class="code docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="code docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -155,7 +155,7 @@ or used as parameters of the transform (True)</p></li>
 variables. The transverse neural network is a rectangular dense neural network</p>
 <p class="rubric">Notes</p>
 <p>Transformation used:
-<a class="reference internal" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform</span></code></a>
+<code class="code docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform</span></code>
 Neural network used:
 zunis.models.layers.trainable.ArbitraryShapeRectangularDNN</p>
 <p>Generator for PWLinearCoupling</p>
@@ -202,9 +202,9 @@ Normalization is imposed in this function using softmax.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(x,h)</span></code>.
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="code docutils literal notranslate"><span class="pre">(x,h)</span></code>.
+- <code class="code docutils literal notranslate"><span class="pre">x</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="code docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -230,9 +230,9 @@ Normalization is imposed in this function using softmax.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair <code class="xref py py-obj docutils literal notranslate"><span class="pre">(y,h)</span></code>.
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
-- <code class="xref py py-obj docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
+<dd class="field-even"><p>pair <code class="code docutils literal notranslate"><span class="pre">(y,h)</span></code>.
+- <code class="code docutils literal notranslate"><span class="pre">y</span></code> is a tensor with shape (N,k) living in the k-dimensional unit hypercube
+- <code class="code docutils literal notranslate"><span class="pre">j</span></code> is the jacobian of the transformation with shape (N,) if compute_jacobian==True, else None.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>tuple of torch.Tensor</p>
@@ -319,7 +319,7 @@ Normalization is imposed in this function using softmax.</p></li>
         
         
         
-        <li><a href="zunis.models.flows.coupling_cells.general_coupling.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;general_coupling module</a></li>
+        <li><a href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;piecewise_quadratic module</a></li>
         
 <!--    </ul>-->
     
@@ -335,7 +335,7 @@ Normalization is imposed in this function using softmax.</p></li>
   <li><a href="zunis.models.flows.coupling_cells.html">coupling_cells package</a><ul>
   <li><a href="zunis.models.flows.coupling_cells.piecewise_coupling.html">piecewise_coupling package</a><ul>
       <li>Previous: <a href="zunis.models.flows.coupling_cells.piecewise_coupling.html" title="previous chapter">piecewise_coupling package</a></li>
-      <li>Next: <a href="zunis.models.flows.coupling_cells.general_coupling.html" title="next chapter">general_coupling module</a></li>
+      <li>Next: <a href="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html" title="next chapter">piecewise_quadratic module</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

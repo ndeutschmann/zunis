@@ -13,6 +13,7 @@ utils package
 .. toctree::
    :maxdepth: 1
 
+   utils.benchmark
    utils.config
    utils.data_storage
    utils.integrands
@@ -25,7 +26,6 @@ utils package
 .. toctree::
    :maxdepth: 1
 
-   utils.benchmark
    utils.command_line_tools
    utils.flat_integrals
    utils.integral_validation

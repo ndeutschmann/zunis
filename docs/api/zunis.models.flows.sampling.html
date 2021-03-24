@@ -51,9 +51,9 @@ of a flow as a sampling layers that draws points and computes the required PDF</
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
 <p>Sample d-dimensional data from a factorized 1D PDF over each dimension
 The 1D PDF is expected to be a pytorch.probability.Distribution object
-but it can be any object that implements the <code class="xref py py-obj docutils literal notranslate"><span class="pre">sample`and</span> <span class="pre">`log_prob</span></code> methods.</p>
+but it can be any object that implements the <code class="code docutils literal notranslate"><span class="pre">sample`and</span> <span class="pre">`log_prob</span></code> methods.</p>
 <p>NB: we provide the 1D prior object explicitly as pytorch distributions don’t
-respond appropriately to the <code class="xref py py-obj docutils literal notranslate"><span class="pre">to(device)</span></code>. To sample on a device, provide a
+respond appropriately to the <code class="code docutils literal notranslate"><span class="pre">.to(device)</span></code>. To sample on a device, provide a
 prior initialized with parameters already on the correct device.</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">

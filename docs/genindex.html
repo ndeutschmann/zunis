@@ -74,15 +74,17 @@
 </li>
       <li><a href="api/zunis.models.flows.analytic_flows.element_wise.html#zunis.models.flows.analytic_flows.element_wise.AnalyticInverseSigmoid">AnalyticInverseSigmoid (class in zunis.models.flows.analytic_flows.element_wise)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.models.flows.analytic_flows.element_wise.html#zunis.models.flows.analytic_flows.element_wise.AnalyticSigmoid">AnalyticSigmoid (class in zunis.models.flows.analytic_flows.element_wise)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.data_storage.dataframe2sql.html#utils.data_storage.dataframe2sql.append_dataframe_to_sqlite">append_dataframe_to_sqlite() (in module utils.data_storage.dataframe2sql)</a>
 </li>
       <li><a href="benchmarks_api/utils.data_storage.record2sql.html#utils.data_storage.record2sql.append_record_to_sqlite">append_record_to_sqlite() (in module utils.data_storage.record2sql)</a>
 </li>
       <li><a href="api/zunis.models.layers.trainable.html#zunis.models.layers.trainable.ArbitraryShapeRectangularDNN">ArbitraryShapeRectangularDNN (class in zunis.models.layers.trainable)</a>
+</li>
+      <li><a href="api/zunis.utils.exceptions.html#zunis.utils.exceptions.AvertedCUDARuntimeError">AvertedCUDARuntimeError</a>
 </li>
   </ul></td>
 </tr></table>
@@ -95,9 +97,13 @@
       <ul>
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.backward">(ElementWisePWLinearTransform static method)</a>
 </li>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.backward">(ElementWisePWQuadraticTransform static method)</a>
+</li>
         <li><a href="api/zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward">(InvertibleTransform method)</a>
 </li>
       </ul></li>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator">BaseIntegrator (class in zunis.integration.base_integrator)</a>
+</li>
       <li><a href="api/zunis.training.weighted_dataset.dkl_training.html#zunis.training.weighted_dataset.dkl_training.BasicDKLTrainer">BasicDKLTrainer (class in zunis.training.weighted_dataset.dkl_training)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.dkl_training.html#zunis.training.weighted_dataset.dkl_training.BasicStatefulDKLTrainer">BasicStatefulDKLTrainer (class in zunis.training.weighted_dataset.dkl_training)</a>
@@ -112,9 +118,15 @@
 </li>
       <li><a href="api/zunis.training.weighted_dataset.variance_training.html#zunis.training.weighted_dataset.variance_training.BasicVarTrainer">BasicVarTrainer (class in zunis.training.weighted_dataset.variance_training)</a>
 </li>
-      <li><a href="benchmarks_api/utils.benchmark.html#utils.benchmark.benchmark_known_integrand">benchmark_known_integrand() (in module utils.benchmark)</a>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.benchmark_method">benchmark_method() (Benchmarker method)</a>
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandBenchmarker.benchmark_method">(KnownIntegrandBenchmarker method)</a>
 </li>
-      <li><a href="benchmarks_api/utils.benchmark.html#utils.benchmark.benchmark_vs_vegas">benchmark_vs_vegas() (in module utils.benchmark)</a>
+        <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasBenchmarker.benchmark_method">(VegasBenchmarker method)</a>
+</li>
+      </ul></li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker">Benchmarker (class in utils.benchmark.benchmarker)</a>
 </li>
       <li><a href="api/zunis.models.layers.activations.html#zunis.models.layers.activations.BiLU">BiLU (class in zunis.models.layers.activations)</a>
 </li>
@@ -142,11 +154,11 @@
 </li>
       <li><a href="benchmarks_api/utils.record.html#utils.record.ComparisonRecord">ComparisonRecord (class in utils.record)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.compute_loss_no_grad">compute_loss_no_grad() (BasicTrainer method)</a>
 </li>
-      <li><a href="benchmarks_api/utils.config.configuration.html#utils.config.configuration.Configuration">Configuration (class in utils.config.configuration)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.utils.config.configuration.html#zunis.utils.config.configuration.Configuration">Configuration (class in zunis.utils.config.configuration)</a>
 </li>
       <li><a href="api/zunis.models.generators.html#zunis.models.generators.create_checkerboard_hypercube_realnvp">create_checkerboard_hypercube_realnvp() (in module zunis.models.generators)</a>
 </li>
@@ -154,13 +166,17 @@
 </li>
       <li><a href="api/zunis.models.generators.html#zunis.models.generators.create_hypercube_flow">create_hypercube_flow() (in module zunis.models.generators)</a>
 </li>
-      <li><a href="benchmarks_api/utils.config.loaders.html#utils.config.loaders.create_integrator_args">create_integrator_args() (in module utils.config.loaders)</a>
+      <li><a href="api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.create_integrator_args">create_integrator_args() (in module zunis.utils.config.loaders)</a>
+</li>
+      <li><a href="api/zunis.utils.config.generators.html#zunis.utils.config.generators.create_integrator_config_file">create_integrator_config_file() (in module zunis.utils.config.generators)</a>
 </li>
       <li><a href="api/zunis.models.generators.html#zunis.models.generators.create_n_ary_hypercube_flow">create_n_ary_hypercube_flow() (in module zunis.models.generators)</a>
 </li>
       <li><a href="api/zunis.models.generators.html#zunis.models.generators.create_n_ary_hypercube_realnvp">create_n_ary_hypercube_realnvp() (in module zunis.models.generators)</a>
 </li>
       <li><a href="api/zunis.models.layers.trainable.html#zunis.models.layers.trainable.create_rectangular_dnn">create_rectangular_dnn() (in module zunis.models.layers.trainable)</a>
+</li>
+      <li><a href="benchmarks_api/utils.integrands.madgraph.html#utils.integrands.madgraph.CrossSection">CrossSection (class in utils.integrands.madgraph)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -188,7 +204,9 @@
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform">ElementWisePWLinearTransform (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.empty_history">empty_history() (PosteriorSurveySamplingIntegrator static method)</a>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform">ElementWisePWQuadraticTransform (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
+</li>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.empty_history">empty_history() (BaseIntegrator static method)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.epoch">epoch() (TrainingRecord property)</a>
 </li>
@@ -206,6 +224,8 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.integrands.pretty.html#utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand">(CircleLineIntegrand method)</a>
+</li>
+        <li><a href="benchmarks_api/utils.integrands.madgraph.html#utils.integrands.madgraph.CrossSection.evaluate_integrand">(CrossSection method)</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.DiagonalGaussianIntegrand.evaluate_integrand">(DiagonalGaussianIntegrand method)</a>
 </li>
@@ -238,24 +258,26 @@
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.FakeT">FakeT (class in zunis.models.flows.coupling_cells.real_nvp)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_integration">finalize_integration() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.finalize_integration">finalize_integration() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_integration">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_refine">finalize_refine() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.finalize_refine">finalize_refine() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_refine">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.finalize_survey">finalize_survey() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.finalize_survey">finalize_survey() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.finalize_survey">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
+      <li><a href="api/zunis.integration.fixed_sample_integrator.html#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator">FixedSampleSurveyIntegrator (class in zunis.integration.fixed_sample_integrator)</a>
+</li>
       <li><a href="benchmarks_api/utils.flat_integrals.html#utils.flat_integrals.FlatSampler">FlatSampler (class in utils.flat_integrals)</a>
 </li>
       <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator">FlatSurveySamplingIntegrator (class in zunis.integration.flat_survey_integrator)</a>
@@ -289,6 +311,8 @@
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.ElementWisePWLinearTransform.forward">(ElementWisePWLinearTransform static method)</a>
 </li>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.forward">(ElementWisePWQuadraticTransform static method)</a>
+</li>
         <li><a href="api/zunis.models.flows.sampling.html#zunis.models.flows.sampling.FactorizedFlowSampler.forward">(FactorizedFlowSampler method)</a>
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.FakeT.forward">(FakeT method)</a>
@@ -318,25 +342,37 @@
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling">GeneralPWLinearCoupling (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear)</a>
 </li>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling">GeneralPWQuadraticCoupling (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
+</li>
       <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP">GeneralRealNVP (class in zunis.models.flows.coupling_cells.real_nvp)</a>
 </li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.generate_config_samples">generate_config_samples() (Benchmarker method)</a>
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.GridBenchmarker.generate_config_samples">(GridBenchmarker method)</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker.generate_config_samples">(RandomHyperparameterBenchmarker method)</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.SequentialBenchmarker.generate_config_samples">(SequentialBenchmarker method)</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker.generate_config_samples">(SequentialIntegratorBenchmarker method)</a>
+</li>
+      </ul></li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.generate_target_batch_from_posterior">generate_target_batch_from_posterior() (BasicTrainer static method)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI">GenericTrainerAPI (class in zunis.training.weighted_dataset.weighted_dataset_trainer)</a>
 </li>
-      <li><a href="benchmarks_api/utils.logging.html#utils.logging.get_benchmark_logger">get_benchmark_logger() (in module utils.logging)</a>
+      <li><a href="api/zunis.models.flows.masking.html#zunis.models.flows.masking.get_bin">get_bin() (in module zunis.models.flows.masking)</a>
 </li>
-      <li><a href="benchmarks_api/utils.logging.html#utils.logging.get_benchmark_logger_debug">get_benchmark_logger_debug() (in module utils.logging)</a>
-</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.get_config">get_config() (BasicStatefulTrainer method)</a>
 
       <ul>
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.get_config">(GenericTrainerAPI method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="benchmarks_api/utils.config.loaders.html#utils.config.loaders.get_default_integrator_config">get_default_integrator_config() (in module utils.config.loaders)</a>
+      <li><a href="api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.get_default_integrator_config">get_default_integrator_config() (in module zunis.utils.config.loaders)</a>
 </li>
       <li><a href="benchmarks_api/utils.torch_utils.html#utils.torch_utils.get_device">get_device() (in module utils.torch_utils)</a>
 </li>
@@ -350,7 +386,7 @@
         <li><a href="benchmarks_api/utils.integral_validation.html#utils.integral_validation.Sampler.get_history">(Sampler method)</a>
 </li>
       </ul></li>
-      <li><a href="benchmarks_api/utils.config.loaders.html#utils.config.loaders.get_optim_from_config">get_optim_from_config() (in module utils.config.loaders)</a>
+      <li><a href="api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.get_optim_from_config">get_optim_from_config() (in module zunis.utils.config.loaders)</a>
 </li>
       <li><a href="benchmarks_api/utils.repo_info.html#utils.repo_info.get_pipfreeze_hash">get_pipfreeze_hash() (in module utils.repo_info)</a>
 </li>
@@ -362,14 +398,26 @@
 </li>
       <li><a href="benchmarks_api/utils.config.loaders.html#utils.config.loaders.get_sql_types">get_sql_types() (in module utils.config.loaders)</a>
 </li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.GridBenchmarker">GridBenchmarker (class in utils.benchmark.benchmarker)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_invalid_loss">handle_invalid_loss() (BasicTrainer method)</a>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_cuda_error">handle_cuda_error() (BasicStatefulTrainer method)</a>
+
+      <ul>
+        <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_cuda_error">(BasicTrainer method)</a>
 </li>
+      </ul></li>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_invalid_loss">handle_invalid_loss() (BasicStatefulTrainer method)</a>
+
+      <ul>
+        <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_invalid_loss">(BasicTrainer method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.HyperrectangleVolumeIntegrand">HyperrectangleVolumeIntegrand (class in utils.integrands.volume)</a>
@@ -382,6 +430,8 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.models.flows.masking.html#zunis.models.flows.masking.iflow_strategy">iflow_strategy() (in module zunis.models.flows.masking)</a>
+</li>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.HyperrectangleVolumeIntegrand.inequality">inequality() (HyperrectangleVolumeIntegrand method)</a>
 
       <ul>
@@ -392,19 +442,19 @@
       </ul></li>
       <li><a href="benchmarks_api/utils.data_storage.record2sql.html#utils.data_storage.record2sql.infer_sql_types">infer_sql_types() (in module utils.data_storage.record2sql)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize">initialize() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.initialize">initialize() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_refine">initialize_refine() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.initialize_refine">initialize_refine() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_refine">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.initialize_survey">initialize_survey() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.initialize_survey">initialize_survey() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.initialize_survey">(SurveyRefineIntegratorAPI method)</a>
@@ -424,14 +474,14 @@
       </ul></li>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.Integrand">Integrand (class in utils.integrands.abstract)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.integrate">integrate() (PosteriorSurveySamplingIntegrator method)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.integrate">integrate() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.integrate">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.integration.html#zunis.integration.integration_logger">integration_logger (in module zunis.integration)</a>
 </li>
       <li><a href="api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator">Integrator() (in module zunis.integration.default_integrator)</a>
@@ -473,6 +523,14 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand">KnownIntegrand (class in utils.integrands.abstract)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandBenchmarker">KnownIntegrandBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandGridBenchmarker">KnownIntegrandGridBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandRandomHPBenchmarker">KnownIntegrandRandomHPBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -518,6 +576,8 @@
 </li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">metrics() (TrainingRecord property)</a>
 </li>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax">modified_softmax() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
+</li>
       <li>
     module
 
@@ -526,11 +586,15 @@
 </li>
         <li><a href="benchmarks_api/utils.benchmark.html#module-utils.benchmark">utils.benchmark</a>
 </li>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#module-utils.benchmark.benchmarker">utils.benchmark.benchmarker</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#module-utils.benchmark.known_integrand_benchmarks">utils.benchmark.known_integrand_benchmarks</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#module-utils.benchmark.vegas_benchmarks">utils.benchmark.vegas_benchmarks</a>
+</li>
         <li><a href="benchmarks_api/utils.command_line_tools.html#module-utils.command_line_tools">utils.command_line_tools</a>
 </li>
         <li><a href="benchmarks_api/utils.config.html#module-utils.config">utils.config</a>
-</li>
-        <li><a href="benchmarks_api/utils.config.configuration.html#module-utils.config.configuration">utils.config.configuration</a>
 </li>
         <li><a href="benchmarks_api/utils.config.loaders.html#module-utils.config.loaders">utils.config.loaders</a>
 </li>
@@ -551,6 +615,8 @@
         <li><a href="benchmarks_api/utils.integrands.abstract.html#module-utils.integrands.abstract">utils.integrands.abstract</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.gaussian.html#module-utils.integrands.gaussian">utils.integrands.gaussian</a>
+</li>
+        <li><a href="benchmarks_api/utils.integrands.madgraph.html#module-utils.integrands.madgraph">utils.integrands.madgraph</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.pretty.html#module-utils.integrands.pretty">utils.integrands.pretty</a>
 </li>
@@ -576,9 +642,13 @@
 </li>
         <li><a href="api/zunis.integration.adaptive_survey_integrator.html#module-zunis.integration.adaptive_survey_integrator">zunis.integration.adaptive_survey_integrator</a>
 </li>
+        <li><a href="api/zunis.integration.base_integrator.html#module-zunis.integration.base_integrator">zunis.integration.base_integrator</a>
+</li>
         <li><a href="api/zunis.integration.default_integrator.html#module-zunis.integration.default_integrator">zunis.integration.default_integrator</a>
 </li>
         <li><a href="api/zunis.integration.dkltrainer_integrator.html#module-zunis.integration.dkltrainer_integrator">zunis.integration.dkltrainer_integrator</a>
+</li>
+        <li><a href="api/zunis.integration.fixed_sample_integrator.html#module-zunis.integration.fixed_sample_integrator">zunis.integration.fixed_sample_integrator</a>
 </li>
         <li><a href="api/zunis.integration.flat_survey_integrator.html#module-zunis.integration.flat_survey_integrator">zunis.integration.flat_survey_integrator</a>
 </li>
@@ -609,6 +679,8 @@
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.html#module-zunis.models.flows.coupling_cells.piecewise_coupling">zunis.models.flows.coupling_cells.piecewise_coupling</a>
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#module-zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear</a>
+</li>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#module-zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic</a>
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#module-zunis.models.flows.coupling_cells.real_nvp">zunis.models.flows.coupling_cells.real_nvp</a>
 </li>
@@ -654,6 +726,18 @@
 </li>
         <li><a href="api/zunis.utils.html#module-zunis.utils">zunis.utils</a>
 </li>
+        <li><a href="api/zunis.utils.config.html#module-zunis.utils.config">zunis.utils.config</a>
+</li>
+        <li><a href="api/zunis.utils.config.configuration.html#module-zunis.utils.config.configuration">zunis.utils.config.configuration</a>
+</li>
+        <li><a href="api/zunis.utils.config.defaults.html#module-zunis.utils.config.defaults">zunis.utils.config.defaults</a>
+</li>
+        <li><a href="api/zunis.utils.config.generators.html#module-zunis.utils.config.generators">zunis.utils.config.generators</a>
+</li>
+        <li><a href="api/zunis.utils.config.loaders.html#module-zunis.utils.config.loaders">zunis.utils.config.loaders</a>
+</li>
+        <li><a href="api/zunis.utils.exceptions.html#module-zunis.utils.exceptions">zunis.utils.exceptions</a>
+</li>
         <li><a href="api/zunis.utils.function_wrapper.html#module-zunis.utils.function_wrapper">zunis.utils.function_wrapper</a>
 </li>
         <li><a href="api/zunis.utils.logger.html#module-zunis.utils.logger">zunis.utils.logger</a>
@@ -671,11 +755,13 @@
 </li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.new_epoch">new_epoch() (TrainingRecord method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.next_step">next_step() (TrainingRecord method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.models.flows.backprop_jacobian_flows.nnflows.html#zunis.models.flows.backprop_jacobian_flows.nnflows.NNFlow">NNFlow (class in zunis.models.flows.backprop_jacobian_flows.nnflows)</a>
+</li>
+      <li><a href="api/zunis.utils.exceptions.html#zunis.utils.exceptions.NoCheckpoint">NoCheckpoint</a>
 </li>
       <li><a href="api/zunis.models.layers.activations.html#zunis.models.layers.activations.NormBiTanh">NormBiTanh (class in zunis.models.layers.activations)</a>
 </li>
@@ -699,6 +785,10 @@
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.piecewise_linear_transform">piecewise_linear_transform() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear)</a>
 </li>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_inverse_transform">piecewise_quadratic_inverse_transform() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
+</li>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_transform">piecewise_quadratic_transform() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
+</li>
       <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator">PosteriorSurveySamplingIntegrator (class in zunis.integration.flat_survey_integrator)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.process_loss">process_loss() (BasicStatefulTrainer method)</a>
@@ -707,23 +797,25 @@
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.process_loss">(BasicTrainer method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_refine_step">process_refine_step() (PosteriorSurveySamplingIntegrator method)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.process_refine_step">process_refine_step() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_refine_step">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">process_survey_step() (AdaptiveSurveyIntegrator method)</a>
 
       <ul>
-        <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.process_survey_step">(PosteriorSurveySamplingIntegrator method)</a>
+        <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.process_survey_step">(BaseIntegrator method)</a>
 </li>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_survey_step">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling">PWLinearCoupling (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear)</a>
+</li>
+      <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling">PWQuadraticCoupling (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
 </li>
       <li><a href="benchmarks_api/utils.command_line_tools.html#utils.command_line_tools.PythonLiteralOption">PythonLiteralOption (class in utils.command_line_tools)</a>
 </li>
@@ -733,13 +825,15 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker">RandomHyperparameterBenchmarker (class in utils.benchmark.benchmarker)</a>
+</li>
       <li><a href="benchmarks_api/utils.data_storage.dataframe2sql.html#utils.data_storage.dataframe2sql.read_pkl_sql">read_pkl_sql() (in module utils.data_storage.dataframe2sql)</a>
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.RealNVP">RealNVP (class in zunis.models.flows.coupling_cells.real_nvp)</a>
 </li>
       <li><a href="benchmarks_api/utils.record.html#utils.record.Record">Record (class in utils.record)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.refine">refine() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.refine">refine() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.refine">(SurveyRefineIntegratorAPI method)</a>
@@ -769,11 +863,11 @@
 </li>
       <li><a href="api/zunis.models.utils.html#zunis.models.utils.Reshift">Reshift (class in zunis.models.utils)</a>
 </li>
-      <li><a href="benchmarks_api/utils.benchmark.html#utils.benchmark.run_benchmark_grid">run_benchmark_grid() (in module utils.benchmark)</a>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint">restore_checkpoint() (BasicStatefulTrainer method)</a>
 </li>
-      <li><a href="benchmarks_api/utils.benchmark.html#utils.benchmark.run_benchmark_grid_known_integrand">run_benchmark_grid_known_integrand() (in module utils.benchmark)</a>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint_except">restore_checkpoint_except() (BasicStatefulTrainer method)</a>
 </li>
-      <li><a href="benchmarks_api/utils.benchmark.html#utils.benchmark.run_benchmark_grid_vegas">run_benchmark_grid_vegas() (in module utils.benchmark)</a>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.run">run() (Benchmarker method)</a>
 </li>
       <li><a href="api/zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.runs_forward">runs_forward() (InvertibleAnalyticFlow method)</a>
 
@@ -803,7 +897,7 @@
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.sample_forward">(GenericTrainerAPI method)</a>
 </li>
       </ul></li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_refine">sample_refine() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.sample_refine">sample_refine() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_refine">(SurveyRefineIntegratorAPI method)</a>
@@ -812,6 +906,8 @@
       <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">sample_survey() (AdaptiveSurveyIntegrator method)</a>
 
       <ul>
+        <li><a href="api/zunis.integration.fixed_sample_integrator.html#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey">(FixedSampleSurveyIntegrator method)</a>
+</li>
         <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.sample_survey">(PosteriorSurveySamplingIntegrator method)</a>
 </li>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_survey">(SurveyRefineIntegratorAPI method)</a>
@@ -821,14 +917,34 @@
 </li>
       <li><a href="benchmarks_api/utils.integrands.html#utils.integrands.sanitize_variable">sanitize_variable() (in module utils.integrands)</a>
 </li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.SequentialBenchmarker">SequentialBenchmarker (class in utils.benchmark.benchmarker)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker">SequentialIntegratorBenchmarker (class in utils.benchmark.benchmarker)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config">set_benchmark_grid_config() (Benchmarker method)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config_param">set_benchmark_grid_config_param() (Benchmarker static method)</a>
+</li>
+      <li><a href="benchmarks_api/utils.logging.html#utils.logging.set_benchmark_logger">set_benchmark_logger() (in module utils.logging)</a>
+</li>
+      <li><a href="benchmarks_api/utils.logging.html#utils.logging.set_benchmark_logger_debug">set_benchmark_logger_debug() (in module utils.logging)</a>
+</li>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_checkpoint">set_checkpoint() (BasicStatefulTrainer method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_config">set_config() (BasicStatefulTrainer method)</a>
 
       <ul>
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.set_config">(GenericTrainerAPI method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.integration.fixed_sample_integrator.html#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample">set_sample() (FixedSampleSurveyIntegrator method)</a>
+</li>
+      <li><a href="api/zunis.integration.fixed_sample_integrator.html#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv">set_sample_csv() (FixedSampleSurveyIntegrator method)</a>
+</li>
+      <li><a href="api/zunis.integration.fixed_sample_integrator.html#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle">set_sample_pickle() (FixedSampleSurveyIntegrator method)</a>
+</li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.set_verbosity">set_verbosity() (BasicTrainer method)</a>
 
       <ul>
@@ -849,7 +965,7 @@
 </li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.step">step() (TrainingRecord property)</a>
 </li>
-      <li><a href="api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator.survey">survey() (PosteriorSurveySamplingIntegrator method)</a>
+      <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.survey">survey() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.survey">(SurveyRefineIntegratorAPI method)</a>
@@ -932,6 +1048,8 @@
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.GeneralPWLinearCoupling.training">(GeneralPWLinearCoupling attribute)</a>
 </li>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling.training">(GeneralPWQuadraticCoupling attribute)</a>
+</li>
         <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training">(GeneralRealNVP attribute)</a>
 </li>
         <li><a href="api/zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.training">(InvertibleAnalyticFlow attribute)</a>
@@ -954,6 +1072,8 @@
 </li>
         <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling.training">(PWLinearCoupling attribute)</a>
 </li>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling.training">(PWQuadraticCoupling attribute)</a>
+</li>
         <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.RealNVP.training">(RealNVP attribute)</a>
 </li>
         <li><a href="api/zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.training">(RepeatedCellFlow attribute)</a>
@@ -968,6 +1088,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.training.html#zunis.training.training_logger">training_logger (in module zunis.training)</a>
+</li>
+      <li><a href="api/zunis.utils.exceptions.html#zunis.utils.exceptions.TrainingInterruption">TrainingInterruption</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord">TrainingRecord (class in zunis.training.weighted_dataset.training_record)</a>
 </li>
@@ -1012,6 +1134,27 @@
 </li>
       </ul></li>
       <li>
+    utils.benchmark.benchmarker
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#module-utils.benchmark.benchmarker">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.benchmark.known_integrand_benchmarks
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#module-utils.benchmark.known_integrand_benchmarks">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.benchmark.vegas_benchmarks
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#module-utils.benchmark.vegas_benchmarks">module</a>
+</li>
+      </ul></li>
+      <li>
     utils.command_line_tools
 
       <ul>
@@ -1023,13 +1166,6 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.config.html#module-utils.config">module</a>
-</li>
-      </ul></li>
-      <li>
-    utils.config.configuration
-
-      <ul>
-        <li><a href="benchmarks_api/utils.config.configuration.html#module-utils.config.configuration">module</a>
 </li>
       </ul></li>
       <li>
@@ -1074,6 +1210,8 @@
         <li><a href="benchmarks_api/utils.integral_validation.html#module-utils.integral_validation">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     utils.integrals
 
@@ -1081,8 +1219,6 @@
         <li><a href="benchmarks_api/utils.integrals.html#module-utils.integrals">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     utils.integrands
 
@@ -1102,6 +1238,13 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.integrands.gaussian.html#module-utils.integrands.gaussian">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.integrands.madgraph
+
+      <ul>
+        <li><a href="benchmarks_api/utils.integrands.madgraph.html#module-utils.integrands.madgraph">module</a>
 </li>
       </ul></li>
       <li>
@@ -1179,11 +1322,19 @@
 </li>
       <li><a href="benchmarks_api/utils.flat_integrals.html#utils.flat_integrals.validate_known_integrand_flat">validate_known_integrand_flat() (in module utils.flat_integrals)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.Integrand.vegas">vegas() (Integrand method)</a>
 </li>
+      <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasBenchmarker">VegasBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasGridBenchmarker">VegasGridBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasRandomHPBenchmarker">VegasRandomHPBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
+</li>
       <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler">VegasSampler (class in utils.vegas_integrals)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker">VegasSequentialBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
 </li>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.VolumeIntegrand">VolumeIntegrand (class in utils.integrands.volume)</a>
 </li>
@@ -1241,6 +1392,13 @@
 </li>
       </ul></li>
       <li>
+    zunis.integration.base_integrator
+
+      <ul>
+        <li><a href="api/zunis.integration.base_integrator.html#module-zunis.integration.base_integrator">module</a>
+</li>
+      </ul></li>
+      <li>
     zunis.integration.default_integrator
 
       <ul>
@@ -1252,6 +1410,13 @@
 
       <ul>
         <li><a href="api/zunis.integration.dkltrainer_integrator.html#module-zunis.integration.dkltrainer_integrator">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.integration.fixed_sample_integrator
+
+      <ul>
+        <li><a href="api/zunis.integration.fixed_sample_integrator.html#module-zunis.integration.fixed_sample_integrator">module</a>
 </li>
       </ul></li>
       <li>
@@ -1360,6 +1525,13 @@
 </li>
       </ul></li>
       <li>
+    zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic
+
+      <ul>
+        <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#module-zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic">module</a>
+</li>
+      </ul></li>
+      <li>
     zunis.models.flows.coupling_cells.real_nvp
 
       <ul>
@@ -1373,8 +1545,6 @@
         <li><a href="api/zunis.models.flows.coupling_cells.transforms.html#module-zunis.models.flows.coupling_cells.transforms">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     zunis.models.flows.general_flow
 
@@ -1389,6 +1559,8 @@
         <li><a href="api/zunis.models.flows.masking.html#module-zunis.models.flows.masking">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     zunis.models.flows.sampling
 
@@ -1513,6 +1685,48 @@
 
       <ul>
         <li><a href="api/zunis.utils.html#module-zunis.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.config
+
+      <ul>
+        <li><a href="api/zunis.utils.config.html#module-zunis.utils.config">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.config.configuration
+
+      <ul>
+        <li><a href="api/zunis.utils.config.configuration.html#module-zunis.utils.config.configuration">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.config.defaults
+
+      <ul>
+        <li><a href="api/zunis.utils.config.defaults.html#module-zunis.utils.config.defaults">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.config.generators
+
+      <ul>
+        <li><a href="api/zunis.utils.config.generators.html#module-zunis.utils.config.generators">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.config.loaders
+
+      <ul>
+        <li><a href="api/zunis.utils.config.loaders.html#module-zunis.utils.config.loaders">module</a>
+</li>
+      </ul></li>
+      <li>
+    zunis.utils.exceptions
+
+      <ul>
+        <li><a href="api/zunis.utils.exceptions.html#module-zunis.utils.exceptions">module</a>
 </li>
       </ul></li>
       <li>

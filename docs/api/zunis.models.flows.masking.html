@@ -43,6 +43,49 @@
 <span id="zunis-models-flows-masking-module"></span><h1>masking module<a class="headerlink" href="#module-zunis.models.flows.masking" title="Permalink to this headline">¶</a></h1>
 <p>Module for the generation of masks for coupling cells</p>
 <dl class="py function">
+<dt id="zunis.models.flows.masking.get_bin">
+<code class="sig-name descname">get_bin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.get_bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the binary representation of x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Minimum number of digits. If x needs less digits in binary, the rest
+is filled with zeros.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of binary digits</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="zunis.models.flows.masking.iflow_strategy">
+<code class="sig-name descname">iflow_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.iflow_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a list of masks using the strategy of Gao et al. arXiv:2001.05486.
+Each dimension is numbered and the number is converted into the binary representation. Then,
+one bit after another, starting with the most significant bit, is converted into a boolean.
+This determines wether the dimension is transformed in this cell or not. In order to be
+able to test for all correlations, for each mask, the inverse mask is used too.</p>
+<p>The minimal amount of cells will be used to represent all possible correlations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of dimensions</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of masks</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of list of bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="zunis.models.flows.masking.maximal_masking_strategy">
 <code class="sig-name descname">maximal_masking_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a list of masks using the maximally complex option:
@@ -54,7 +97,7 @@ number of dimensions</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of dimensions</p></li>
-<li><p><strong>repetitions</strong> – number of repetitions</p></li>
+<li><p><strong>repetitions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of repetitions</p></li>
 </ul>
 </dd>
 </dl>

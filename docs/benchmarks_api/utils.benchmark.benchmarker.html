@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils.benchmark.benchmarker module &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="utils.benchmark.known_integrand_benchmarks module" href="utils.benchmark.known_integrand_benchmarks.html" />
+    <link rel="prev" title="utils.benchmark package" href="utils.benchmark.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="module-utils.benchmark.benchmarker">
+<span id="utils-benchmark-benchmarker-module"></span><h1>utils.benchmark.benchmarker module<a class="headerlink" href="#module-utils.benchmark.benchmarker" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="utils.benchmark.benchmarker.Benchmarker">
+<em class="property">class </em><code class="sig-name descname">Benchmarker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<p>Benchmarker class used to run benchmarks of our integrator comparing to others and perform parameter scans</p>
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.Benchmarker.benchmark_method">
+<em class="property">abstract </em><code class="sig-name descname">benchmark_method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">integrand</span></em>, <em class="sig-param"><span class="n">integrator_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">integrand_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.benchmark_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a single benchmark evaluation of a given integrand</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.Benchmarker.generate_config_samples">
+<em class="property">abstract </em><code class="sig-name descname">generate_config_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrator_grid</span></em>, <em class="sig-param"><span class="n">integrand_grid</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample over dimensions, integrator and integrand configurations from lists of possible option values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – list of dimensions to sample from</p></li>
+<li><p><strong>integrator_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrator</p></li>
+<li><p><strong>integrand_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Tuple[int, Dict[str, Any], Dict[str, Any]]</em> – triplets (d, integrator_config, integrand_params) that can be used to sample configurations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.Benchmarker.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrand</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">base_integrand_params</span></em>, <em class="sig-param"><span class="n">base_integrator_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">integrand_params_grid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">integrator_config_grid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">100000</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sql_dtypes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dbname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">experiment_name</span><span class="o">=</span><span class="default_value">'benchmark'</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run benchmarks over a grid of parameters for the integrator and the integrand.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config">
+<code class="sig-name descname">set_benchmark_grid_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dimensions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dbname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">experiment_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debug</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default_dimension</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">base_integrand_params</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare standard arguments for <code class="code docutils literal notranslate"><span class="pre">run_benchmark_grid</span></code>
+The parameter importance hierarchy is:</p>
+<ol class="arabic simple">
+<li><p>CLI arguments (direct arguments to this function)</p></li>
+<li><p>config file (filepath given as <code class="code docutils literal notranslate"><span class="pre">config</span></code>)</p></li>
+<li><p>default values provided as argument</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config_param">
+<em class="property">static </em><code class="sig-name descname">set_benchmark_grid_config_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">benchmark_grid_config</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">param_value</span></em>, <em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker.set_benchmark_grid_config_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an argument in the configuration dictionary to be provided to <code class="code docutils literal notranslate"><span class="pre">run_benchmark_grid</span></code> according to the
+established hierarchy:</p>
+<ol class="arabic simple">
+<li><p>direct argument value (typically from CLI)</p></li>
+<li><p>config file value</p></li>
+<li><p>default value - what is already in the config dictionary when entering this function</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>benchmark_grid_config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – configuration dictionary being constructed. Keys should match the arguments of <code class="code docutils literal notranslate"><span class="pre">run_benchmark_grid</span></code></p></li>
+<li><p><strong>param</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the parameter to be set</p></li>
+<li><p><strong>param_value</strong> (<em>optional</em>) – direct argument value for the parameter. Use the configuration dictionary if not provided</p></li>
+<li><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code>, <em>optional</em>) – Configuration nested dictionary for the benchmarking run at hand. If it is not provided or does not specify
+a value of <code class="code docutils literal notranslate"><span class="pre">param</span></code>, use the default value instead.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.benchmark.benchmarker.GridBenchmarker">
+<em class="property">class </em><code class="sig-name descname">GridBenchmarker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.GridBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
+<p>Benchmark by sampling configurations like a grid</p>
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.GridBenchmarker.generate_config_samples">
+<code class="sig-name descname">generate_config_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrator_grid</span></em>, <em class="sig-param"><span class="n">integrand_grid</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.GridBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample over dimensions, integrator and integrand configurations from lists of possible option values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – list of dimensions to sample from</p></li>
+<li><p><strong>integrator_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrator</p></li>
+<li><p><strong>integrand_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Tuple[int, Dict[str, Any], Dict[str, Any]]</em> – triplets (d, integrator_config, integrand_params) that can be used to sample configurations</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.benchmark.benchmarker.RandomHyperparameterBenchmarker">
+<em class="property">class </em><code class="sig-name descname">RandomHyperparameterBenchmarker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
+<p>Benchmark by sampling integrator configurations randomly, a fixed number of times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n_attempts</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of random integrator configurations to draw</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.RandomHyperparameterBenchmarker.generate_config_samples">
+<code class="sig-name descname">generate_config_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrator_grid</span></em>, <em class="sig-param"><span class="n">integrand_grid</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample over dimensions, integrator and integrand configurations from lists of possible option values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – list of dimensions to sample from</p></li>
+<li><p><strong>integrator_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrator</p></li>
+<li><p><strong>integrand_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Tuple[int, Dict[str, Any], Dict[str, Any]]</em> – triplets (d, integrator_config, integrand_params) that can be used to sample configurations</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.benchmark.benchmarker.SequentialBenchmarker">
+<em class="property">class </em><code class="sig-name descname">SequentialBenchmarker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
+<p>Benchmark by going through a list of integrands and matching integrator configurations
+(as opposed to scanning through parameters for either).</p>
+<p>This is intended for benchmarking integrands on “optimal configurations” found through previous
+hyper parameter searching.</p>
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.SequentialBenchmarker.generate_config_samples">
+<code class="sig-name descname">generate_config_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrator_grid</span></em>, <em class="sig-param"><span class="n">integrand_grid</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample over dimensions, integrator and integrand configurations from lists of possible option values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – list of dimensions to sample from</p></li>
+<li><p><strong>integrator_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrator</p></li>
+<li><p><strong>integrand_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Tuple[int, Dict[str, Any], Dict[str, Any]]</em> – triplets (d, integrator_config, integrand_params) that can be used to sample configurations</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The integrator grid is interpreted as a sequence:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">integrator_grid</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">param1</span><span class="p">:</span> <span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">vn</span><span class="p">]</span>
+  <span class="n">param2</span><span class="p">:</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">wn</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>is scanned as the list of configurations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config1</span> <span class="o">=</span> <span class="p">{</span><span class="n">param1</span><span class="p">:</span> <span class="n">v1</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="n">w1</span><span class="p">}</span>
+<span class="n">config2</span> <span class="o">=</span> <span class="p">{</span><span class="n">param1</span><span class="p">:</span> <span class="n">v2</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="n">w2</span><span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.benchmark.benchmarker.SequentialIntegratorBenchmarker">
+<em class="property">class </em><code class="sig-name descname">SequentialIntegratorBenchmarker</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
+<p>Benchmark by going through a list of full integrator configurations (as opposed to going through parameters
+in the configuration independently) and scan over a grid of possible integrands</p>
+<dl class="py method">
+<dt id="utils.benchmark.benchmarker.SequentialIntegratorBenchmarker.generate_config_samples">
+<code class="sig-name descname">generate_config_samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dimensions</span></em>, <em class="sig-param"><span class="n">integrator_grid</span></em>, <em class="sig-param"><span class="n">integrand_grid</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample over dimensions, integrator and integrand configurations from lists of possible option values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – list of dimensions to sample from</p></li>
+<li><p><strong>integrator_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrator</p></li>
+<li><p><strong>integrand_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict[str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List[Any]]</span></code>) – mapping (option name) -&gt; (list of values) for the integrand</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Tuple[int, Dict[str, Any], Dict[str, Any]]</em> – triplets (d, integrator_config, integrand_params) that can be used to sample configurations</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The integrator grid is interpreted as a sequence:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">integrator_grid</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="n">param1</span><span class="p">:</span> <span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">vn</span><span class="p">]</span>
+  <span class="n">param2</span><span class="p">:</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">wn</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>is scanned as the list of configurations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config1</span> <span class="o">=</span> <span class="p">{</span><span class="n">param1</span><span class="p">:</span> <span class="n">v1</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="n">w1</span><span class="p">}</span>
+<span class="n">config2</span> <span class="o">=</span> <span class="p">{</span><span class="n">param1</span><span class="p">:</span> <span class="n">v2</span><span class="p">,</span> <span class="n">param2</span><span class="p">:</span> <span class="n">w2</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="utils.html">Benchmark utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="utils.benchmark.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;benchmark package</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        
+        <li><a href="utils.benchmark.known_integrand_benchmarks.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;known_integrand_benchmarks module</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../docs.html">API Documentation</a><ul>
+  <li><a href="utils.html">utils package</a><ul>
+  <li><a href="utils.benchmark.html">utils.benchmark package</a><ul>
+      <li>Previous: <a href="utils.benchmark.html" title="previous chapter">utils.benchmark package</a></li>
+      <li>Next: <a href="utils.benchmark.known_integrand_benchmarks.html" title="next chapter">utils.benchmark.known_integrand_benchmarks module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

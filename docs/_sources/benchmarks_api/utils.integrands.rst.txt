@@ -16,5 +16,6 @@ utils.integrands package
 
    utils.integrands.abstract
    utils.integrands.gaussian
+   utils.integrands.madgraph
    utils.integrands.pretty
    utils.integrands.volume

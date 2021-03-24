@@ -14,5 +14,4 @@ utils.config package
 .. toctree::
    :maxdepth: 1
 
-   utils.config.configuration
    utils.config.loaders

@@ -19,7 +19,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="default_integrator module" href="zunis.integration.default_integrator.html" />
+    <link rel="next" title="base_integrator module" href="zunis.integration.base_integrator.html" />
     <link rel="prev" title="integration package" href="zunis.integration.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -57,6 +57,22 @@
 whether the flat distribution does a better job of estimating the loss than the flat distribution</p>
 </dd>
 <dt>Refine:</dt><dd><p>Sample points using the trained model and evaluate the integral</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
+<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+not recommended due to uncontrolled correlations in error estimates</p></li>
+<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -159,7 +175,7 @@ and using the model</p>
         
         
         
-        <li><a href="zunis.integration.default_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;default_integrator module</a></li>
+        <li><a href="zunis.integration.base_integrator.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;base_integrator module</a></li>
         
 <!--    </ul>-->
     
@@ -172,7 +188,7 @@ and using the model</p>
   <li><a href="zunis.html">zunis package</a><ul>
   <li><a href="zunis.integration.html">integration package</a><ul>
       <li>Previous: <a href="zunis.integration.html" title="previous chapter">integration package</a></li>
-      <li>Next: <a href="zunis.integration.default_integrator.html" title="next chapter">default_integrator module</a></li>
+      <li>Next: <a href="zunis.integration.base_integrator.html" title="next chapter">base_integrator module</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

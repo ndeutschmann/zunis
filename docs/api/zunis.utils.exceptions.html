@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>utils.config.configuration module &#8212; ZüNIS 0.1 documentation</title>
+    <title>exceptions module &#8212; ZüNIS 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
@@ -19,8 +19,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="utils.config.loaders module" href="utils.config.loaders.html" />
-    <link rel="prev" title="utils.config package" href="utils.config.html" />
+    <link rel="next" title="function_wrapper module" href="zunis.utils.function_wrapper.html" />
+    <link rel="prev" title="loaders module" href="zunis.utils.config.loaders.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -39,23 +39,29 @@
                 </a>
             </p>
             
-  <div class="section" id="module-utils.config.configuration">
-<span id="utils-config-configuration-module"></span><h1>utils.config.configuration module<a class="headerlink" href="#module-utils.config.configuration" title="Permalink to this headline">¶</a></h1>
-<p>Configuration class</p>
-<dl class="py class">
-<dt id="utils.config.configuration.Configuration">
-<em class="property">class </em><code class="sig-name descname">Configuration</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">recursive</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">check</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/config/configuration.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.config.configuration.Configuration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dictwrapper.nested.NestedMapping</span></code></p>
-<p>Nested dictionary like object with top level access to all leaf-level mappings</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> – positional argument: either nothing or a valid object for dictionary instantiation</p></li>
-<li><p><strong>recursive</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to go down the dictionary and convert all sub dictionaries to NestedMappings</p></li>
-<li><p><strong>check</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to check that the nested structure is valid (i.e. there are no repeated keys)</p></li>
-</ul>
-</dd>
-</dl>
+  <div class="section" id="module-zunis.utils.exceptions">
+<span id="zunis-utils-exceptions-module"></span><h1>exceptions module<a class="headerlink" href="#module-zunis.utils.exceptions" title="Permalink to this headline">¶</a></h1>
+<p>Custom exceptions for the ZüNIS library</p>
+<dl class="py exception">
+<dt id="zunis.utils.exceptions.AvertedCUDARuntimeError">
+<em class="property">exception </em><code class="sig-name descname">AvertedCUDARuntimeError</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.exceptions.AvertedCUDARuntimeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Prevents the raising of a RuntimeError cause by a CUDA device-side assert failure
+which whould lock the GPU in a failed state.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zunis.utils.exceptions.NoCheckpoint">
+<em class="property">exception </em><code class="sig-name descname">NoCheckpoint</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.exceptions.NoCheckpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Raised to signify no checkpoint is available for reloading</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="zunis.utils.exceptions.TrainingInterruption">
+<em class="property">exception </em><code class="sig-name descname">TrainingInterruption</code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.exceptions.TrainingInterruption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
+<p>Raised when a Trainer determines that the model should no longer be trained</p>
 </dd></dl>
 
 </div>
@@ -95,8 +101,8 @@
 <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="utils.html">Benchmark utilities</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../benchmarks_api/utils.html">Benchmark utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
@@ -130,14 +136,17 @@
 
     
     
-    <li><a href="utils.config.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;config package</a></li>
+    <li><a href="zunis.utils.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;utils package</a></li>
     
     
 <!--    <ul>-->
         
         
+        <li><a href="zunis.utils.config.loaders.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;loaders module</a></li>
         
-        <li><a href="utils.config.loaders.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;loaders module</a></li>
+        
+        
+        <li><a href="zunis.utils.function_wrapper.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;function_wrapper module</a></li>
         
 <!--    </ul>-->
     
@@ -147,10 +156,10 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../docs.html">API Documentation</a><ul>
-  <li><a href="utils.html">utils package</a><ul>
-  <li><a href="utils.config.html">utils.config package</a><ul>
-      <li>Previous: <a href="utils.config.html" title="previous chapter">utils.config package</a></li>
-      <li>Next: <a href="utils.config.loaders.html" title="next chapter">utils.config.loaders module</a></li>
+  <li><a href="zunis.html">zunis package</a><ul>
+  <li><a href="zunis.utils.html">utils package</a><ul>
+      <li>Previous: <a href="zunis.utils.config.loaders.html" title="previous chapter">loaders module</a></li>
+      <li>Next: <a href="zunis.utils.function_wrapper.html" title="next chapter">function_wrapper module</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

@@ -1,7 +1,7 @@
-utils.config.configuration module
+zunis.utils.config.loaders module
 =================================
 
-.. automodule:: utils.config.configuration
+.. automodule:: zunis.utils.config.loaders
    :members:
    :undoc-members:
    :show-inheritance:

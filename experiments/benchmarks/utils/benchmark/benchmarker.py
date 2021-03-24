@@ -44,13 +44,13 @@ class Benchmarker(ABC):
         -------
         Tuple[int, Dict[str, Any], Dict[str, Any]]
             triplets (d, integrator_config, integrand_params) that can be used to sample configurations
-
         """
 
     @staticmethod
     def set_benchmark_grid_config_param(benchmark_grid_config, param, param_value, config):
         """Set an argument in the configuration dictionary to be provided to `run_benchmark_grid` according to the
         established hierarchy:
+
         1. direct argument value (typically from CLI)
         2. config file value
         3. default value - what is already in the config dictionary when entering this function
@@ -84,6 +84,7 @@ class Benchmarker(ABC):
                                   default_dimension=(2,), base_integrand_params=()):
         """Prepare standard arguments for `run_benchmark_grid`
         The parameter importance hierarchy is:
+
         1. CLI arguments (direct arguments to this function)
         2. config file (filepath given as `config`)
         3. default values provided as argument
@@ -270,21 +271,27 @@ class SequentialIntegratorBenchmarker(Benchmarker):
 
         Yields
         -------
-        Tuple[int, Dict[str, Any], Dict[str, Any]]
-            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+            Tuple[int, Dict[str, Any], Dict[str, Any]]
+                triplets (d, integrator_config, integrand_params) that can be used to sample configurations
 
         Notes
         -----
 
         The integrator grid is interpreted as a sequence:
-        `integrator_grid = {
-          param1: [v1, v2, ..., vn]
-          param2: [w1, w2, ..., wn]
-        }
+
+        .. code-block:: python
+
+            integrator_grid = {
+              param1: [v1, v2, ..., vn]
+              param2: [w1, w2, ..., wn]
+            }
+
         is scanned as the list of configurations
-        config1 = {param1: v1, param2: w1}
-        config2 = {param1: v2, param2: w2}
-        ...`
+
+        .. code-block:: python
+
+            config1 = {param1: v1, param2: w1}
+            config2 = {param1: v2, param2: w2}
         """
 
         grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
@@ -328,21 +335,28 @@ class SequentialBenchmarker(Benchmarker):
 
         Yields
         -------
-        Tuple[int, Dict[str, Any], Dict[str, Any]]
-            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+            Tuple[int, Dict[str, Any], Dict[str, Any]]
+                triplets (d, integrator_config, integrand_params) that can be used to sample configurations
 
         Notes
         -----
 
         The integrator grid is interpreted as a sequence:
-        `integrator_grid = {
-          param1: [v1, v2, ..., vn]
-          param2: [w1, w2, ..., wn]
-        }
+
+        .. code-block:: python
+
+            integrator_grid = {
+              param1: [v1, v2, ..., vn]
+              param2: [w1, w2, ..., wn]
+            }
+
         is scanned as the list of configurations
-        config1 = {param1: v1, param2: w1}
-        config2 = {param1: v2, param2: w2}
-        ...`
+
+        .. code-block:: python
+
+            config1 = {param1: v1, param2: w1}
+            config2 = {param1: v2, param2: w2}
+            ...
         """
 
         integrator_grid_lengths = list(set([len(param) for param in integrator_grid.values()]))

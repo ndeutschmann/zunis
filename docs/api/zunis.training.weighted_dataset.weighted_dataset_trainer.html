@@ -52,9 +52,39 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_cuda_error">
+<code class="sig-name descname">handle_cuda_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_cuda_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>In case of a cuda error, we try to reload the latest checkpoint</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_invalid_loss">
+<code class="sig-name descname">handle_invalid_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.handle_invalid_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>In case of invalid loss, we try to reload the latest checkpoint</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.process_loss">
 <code class="sig-name descname">process_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.process_loss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle invalid losses by reloading checkpoint and handle logging and checkpointing if valid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint">
+<code class="sig-name descname">restore_checkpoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore from a checkpoint if available</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint_except">
+<code class="sig-name descname">restore_checkpoint_except</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint_except" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to to restore from a checkpoint as a response to an exception</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_checkpoint">
+<code class="sig-name descname">set_checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the current model state as a checkpoint</p>
 </dd></dl>
 
 <dl class="py method">
@@ -148,6 +178,11 @@ tracking, checkpointing etc is performed. No state or history is conserved.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_cuda_error">
+<code class="sig-name descname">handle_cuda_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/training/weighted_dataset/weighted_dataset_trainer.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_cuda_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.handle_invalid_loss">

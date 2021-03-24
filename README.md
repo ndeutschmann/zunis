@@ -33,7 +33,7 @@ pip install --upgrade pip
 # Install the requirements
 cd ./zunis
 pip install -r requirements.txt
-# Run one benchmark (GPU highly recommended)
+# Run one benchmark (GPU recommended)
 cd ./experiments/benchmarks
 python benchmark_hypersphere.py
 ````
@@ -44,10 +44,9 @@ For basic uses, a RealNVP-based integrator is provided with default choices and 
 
 ```
 import torch
-from src.integration import Integrator
+from zunis.integration import Integrator
 
 device = torch.device("cuda")
-
 
 d = 2
 
