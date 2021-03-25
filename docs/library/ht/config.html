@@ -41,17 +41,64 @@
             
   <div class="section" id="how-to-use-a-config-file">
 <h1>How to use a config file<a class="headerlink" href="#how-to-use-a-config-file" title="Permalink to this headline">¶</a></h1>
+<p>Config files can be used to specify arguments for an integrator, including an
+instantiated optimizer. This is included in the <a class="reference internal" href="../../api/zunis.utils.config.html"><span class="doc">config</span></a> subpackage.
+A default config file, integrator_config.yaml, is given there:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwquad</span>
+<span class="nt">flow_options</span><span class="p">:</span>
+<span class="nt">cell_params</span><span class="p">:</span>
+  <span class="nt">d_hidden</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">256</span>
+  <span class="nt">n_bins</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+  <span class="nt">n_hidden</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">masking</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">iflow</span>
+<span class="nt">masking_options</span><span class="p">:</span>
+  <span class="nt">repetitions</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">loss</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">variance</span>
+<span class="nt">n_points_survey</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10000</span>
+<span class="nt">n_iter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="nt">trainer_options</span><span class="p">:</span>
+<span class="nt">minibatch_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="nt">max_reloads</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">n_epochs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">50</span>
+<span class="nt">optim</span><span class="p">:</span>
+  <span class="nt">optim_cls</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Adam</span>
+  <span class="nt">optim_config</span><span class="p">:</span>
+    <span class="nt">betas</span><span class="p">:</span> <span class="kt">!!python/tuple</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">0.9</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">0.999</span>
+    <span class="nt">eps</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0e-08</span>
+    <span class="nt">lr</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="nt">checkpoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">checkpoint_on_cuda</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="nt">checkpoint_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
+</pre></div>
+</div>
+<p>the settings specified in the config file are used for the setup of the trainer,
+the integrator and the flow.
+The flow option specifies which kind of flow to use in the coupling
+cells (choices being “realnvp”, “pwlinear” or “pwquad”), as well as the geometry
+of the underlying neural network and, in case of piecewise-linear or -quadratic
+flows, the number of bins. It is also possible to choose either a “checkerboard”,
+“maximal” or “iflow” masking strategy and define how many sets of coupling cells
+should be used.
+For the purpose of training, either a “variance” or “dkl” loss can be specified.
+For the DKL loss, it is possible to also request the survey strategy “adaptive_dkl”.
+n_iter refers to the number of iterations, whereas n_points_survey defines the
+number of points used per iteration for the survey stage; the same can be defined
+for the refine stage too.
+Apart from this, the trainer options itself can be also defined - the size of
+minibatches, the maximum number of how often the trainer is allowed to restore
+from a checkpoint if an exception happens as well as how many epochs are used
+during an iteration. If “checkpoint” is set to True, checkpoints are saved
+(on the GPU if “checkpoint_on_cuda” is true), alternative checkpoints can be
+also taken from a file if a path is given. Lastly, the optimizer settings itself
+are specified, defining which algorithm to use as well as its parameters.</p>
+<p>TODO: add code</p>
 </div>
 
 
 
             <!-- Render the warning message if using meta tag `:todo:` -->
-            
-            <p class="under-construction">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                This page is still under construction
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            </p>
             
         </div>
         
@@ -80,6 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="nointeg.html">How to train without integrating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preeval.html">How to train on a pre-evaluated sample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sample.html">How to sample from a trained model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rd.html">How to integrate in R^d</a></li>
 </ul>
 </li>
 </ul>

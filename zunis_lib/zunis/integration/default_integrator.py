@@ -62,6 +62,8 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
     -------
        subclass of :py:class:`zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow`
     """
+    print(survey_strategy)
+    print(n_points_survey)
     if trainer is None:
         if trainer_options is None:
             trainer_options = dict()
@@ -91,5 +93,5 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                            n_points_refine=n_points_refine, use_survey=use_survey,
                                            device=device, verbosity=verbosity,
                                            trainer_verbosity=trainer_verbosity)
-
+#test
     raise ValueError("No valid survey strategy was provided. Try 'flat' or 'adaptive_dkl'")
