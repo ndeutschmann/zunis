@@ -62,8 +62,6 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
     -------
        subclass of :py:class:`zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow`
     """
-    print(survey_strategy)
-    print(n_points_survey)
     if trainer is None:
         if trainer_options is None:
             trainer_options = dict()
