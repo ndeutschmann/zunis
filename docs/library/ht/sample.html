@@ -41,6 +41,62 @@
             
   <div class="section" id="how-to-sample-from-a-trained-model">
 <h1>How to sample from a trained model<a class="headerlink" href="#how-to-sample-from-a-trained-model" title="Permalink to this headline">¶</a></h1>
+<p>In the case that we have a pre-trained integrator object present, one can sample
+from the trainer in a similar fashion as presented in the section <a class="reference internal" href="nointeg.html"><span class="doc">How to train
+without integrating</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">use_survey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">survey</span><span class="p">()</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">sample_refine</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After performing the survey step, the model is trained and can be used for sampling.
+<code class="code docutils literal notranslate"><span class="pre">sample_refine</span></code> returns a tensor of size <code class="code docutils literal notranslate"><span class="pre">n_points</span> <span class="pre">x</span> <span class="pre">d</span></code> with the sampled points,
+as well as the Jacobian of the transformation for the sampled point and the function
+value.</p>
+<p>The model can also be saved on the disk for later use. In order to do so, one has
+to save the PyTorch <code class="code docutils literal notranslate"><span class="pre">state_dict</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">use_survey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">survey</span><span class="p">()</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">integrator</span><span class="o">.</span><span class="n">model_trainer</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;model_dict&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This saves the trained model to the same path as the execution file. Now, one can
+at a later point initialise an untrained model with the same parameters and load
+the trained state from the disk:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">integrator</span><span class="o">.</span><span class="n">model_trainer</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;model_dict&quot;</span><span class="p">))</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">sample_refine</span><span class="p">(</span><span class="n">n_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 
 
