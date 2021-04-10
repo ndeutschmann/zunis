@@ -1,5 +1,3 @@
-:todo:
-
 How to sample from a trained model
 ##################################
 In the case that we have a pre-trained integrator object present, one can sample
@@ -23,7 +21,7 @@ without integrating <nointeg>`:
   integrator.sample_refine(n_points=10, f=f)
 
 After performing the survey step, the model is trained and can be used for sampling.
-`sample_refine` returns a tensor of size `n_points x d` with the sampled points,
+`sample_refine` returns a tensor of shape `(n_points,d)` with the sampled points,
 as well as the Jacobian of the transformation for the sampled point and the function
 value.
 

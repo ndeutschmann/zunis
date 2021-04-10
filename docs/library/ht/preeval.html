@@ -41,17 +41,105 @@
             
   <div class="section" id="how-to-train-on-a-pre-evaluated-sample">
 <h1>How to train on a pre-evaluated sample<a class="headerlink" href="#how-to-train-on-a-pre-evaluated-sample" title="Permalink to this headline">¶</a></h1>
+<p>ZüNIS provides integrators which use pre-evaluated samples. This is especially
+useful when the to be integrated function is very costly to evaluate.</p>
+<p>The functionality for using pre-evaluated samples are provided by the
+<a class="reference internal" href="../../api/zunis.integration.fixed_sample_integrator.html"><span class="doc">Fixed Sample Integrator</span></a>.</p>
+<p>Starting from the basic example, on can train on a sample already present as a
+PyTorch tensor:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
+<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">data_x</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">data_px</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
+
+<span class="n">sample</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_px</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)))</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">set_sample</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The sample have to be PyTorch tensors present on the same device in a 3-tuple, with
+the first entry being of the shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,</span> <span class="pre">d)</span></code> containing the sampled points,
+the second entry of shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code> containing the sampling distribution
+PDF values, and the last entry of the shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code> containing the function
+values.
+Note that the number of evaluation points may not be greater than the sample size,
+which is generally much bigger than in this example.</p>
+<p>Another option to fed the sample to ZüNIS is via a pickle file, containing a sample
+batch of the same structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
+<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">data_x</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">data_px</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
+
+<span class="n">sample</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_px</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)))</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sample.p&quot;</span><span class="p">,</span><span class="s2">&quot;wb&quot;</span><span class="p">))</span>
+
+<span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_pickle</span><span class="p">(</span><span class="s2">&quot;sample.p&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This saves the small example sample in a pickle file “sample.p” at the same path as the
+Python script. This pickle file can be opened by the integrator and used as a sample.</p>
+<p>As a last option, it is also possible to provide samples as a <code class="code docutils literal notranslate"><span class="pre">.csv</span></code> file. This
+file has to have <code class="code docutils literal notranslate"><span class="pre">d+2</span></code> columns, with the first <code class="code docutils literal notranslate"><span class="pre">d</span></code> columns containing the sampled
+points, the second the sampling distribution PDF values and the last the function
+value.
+For the above example, the <code class="code docutils literal notranslate"><span class="pre">.csv</span></code> file would look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
+<span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span>
+</pre></div>
+</div>
+<p>This could be imported as a pre-evaluated example and used for integration in the
+following way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
+<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_csv</span><span class="p">(</span><span class="s2">&quot;sample.csv&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 
 
 
             <!-- Render the warning message if using meta tag `:todo:` -->
-            
-            <p class="under-construction">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                This page is still under construction
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            </p>
             
         </div>
         
