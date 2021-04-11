@@ -41,17 +41,38 @@
             
   <div class="section" id="how-to-integrate-in-r-d">
 <h1>How to integrate in R^d<a class="headerlink" href="#how-to-integrate-in-r-d" title="Permalink to this headline">¶</a></h1>
+<p>ZüNIS samples into the unit hypercube. In order to integrate functions over the
+whole space of real numbers, it is necessary to perform a variable transformation.
+The change of variables has to map [0,1] to R. This can be done by using any
+bijective function with two divergences. Examples of such functions would be the
+tangens or the arctanh.</p>
+<p>Starting from the basic example, and integrating over a function in R^2 instead,
+this could be done like the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">square</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">f_wrapped</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)))</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">square</span><span class="p">())))</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">f</span><span class="o">=</span><span class="n">f_wrapped</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that sampling uniformly over an arbitrary large interval instead of a
+change of variable introduces infinite variance.</p>
 </div>
 
 
 
             <!-- Render the warning message if using meta tag `:todo:` -->
-            
-            <p class="under-construction">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                This page is still under construction
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            </p>
             
         </div>
         
