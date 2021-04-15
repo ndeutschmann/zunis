@@ -48,18 +48,22 @@ This means that the <em>variable transform</em> is piecewise-quadratic.</p>
 <em class="property">class </em><code class="sig-name descname">ElementWisePWQuadraticTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
 <p>Invertible piecewise-quadratic transformations over the unit hypercube</p>
-<p>Implements a batched bijective transformation <code class="code docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
+<blockquote>
+<div><p>Implements a batched bijective transformation <code class="code docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
 in an element-wise fashion (each coordinate transformed independently)</p>
 <p>In each direction, the bijection is a piecewise-quadratic transform with b bins
-where the forward transform has bins with adjustable width. The transformation in each bin is
-then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the
-derivative of the transform for each direction and each point of the batch. They are normalized such that:
+where the forward transform has bins with adjustable width. The transformation in each bin is</p>
+</div></blockquote>
+<dl>
+<dt>then a quadratic spline. The network predicts the bin width w_tilde and the vertex height v_tilde of the</dt><dd><p>derivative of the transform for each direction and each point of the batch. They are normalized such that:
 1. h(0) = 0
 2. h(1) = 1
 3. h is monotonous
 4. h is continuous</p>
-<p>Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible.
+<p>Conditions 1. to 3. ensure the transformation is a bijection and therefore invertible
 The inverse is also an element-wise, piece-wise quadratic transformation.</p>
+</dd>
+</dl>
 <p>Constructor for InvertibleTransform</p>
 <p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
 <dl class="py method">
@@ -70,7 +74,7 @@ The inverse is also an element-wise, piece-wise quadratic transformation.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
-dimension of the variable space. This variable spans the k-dimensional unit
+dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
 <li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant
@@ -156,7 +160,7 @@ or used as parameters of the transform (True)</p></li>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling</span></code></a></p>
 <p>Piece-wise Quadratic coupling</p>
 <p>Coupling cell using an element-wise piece-wise quadratic transformation as a change of
-variables. The transverse neural network is a rectangular dense neural network.</p>
+variables. The transverse neural network is a rectangular dense neural network</p>
 <p class="rubric">Notes</p>
 <p>Transformation used:
 <code class="code docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform</span></code>
@@ -234,7 +238,7 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
-dimension of the variable space. This variable spans the k-dimensional unit
+dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
 <li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant
@@ -283,7 +287,7 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/how-tos.html">How-to's</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
