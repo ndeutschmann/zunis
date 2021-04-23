@@ -1,6 +1,6 @@
 How to sample from a trained model
 ##################################
-In the case that we have a pre-trained integrator object present, one can sample
+Provided a pre-trained model, one can sample
 from the trainer in a similar fashion as presented in the section :doc:`How to train
 without integrating <nointeg>`:
 
@@ -50,9 +50,7 @@ to save the PyTorch `state_dict`:
 
   torch.save(trainer.flow.state_dict(),"model_dict")
 
-This saves the trained model to the same path as the execution file. Now, one can
-at a later point initialize an untrained model with the same parameters and load
-the trained state from the disk:
+One can then reload the model weights from the disk:
 
 .. code-block:: python
 

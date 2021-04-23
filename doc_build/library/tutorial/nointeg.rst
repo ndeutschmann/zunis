@@ -25,4 +25,3 @@ use the trainer API:
 In a first step, we initialize a trainer object. We generate a batch of 10 uniformly
 sampled points in the 2D hypercube `x` with the probability distribution `px`
 and the function value `fx`. Then, one training step is performed on this batch.
-The trainer could be then used in an integrator object to perform an integration.

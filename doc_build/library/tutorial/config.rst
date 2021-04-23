@@ -1,9 +1,9 @@
 
-How to use a config file
-########################
+How to use a configuration file
+###############################
 
-Config files can be used to specify arguments for an integrator, including an
-instantiated optimizer. This is included in the :doc:`config </api/zunis.utils.config>` subpackage.
+Configuration files can be used to specify arguments for the :doc:`Integrator </library/integrator>` interface in YAML.
+This is implemented in the :doc:`config </api/zunis.utils.config>` subpackage.
 A default config file, integrator_config.yaml, is given there:
 
 .. code-block:: yaml
@@ -36,7 +36,7 @@ A default config file, integrator_config.yaml, is given there:
   checkpoint_on_cuda: True
   checkpoint_path: null
 
-The settings specified in the config file are used for the setup of the trainer,
+The settings specified in the configuration file are used for the setup of the trainer,
 the integrator and the flow.
 
 The flow option specifies which kind of flow to use in the coupling
@@ -52,7 +52,7 @@ For the DKL loss, it is possible to also request the survey strategy `adaptive_d
 number of points used per iteration for the survey stage; the same can be defined
 for the refine stage too.
 
-Apart from this, the trainer options itself can be also defined - the size of
+Besides this, the trainer options itself can be also defined - the size of
 minibatches, the maximum number of how often the trainer is allowed to restore
 from a checkpoint if an exception happens as well as how many epochs are used
 during an iteration. If `checkpoint` is set to True, checkpoints are saved
@@ -60,7 +60,10 @@ during an iteration. If `checkpoint` is set to True, checkpoints are saved
 also taken from a file if a path is given. Lastly, the optimizer settings itself
 are specified, defining which algorithm to use as well as its parameters.
 
-Extending the basic example, this config file can be loaded to the integrator
+In general, all keywords arguments specified for :func:`Integrators <zunis.integration.default_integrator.Integrator>` can be defined
+in a configuration file.
+
+Extending the basic example, this configuration file can be loaded to the integrator
 in the following way:
 
 .. code-block:: python
@@ -76,7 +79,7 @@ in the following way:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  integrator = Integrator(f,d,**create_integrator_args(None),device=device)
+  integrator = Integrator(f,d,**create_integrator_args(),device=device)
   result, uncertainty, history = integrator.integrate()
 
 `create_integrator_args(None)` returns a dictionary with keyword arguments which
@@ -84,7 +87,7 @@ are given to the integrator. The values of the keyword arguments are specified b
 the yaml file which is at the path specified by the argument. If the argument
 is `None`, as it is in this case, the quoted default `config.yaml` is loaded.
 
-The config files can be written by hand, or, alternativly, a generator is also
+The config files can be written by hand, or, alternatively, a generator is also
 available at `zunis.utils.config.generators`
 
 
@@ -102,9 +105,7 @@ available at `zunis.utils.config.generators`
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-
-
-  create_integrator_config_file(filepath="integrator_config_new.yaml", base_config="integrator_config_old.yaml", n_points_survey= 20000)
+  create_integrator_config_file(filepath="integrator_config_new.yaml", base_config="integrator_config_old.yaml", n_points_survey=20000)
   integrator = Integrator(f,d,**create_integrator_args("integrator_config_new.yaml"),device=device)
   result, uncertainty, history = integrator.integrate()
 
