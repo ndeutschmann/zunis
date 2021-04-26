@@ -74,3 +74,34 @@ class AdaptiveSurveyIntegrator(FlatSurveySamplingIntegrator):
         if (not self.sample_forward) and self.survey_switch_condition():
             self.logger.info("Switching sampling mode")
             self.sample_forward = True
+
+
+class ForwardSurveySamplingIntegrator(AdaptiveSurveyIntegrator):
+    """Survey/Refine integrator using forward sampling for training during the survey phase.
+
+    The constructor option `ForwardSurveySamplingIntegrator` (default: `False`) allows using flat latent space sampling
+    for the first survey step, then switching to forward sampling.
+    """
+
+    def __init__(self, f, trainer, d, n_iter=10, n_iter_survey=None, n_iter_refine=None,
+                 n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
+                 device=torch.device("cpu"), verbosity=2, trainer_verbosity=1, sample_flat_once=False , **kwargs):
+        super(ForwardSurveySamplingIntegrator, self).__init__(f,
+                                                              trainer,
+                                                              d,
+                                                              n_iter=n_iter,
+                                                              n_iter_survey=n_iter_survey,
+                                                              n_iter_refine=n_iter_refine,
+                                                              n_points=n_points,
+                                                              n_points_survey=n_points_survey,
+                                                              n_points_refine=n_points_refine,
+                                                              use_survey=use_survey,
+                                                              device=device,
+                                                              verbosity=verbosity,
+                                                              trainer_verbosity=trainer_verbosity,
+                                                              **kwargs)
+
+        self.sample_forward = not sample_flat_once
+
+    def survey_switch_condition(self):
+        return True
