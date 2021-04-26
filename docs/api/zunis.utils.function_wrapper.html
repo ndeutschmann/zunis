@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>function_wrapper module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,7 +42,7 @@
 <p>Function wrappers to provide API-compatible functions</p>
 <dl class="py function">
 <dt id="zunis.utils.function_wrapper.wrap_compact_arguments_function">
-<code class="sig-name descname">wrap_compact_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_compact_arguments_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wrap_compact_arguments_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_compact_arguments_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take a function that evaluates on a sequence of arguments with values in compact intervals provided
 as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries and
 return a function that evaluates on pytorch batches in the unit hypercube,
@@ -54,7 +52,7 @@ weighted by the proper Jacobian factor to preserve integrals.</p>
 
 <dl class="py function">
 <dt id="zunis.utils.function_wrapper.wrap_hypercube_arguments_function">
-<code class="sig-name descname">wrap_hypercube_arguments_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_hypercube_arguments_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wrap_hypercube_arguments_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_hypercube_arguments_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take a function that evaluates on a sequence of arguments with values in the unit hypercube and
 return a function that evaluates on pytorch batches in the unit hypercube,
 weighted by the proper Jacobian factor to preserve integrals.</p>
@@ -63,7 +61,7 @@ weighted by the proper Jacobian factor to preserve integrals.</p>
 
 <dl class="py function">
 <dt id="zunis.utils.function_wrapper.wrap_numpy_compact_batch_function">
-<code class="sig-name descname">wrap_numpy_compact_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">dimensions</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_compact_batch_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wrap_numpy_compact_batch_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_compact_batch_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take a function that evaluates on numpy batches with values in compact intervals provided
 as a list of shape (d,2) where each element is the pair (lower,upper) of interval boundaries.
 and return a function that evaluates on pytorch batches in the unit hypercube,
@@ -72,7 +70,7 @@ weighted by the proper Jacobian factor to preserve integrals.</p>
 
 <dl class="py function">
 <dt id="zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function">
-<code class="sig-name descname">wrap_numpy_hypercube_batch_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">wrap_numpy_hypercube_batch_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/function_wrapper.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.function_wrapper.wrap_numpy_hypercube_batch_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take a function that evaluates on numpy batches with values in the unit hypercube
 and return a function that evaluates on pytorch batches in the unit hypercube</p>
 </dd></dl>
@@ -105,6 +103,7 @@ and return a function that evaluates on pytorch batches in the unit hypercube</p
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -205,7 +204,7 @@ and return a function that evaluates on pytorch batches in the unit hypercube</p
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

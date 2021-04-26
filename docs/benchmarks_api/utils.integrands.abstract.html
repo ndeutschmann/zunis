@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.integrands.abstract module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,18 +42,18 @@
 <p>Abstract classes for integrands</p>
 <dl class="py class">
 <dt id="utils.integrands.abstract.Integrand">
-<em class="property">class </em><code class="sig-name descname">Integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Abstract class to define integrands for testing the integration library</p>
 <dl class="py method">
 <dt id="utils.integrands.abstract.Integrand.evaluate_integrand">
-<em class="property">abstract </em><code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the integrand on a batch of points</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.abstract.Integrand.vegas">
-<code class="sig-name descname">vegas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand.vegas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">vegas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.Integrand.vegas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn this integrand into a vegas batch integrand</p>
 </dd></dl>
 
@@ -63,19 +61,19 @@
 
 <dl class="py class">
 <dt id="utils.integrands.abstract.KnownIntegrand">
-<em class="property">class </em><code class="sig-name descname">KnownIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">KnownIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Abstract class for integrands with a known integral value</p>
 <dl class="py method">
 <dt id="utils.integrands.abstract.KnownIntegrand.check">
-<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimated_integral</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'relative'</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.check" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">check</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimated_integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relative'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.check" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the value of an estimation of the integral value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>estimated_integral</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
-<li><p><strong>tolerance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;relative&quot;,</span> <span class="pre">&quot;absolute&quot;}</span></code>) – </p></li>
+<li><p><strong>estimated_integral</strong> (<em>float</em>) – </p></li>
+<li><p><strong>tolerance</strong> (<em>float</em>) – </p></li>
+<li><p><strong>method</strong> (<em>{&quot;relative&quot;</em><em>, </em><em>&quot;absolute&quot;}</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -89,19 +87,19 @@
 
 <dl class="py method">
 <dt id="utils.integrands.abstract.KnownIntegrand.compare_absolute">
-<code class="sig-name descname">compare_absolute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimated_integral</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.compare_absolute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">compare_absolute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimated_integral</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.compare_absolute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the absolute difference between an integral and the true value</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.abstract.KnownIntegrand.compare_relative">
-<code class="sig-name descname">compare_relative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimated_integral</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.compare_relative" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">compare_relative</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimated_integral</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.compare_relative" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the relative difference between an integral estimation and the true value</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.abstract.KnownIntegrand.integral">
-<em class="property">abstract </em><code class="sig-name descname">integral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.integral" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">integral</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.KnownIntegrand.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the true value of the integral</p>
 </dd></dl>
 
@@ -109,7 +107,7 @@
 
 <dl class="py class">
 <dt id="utils.integrands.abstract.RegulatedIntegrand">
-<em class="property">class </em><code class="sig-name descname">RegulatedIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RegulatedIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>Integrand deriving from another one and adding a small constant
 regulating factor</p>
@@ -117,7 +115,7 @@ regulating factor</p>
 <a class="reference external" href="https://stackoverflow.com/a/50465583">[1]</a> <a class="reference external" href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/">[2]</a></p>
 <dl class="py method">
 <dt id="utils.integrands.abstract.RegulatedIntegrand.evaluate_integrand">
-<code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the integrand on a batch of points</p>
 </dd></dl>
 
@@ -125,13 +123,13 @@ regulating factor</p>
 
 <dl class="py class">
 <dt id="utils.integrands.abstract.RegulatedKnownIntegrand">
-<em class="property">class </em><code class="sig-name descname">RegulatedKnownIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedKnownIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RegulatedKnownIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedKnownIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.abstract.RegulatedIntegrand" title="utils.integrands.abstract.RegulatedIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.RegulatedIntegrand</span></code></a>, <a class="reference internal" href="#utils.integrands.abstract.KnownIntegrand" title="utils.integrands.abstract.KnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.KnownIntegrand</span></code></a></p>
 <p>Integrand deriving from another known one and adding a small constant
 regulating factor</p>
 <dl class="py method">
 <dt id="utils.integrands.abstract.RegulatedKnownIntegrand.integral">
-<code class="sig-name descname">integral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedKnownIntegrand.integral" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integral</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/abstract.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.abstract.RegulatedKnownIntegrand.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the true value of the integral</p>
 </dd></dl>
 
@@ -165,6 +163,7 @@ regulating factor</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -262,7 +261,7 @@ regulating factor</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

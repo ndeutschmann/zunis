@@ -98,6 +98,7 @@ If this seems like a problem that machine learning should be able to solve, you 
     Installation <library/installation>
     Basic example <library/basic-example>
     Concepts <library/concepts>
+    Tutorials  <library/tutorial>
 
 .. toctree::
     :caption: Background

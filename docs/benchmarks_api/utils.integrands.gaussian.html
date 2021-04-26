@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.integrands.gaussian module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -43,28 +41,28 @@
 <span id="utils-integrands-gaussian-module"></span><h1>utils.integrands.gaussian module<a class="headerlink" href="#module-utils.integrands.gaussian" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="utils.integrands.gaussian.CamelIntegrand">
-<em class="property">class </em><code class="sig-name descname">CamelIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.CamelIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">CamelIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.CamelIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>Camel function: two gaussian peaks on the hyperdiagonal of the unit hypercube
 at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – std of the first gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>s2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – std of the second gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>norm1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – normalization of the first gaussian. Must be a scalar.</p></li>
-<li><p><strong>norm2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – normalization of the second gaussian. Must be a scalar.</p></li>
-<li><p><strong>device</strong> (<em>default</em> <code class="xref py py-class docutils literal notranslate"><span class="pre">device</span> <span class="pre">on</span> <span class="pre">which</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">run</span> <span class="pre">the</span> <span class="pre">computation</span></code>) – </p></li>
+<li><p><strong>s1</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – std of the first gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>s2</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – std of the second gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>norm1</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – normalization of the first gaussian. Must be a scalar.</p></li>
+<li><p><strong>norm2</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – normalization of the second gaussian. Must be a scalar.</p></li>
+<li><p><strong>device</strong> (<em>default device on which to run the computation</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="utils.integrands.gaussian.CamelIntegrand.evaluate_integrand">
-<code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.CamelIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.CamelIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the camel function for a batch of points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – </p>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -79,16 +77,16 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 
 <dl class="py class">
 <dt id="utils.integrands.gaussian.DiagonalGaussianIntegrand">
-<em class="property">class </em><code class="sig-name descname">DiagonalGaussianIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.DiagonalGaussianIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">DiagonalGaussianIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.DiagonalGaussianIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>N-dimensional gaussian with a diagonal covariance matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mu</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Mean of the gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Standard deviation of the gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Prefactor of the gaussian. Must be a scalar.</p></li>
-<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – Default device where the parameters are stored</p></li>
+<li><p><strong>mu</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Mean of the gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>s</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Standard deviation of the gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>norm</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Prefactor of the gaussian. Must be a scalar.</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – Default device where the parameters are stored</p></li>
 </ul>
 </dd>
 </dl>
@@ -96,12 +94,12 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 <p>Correct value in 2D with standard params: 0.031415898(81)</p>
 <dl class="py method">
 <dt id="utils.integrands.gaussian.DiagonalGaussianIntegrand.evaluate_integrand">
-<code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.DiagonalGaussianIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.DiagonalGaussianIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the gaussian</p>
 <p>The parameters of the gaussian are sent to the device of the input</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Batch of points of size <code class="docutils literal notranslate"><span class="pre">`(*,d)`</span></code></p>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – Batch of points of size <code class="docutils literal notranslate"><span class="pre">`(*,d)`</span></code></p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -116,17 +114,17 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 
 <dl class="py class">
 <dt id="utils.integrands.gaussian.RegulatedDiagonalGaussianIntegrand">
-<em class="property">class </em><code class="sig-name descname">RegulatedDiagonalGaussianIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.RegulatedDiagonalGaussianIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RegulatedDiagonalGaussianIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.RegulatedDiagonalGaussianIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.RegulatedIntegrand" title="utils.integrands.abstract.RegulatedIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.RegulatedIntegrand</span></code></a>, <a class="reference internal" href="#utils.integrands.gaussian.DiagonalGaussianIntegrand" title="utils.integrands.gaussian.DiagonalGaussianIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.gaussian.DiagonalGaussianIntegrand</span></code></a></p>
 <p>N-dimensional regulated gaussian with a diagonal covariance matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mu</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Mean of the gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Standard deviation of the gaussian. Either a scalar or a vector of size d</p></li>
-<li><p><strong>norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – Prefactor of the gaussian. Must be a scalar.</p></li>
-<li><p><strong>reg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – regularization constant</p></li>
-<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – Default device where the parameters are stored</p></li>
+<li><p><strong>mu</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Mean of the gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>s</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Standard deviation of the gaussian. Either a scalar or a vector of size d</p></li>
+<li><p><strong>norm</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – Prefactor of the gaussian. Must be a scalar.</p></li>
+<li><p><strong>reg</strong> (<em>float</em>) – regularization constant</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – Default device where the parameters are stored</p></li>
 </ul>
 </dd>
 </dl>
@@ -136,15 +134,15 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 
 <dl class="py class">
 <dt id="utils.integrands.gaussian.SymmetricCamelIntegrand">
-<em class="property">class </em><code class="sig-name descname">SymmetricCamelIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.gaussian.SymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SymmetricCamelIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/gaussian.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.gaussian.SymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.gaussian.CamelIntegrand" title="utils.integrands.gaussian.CamelIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.gaussian.CamelIntegrand</span></code></a></p>
 <p>Camel integrands with two identical humps</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – std of the two gaussians. Either a scalar or a vector of size d</p></li>
-<li><p><strong>norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – normalization of the two gaussians. Must be a scalar.</p></li>
-<li><p><strong>device</strong> (<em>default</em> <code class="xref py py-class docutils literal notranslate"><span class="pre">device</span> <span class="pre">on</span> <span class="pre">which</span></code> to <code class="xref py py-class docutils literal notranslate"><span class="pre">run</span> <span class="pre">the</span> <span class="pre">computation</span></code>) – </p></li>
+<li><p><strong>s</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – std of the two gaussians. Either a scalar or a vector of size d</p></li>
+<li><p><strong>norm</strong> (<em>float</em><em> or </em><em>torch.Tensor</em>) – normalization of the two gaussians. Must be a scalar.</p></li>
+<li><p><strong>device</strong> (<em>default device on which to run the computation</em>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -178,6 +176,7 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -278,7 +277,7 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

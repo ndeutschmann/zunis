@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>adaptive_survey_integrator module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -43,7 +41,7 @@
 <span id="zunis-integration-adaptive-survey-integrator-module"></span><h1>adaptive_survey_integrator module<a class="headerlink" href="#module-zunis.integration.adaptive_survey_integrator" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator">
-<em class="property">class </em><code class="sig-name descname">AdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">AdaptiveSurveyIntegrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.FlatSurveySamplingIntegrator</span></code></a></p>
 <p>Adaptive integrator based on a separation between survey and sampling</p>
 <dl>
@@ -62,34 +60,34 @@ whether the flat distribution does a better job of estimating the loss than the 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
-<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
-<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
-<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
 <li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
-<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
-<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
-<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
 not recommended due to uncontrolled correlations in error estimates</p></li>
-<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">
-<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_survey_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_record</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the result of a survey step</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">
-<code class="sig-name descname">sample_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sample_survey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points from target space distribution</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition">
-<em class="property">abstract </em><code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">survey_switch_condition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Boolean valued method that checks if it is time to switch between sampling uniformly
 and using the model</p>
 </dd></dl>
@@ -124,6 +122,7 @@ and using the model</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -221,7 +220,7 @@ and using the model</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
