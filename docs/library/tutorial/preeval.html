@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How to train on a pre-evaluated sample &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -42,10 +40,10 @@
   <div class="section" id="how-to-train-on-a-pre-evaluated-sample">
 <h1>How to train on a pre-evaluated sample<a class="headerlink" href="#how-to-train-on-a-pre-evaluated-sample" title="Permalink to this headline">¶</a></h1>
 <p>ZüNIS provides integrators which use pre-evaluated samples. This is especially
-useful when the to be integrated function is very costly to evaluate.</p>
+useful when fine-tuning integration parameters for a function that is very costly to evaluate.</p>
 <p>The functionality for using pre-evaluated samples are provided by the
 <a class="reference internal" href="../../api/zunis.integration.fixed_sample_integrator.html"><span class="doc">Fixed Sample Integrator</span></a>.</p>
-<p>Starting from the basic example, on can train on a sample already present as a
+<p>Starting from the basic example, on can train on a sample defined as a
 PyTorch tensor:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
@@ -58,24 +56,31 @@ PyTorch tensor:</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">data_x</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">data_px</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
 
-<span class="n">sample</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_px</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)))</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># Uniformly sampled points</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_points</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="c1"># x.shape = (n_points,d)</span>
+
+<span class="n">px</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
+<span class="c1"># px.shape = (n_points,)</span>
+
+<span class="c1"># Function values</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="n">fx</span>
 <span class="n">integrator</span><span class="o">.</span><span class="n">set_sample</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The sample have to be PyTorch tensors present on the same device in a 3-tuple, with
-the first entry being of the shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,</span> <span class="pre">d)</span></code> containing the sampled points,
-the second entry of shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code> containing the sampling distribution
-PDF values, and the last entry of the shape <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code> containing the function
-values.
-Note that the number of evaluation points may not be greater than the sample size,
-which is generally much bigger than in this example.</p>
-<p>Another option to fed the sample to ZüNIS is via a pickle file, containing a sample
+<p>The sample have to be PyTorch tensors present on the same device in a 3-tuple, with the first containing the sampled points,
+the second containing the sampling distribution
+PDF values, and the last entry containing the function
+values, respectively of shapes <code class="code docutils literal notranslate"><span class="pre">(sample_size,</span> <span class="pre">d)</span></code>, <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code> and <code class="code docutils literal notranslate"><span class="pre">(sample_size,)</span></code></p>
+<p>Fixed sample integrators can also directly import a pickle file, containing a sample
 batch of the same structure:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
@@ -102,9 +107,7 @@ batch of the same structure:</p>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This saves the small example sample in a pickle file “sample.p” at the same path as the
-Python script. This pickle file can be opened by the integrator and used as a sample.</p>
-<p>As a last option, it is also possible to provide samples as a <code class="code docutils literal notranslate"><span class="pre">.csv</span></code> file. This
+<p>Finally , it is also possible to provide samples as a <code class="code docutils literal notranslate"><span class="pre">.csv</span></code> file. This
 file has to have <code class="code docutils literal notranslate"><span class="pre">d+2</span></code> columns, with the first <code class="code docutils literal notranslate"><span class="pre">d</span></code> columns containing the sampled
 points, the second the sampling distribution PDF values and the last the function
 value.
@@ -163,12 +166,17 @@ following way:</p>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="config.html">How to use a config file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nointeg.html">How to train without integrating</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to train on a pre-evaluated sample</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample.html">How to sample from a trained model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Rd.html">How to integrate in R^d</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nointeg.html">Training without integrating</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rd.html">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
 </ul>
 </li>
 </ul>
@@ -211,7 +219,7 @@ following way:</p>
 
     
     
-    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Tutorials</a></li>
+    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;ZüNIS Tutorials</a></li>
     
     
 <!--    <ul>-->
@@ -230,7 +238,7 @@ following way:</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../tutorial.html">Tutorials</a><ul>
+  <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
       <li>Previous: <a href="nointeg.html" title="previous chapter">How to train without integrating</a></li>
       <li>Next: <a href="sample.html" title="next chapter">How to sample from a trained model</a></li>
   </ul></li>
@@ -263,7 +271,7 @@ following way:</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

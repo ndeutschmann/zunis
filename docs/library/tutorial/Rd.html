@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How to integrate in R^d &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -41,13 +39,11 @@
             
   <div class="section" id="how-to-integrate-in-r-d">
 <h1>How to integrate in R^d<a class="headerlink" href="#how-to-integrate-in-r-d" title="Permalink to this headline">¶</a></h1>
-<p>ZüNIS samples into the unit hypercube. In order to integrate functions over the
-whole space of real numbers, it is necessary to perform a variable transformation.
+<p>ZüNIS integrates over the unit hypercube. In order to integrate functions over the
+whole real line, it is necessary to perform a variable transformation.
 The change of variables has to map [0,1] to R. This can be done by using any
-bijective function with two divergences. Examples of such functions would be the
-tangens or the arctanh.</p>
-<p>Starting from the basic example, and integrating over a function in R^2 instead,
-this could be done like the following:</p>
+bijective function with two divergences such as the tangent and the inverse hyperbolic tangent functions.</p>
+<p>Here is for example how to compute a gaussian integral in two dimensions.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
@@ -66,8 +62,6 @@ this could be done like the following:</p>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Note that sampling uniformly over an arbitrary large interval instead of a
-change of variable introduces infinite variance.</p>
 </div>
 
 
@@ -96,12 +90,17 @@ change of variable introduces infinite variance.</p>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="config.html">How to use a config file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nointeg.html">How to train without integrating</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preeval.html">How to train on a pre-evaluated sample</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample.html">How to sample from a trained model</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to integrate in R^d</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nointeg.html">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
 </ul>
 </li>
 </ul>
@@ -144,7 +143,7 @@ change of variable introduces infinite variance.</p>
 
     
     
-    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Tutorials</a></li>
+    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;ZüNIS Tutorials</a></li>
     
     
 <!--    <ul>-->
@@ -163,7 +162,7 @@ change of variable introduces infinite variance.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../tutorial.html">Tutorials</a><ul>
+  <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
       <li>Previous: <a href="sample.html" title="previous chapter">How to sample from a trained model</a></li>
       <li>Next: <a href="../../background/nis.html" title="next chapter">Neural Importance Sampling</a></li>
   </ul></li>
@@ -196,7 +195,7 @@ change of variable introduces infinite variance.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

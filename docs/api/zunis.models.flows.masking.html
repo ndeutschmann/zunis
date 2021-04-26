@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>masking module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,13 +42,13 @@
 <p>Module for the generation of masks for coupling cells</p>
 <dl class="py function">
 <dt id="zunis.models.flows.masking.get_bin">
-<code class="sig-name descname">get_bin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.get_bin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_bin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.masking.get_bin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the binary representation of x.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Minimum number of digits. If x needs less digits in binary, the rest
+<li><p><strong>x</strong> (<em>int</em>) – </p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Minimum number of digits. If x needs less digits in binary, the rest
 is filled with zeros.</p></li>
 </ul>
 </dd>
@@ -65,7 +63,7 @@ is filled with zeros.</p></li>
 
 <dl class="py function">
 <dt id="zunis.models.flows.masking.iflow_strategy">
-<code class="sig-name descname">iflow_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.iflow_strategy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">iflow_strategy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repetitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.masking.iflow_strategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a list of masks using the strategy of Gao et al. arXiv:2001.05486.
 Each dimension is numbered and the number is converted into the binary representation. Then,
 one bit after another, starting with the most significant bit, is converted into a boolean.
@@ -74,7 +72,7 @@ able to test for all correlations, for each mask, the inverse mask is used too.<
 <p>The minimal amount of cells will be used to represent all possible correlations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of dimensions</p>
+<dd class="field-odd"><p><strong>d</strong> (<em>int</em>) – number of dimensions</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>list of masks</p>
@@ -87,7 +85,7 @@ able to test for all correlations, for each mask, the inverse mask is used too.<
 
 <dl class="py function">
 <dt id="zunis.models.flows.masking.maximal_masking_strategy">
-<code class="sig-name descname">maximal_masking_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">maximal_masking_strategy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repetitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.masking.maximal_masking_strategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a list of masks using the maximally complex option:
 (not really but within the reasonable options)</p>
 <p>Each variable is transformed using all the others as parameters, looping
@@ -96,8 +94,8 @@ number of dimensions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of dimensions</p></li>
-<li><p><strong>repetitions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of repetitions</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – number of dimensions</p></li>
+<li><p><strong>repetitions</strong> (<em>int</em>) – number of repetitions</p></li>
 </ul>
 </dd>
 </dl>
@@ -105,14 +103,14 @@ number of dimensions</p>
 
 <dl class="py function">
 <dt id="zunis.models.flows.masking.n_ary_mask">
-<code class="sig-name descname">n_ary_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">offset</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">n_ary_mask</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a n-ary mask with n entries (a list of bool with each nth entry True)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – numbers of entries in the mask</p></li>
-<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – period of the mask</p></li>
-<li><p><strong>offset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – offset of the True entries</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – numbers of entries in the mask</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – period of the mask</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – offset of the True entries</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -126,16 +124,16 @@ number of dimensions</p>
 
 <dl class="py function">
 <dt id="zunis.models.flows.masking.n_ary_mask_strategy">
-<code class="sig-name descname">n_ary_mask_strategy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">repetitions</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask_strategy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">n_ary_mask_strategy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repetitions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/masking.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.masking.n_ary_mask_strategy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate an list of masks using the n-ary periodic strategy: every nth entry is True and each next mask is
 offset by one position with respect to the previous one. We loop for a given number of repetitions through all
 possible masks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimensionality of the space</p></li>
-<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – periodicity of the mask</p></li>
-<li><p><strong>repetitions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations through all possible masks</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – dimensionality of the space</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – periodicity of the mask</p></li>
+<li><p><strong>repetitions</strong> (<em>int</em>) – number of iterations through all possible masks</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -175,7 +173,7 @@ possible masks.</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -278,7 +276,7 @@ possible masks.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

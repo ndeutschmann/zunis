@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.integrals module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,14 +42,14 @@
 <p>Facilities for evaluating integrals from a batch of points</p>
 <dl class="py function">
 <dt id="utils.integrals.mean_std_integrand">
-<code class="sig-name descname">mean_std_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">px</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrals.mean_std_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">mean_std_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">px</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrals.mean_std_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the expectation value and the standard deviation of a function evaluated
 on a sample of points taken from a known distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – batch of function values</p></li>
-<li><p><strong>px</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.tensor</span></code>) – batch of PDF values for each of the sampled x</p></li>
+<li><p><strong>fx</strong> (<em>torch.Tensor</em>) – batch of function values</p></li>
+<li><p><strong>px</strong> (<em>torch.tensor</em>) – batch of PDF values for each of the sampled x</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -91,7 +89,7 @@ on a sample of points taken from a known distribution.</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -190,7 +188,7 @@ on a sample of points taken from a known distribution.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

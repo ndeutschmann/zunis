@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>simple_backprop_flows module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,19 +42,19 @@
 <p>Simple flows with an easily computable jacobian - useful for tests and checks</p>
 <dl class="py class">
 <dt id="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow">
-<em class="property">class </em><code class="sig-name descname">LinearFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">LinearFlow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow" title="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow</span></code></a></p>
 <p>Flow transformation as a pure matrix multiplication
 Expected jacobian: det(self.flow.weight)</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.weight_init_identity_">
-<code class="sig-name descname">weight_init_identity_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">std</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.weight_init_identity_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">weight_init_identity_</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.LinearFlow.weight_init_identity_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize weights as eye + normal(0,std)
 Essentially realizing a resnet-like layer</p>
 </dd></dl>
@@ -65,14 +63,14 @@ Essentially realizing a resnet-like layer</p>
 
 <dl class="py class">
 <dt id="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow">
-<em class="property">class </em><code class="sig-name descname">SigmoidFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SigmoidFlow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.html#zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow" title="zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.backprop_jacobian_flows.general_backprop_j_flow.GeneralBackpropJacobianFlow</span></code></a></p>
 <p>Flow transformation as an element-wise sigmoid application
 Expected jacobian: sigmoid(x)*(1-sigmoid(x))</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py attribute">
 <dt id="zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/backprop_jacobian_flows/simple_backprop_flows.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.backprop_jacobian_flows.simple_backprop_flows.SigmoidFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -105,7 +103,7 @@ Expected jacobian: sigmoid(x)*(1-sigmoid(x))</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -210,7 +208,7 @@ Expected jacobian: sigmoid(x)*(1-sigmoid(x))</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

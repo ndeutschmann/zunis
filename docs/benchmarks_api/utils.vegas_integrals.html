@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.vegas_integrals module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -43,7 +41,7 @@
 <span id="utils-vegas-integrals-module"></span><h1>utils.vegas_integrals module<a class="headerlink" href="#module-utils.vegas_integrals" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="utils.vegas_integrals.VegasSampler">
-<em class="property">class </em><code class="sig-name descname">VegasSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VegasSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integral_validation.html#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integral_validation.Sampler</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -57,27 +55,27 @@
 </dl>
 <dl class="py method">
 <dt id="utils.vegas_integrals.VegasSampler.get_point">
-<code class="sig-name descname">get_point</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.get_point" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_point</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.get_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample a single point from the vegas integrator with point pdfs normalized to 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
-<dd class="field-odd"><p><strong>x, px</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – point and its pdf</p>
+<dd class="field-odd"><p><strong>x, px</strong> (<em>tuple of float</em>) – point and its pdf</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.vegas_integrals.VegasSampler.reset_point_iterator">
-<code class="sig-name descname">reset_point_iterator</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.reset_point_iterator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">reset_point_iterator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.reset_point_iterator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="utils.vegas_integrals.VegasSampler.sample">
-<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.sample" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">batch</span> <span class="pre">callable</span></code>) – function mapping numpy arrays to numpy arrays</p></li>
+<li><p><strong>f</strong> (<em>batch callable</em>) – function mapping numpy arrays to numpy arrays</p></li>
 <li><p><strong>n_batch</strong> – </p></li>
 <li><p><strong>args</strong> – </p></li>
 <li><p><strong>kwargs</strong> – </p></li>
@@ -88,13 +86,13 @@
 
 <dl class="py method">
 <dt id="utils.vegas_integrals.VegasSampler.train_integrator">
-<code class="sig-name descname">train_integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span></em>, <em class="sig-param"><span class="n">n_batch</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.train_integrator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">train_integrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.VegasSampler.train_integrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the integrator before sampling</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training</p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – maximum number of function evaluations per survey step</p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training</p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – maximum number of function evaluations per survey step</p></li>
 </ul>
 </dd>
 </dl>
@@ -104,17 +102,17 @@
 
 <dl class="py function">
 <dt id="utils.vegas_integrals.evaluate_integral_vegas">
-<code class="sig-name descname">evaluate_integral_vegas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">integrator</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">train</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">n_batch_survey</span><span class="o">=</span><span class="default_value">10000</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.vegas_integrals.evaluate_integral_vegas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integral_vegas</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch_survey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/vegas_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.vegas_integrals.evaluate_integral_vegas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a known integral using a VEGAS integrator as a sampler</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
-<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>train</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument</p></li>
-<li><p><strong>n_batch_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>f</strong> (<em>utils.integrands.KnownIntegrand</em>) – </p></li>
+<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><em>zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</em></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>train</strong> (<em>bool</em>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument</p></li>
+<li><p><strong>n_batch_survey</strong> (<em>int</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -154,7 +152,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -253,7 +251,7 @@
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

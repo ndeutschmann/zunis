@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.flat_integrals module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,29 +42,29 @@
 <p>Computing integrals using Naive Monte Carlo</p>
 <dl class="py class">
 <dt id="utils.flat_integrals.FlatSampler">
-<em class="property">class </em><code class="sig-name descname">FlatSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.flat_integrals.FlatSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">FlatSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.flat_integrals.FlatSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integral_validation.html#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integral_validation.Sampler</span></code></a></p>
 <p>Sampler for uniform sampling in the d-dimensional hypercube</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p>
+<dd class="field-odd"><p><strong>d</strong> (<em>int</em>) – </p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="utils.flat_integrals.FlatSampler.sample">
-<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.flat_integrals.FlatSampler.sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.flat_integrals.FlatSampler.sample" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">utils.Integrand</span></code>) – function that evaluate batches of points and returns batches of points</p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – </p></li>
+<li><p><strong>f</strong> (<em>function</em><em> or </em><em>utils.Integrand</em>) – function that evaluate batches of points and returns batches of points</p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><em>tuple of torch.Tensor</em></p></li>
-<li><p><strong>x,px,fx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">points</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pdfs</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">function</span> <span class="pre">values</span></code>)</p></li>
+<li><p><strong>x,px,fx</strong> (<em>points, pdfs, function values</em>)</p></li>
 </ul>
 </p>
 </dd>
@@ -77,15 +75,15 @@
 
 <dl class="py function">
 <dt id="utils.flat_integrals.evaluate_integral_flat">
-<code class="sig-name descname">evaluate_integral_flat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.flat_integrals.evaluate_integral_flat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integral_flat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.flat_integrals.evaluate_integral_flat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate an integral using uniform sampling</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – </p></li>
+<li><p><strong>f</strong> (<em>utils.integrands.KnownIntegrand</em>) – </p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -99,16 +97,16 @@
 
 <dl class="py function">
 <dt id="utils.flat_integrals.validate_known_integrand_flat">
-<code class="sig-name descname">validate_known_integrand_flat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">sigma_cutoff</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">device</span><span class="o">=</span><span class="default_value">device(type='cpu')</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.flat_integrals.validate_known_integrand_flat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">validate_known_integrand_flat</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/flat_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.flat_integrals.validate_known_integrand_flat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a known integral using uniform sampling</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>sigma_cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
-<li><p><strong>device</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.device</span></code>) – </p></li>
+<li><p><strong>f</strong> (<em>utils.integrands.KnownIntegrand</em>) – </p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>sigma_cutoff</strong> (<em>float</em>) – </p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -148,7 +146,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -247,7 +245,7 @@
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

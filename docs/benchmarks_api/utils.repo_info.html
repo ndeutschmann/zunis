@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.repo_info module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,7 +42,7 @@
 <p>Tools to collect information about the repository</p>
 <dl class="py function">
 <dt id="utils.repo_info.get_dirt_hash">
-<code class="sig-name descname">get_dirt_hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_dirt_hash" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_dirt_hash</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_dirt_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a SHA1 hash of all sources of dirt (modified tracked files).
 Explicitly, we collect all such files, hash their contents one by one, concatenate all hashes and
 hash them again (to avoid loading many large files in memory)</p>
@@ -63,7 +61,7 @@ hash them again (to avoid loading many large files in memory)</p>
 
 <dl class="py function">
 <dt id="utils.repo_info.get_git_summary">
-<code class="sig-name descname">get_git_summary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_git_summary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_git_summary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_git_summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a string summarizing the status of the repo
 The format is
 &lt;commit hash&gt;:&lt;pip freeze hash&gt;[:&lt;dirt hash&gt;]</p>
@@ -82,13 +80,13 @@ The format is
 
 <dl class="py function">
 <dt id="utils.repo_info.get_pipfreeze_hash">
-<code class="sig-name descname">get_pipfreeze_hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_pipfreeze_hash" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_pipfreeze_hash</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_pipfreeze_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a hash of the libraries installed in the current environment - generated by pip freeze</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="utils.repo_info.get_repo">
-<code class="sig-name descname">get_repo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_repo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_repo</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_repo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a repository object for the working directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -102,11 +100,11 @@ The format is
 
 <dl class="py function">
 <dt id="utils.repo_info.get_repo_hash">
-<code class="sig-name descname">get_repo_hash</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.get_repo_hash" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_repo_hash</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_repo_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect the hash of the head of the repo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>repo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">git.Repo</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – </p>
+<dd class="field-odd"><p><strong>repo</strong> (<em>git.Repo</em><em>, </em><em>None</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -119,11 +117,11 @@ The format is
 
 <dl class="py function">
 <dt id="utils.repo_info.repo_is_dirty">
-<code class="sig-name descname">repo_is_dirty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.repo_info.repo_is_dirty" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">repo_is_dirty</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.repo_is_dirty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the status information of the repository.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>repo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">git.Repo</span></code>, <em>optional</em>) – The repository object to inspect, if none is given, the repo containing the working directory (if it exists) is
+<dd class="field-odd"><p><strong>repo</strong> (<em>git.Repo</em><em>, </em><em>optional</em>) – The repository object to inspect, if none is given, the repo containing the working directory (if it exists) is
 used.</p>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -163,7 +161,7 @@ used.</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -262,7 +260,7 @@ used.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

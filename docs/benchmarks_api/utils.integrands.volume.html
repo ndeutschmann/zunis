@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.integrands.volume module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -43,7 +41,7 @@
 <span id="utils-integrands-volume-module"></span><h1>utils.integrands.volume module<a class="headerlink" href="#module-utils.integrands.volume" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="utils.integrands.volume.HyperrectangleVolumeIntegrand">
-<em class="property">class </em><code class="sig-name descname">HyperrectangleVolumeIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">HyperrectangleVolumeIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.volume.VolumeIntegrand" title="utils.integrands.volume.VolumeIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.volume.VolumeIntegrand</span></code></a>, <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand" title="utils.integrands.abstract.KnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.KnownIntegrand</span></code></a></p>
 <p>Characteristic function of an hyperrectangle defined by cutting the
 unit hypercube along one axis. Its characteristic inequality is x[i] &lt;= frac
@@ -51,21 +49,21 @@ where 0. &lt; frac &lt; 1.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>split_dim</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>frac</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>split_dim</strong> (<em>int</em>) – </p></li>
+<li><p><strong>frac</strong> (<em>float</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="utils.integrands.volume.HyperrectangleVolumeIntegrand.inequality">
-<code class="sig-name descname">inequality</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">inequality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if we are in the hyperrectangle</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.volume.HyperrectangleVolumeIntegrand.integral">
-<code class="sig-name descname">integral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand.integral" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integral</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HyperrectangleVolumeIntegrand.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>The integral is the length of the non-unit side of the hyperrectangle</p>
 </dd></dl>
 
@@ -73,27 +71,27 @@ where 0. &lt; frac &lt; 1.</p>
 
 <dl class="py class">
 <dt id="utils.integrands.volume.HypersphereVolumeIntegrand">
-<em class="property">class </em><code class="sig-name descname">HypersphereVolumeIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">HypersphereVolumeIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.volume.VolumeIntegrand" title="utils.integrands.volume.VolumeIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.volume.VolumeIntegrand</span></code></a>, <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand" title="utils.integrands.abstract.KnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.KnownIntegrand</span></code></a></p>
 <p>Characteristic function of an hypersphere. The hypersphere must fit in the unit hypercube fully</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>r</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
-<li><p><strong>c</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>r</strong> (<em>float</em>) – </p></li>
+<li><p><strong>c</strong> (<em>torch.Tensor</em><em> or </em><em>float</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="utils.integrands.volume.HypersphereVolumeIntegrand.inequality">
-<code class="sig-name descname">inequality</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">inequality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the points are in the hypersphere</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.volume.HypersphereVolumeIntegrand.integral">
-<code class="sig-name descname">integral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand.integral" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integral</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.HypersphereVolumeIntegrand.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the volume of the hypersphere in d dimensions</p>
 </dd></dl>
 
@@ -101,16 +99,16 @@ where 0. &lt; frac &lt; 1.</p>
 
 <dl class="py class">
 <dt id="utils.integrands.volume.RegulatedHyperSphereIntegrand">
-<em class="property">class </em><code class="sig-name descname">RegulatedHyperSphereIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphereIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RegulatedHyperSphereIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphereIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.RegulatedKnownIntegrand" title="utils.integrands.abstract.RegulatedKnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.RegulatedKnownIntegrand</span></code></a>, <a class="reference internal" href="#utils.integrands.volume.HypersphereVolumeIntegrand" title="utils.integrands.volume.HypersphereVolumeIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.volume.HypersphereVolumeIntegrand</span></code></a></p>
 <p>Characteristic function of an hypersphere with a small regulating factor.
 The hypersphere must fit in the unit hypercube fully</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>r</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
-<li><p><strong>c</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – </p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>r</strong> (<em>float</em>) – </p></li>
+<li><p><strong>c</strong> (<em>torch.Tensor</em><em> or </em><em>float</em>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -118,19 +116,19 @@ The hypersphere must fit in the unit hypercube fully</p>
 
 <dl class="py class">
 <dt id="utils.integrands.volume.RegulatedHyperSphericalCamel">
-<em class="property">class </em><code class="sig-name descname">RegulatedHyperSphericalCamel</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RegulatedHyperSphericalCamel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand" title="utils.integrands.abstract.KnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.KnownIntegrand</span></code></a></p>
 <p>Camel function consisting of the sum of two regulated hyperspherical
 volume functions with centers at (0.25, …, 0.25) and (0.75, …, 0.75)</p>
 <dl class="py method">
 <dt id="utils.integrands.volume.RegulatedHyperSphericalCamel.evaluate_integrand">
-<code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the integrand on a batch of points</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="utils.integrands.volume.RegulatedHyperSphericalCamel.integral">
-<code class="sig-name descname">integral</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel.integral" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integral</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.RegulatedHyperSphericalCamel.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the true value of the integral</p>
 </dd></dl>
 
@@ -138,16 +136,16 @@ volume functions with centers at (0.25, …, 0.25) and (0.75, …, 0.75)</p>
 
 <dl class="py class">
 <dt id="utils.integrands.volume.VolumeIntegrand">
-<em class="property">class </em><code class="sig-name descname">VolumeIntegrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VolumeIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Abstract class to define integrands that are 1 on a characteristic subspace and 0 outside, defined
 through an inequality f(x) &gt;= 0</p>
 <dl class="py method">
 <dt id="utils.integrands.volume.VolumeIntegrand.evaluate_integrand">
-<code class="sig-name descname">evaluate_integrand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the integrand on a batch of points by checking their inequality
 :param x:
-:type x: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></p>
+:type x: torch.Tensor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -160,11 +158,11 @@ through an inequality f(x) &gt;= 0</p>
 
 <dl class="py method">
 <dt id="utils.integrands.volume.VolumeIntegrand.inequality">
-<em class="property">abstract </em><code class="sig-name descname">inequality</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">inequality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/volume.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.volume.VolumeIntegrand.inequality" title="Permalink to this definition">¶</a></dt>
 <dd><p>The characteristic inequality of the volume we want to measure</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – </p>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -205,7 +203,7 @@ through an inequality f(x) &gt;= 0</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -306,7 +304,7 @@ through an inequality f(x) &gt;= 0</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

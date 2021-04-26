@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>utils.integrator_integrals module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,23 +42,23 @@
 <p>Facilities to compute, estimate and benchmark integrals performed with Integrator objects</p>
 <dl class="py class">
 <dt id="utils.integrator_integrals.IntegratorSampler">
-<em class="property">class </em><code class="sig-name descname">IntegratorSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">IntegratorSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integral_validation.html#utils.integral_validation.Sampler" title="utils.integral_validation.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integral_validation.Sampler</span></code></a></p>
 <p>Sampler using an Integrator’s sample_refine method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</span></code></a>) – </p></li>
-<li><p><strong>train</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to train the integrator by running <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training. If None, use the configuration
+<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><em>zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</em></a>) – </p></li>
+<li><p><strong>train</strong> (<em>bool</em>) – whether to train the integrator by running <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em><em>, </em><em>None</em>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training. If None, use the configuration
 set at the creation of the Integrator</p></li>
-<li><p><strong>survey_args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, additional survey options to pass to <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>survey_args</strong> (<em>None</em><em> or </em><em>dict</em>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, additional survey options to pass to <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="utils.integrator_integrals.IntegratorSampler.get_history">
-<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.get_history" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_history</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.get_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the integrator’s training history</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -74,18 +72,18 @@ set at the creation of the Integrator</p></li>
 
 <dl class="py method">
 <dt id="utils.integrator_integrals.IntegratorSampler.sample">
-<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.sample" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.Integrand</span></code>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
+<li><p><strong>f</strong> (<em>utils.integrands.Integrand</em>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><em>tuple of torch.Tensor</em></p></li>
-<li><p><strong>x,px,fx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">points</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pdfs</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">function</span> <span class="pre">values</span></code>)</p></li>
+<li><p><strong>x,px,fx</strong> (<em>points, pdfs, function values</em>)</p></li>
 </ul>
 </p>
 </dd>
@@ -94,13 +92,13 @@ set at the creation of the Integrator</p></li>
 
 <dl class="py method">
 <dt id="utils.integrator_integrals.IntegratorSampler.train_integrator">
-<code class="sig-name descname">train_integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">survey_args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.train_integrator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">train_integrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survey_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.IntegratorSampler.train_integrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the integrator before sampling</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training</p></li>
-<li><p><strong>survey_args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, additional survey options to pass to <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, how many survey steps to use for training</p></li>
+<li><p><strong>survey_args</strong> (<em>None</em><em> or </em><em>dict</em>) – if train is <code class="code docutils literal notranslate"><span class="pre">True</span></code>, additional survey options to pass to <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -110,19 +108,19 @@ set at the creation of the Integrator</p></li>
 
 <dl class="py function">
 <dt id="utils.integrator_integrals.evaluate_integral_integrator">
-<code class="sig-name descname">evaluate_integral_integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">integrator</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">train</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">survey_args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.evaluate_integral_integrator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">evaluate_integral_integrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survey_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.evaluate_integral_integrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a known integral using an integrator as a sampler</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
-<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</span></code></a>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>train</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <em>optional</em>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument. Use the attribute n_iter_survey set at instantiation if not
+<li><p><strong>f</strong> (<em>utils.integrands.KnownIntegrand</em>) – </p></li>
+<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.flat_survey_integrator.html#zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator" title="zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator"><em>zunis.integration.flat_survey_integrator.PosteriorSurveySamplingIntegrator</em></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>train</strong> (<em>bool</em>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em><em>, </em><em>optional</em>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument. Use the attribute n_iter_survey set at instantiation if not
 specified.</p></li>
-<li><p><strong>survey_args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – optional keyword-argument dictionary for <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to keep track of the training history</p></li>
+<li><p><strong>survey_args</strong> (<em>None</em><em> or </em><em>dict</em>) – optional keyword-argument dictionary for <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>keep_history</strong> (<em>bool</em>) – whether to keep track of the training history</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -136,19 +134,19 @@ specified.</p></li>
 
 <dl class="py function">
 <dt id="utils.integrator_integrals.validate_integral_integrator">
-<code class="sig-name descname">validate_integral_integrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">integrator</span></em>, <em class="sig-param"><span class="n">n_batch</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">sigma_cutoff</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">train</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">survey_args</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">keep_history</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.integrator_integrals.validate_integral_integrator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">validate_integral_integrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survey_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrator_integrals.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrator_integrals.validate_integral_integrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate a known integral using an integrator as a sampler</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.KnownIntegrand</span></code>) – </p></li>
-<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a>) – </p></li>
-<li><p><strong>n_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>sigma_cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>train</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>n_survey_steps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument</p></li>
-<li><p><strong>survey_args</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – optional keyword-argument dictionary for <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
-<li><p><strong>keep_history</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to keep track of the training history</p></li>
+<li><p><strong>f</strong> (<em>utils.integrands.KnownIntegrand</em>) – </p></li>
+<li><p><strong>integrator</strong> (<a class="reference internal" href="../api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><em>zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</em></a>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>sigma_cutoff</strong> (<em>int</em>) – </p></li>
+<li><p><strong>train</strong> (<em>bool</em>) – whether to train the integrator using <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>n_survey_steps</strong> (<em>int</em>) – positional <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code> argument</p></li>
+<li><p><strong>survey_args</strong> (<em>None</em><em> or </em><em>dict</em>) – optional keyword-argument dictionary for <code class="code docutils literal notranslate"><span class="pre">integrator.survey</span></code></p></li>
+<li><p><strong>keep_history</strong> (<em>bool</em>) – whether to keep track of the training history</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -188,7 +186,7 @@ specified.</p></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -287,7 +285,7 @@ specified.</p></li>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

@@ -5,22 +5,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>How to use a config file &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <title>How to use a configuration file &#8212; ZüNIS 0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="How to train without integrating" href="nointeg.html" />
-    <link rel="prev" title="Tutorials" href="../tutorial.html" />
+    <link rel="prev" title="ZüNIS Tutorials" href="../tutorial.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -39,10 +37,10 @@
                 </a>
             </p>
             
-  <div class="section" id="how-to-use-a-config-file">
-<h1>How to use a config file<a class="headerlink" href="#how-to-use-a-config-file" title="Permalink to this headline">¶</a></h1>
-<p>Config files can be used to specify arguments for an integrator, including an
-instantiated optimizer. This is included in the <a class="reference internal" href="../../api/zunis.utils.config.html"><span class="doc">config</span></a> subpackage.
+  <div class="section" id="how-to-use-a-configuration-file">
+<h1>How to use a configuration file<a class="headerlink" href="#how-to-use-a-configuration-file" title="Permalink to this headline">¶</a></h1>
+<p>Configuration files can be used to specify arguments for the <a class="reference internal" href="../integrator.html"><span class="doc">Integrator</span></a> interface in YAML.
+This is implemented in the <a class="reference internal" href="../../api/zunis.utils.config.html"><span class="doc">config</span></a> subpackage.
 A default config file, integrator_config.yaml, is given there:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">flow</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwquad</span>
 <span class="nt">flow_options</span><span class="p">:</span>
@@ -73,7 +71,7 @@ A default config file, integrator_config.yaml, is given there:</p>
 <span class="nt">checkpoint_path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
-<p>The settings specified in the config file are used for the setup of the trainer,
+<p>The settings specified in the configuration file are used for the setup of the trainer,
 the integrator and the flow.</p>
 <p>The flow option specifies which kind of flow to use in the coupling
 cells (choices being <code class="code docutils literal notranslate"><span class="pre">realnvp</span></code>, <code class="code docutils literal notranslate"><span class="pre">pwlinear</span></code> or <code class="code docutils literal notranslate"><span class="pre">pwquad</span></code>), as well as the geometry
@@ -86,14 +84,16 @@ For the DKL loss, it is possible to also request the survey strategy <code class
 <code class="code docutils literal notranslate"><span class="pre">n_iter</span></code> refers to the number of iterations, whereas <code class="code docutils literal notranslate"><span class="pre">n_points_survey</span></code> defines the
 number of points used per iteration for the survey stage; the same can be defined
 for the refine stage too.</p>
-<p>Apart from this, the trainer options itself can be also defined - the size of
+<p>Besides this, the trainer options itself can be also defined - the size of
 minibatches, the maximum number of how often the trainer is allowed to restore
 from a checkpoint if an exception happens as well as how many epochs are used
 during an iteration. If <code class="code docutils literal notranslate"><span class="pre">checkpoint</span></code> is set to True, checkpoints are saved
 (on the GPU if <code class="code docutils literal notranslate"><span class="pre">checkpoint_on_cuda</span></code> is true), alternative checkpoints can be
 also taken from a file if a path is given. Lastly, the optimizer settings itself
 are specified, defining which algorithm to use as well as its parameters.</p>
-<p>Extending the basic example, this config file can be loaded to the integrator
+<p>In general, all keywords arguments specified for <a class="reference internal" href="../../api/zunis.integration.default_integrator.html#zunis.integration.default_integrator.Integrator" title="zunis.integration.default_integrator.Integrator"><code class="xref py py-func docutils literal notranslate"><span class="pre">Integrators</span></code></a> can be defined
+in a configuration file.</p>
+<p>Extending the basic example, this configuration file can be loaded to the integrator
 in the following way:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
@@ -106,7 +106,7 @@ in the following way:</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="o">**</span><span class="n">create_integrator_args</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="o">**</span><span class="n">create_integrator_args</span><span class="p">(),</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -114,7 +114,7 @@ in the following way:</p>
 are given to the integrator. The values of the keyword arguments are specified by
 the yaml file which is at the path specified by the argument. If the argument
 is <code class="code docutils literal notranslate"><span class="pre">None</span></code>, as it is in this case, the quoted default <code class="code docutils literal notranslate"><span class="pre">config.yaml</span></code> is loaded.</p>
-<p>The config files can be written by hand, or, alternativly, a generator is also
+<p>The config files can be written by hand, or, alternatively, a generator is also
 available at <code class="code docutils literal notranslate"><span class="pre">zunis.utils.config.generators</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
@@ -128,9 +128,7 @@ available at <code class="code docutils literal notranslate"><span class="pre">z
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-
-
-<span class="n">create_integrator_config_file</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;integrator_config_new.yaml&quot;</span><span class="p">,</span> <span class="n">base_config</span><span class="o">=</span><span class="s2">&quot;integrator_config_old.yaml&quot;</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span> <span class="mi">20000</span><span class="p">)</span>
+<span class="n">create_integrator_config_file</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;integrator_config_new.yaml&quot;</span><span class="p">,</span> <span class="n">base_config</span><span class="o">=</span><span class="s2">&quot;integrator_config_old.yaml&quot;</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 <span class="n">integrator</span> <span class="o">=</span> <span class="n">Integrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="o">**</span><span class="n">create_integrator_args</span><span class="p">(</span><span class="s2">&quot;integrator_config_new.yaml&quot;</span><span class="p">),</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
@@ -165,12 +163,17 @@ points and provides the updated file to the integrator.</p>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use a config file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nointeg.html">How to train without integrating</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preeval.html">How to train on a pre-evaluated sample</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sample.html">How to sample from a trained model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Rd.html">How to integrate in R^d</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nointeg.html">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rd.html">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
 </ul>
 </li>
 </ul>
@@ -213,7 +216,7 @@ points and provides the updated file to the integrator.</p>
 
     
     
-    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;Tutorials</a></li>
+    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;ZüNIS Tutorials</a></li>
     
     
 <!--    <ul>-->
@@ -229,8 +232,8 @@ points and provides the updated file to the integrator.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../tutorial.html">Tutorials</a><ul>
-      <li>Previous: <a href="../tutorial.html" title="previous chapter">Tutorials</a></li>
+  <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
+      <li>Previous: <a href="../tutorial.html" title="previous chapter">ZüNIS Tutorials</a></li>
       <li>Next: <a href="nointeg.html" title="next chapter">How to train without integrating</a></li>
   </ul></li>
   </ul></li>
@@ -262,7 +265,7 @@ points and provides the updated file to the integrator.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

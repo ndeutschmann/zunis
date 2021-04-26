@@ -1,14 +1,12 @@
 How to integrate in R^d
 ########################
 
-ZüNIS samples into the unit hypercube. In order to integrate functions over the
-whole space of real numbers, it is necessary to perform a variable transformation.
+ZüNIS integrates over the unit hypercube. In order to integrate functions over the
+whole real line, it is necessary to perform a variable transformation.
 The change of variables has to map [0,1] to R. This can be done by using any
-bijective function with two divergences. Examples of such functions would be the
-tangens or the arctanh.
+bijective function with two divergences such as the tangent and the inverse hyperbolic tangent functions.
 
-Starting from the basic example, and integrating over a function in R^2 instead,
-this could be done like the following:
+Here is for example how to compute a gaussian integral in two dimensions.
 
 .. code-block:: python
 
@@ -28,7 +26,3 @@ this could be done like the following:
       
   integrator = Integrator(d=d,f=f_wrapped,device=device)
   result, uncertainty, history = integrator.integrate()
-
-
-Note that sampling uniformly over an arbitrary large interval instead of a
-change of variable introduces infinite variance.

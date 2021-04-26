@@ -5,21 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutorials &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <title>ZüNIS Tutorials &#8212; ZüNIS 0.1 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to use a config file" href="tutorial/config.html" />
+    <link rel="next" title="How to use a configuration file" href="tutorial/config.html" />
     <link rel="prev" title="Integrand functions" href="function.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -39,22 +37,36 @@
                 </a>
             </p>
             
-  <div class="section" id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="zunis-tutorials">
+<h1>ZüNIS Tutorials<a class="headerlink" href="#zunis-tutorials" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>This section gives several examples for how to perform common tasks regarding training models,
-saving the state of models and integrating within the API of this library. Due to the
-high level of abstraction of the ZüNIS library, most tasks can be performed in only
-few lines of code.</p>
-<p>This tutorial conatians the following sections:</p>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="tutorial/config.html"><span class="doc">How to use a config file</span></a></p></li>
-<li><p><a class="reference internal" href="tutorial/nointeg.html"><span class="doc">How to train without integrating</span></a></p></li>
-<li><p><a class="reference internal" href="tutorial/preeval.html"><span class="doc">How to train on a pre-evaluated sample</span></a></p></li>
-<li><p><a class="reference internal" href="tutorial/sample.html"><span class="doc">How to sample from a trained model</span></a></p></li>
-<li><p><a class="reference internal" href="tutorial/Rd.html"><span class="doc">How to integrate in R^d</span></a></p></li>
-</ol>
+<p>These pages are intended to teach how to perform specific tasks using the ZüNIS library without focussing on explaining why and how things are implemented.
+More detailed explanations can be found in the <span class="xref std std-doc">Background</span> and <a class="reference internal" href="concepts.html"><span class="doc">Concepts</span></a> sections.</p>
+<div class="section" id="how-to-use-a-configuration-file">
+<h2><a class="reference internal" href="tutorial/config.html"><span class="doc">How to use a configuration file</span></a><a class="headerlink" href="#how-to-use-a-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Configuration files can be used to specify fine-grained configuration of integrators and their subparts. They also provide a good way to track parameters for reproducibility.</p>
+</div>
+<div class="section" id="how-to-train-without-integrating">
+<h2><a class="reference internal" href="tutorial/nointeg.html"><span class="doc">How to train without integrating</span></a><a class="headerlink" href="#how-to-train-without-integrating" title="Permalink to this headline">¶</a></h2>
+<p>ZüNIS implements normalizing flows and facilities for training them to learn the distribution induced by a non-normalized function.
+We show here how to train models outside of the importance sampling context, which can be useful for other applications.</p>
+</div>
+<div class="section" id="how-to-train-on-a-pre-evaluated-sample">
+<h2><a class="reference internal" href="tutorial/preeval.html"><span class="doc">How to train on a pre-evaluated sample</span></a><a class="headerlink" href="#how-to-train-on-a-pre-evaluated-sample" title="Permalink to this headline">¶</a></h2>
+<p>In some applications, evaluating a function is extremely costly or needs to be performed in a specific environment. We show here how to decouple
+sampling and function evaluation from training a model, which can be used for example to tune parameters in a data efficient way.</p>
+</div>
+<div class="section" id="how-to-sample-from-a-trained-model">
+<h2><a class="reference internal" href="tutorial/sample.html"><span class="doc">How to sample from a trained model</span></a><a class="headerlink" href="#how-to-sample-from-a-trained-model" title="Permalink to this headline">¶</a></h2>
+<p>If a model has been trained in advance, it can be used to sample points from the learned distribution.
+This can be useful for unweighting distributions as well as for evaluating integrals in cases where function evaluation is not easily interfaceable with ZüNIS.</p>
+</div>
+<div class="section" id="how-to-integrate-in-r-d">
+<h2><a class="reference internal" href="tutorial/Rd.html"><span class="doc">How to integrate in R^d</span></a><a class="headerlink" href="#how-to-integrate-in-r-d" title="Permalink to this headline">¶</a></h2>
+<p>ZüNIS accepts only functions defined on the unit hypercube. Of course, many integration problems are setup in different spaces.
+We show here how to perform a change of variables to reformulate infinite volume integrals as unit hypercube integrals.</p>
+</div>
 </div>
 
 
@@ -83,12 +95,17 @@ few lines of code.</p>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/config.html">How to use a config file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/nointeg.html">How to train without integrating</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/preeval.html">How to train on a pre-evaluated sample</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/sample.html">How to sample from a trained model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/Rd.html">How to integrate in R^d</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/config.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/nointeg.html">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/preeval.html">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/sample.html">Sampling points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/Rd.html">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
 </ul>
 </li>
 </ul>
@@ -137,7 +154,7 @@ few lines of code.</p>
         
         
         
-        <li><a href="tutorial/config.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to use a config file</a></li>
+        <li><a href="tutorial/config.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to use a configuration file</a></li>
         
 <!--    </ul>-->
     
@@ -147,7 +164,7 @@ few lines of code.</p>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="function.html" title="previous chapter">Integrand functions</a></li>
-      <li>Next: <a href="tutorial/config.html" title="next chapter">How to use a config file</a></li>
+      <li>Next: <a href="tutorial/config.html" title="next chapter">How to use a configuration file</a></li>
   </ul></li>
 </ul>
 </div>
@@ -177,7 +194,7 @@ few lines of code.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

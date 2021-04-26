@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>base_integrator module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,88 +42,88 @@
 <p>Implementation of basic integrator functions</p>
 <dl class="py class">
 <dt id="zunis.integration.base_integrator.BaseIntegrator">
-<em class="property">class </em><code class="sig-name descname">BaseIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">BaseIntegrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI" title="zunis.integration.integratorAPI.SurveyRefineIntegratorAPI"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.integratorAPI.SurveyRefineIntegratorAPI</span></code></a></p>
 <p>Base abstract class that implements common functionality</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
-<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
-<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
-<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
 <li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
-<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
-<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
-<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
 not recommended due to uncontrolled correlations in error estimates</p></li>
-<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.empty_history">
-<em class="property">static </em><code class="sig-name descname">empty_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.empty_history" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">empty_history</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.empty_history" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an empty history object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.finalize_integration">
-<code class="sig-name descname">finalize_integration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_survey</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_integration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">finalize_integration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_survey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_integration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the final operations of the whole integration</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.finalize_refine">
-<code class="sig-name descname">finalize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">finalize_refine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the final operations of the refine phase</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.finalize_survey">
-<code class="sig-name descname">finalize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_survey" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">finalize_survey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.finalize_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the final operations of the survey phase</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.initialize">
-<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intialization before the whole integration process</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.initialize_refine">
-<code class="sig-name descname">initialize_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize_refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">initialize_refine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize_refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialization before the survey phase</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.initialize_survey">
-<code class="sig-name descname">initialize_survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize_survey" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">initialize_survey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.initialize_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialization before the survey phase</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.integrate">
-<code class="sig-name descname">integrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.integrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">integrate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_refine_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.integrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the integration</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.process_refine_step">
-<code class="sig-name descname">process_refine_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.process_refine_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_refine_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_var</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.process_refine_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the result of a refine step</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.process_survey_step">
-<code class="sig-name descname">process_survey_step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sample</span></em>, <em class="sig-param"><span class="n">integral</span></em>, <em class="sig-param"><span class="n">integral_var</span></em>, <em class="sig-param"><span class="n">training_record</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_survey_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_record</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process the result of a survey step</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.refine">
-<code class="sig-name descname">refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_refine_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">refine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_refine_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform the refine phase of integration</p>
 <p>Possible keyword arguments:</p>
 <p>trainer_config_args: dict
@@ -135,13 +133,13 @@ finalize_refine_args: dict</p>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.sample_refine">
-<code class="sig-name descname">sample_refine</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">n_points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">f</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.sample_refine" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sample_refine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.sample_refine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points for a refine step</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.integration.base_integrator.BaseIntegrator.survey">
-<code class="sig-name descname">survey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_survey_steps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.survey" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">survey</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_survey_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/base_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.base_integrator.BaseIntegrator.survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a survey phase of integration</p>
 <dl class="simple">
 <dt>possible keyword arguments:</dt><dd><p>trainer_config_args: dict
@@ -181,7 +179,7 @@ finalize_survey_args: dict</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../library/how-tos.html">How-to's</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -282,7 +280,7 @@ finalize_survey_args: dict</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
