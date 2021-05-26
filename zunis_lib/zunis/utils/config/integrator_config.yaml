@@ -9,6 +9,7 @@ flow_options:
     repetitions: 2
 loss: variance
 n_points_survey: 10000
+survey_strategy: "adaptive_dkl"
 n_iter: 10
 trainer_options:
   minibatch_size: 1.0

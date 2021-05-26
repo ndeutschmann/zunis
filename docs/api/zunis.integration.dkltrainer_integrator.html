@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dkltrainer_integrator module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -44,7 +42,7 @@
 <p>Survey/Refine integrator based on training models with a DKL trainer</p>
 <dl class="py class">
 <dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator">
-<em class="property">class </em><code class="sig-name descname">DKLAdaptiveSurveyIntegrator</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">DKLAdaptiveSurveyIntegrator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
 <p>Survey/Refine adaptive integrator based on the DKL loss. The loss is the D_KL distance between
 the PDF from a flow model and an un-normalized function, up to non-trainable terms</p>
@@ -59,22 +57,22 @@ this is easy:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>) – the function to integrate</p></li>
-<li><p><strong>n_iter</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
-<li><p><strong>n_iter_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the survey stage</p></li>
-<li><p><strong>n_iter_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of iterations for the refine stage</p></li>
+<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
 <li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
-<li><p><strong>n_points_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the survey stage</p></li>
-<li><p><strong>n_points_refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of points per iteration for the refine stage</p></li>
-<li><p><strong>use_survey</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether to use the points generated during the survey to compute the final integral
+<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
 not recommended due to uncontrolled correlations in error estimates</p></li>
-<li><p><strong>verbosity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – verbosity level of the integrator</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
-<code class="sig-name descname">survey_switch_condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">survey_switch_condition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the loss is negative. This test is used to switch from uniform sampling
 to sampling from the flow in the survey phase.</p>
 <p>The loss is the distance between the target function and the flow PDF. Since the distance between
@@ -111,6 +109,7 @@ the target function and the uniform function, a negative loss indicates that flo
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -211,7 +210,7 @@ the target function and the uniform function, a negative loss indicates that flo
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

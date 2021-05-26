@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to train without integrating &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to train on a pre-evaluated sample" href="preeval.html" />
+    <link rel="prev" title="How to use a configuration file" href="config.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="how-to-train-without-integrating">
+<h1>How to train without integrating<a class="headerlink" href="#how-to-train-without-integrating" title="Permalink to this headline">¶</a></h1>
+<p>ZüNIS allows to train a model without performing the integration. For this, we can
+use the trainer API:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.models.flows.sampling</span> <span class="kn">import</span> <span class="n">UniformSampler</span>
+<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">generate_target_batch_from_posterior</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">UniformSampler</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">))</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">px</span><span class="p">,</span><span class="n">fx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In a first step, we initialize a trainer object. We generate a batch of 10 uniformly
+sampled points in the 2D hypercube <code class="code docutils literal notranslate"><span class="pre">x</span></code> with the probability distribution <code class="code docutils literal notranslate"><span class="pre">px</span></code>
+and the function value <code class="code docutils literal notranslate"><span class="pre">fx</span></code>. Then, one training step is performed on this batch.</p>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rd.html">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;ZüNIS Tutorials</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="config.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;How to use a configuration file</a></li>
+        
+        
+        
+        <li><a href="preeval.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to train on a pre-evaluated sample</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
+      <li>Previous: <a href="config.html" title="previous chapter">How to use a configuration file</a></li>
+      <li>Next: <a href="preeval.html" title="next chapter">How to train on a pre-evaluated sample</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

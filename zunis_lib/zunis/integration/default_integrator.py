@@ -4,10 +4,12 @@ import logging
 
 from .flat_survey_integrator import FlatSurveySamplingIntegrator
 from .dkltrainer_integrator import DKLAdaptiveSurveyIntegrator
+from .adaptive_survey_integrator import ForwardSurveySamplingIntegrator
 
 from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
 
 logger = logging.getLogger(__name__)
+
 
 def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_iter_refine=None,
                n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
@@ -24,6 +26,7 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
     d: int
         dimensionality of the integration space
     survey_strategy: str
+        how points are sampled during the survey step: one of `'flat'`, `'forward'`, `'adaptive_dkl'`
     n_iter: int
         general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set
     n_iter_survey: int
@@ -92,4 +95,23 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                            device=device, verbosity=verbosity,
                                            trainer_verbosity=trainer_verbosity)
 
-    raise ValueError("No valid survey strategy was provided. Try 'flat' or 'adaptive_dkl'")
+    if survey_strategy == 'forward':
+        return ForwardSurveySamplingIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
+                                               n_iter_refine=n_iter_refine,
+                                               n_points=n_points, n_points_survey=n_points_survey,
+                                               n_points_refine=n_points_refine, use_survey=use_survey,
+                                               device=device, verbosity=verbosity,
+                                               trainer_verbosity=trainer_verbosity,
+                                               sample_flat_once=False)
+
+    if survey_strategy == 'forward_flat_init':
+        return ForwardSurveySamplingIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
+                                               n_iter_refine=n_iter_refine,
+                                               n_points=n_points, n_points_survey=n_points_survey,
+                                               n_points_refine=n_points_refine, use_survey=use_survey,
+                                               device=device, verbosity=verbosity,
+                                               trainer_verbosity=trainer_verbosity,
+                                               sample_flat_once=True)
+
+    raise ValueError("""No valid survey strategy was provided. Allowed strategies are:
+     ['flat', 'adaptive_dkl', 'forward', 'forward_flat_init']""")

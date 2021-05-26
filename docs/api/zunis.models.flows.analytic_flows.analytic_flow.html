@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>analytic_flow module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -43,54 +41,54 @@
 <span id="zunis-models-flows-analytic-flows-analytic-flow-module"></span><h1>analytic_flow module<a class="headerlink" href="#module-zunis.models.flows.analytic_flows.analytic_flow" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow">
-<em class="property">class </em><code class="sig-name descname">AnalyticFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">AnalyticFlow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.flow">
-<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.flow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">flow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform the batch of points x  with shape (…,d)
 This is an abstract method that should be overriden</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.AnalyticFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow">
-<em class="property">class </em><code class="sig-name descname">InvertibleAnalyticFlow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">InvertibleAnalyticFlow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.flow">
-<code class="sig-name descname">flow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.flow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">flow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform the batch of points x  with shape (…,d)
 This is an abstract method that should be overriden</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.invert">
-<code class="sig-name descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.invert" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">invert</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.invert" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.runs_forward">
-<code class="sig-name descname">runs_forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.runs_forward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">runs_forward</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.runs_forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the running mode: True if forward and False if backward/inverse</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.transform_and_compute_jacobian">
-<code class="sig-name descname">transform_and_compute_jacobian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xj</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">transform_and_compute_jacobian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/analytic_flows/analytic_flow.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the flow transformation and its Jacobian simulatenously on
 xj with xj.shape == (…,d+1)</p>
 <p>This is an abstract method that should be overriden</p>
@@ -126,6 +124,7 @@ xj with xj.shape == (…,d+1)</p>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -227,7 +226,7 @@ xj with xj.shape == (…,d+1)</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

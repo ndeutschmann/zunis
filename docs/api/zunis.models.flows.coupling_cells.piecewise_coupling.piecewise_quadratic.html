@@ -6,15 +6,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>piecewise_quadratic module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -45,7 +43,7 @@
 This means that the <em>variable transform</em> is piecewise-quadratic.</p>
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform">
-<em class="property">class </em><code class="sig-name descname">ElementWisePWQuadraticTransform</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ElementWisePWQuadraticTransform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
 <p>Invertible piecewise-quadratic transformations over the unit hypercube</p>
 <p>Implements a batched bijective transformation <code class="code docutils literal notranslate"><span class="pre">h</span></code> from the d-dimensional unit hypercube to itself,
@@ -64,20 +62,20 @@ The inverse is also an element-wise, piece-wise quadratic transformation.</p>
 <p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
 <dl class="py method">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.backward">
-<em class="property">static </em><code class="sig-name descname">backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">wv_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.backward" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">backward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv_tilde</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.backward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply an element-wise piecewise-quadratic transformation to some variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable spans the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
+<li><p><strong>wv_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant
 PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using a modified softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -93,15 +91,15 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 
 <dl class="py method">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.forward">
-<em class="property">static </em><code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">wv_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.forward" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv_tilde</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.ElementWisePWQuadraticTransform.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the inverse of an element-wise piecewise-linear transformation to some variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
+<li><p><strong>wv_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using a modified softmax.</p></li>
@@ -128,7 +126,7 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling">
-<em class="property">class </em><code class="sig-name descname">GeneralPWQuadraticCoupling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GeneralPWQuadraticCoupling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.general_coupling.html#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell</span></code></a></p>
 <p>Abstract class implementing a coupling cell based on PW quadratic transformations</p>
 <p>A specific way to predict the parameters of the transform must be implemented
@@ -137,22 +135,22 @@ in child classes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the space</p></li>
-<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – variable mask which variables are transformed (False)
+<li><p><strong>d</strong> (<em>int</em>) – dimension of the space</p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask which variables are transformed (False)
 or used as parameters of the transform (True)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling">
-<em class="property">class </em><code class="sig-name descname">PWQuadraticCoupling</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">PWQuadraticCoupling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling" title="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.GeneralPWQuadraticCoupling</span></code></a></p>
 <p>Piece-wise Quadratic coupling</p>
 <p>Coupling cell using an element-wise piece-wise quadratic transformation as a change of
@@ -166,44 +164,44 @@ zunis.models.layers.trainable.ArbitraryShapeRectangularDNN</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>d</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – </p></li>
-<li><p><strong>mask</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – variable mask: which dimension are transformed (False) and which are not (True)</p></li>
-<li><p><strong>n_bins</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of bins in each dimensions</p></li>
-<li><p><strong>d_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dimension of the hidden layers of the DNN</p></li>
-<li><p><strong>n_hidden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of hidden layers in the DNN</p></li>
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>mask</strong> (<em>list of bool</em>) – variable mask: which dimension are transformed (False) and which are not (True)</p></li>
+<li><p><strong>n_bins</strong> (<em>int</em>) – number of bins in each dimensions</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em>) – dimension of the hidden layers of the DNN</p></li>
+<li><p><strong>n_hidden</strong> (<em>int</em>) – number of hidden layers in the DNN</p></li>
 <li><p><strong>input_activation</strong> (<em>optional</em>) – pytorch activation function before feeding into the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
 <li><p><strong>hidden_activation</strong> (<em>optional</em>) – pytorch activation function between hidden layers of the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
 <li><p><strong>output_activation</strong> (<em>optional</em>) – pytorch activation function at the output of the DNN.
 must be a callable generator without arguments (i.e. a classname or a function)</p></li>
-<li><p><strong>use_batch_norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether batch normalization should be used in the DNN.</p></li>
+<li><p><strong>use_batch_norm</strong> (<em>bool</em>) – whether batch normalization should be used in the DNN.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling.training">
-<code class="sig-name descname">training</code><em class="property">: bool</em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling.training" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.PWQuadraticCoupling.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax">
-<code class="sig-name descname">modified_softmax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">w</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">modified_softmax</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_inverse_transform">
-<code class="sig-name descname">piecewise_quadratic_inverse_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">wv_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">piecewise_quadratic_inverse_transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv_tilde</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply the inverse of an element-wise piecewise-linear transformation to some variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>y</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable span the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
+<li><p><strong>wv_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using a modified softmax.</p></li>
@@ -228,20 +226,20 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 
 <dl class="py function">
 <dt id="zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_transform">
-<code class="sig-name descname">piecewise_quadratic_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">wv_tilde</span></em>, <em class="sig-param"><span class="n">compute_jacobian</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">piecewise_quadratic_transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wv_tilde</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/piecewise_coupling/piecewise_quadratic.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.piecewise_quadratic_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply an element-wise piecewise-quadratic transformation to some variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – a tensor with shape (N,k) where N is the batch dimension while k is the
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – a tensor with shape (N,k) where N is the batch dimension while k is the
 dimension of the variable space. This variable spans the k-dimensional unit
 hypercube</p></li>
-<li><p><strong>wv_tilde</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
+<li><p><strong>wv_tilde</strong> (<em>torch.Tensor</em>) – is a tensor with shape (N,k,2b+1) where b is the number of bins.
 This contains the un-normalized widths and heights of the bins of the piecewise-constant
 PDF for dimension k,
 i.e. q_tilde lives in all of R and we don’t impose a constraint on their sum yet.
 Normalization is imposed in this function using a modified softmax.</p></li>
-<li><p><strong>compute_jacobian</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
+<li><p><strong>compute_jacobian</strong> (<em>bool</em><em>, </em><em>optional</em>) – determines whether the jacobian should be compute or None is returned</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -283,6 +281,7 @@ Normalization is imposed in this function using a modified softmax.</p></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Background</span></p>
 <ul>
@@ -389,7 +388,7 @@ Normalization is imposed in this function using a modified softmax.</p></li>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

@@ -124,7 +124,7 @@ class FixedSampleSurveyIntegrator(BaseIntegrator):
         device: torch.device, None
             device on which to send the sample. If none is provided, flow parameter device will be used
         """
-        with open(pickle_path, "r") as picklefile:
+        with open(pickle_path, "rb") as picklefile:
             pickle_sample = pickle.load(picklefile)
 
         if device is None:
@@ -133,12 +133,13 @@ class FixedSampleSurveyIntegrator(BaseIntegrator):
         if isinstance(pickle_sample, Sequence):
             self.set_sample([torch.tensor(el).to(device) for el in pickle_sample])
 
-        if isinstance(pickle_sample, Mapping):
+        elif isinstance(pickle_sample, Mapping):
             self.set_sample([
                 torch.tensor(pickle_sample[key]).to(device) for key in ["x", "px", "fx"]
             ])
 
-        raise TypeError("Pickled sample must be either sequences or mappings")
+        else:
+            raise TypeError("Pickled sample must be either sequences or mappings")
 
     def set_sample_csv(self, csv_path, device=None, delimiter=",", dtype=np.float):
         """Assign a sample to be trained on from a csv file
