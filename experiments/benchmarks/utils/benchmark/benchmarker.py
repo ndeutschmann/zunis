@@ -73,7 +73,7 @@ class Benchmarker(ABC):
                 benchmark_grid_config[param].update(param_value)
             else:
                 benchmark_grid_config[param] = param_value
-        elif param in config:
+        elif config is not None and param in config:
             if isinstance(benchmark_grid_config[param], MutableMapping):
                 benchmark_grid_config[param].update(config[param])
             else:
