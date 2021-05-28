@@ -1,4 +1,4 @@
-base_integrator_config: {checkpoint_on_cuda: false, n_points_survey: 100000, n_epochs: 10, minibatch_size: 10000, lr: 1.e-4}
+base_integrator_config: {checkpoint_on_cuda: false, n_points_survey: 100000, n_epochs: 10, minibatch_size: 10000}
 dbname: benchmarks_03/benchmarks.db
 debug: false
 dimensions: [32]
