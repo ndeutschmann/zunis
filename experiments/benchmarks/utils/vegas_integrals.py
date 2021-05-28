@@ -47,7 +47,7 @@ class VegasSampler(Sampler):
         # furthermore the C backend of vegas.Integrator.random
         # reuses the same location in memory to store points: we need to copy
         x = np.asarray(x).copy()
-        wx = float(np.asarray(wx))*self.actual_n_batch
+        wx = float(np.asarray(wx)) * self.actual_n_batch
         return x, 1 / wx
 
     def train_integrator(self, n_survey_steps, n_batch):
@@ -103,15 +103,21 @@ def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_s
     n_batch: int
     train: bool
         whether to train the integrator using `integrator.survey`
-    n_survey_steps: int
+    n_survey_steps: int or None
         positional `integrator.survey` argument
-    n_batch_survey: int
+    n_batch_survey: int or None
 
 
     Returns
     -------
         utils.record.EvaluationRecord
     """
+
+    if n_survey_steps is None:
+        n_survey_steps = 10
+    if n_batch_survey is None:
+        n_batch_survey = 10000
+
     sampler = VegasSampler(integrator, f, train=train, n_survey_steps=n_survey_steps, n_batch=n_batch_survey)
     sampler.reset_point_iterator()
 

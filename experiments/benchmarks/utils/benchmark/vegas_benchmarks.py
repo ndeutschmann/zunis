@@ -1,4 +1,5 @@
 import logging
+import pickle
 
 import torch
 import vegas
@@ -53,15 +54,49 @@ class VegasBenchmarker(Benchmarker):
             integrator_config = get_default_integrator_config()
         integrator_args = create_integrator_args(integrator_config)
         integrator = Integrator(f=f, d=d, device=device, **integrator_args)
-
         vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
-        start_time_zunis=datetime.datetime.utcnow()
+
+        # Preparing VEGAS arguments
+        n_survey_steps = None
+        if 'n_iter' in integrator_config:
+            n_survey_steps = integrator_config["n_iter"]
+        if 'n_iter_survey' in integrator_config:
+            n_survey_steps = integrator_config["n_iter_survey"]
+
+        n_batch_survey = None
+        if 'n_points' in integrator_config:
+            n_batch_survey = integrator_config["n_points"]
+        if 'n_points_survey' in integrator_config:
+            n_batch_survey = integrator_config["n_points_survey"]
+
+        vegas_checkpoint_path = None
+        if "checkpoint_path" in integrator_config:
+            vegas_checkpoint_path = integrator_config['checkpoint_path']
+        if vegas_checkpoint_path is not None:
+            vegas_checkpoint_path = vegas_checkpoint_path + ".vegas"
+
+        # Starting integrals
+        start_time_zunis = datetime.datetime.utcnow()
         integrator_result = evaluate_integral_integrator(f, integrator, n_batch=n_batch, keep_history=keep_history)
-        switch_time=datetime.datetime.utcnow()
+        end_time_zunis = datetime.datetime.utcnow()
+
+        start_time_vegas = datetime.datetime.utcnow()
         vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
-                                               n_batch_survey=integrator_args["n_points_survey"])
-        end_time_vegas=datetime.datetime.utcnow()
+                                               n_batch_survey=n_batch_survey,
+                                               n_survey_steps=n_survey_steps)
+
+        end_time_vegas = datetime.datetime.utcnow()
+        if vegas_checkpoint_path is not None:
+            try:
+                with open(vegas_checkpoint_path, "xb") as vegas_checkpoint_file:
+                    pickle.dump(vintegrator, vegas_checkpoint_file)
+            except "FileExistsError" as e:
+                logger.error("Error while saving VEGAS checkpoint: File exists")
+                logger.error(vegas_checkpoint_path)
+                logger.error(e)
+
         flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
+
         if isinstance(f, KnownIntegrand):
             exact_result = evaluate_known_integral(f)
 
@@ -105,8 +140,8 @@ class VegasBenchmarker(Benchmarker):
         result.update(integrand_params)
 
         result["d"] = d
-        result["time_zunis"]=(switch_time-start_time_zunis).total_seconds()
-        result["time_vegas"]=(end_time_vegas-switch_time).total_seconds()
+        result["time_zunis"] = (end_time_zunis - start_time_zunis).total_seconds()
+        result["time_vegas"] = (end_time_vegas - start_time_vegas).total_seconds()
 
         return result, integrator
 
