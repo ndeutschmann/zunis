@@ -17,38 +17,21 @@ class VegasSampler(Sampler):
         """
 
         self.integrator = integrator
-        self.point_iterator = None
-        self.actual_n_batch = 0
         self.integrand = integrand
+        self.n_batch = n_batch
+        self.n_batches = None
+        self.n_eval = None
+
+        self.reset_point_iterator(n_batch=n_batch)
 
         if train:
             self.train_integrator(n_survey_steps, n_batch)
 
-    def reset_point_iterator(self):
-        self.actual_n_batch = len(list(self.integrator.random()))
-        self.point_iterator = self.integrator.random()
-
-    def get_point(self):
-        """Sample a single point from the vegas integrator with point pdfs normalized to 1.
-
-        Yields
-        -------
-            x, px: tuple of float
-                point and its pdf
-        """
-        if self.point_iterator is None:
-            self.reset_point_iterator()
-        try:
-            x, wx = next(self.point_iterator)
-        except StopIteration:
-            self.reset_point_iterator()
-            x, wx = next(self.point_iterator)
-        # x is originally a view: map it to an array
-        # furthermore the C backend of vegas.Integrator.random
-        # reuses the same location in memory to store points: we need to copy
-        x = np.asarray(x).copy()
-        wx = float(np.asarray(wx)) * self.actual_n_batch
-        return x, 1 / wx
+    def reset_point_iterator(self, n_batch):
+        self.integrator.set(neval=n_batch)
+        self.n_batch = n_batch
+        self.n_batches = len(list(self.integrator.random_batch()))
+        self.n_eval = len(next(self.integrator.random_batch())[0])
 
     def train_integrator(self, n_survey_steps, n_batch):
         """Train the integrator before sampling
@@ -72,6 +55,7 @@ class VegasSampler(Sampler):
         f: batch callable
             function mapping numpy arrays to numpy arrays
         n_batch
+        approx
         args
         kwargs
 
@@ -79,14 +63,20 @@ class VegasSampler(Sampler):
         -------
 
         """
-        xs = []
-        pxs = []
-        while len(xs) <= n_batch:
-            xi, pxi = self.get_point()
-            xs.append(xi)
-            pxs.append(pxi)
-        x = np.array(xs)
-        px = torch.tensor(pxs)
+        if n_batch != self.n_batch:
+            self.reset_point_iterator(n_batch)
+
+        x, wx = self.integrator.sample_batch()
+        # x is originally a view: map it to an array
+        # furthermore the C backend of vegas.Integrator.random
+        # reuses the same location in memory to store points: we need to copy
+        x = np.asarray(x).copy()
+        # Point weights are normalized so that the sum of weights is the volume
+        # We use PDFs: the mean of PDFs is the volume.
+        # We need to divide by the number of points sampled by the integrator.sample_batch() function
+        wx = float(np.asarray(wx)) * self.n_eval * self.n_batches
+
+        px = 1 / torch.tensor(wx)
         fx = f(x)
         x = torch.tensor(x)
 
