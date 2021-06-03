@@ -6,13 +6,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ZüNIS Tutorials &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -42,31 +44,26 @@
 <div class="toctree-wrapper compound">
 </div>
 <p>These pages are intended to teach how to perform specific tasks using the ZüNIS library without focussing on explaining why and how things are implemented.
-More detailed explanations can be found in the <span class="xref std std-doc">Background</span> and <a class="reference internal" href="concepts.html"><span class="doc">Concepts</span></a> sections.</p>
-<div class="section" id="how-to-use-a-configuration-file">
-<h2><a class="reference internal" href="tutorial/config.html"><span class="doc">How to use a configuration file</span></a><a class="headerlink" href="#how-to-use-a-configuration-file" title="Permalink to this headline">¶</a></h2>
+More detailed explanations can be found in the <a class="reference internal" href="../background/nis.html"><span class="doc">Background</span></a> and <a class="reference internal" href="concepts.html"><span class="doc">Concepts</span></a> sections.</p>
+<p class="rubric"><a class="reference internal" href="tutorial/config.html"><span class="doc">How to use a configuration file</span></a></p>
 <p>Configuration files can be used to specify fine-grained configuration of integrators and their subparts. They also provide a good way to track parameters for reproducibility.</p>
-</div>
-<div class="section" id="how-to-train-without-integrating">
-<h2><a class="reference internal" href="tutorial/nointeg.html"><span class="doc">How to train without integrating</span></a><a class="headerlink" href="#how-to-train-without-integrating" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><a class="reference internal" href="tutorial/nointeg.html"><span class="doc">How to train without integrating</span></a></p>
 <p>ZüNIS implements normalizing flows and facilities for training them to learn the distribution induced by a non-normalized function.
 We show here how to train models outside of the importance sampling context, which can be useful for other applications.</p>
-</div>
-<div class="section" id="how-to-train-on-a-pre-evaluated-sample">
-<h2><a class="reference internal" href="tutorial/preeval.html"><span class="doc">How to train on a pre-evaluated sample</span></a><a class="headerlink" href="#how-to-train-on-a-pre-evaluated-sample" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><a class="reference internal" href="tutorial/preeval.html"><span class="doc">How to train on a pre-evaluated sample</span></a></p>
 <p>In some applications, evaluating a function is extremely costly or needs to be performed in a specific environment. We show here how to decouple
 sampling and function evaluation from training a model, which can be used for example to tune parameters in a data efficient way.</p>
-</div>
-<div class="section" id="how-to-sample-from-a-trained-model">
-<h2><a class="reference internal" href="tutorial/sample.html"><span class="doc">How to sample from a trained model</span></a><a class="headerlink" href="#how-to-sample-from-a-trained-model" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><a class="reference internal" href="tutorial/sample.html"><span class="doc">How to sample from a trained model</span></a></p>
 <p>If a model has been trained in advance, it can be used to sample points from the learned distribution.
 This can be useful for unweighting distributions as well as for evaluating integrals in cases where function evaluation is not easily interfaceable with ZüNIS.</p>
-</div>
-<div class="section" id="how-to-integrate-in-r-d">
-<h2><a class="reference internal" href="tutorial/Rd.html"><span class="doc">How to integrate in R^d</span></a><a class="headerlink" href="#how-to-integrate-in-r-d" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><a class="reference internal" href="tutorial/invert.html"><span class="doc">How to invert a normalizing flow</span></a></p>
+<p>For some applications, it is necessary to invert a trained model. We show here how this can be done in a directly within the framework of ZüNIS.</p>
+<p class="rubric"><a class="reference internal" href="tutorial/coupling.html"><span class="doc">How to use custom coupling cells</span></a></p>
+<p>In the case that a user wants to extend the range of available transformations for the normalizing flows, it is possible to define custom coupling cells and to use them instead of the implemented transformations.
+This tutorial shows the necessary steps to define a coupling cells and how to include it into a model.</p>
+<p class="rubric"><a class="reference internal" href="tutorial/Rd.html"><span class="doc">How to integrate in R^d</span></a></p>
 <p>ZüNIS accepts only functions defined on the unit hypercube. Of course, many integration problems are setup in different spaces.
 We show here how to perform a change of variables to reformulate infinite volume integrals as unit hypercube integrals.</p>
-</div>
 </div>
 
 
@@ -101,11 +98,8 @@ We show here how to perform a change of variables to reformulate infinite volume
 <li class="toctree-l2"><a class="reference internal" href="tutorial/preeval.html">Training on a fixed sample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/sample.html">Sampling points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/Rd.html">Integrating in R^d</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/invert.html">Inverting normalizing flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/coupling.html">Custom coupling cells</a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +188,7 @@ We show here how to perform a change of variables to reformulate infinite volume
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

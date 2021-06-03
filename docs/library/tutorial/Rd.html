@@ -6,18 +6,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>How to integrate in R^d &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Neural Importance Sampling" href="../../background/nis.html" />
+    <link rel="next" title="How to use a configuration file" href="invert.html" />
     <link rel="prev" title="How to sample from a trained model" href="sample.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -96,11 +98,8 @@ bijective function with two divergences such as the tangent and the inverse hype
 <li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Integrating in R^d</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-use-a-configuration-file"><span class="xref std std-doc">How to use a configuration file</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-without-integrating"><span class="xref std std-doc">How to train without integrating</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-train-on-a-pre-evaluated-sample"><span class="xref std std-doc">How to train on a pre-evaluated sample</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-sample-from-a-trained-model"><span class="xref std std-doc">How to sample from a trained model</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#how-to-integrate-in-r-d"><span class="xref std std-doc">How to integrate in R^d</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="invert.html">Inverting normalizing flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coupling.html">Custom coupling cells</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +152,7 @@ bijective function with two divergences such as the tangent and the inverse hype
         
         
         
-        <li><a href="../../background/nis.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;Neural Importance Sampling</a></li>
+        <li><a href="invert.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to use a configuration file</a></li>
         
 <!--    </ul>-->
     
@@ -164,7 +163,7 @@ bijective function with two divergences such as the tangent and the inverse hype
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
       <li>Previous: <a href="sample.html" title="previous chapter">How to sample from a trained model</a></li>
-      <li>Next: <a href="../../background/nis.html" title="next chapter">Neural Importance Sampling</a></li>
+      <li>Next: <a href="invert.html" title="next chapter">How to use a configuration file</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -195,7 +194,7 @@ bijective function with two divergences such as the tangent and the inverse hype
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
