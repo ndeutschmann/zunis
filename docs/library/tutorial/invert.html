@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>How to train without integrating &#8212; ZüNIS 0.1 documentation</title>
+    <title>How to invert a normalizing flow &#8212; ZüNIS 0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
@@ -19,8 +19,8 @@
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="How to train on a pre-evaluated sample" href="preeval.html" />
-    <link rel="prev" title="How to use a configuration file" href="config.html" />
+    <link rel="next" title="How to use a configuration file" href="coupling.html" />
+    <link rel="prev" title="How to integrate in R^d" href="Rd.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -39,29 +39,54 @@
                 </a>
             </p>
             
-  <div class="section" id="how-to-train-without-integrating">
-<h1>How to train without integrating<a class="headerlink" href="#how-to-train-without-integrating" title="Permalink to this headline">¶</a></h1>
-<p>ZüNIS allows to train a model without performing the integration. For this, we can
-use the trainer API:</p>
+  <div class="section" id="how-to-invert-a-normalizing-flow">
+<h1>How to invert a normalizing flow<a class="headerlink" href="#how-to-invert-a-normalizing-flow" title="Permalink to this headline">¶</a></h1>
+<p>For some applications, it is necessary to invert a trained model. As normalizing
+flows are bijections, this is always possible, and due to the structure of coupling
+cells, this can be done in an exact and efficient way. The forward and the backward
+transformation access in runtime both the same parameters, so inverting a normalizing
+flow in ZüNIS reduces to signaling the model which of both operations to perform.</p>
+<p>The following example shows how this can be done:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">zunis.models.flows.sampling</span> <span class="kn">import</span> <span class="n">UniformSampler</span>
 <span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
 
-<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+  <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">generate_target_batch_from_posterior</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">UniformSampler</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">))</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="c1"># Uniformly sampled points</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_points</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">#[[0.8797, 0.0277],[0.4615, 0.8289],[0.7171, 0.5085]]</span>
+
+<span class="n">px</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
+<span class="c1"># px.shape = (n_points,)</span>
+
+<span class="c1"># Function values</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="n">fx</span>
 <span class="n">trainer</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">px</span><span class="p">,</span><span class="n">fx</span><span class="p">)</span>
+
+<span class="n">y</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">px</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#[[0.8903, 0.0952],[0.2285, 0.6719],[0.5979, 0.3470]]</span>
+
+<span class="n">trainer</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">invert</span><span class="p">()</span>
+<span class="n">q</span><span class="o">=</span><span class="n">trainer</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#[[0.8797, 0.0277],[0.4615, 0.8289], [0.7171, 0.5085]]</span>
 </pre></div>
 </div>
-<p>In a first step, we initialize a trainer object. We generate a batch of 10 uniformly
-sampled points in the 2D hypercube <code class="code docutils literal notranslate"><span class="pre">x</span></code> with the probability distribution <code class="code docutils literal notranslate"><span class="pre">px</span></code>
-and the function value <code class="code docutils literal notranslate"><span class="pre">fx</span></code>. Then, one training step is performed on this batch.</p>
+<p>From the sampled points, a training sample is created on which the trainer is optimized.
+Then, we apply the trained model on the originally sampled points, which gives the mapped
+points and the jacobian of the transformation. The trainer can be inverted by calling
+<code class="code docutils literal notranslate"><span class="pre">.invert()</span></code>, through which the underlying normalizing flow (<code class="code docutils literal notranslate"><span class="pre">trainer.flow</span></code>) is operating
+backwards instead of forward. This allows to again restore <code class="code docutils literal notranslate"><span class="pre">x</span></code> from <code class="code docutils literal notranslate"><span class="pre">y</span></code>.</p>
 </div>
 
 
@@ -92,11 +117,11 @@ and the function value <code class="code docutils literal notranslate"><span cla
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="config.html">Configuration files</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nointeg.html">Training without integrating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Rd.html">Integrating in R^d</a></li>
-<li class="toctree-l2"><a class="reference internal" href="invert.html">Inverting normalizing flows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inverting normalizing flows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="coupling.html">Custom coupling cells</a></li>
 </ul>
 </li>
@@ -146,11 +171,11 @@ and the function value <code class="code docutils literal notranslate"><span cla
 <!--    <ul>-->
         
         
-        <li><a href="config.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;How to use a configuration file</a></li>
+        <li><a href="Rd.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;How to integrate in R^d</a></li>
         
         
         
-        <li><a href="preeval.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to train on a pre-evaluated sample</a></li>
+        <li><a href="coupling.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;How to use a configuration file</a></li>
         
 <!--    </ul>-->
     
@@ -160,8 +185,8 @@ and the function value <code class="code docutils literal notranslate"><span cla
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
-      <li>Previous: <a href="config.html" title="previous chapter">How to use a configuration file</a></li>
-      <li>Next: <a href="preeval.html" title="next chapter">How to train on a pre-evaluated sample</a></li>
+      <li>Previous: <a href="Rd.html" title="previous chapter">How to integrate in R^d</a></li>
+      <li>Next: <a href="coupling.html" title="next chapter">How to use a configuration file</a></li>
   </ul></li>
   </ul></li>
 </ul>
