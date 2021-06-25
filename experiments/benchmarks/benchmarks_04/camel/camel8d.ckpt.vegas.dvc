@@ -1,0 +1,4 @@
+outs:
+- md5: 608cf856412548de86803cff2eff228a
+  size: 67285
+  path: camel8d.ckpt.vegas
