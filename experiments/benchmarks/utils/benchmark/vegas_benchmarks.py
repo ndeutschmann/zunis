@@ -24,7 +24,7 @@ class VegasBenchmarker(Benchmarker):
     """Benchmark by comparing with VEGAS"""
 
     def benchmark_method(self, d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
-                         keep_history=False, device=torch.device("cpu")):
+                         keep_history=False, device=torch.device("cpu"), stratified=False):
         """Benchmarking class for comparing with VEGAS
 
         Parameters
@@ -54,7 +54,7 @@ class VegasBenchmarker(Benchmarker):
             integrator_config = get_default_integrator_config()
         integrator_args = create_integrator_args(integrator_config)
         integrator = Integrator(f=f, d=d, device=device, **integrator_args)
-        vintegrator = vegas.Integrator([[0, 1]] * d, max_nhcube=1)
+        vintegrator = vegas.Integrator([[0, 1]] * d)
 
         # Preparing VEGAS arguments
         n_survey_steps = None
@@ -83,7 +83,8 @@ class VegasBenchmarker(Benchmarker):
         start_time_vegas = datetime.datetime.utcnow()
         vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                                n_batch_survey=n_batch_survey,
-                                               n_survey_steps=n_survey_steps)
+                                               n_survey_steps=n_survey_steps,
+                                               stratified=stratified)
 
         end_time_vegas = datetime.datetime.utcnow()
         if vegas_checkpoint_path is not None:
