@@ -75,6 +75,23 @@ def evaluate_integral(integrand, sampler, n_batch=10000, keep_history=False):
     return result
 
 
+def evaluate_integral_stratified(integrand, sampler, n_batch=10000, keep_history=False):
+    """Evaluate an integral with a stratified sampling sampler
+
+    Parameters
+    ----------
+    integrand: utils.integrands.KnownIntegrand
+    sampler: Sampler
+    n_batch: int
+    keep_history: bool
+
+    Returns
+    -------
+        utils.record.EvaluationRecord
+    """
+    raise NotImplementedError("PLEASE IMPLEMENT ME")  # TODO
+
+
 def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2, keep_history=False):
     """Compute the integral and check whether it matches the known value
 

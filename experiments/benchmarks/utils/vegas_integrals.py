@@ -1,11 +1,10 @@
 import torch
 import numpy as np
-from random import shuffle
-from utils.integral_validation import Sampler, evaluate_integral
+from utils.integral_validation import Sampler, evaluate_integral, evaluate_integral_stratified
 
 
 class VegasSampler(Sampler):
-    def __init__(self, integrator, integrand, train=True, n_survey_steps=10, n_batch=100000):
+    def __init__(self, integrator, integrand, train=True, n_survey_steps=10, n_batch=100000, stratified=False):
         """
 
         Parameters
@@ -17,38 +16,15 @@ class VegasSampler(Sampler):
         """
 
         self.integrator = integrator
-        self.point_iterator = None
-        self.actual_n_batch = 0
         self.integrand = integrand
+        self.n_batch = n_batch
+        self.stratified = stratified
+        max_nhcube = None if stratified else 1
+
+        self.integrator.set(neval=n_batch, max_nhcube=max_nhcube)
 
         if train:
             self.train_integrator(n_survey_steps, n_batch)
-
-    def reset_point_iterator(self):
-        self.actual_n_batch = len(list(self.integrator.random()))
-        self.point_iterator = self.integrator.random()
-
-    def get_point(self):
-        """Sample a single point from the vegas integrator with point pdfs normalized to 1.
-
-        Yields
-        -------
-            x, px: tuple of float
-                point and its pdf
-        """
-        if self.point_iterator is None:
-            self.reset_point_iterator()
-        try:
-            x, wx = next(self.point_iterator)
-        except StopIteration:
-            self.reset_point_iterator()
-            x, wx = next(self.point_iterator)
-        # x is originally a view: map it to an array
-        # furthermore the C backend of vegas.Integrator.random
-        # reuses the same location in memory to store points: we need to copy
-        x = np.asarray(x).copy()
-        wx = float(np.asarray(wx)) * self.actual_n_batch
-        return x, 1 / wx
 
     def train_integrator(self, n_survey_steps, n_batch):
         """Train the integrator before sampling
@@ -60,11 +36,21 @@ class VegasSampler(Sampler):
         n_batch: int
             maximum number of function evaluations per survey step
         """
-        self.integrator(self.integrand, nitn=n_survey_steps, neval=n_batch)
+        max_nhcube = None if self.stratified else 1
+        self.integrator(self.integrand, nitn=n_survey_steps, neval=n_batch, max_nhcube=max_nhcube)
         # integrating changes how points are sampled, the iterator should be reset
-        self.reset_point_iterator()
+        self.integrator.set(neval=n_batch)
 
     def sample(self, f, n_batch=10000, *args, **kwargs):
+        if self.stratified:
+            return self.sample_stratified(f, n_batch=n_batch)
+        else:
+            return self.sample_non_stratified(f, n_batch=n_batch)
+
+    def sample_stratified(self, f, n_batch):
+        raise NotImplementedError("PLEASE IMPLEMENT ME")  # TODO
+
+    def sample_non_stratified(self, f, n_batch=10000, *args, **kwargs):
         """
 
         Parameters
@@ -79,21 +65,31 @@ class VegasSampler(Sampler):
         -------
 
         """
-        xs = []
-        pxs = []
-        while len(xs) <= n_batch:
-            xi, pxi = self.get_point()
-            xs.append(xi)
-            pxs.append(pxi)
-        x = np.array(xs)
-        px = torch.tensor(pxs)
+
+        if n_batch != self.n_batch:
+            self.n_batch = n_batch
+            self.integrator.set(neval=n_batch)
+
+        x, wx = next(self.integrator.random_batch())
+        # x is originally a view: map it to an array
+        # furthermore the C backend of vegas.Integrator.random
+        # reuses the same location in memory to store points: we need to copy
+        x = np.asarray(x).copy()
+        # Point weights are normalized so that the sum of weights is the volume
+        # We use PDFs: the mean of PDFs is the volume.
+        # We need to divide by the number of points sampled by the integrator.sample_batch() function
+        n_eval = x.shape[0]
+        wx = np.asarray(wx).copy() * n_eval
+
+        px = 1 / torch.tensor(wx, dtype=torch.float32)
         fx = f(x)
-        x = torch.tensor(x)
+        x = torch.tensor(x, dtype=torch.float32)
 
         return x, px, fx
 
 
-def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_steps=10, n_batch_survey=10000):
+def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_steps=10, n_batch_survey=10000,
+                            stratified=False):
     """Validate a known integral using a VEGAS integrator as a sampler
 
     Parameters
@@ -106,7 +102,8 @@ def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_s
     n_survey_steps: int or None
         positional `integrator.survey` argument
     n_batch_survey: int or None
-
+    stratified: bool
+        whether to use VEGAS stratified sampling
 
     Returns
     -------
@@ -118,7 +115,10 @@ def evaluate_integral_vegas(f, integrator, n_batch=10000, train=True, n_survey_s
     if n_batch_survey is None:
         n_batch_survey = 10000
 
-    sampler = VegasSampler(integrator, f, train=train, n_survey_steps=n_survey_steps, n_batch=n_batch_survey)
-    sampler.reset_point_iterator()
+    sampler = VegasSampler(integrator, f, train=train, n_survey_steps=n_survey_steps, n_batch=n_batch_survey,
+                           stratified=stratified)
 
-    return evaluate_integral(f, sampler, n_batch)
+    if stratified:
+        return evaluate_integral_stratified(f, sampler, n_batch)
+    else:
+        return evaluate_integral(f, sampler, n_batch)
