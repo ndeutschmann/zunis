@@ -6,7 +6,8 @@ from itertools import product
 from typing import Dict, List
 
 import torch
-from better_abc import ABC, abstractmethod
+from abc import ABC,abstractmethod
+from better_abc import ABCMeta, abstract_attribute
 from dictwrapper import NestedMapping
 
 from zunis.utils.config.configuration import Configuration
@@ -187,6 +188,9 @@ class Benchmarker(ABC):
                                                    integrator_config=integrator_config,
                                                    n_batch=n_batch, device=device,
                                                    keep_history=keep_history)
+                    if dbname is not None:
+                        append_dataframe_to_sqlite(result.as_dataframe(), dbname=dbname, tablename=experiment_name,
+                                               dtypes=sql_dtypes)
                     
                 except Exception as e:
                     logger.exception(e)
@@ -197,9 +201,7 @@ class Benchmarker(ABC):
                     result["extra_data"] = e
                     result = result.as_dataframe()
 
-                if dbname is not None:
-                    append_dataframe_to_sqlite(result.as_dataframe(), dbname=dbname, tablename=experiment_name,
-                                               dtypes=sql_dtypes)
+               
 
 
 class GridBenchmarker(Benchmarker):
@@ -220,6 +222,36 @@ class GridBenchmarker(Benchmarker):
                     integrator_config_update = dict(zip(integrator_grid_keys, integrator_update))
                     integrand_config_update = dict(zip(integrand_grid_keys, integrand_update))
                     yield d, integrator_config_update, integrand_config_update
+                    
+class GridBenchmarkerN(Benchmarker):
+    """Benchmark by sampling configurations like a grid. Goes n times through the grid"""
+    
+    def __init__(self, n=5):
+        """
+
+        Parameters
+        ----------
+        n_attempts : int
+            How often the grid is sampled
+        """
+        self.n = n
+
+    def generate_config_samples(self, dimensions, integrator_grid, integrand_grid):
+        integrator_grid_keys = integrator_grid.keys()
+        integrand_grid_keys = integrand_grid.keys()
+        integrator_grid_values = integrator_grid.values()
+        integrand_grid_values = integrand_grid.values()
+
+        for d in dimensions:
+            # Need to reset our cartesian product iterator at each pass through
+            integrand_full_grid = product(*integrand_grid_values)
+            for integrand_update in integrand_full_grid:
+                integrator_full_grid = product(*integrator_grid_values)
+                for integrator_update in integrator_full_grid:
+                    for i in range(self.n):
+                        integrator_config_update = dict(zip(integrator_grid_keys, integrator_update))
+                        integrand_config_update = dict(zip(integrand_grid_keys, integrand_update))
+                        yield d, integrator_config_update, integrand_config_update
 
 
 class RandomHyperparameterBenchmarker(Benchmarker):
@@ -364,3 +396,73 @@ class SequentialBenchmarker(Benchmarker):
             for param_name, param_grid in integrand_grid.items():
                 integrand_config_update[param_name] = param_grid[i]
             yield d, integrator_config_update, integrand_config_update
+
+
+class SequentialBenchmarkerN(Benchmarker):
+    """Benchmark by going through a list of integrands and matching integrator configurations
+    (as opposed to scanning through parameters for either).
+
+    This is intended for benchmarking integrands on "optimal configurations" found through previous
+    hyper parameter searching.
+    """
+    def __init__(self, n=5):
+        """
+
+        Parameters
+        ----------
+        n_attempts : int
+            Number of times each integrator configurations is evaluated
+        """
+        self.n = n
+
+    def generate_config_samples(self, dimensions, integrator_grid, integrand_grid):
+        """Sample over dimensions, integrator and integrand configurations from lists of possible option values.
+
+        Parameters
+        ----------
+        dimensions : List[int]
+            list of dimensions to sample from
+        integrator_grid : Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrator
+        integrand_grid: Dict[str, List[Any]]
+            mapping (option name) -> (list of values) for the integrand
+
+        Yields
+        -------
+        Tuple[int, Dict[str, Any], Dict[str, Any]]
+            triplets (d, integrator_config, integrand_params) that can be used to sample configurations
+
+        Notes
+        -----
+
+        The integrator grid is interpreted as a sequence:
+        `integrator_grid = {
+          param1: [v1, v2, ..., vn]
+          param2: [w1, w2, ..., wn]
+        }
+        is scanned as the list of configurations
+        config1 = {param1: v1, param2: w1}
+        config2 = {param1: v2, param2: w2}
+        ...`
+        """
+
+        integrator_grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
+        integrand_grid_lengths = list(set([len(param) for param in integrand_grid.values()]))
+        assert \
+            len(integrator_grid_lengths) == 1 and \
+            len(integrand_grid_lengths) == 1 and \
+            integrand_grid_lengths[0] == integrand_grid_lengths[0] == len(dimensions), \
+            "The length of all parameter grids must match (integrator, integrand, dimensions)"
+
+        grid_length = integrand_grid_lengths[0]
+
+        for i in range(grid_length):
+            integrator_config_update = dict()
+            for j in range(self.n):
+                integrand_config_update = dict()
+                d = dimensions[i]
+                for param_name, param_grid in integrator_grid.items():
+                    integrator_config_update[param_name] = param_grid[i]
+                for param_name, param_grid in integrand_grid.items():
+                    integrand_config_update[param_name] = param_grid[i]
+                yield d, integrator_config_update, integrand_config_update

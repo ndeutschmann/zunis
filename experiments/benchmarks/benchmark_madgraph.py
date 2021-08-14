@@ -2,14 +2,14 @@
 import click
 import sys
 
-from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
+from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker, VegasGridBenchmarkerN, VegasSequentialBenchmarkerN
 from utils.command_line_tools import PythonLiteralOption
 from utils.config.loaders import get_sql_types
 from utils.integrands.madgraph import CrossSection
 
 
 def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut=None,process=None,pdf_type=None,
-                       pdf_dir=None, lhapdf_dir=None, db=None, experiment_name=None, debug=None, cuda=None, keep_history=None, config=None, n_search=10):
+                       pdf_dir=None, lhapdf_dir=None, db=None, experiment_name=None, debug=None, cuda=None, keep_history=None, config=None, n_search=100):
     
     dtypes = get_sql_types()
 
@@ -26,8 +26,10 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         "lhapdf_dir":""
     }
 
-    benchmarker = VegasRandomHPBenchmarker(n=n_search)
+    """benchmarker = VegasRandomHPBenchmarker(n=n_search)"""
 
+    benchmarker = VegasSequentialBenchmarkerN(n=n_search)
+    
     benchmark_config = benchmarker.set_benchmark_grid_config(config=config,dimensions=1, #will be overwritten
                                                              keep_history=keep_history,
                                                              dbname=db, experiment_name=experiment_name, cuda=cuda,
@@ -57,7 +59,7 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
     #The integrand is initialised once in order to get the right number of dimensions needed to integrate the process
     CS=CrossSection(pdf=benchmark_config["base_integrand_params"]["pdf"], pdf_dir=benchmark_config["base_integrand_params"]["pdf_dir"], lhapdf_dir=benchmark_config["base_integrand_params"]["lhapdf_dir"], process=benchmark_config["base_integrand_params"]["process"],pdf_type=benchmark_config["base_integrand_params"]["pdf_type"])
   
-    benchmark_config["dimensions"]=CS.d
+    benchmark_config["dimensions"]=[CS.d,CS.d,CS.d]
     
  
     benchmarker.run(integrand=CrossSection, sql_dtypes=dtypes,
@@ -79,7 +81,7 @@ cli = click.Command("cli", callback=benchmark_madgraph, params=[
     click.Option(["--db"], default=None, type=str),
     click.Option(["--experiment_name"], default=None, type=str),
     click.Option(["--config"], default=None, type=str),
-    click.Option(["--n_search"], default=10, type=int)
+    click.Option(["--n_search"], default=5, type=int)
 ])
 
 if __name__ == '__main__':
