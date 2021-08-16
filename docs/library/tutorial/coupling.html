@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to define a custom coupling cell &#8212; ZüNIS 0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="../../_static/favicon-v2.png"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Neural Importance Sampling" href="../../background/nis.html" />
+    <link rel="prev" title="How to invert a normalizing flow" href="invert.html" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  </head><body>
+  
+
+    <div class="document">
+<div class="documentwrapper">
+    <div class="bodywrapper">
+        
+
+        <div class="body" role="main">
+            <p id="mobilelink">
+                <a href="#mobileanchor">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i> navigation links
+                </a>
+            </p>
+            
+  <div class="section" id="how-to-define-a-custom-coupling-cell">
+<h1>How to define a custom coupling cell<a class="headerlink" href="#how-to-define-a-custom-coupling-cell" title="Permalink to this headline">¶</a></h1>
+<p>ZüNIS provides popular choices for the coupling transforms, including affine transformations
+as well as piecewise-linear and piecewise-quadratic transformations. In case the
+user wishes to investigate the effecte of alternative choices of the coupling transform,
+it easy to extend the classes provided by this package to do so. In the first step,
+one needs to define an invertible coupling transform:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">zunis.models.flows.sampling</span> <span class="kn">import</span> <span class="n">FactorizedGaussianSampler</span>
+<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+<span class="kn">from</span> <span class="nn">zunis.models.flows.coupling_cells.general_coupling</span> <span class="kn">import</span> <span class="n">InvertibleCouplingCell</span>
+<span class="kn">from</span> <span class="nn">zunis.models.flows.coupling_cells.transforms</span> <span class="kn">import</span> <span class="n">InvertibleTransform</span>
+<span class="kn">from</span> <span class="nn">zunis.models.layers.trainable</span> <span class="kn">import</span> <span class="n">ArbitraryShapeRectangularDNN</span>
+
+<span class="k">class</span> <span class="nc">LinearTransform</span><span class="p">(</span><span class="n">InvertibleTransform</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+      <span class="n">alpha</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+      <span class="n">logj</span> <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">alpha</span><span class="p">,</span> <span class="n">logj</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+  <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">T</span><span class="p">):</span>
+      <span class="n">alpha</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">T</span><span class="p">)</span>
+      <span class="n">logj</span> <span class="o">=</span> <span class="o">-</span><span class="n">T</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">alpha</span><span class="p">,</span> <span class="n">logj</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here, we chose a very simple linear mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y = Q(x):\;\left\{ \begin{array}{l} y^A = x^A\\ y^B = \exp\left(T(x^A)\right) \times x^B,\end{array} \right.\end{split}\]</div>
+<p>where the argument of the exponential is strictly positive and which can be
+inverted in a straightforward way. Starting from this linear bijective transformation,
+one can define a coupling cell by inheriting from ZüNIS’ invertible coupling cell
+class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LinearCouplingCell</span><span class="p">(</span><span class="n">InvertibleCouplingCell</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">nn_width</span><span class="p">,</span> <span class="n">nn_depth</span><span class="p">):</span>
+      <span class="n">transform</span> <span class="o">=</span> <span class="n">LinearTransform</span><span class="p">()</span>
+      <span class="nb">super</span><span class="p">(</span><span class="n">LinearCouplingCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span><span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+      <span class="n">d_in</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">ArbitraryShapeRectangularDNN</span><span class="p">(</span><span class="n">d_in</span><span class="o">=</span><span class="n">d_in</span><span class="p">,</span><span class="n">out_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,),</span><span class="n">d_hidden</span><span class="o">=</span><span class="n">nn_width</span><span class="p">,</span><span class="n">n_hidden</span><span class="o">=</span><span class="n">nn_depth</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="o">=</span><span class="kc">False</span>
+</pre></div>
+</div>
+<p>This class is provided with the transformation we just defined, as well as with
+the definition of neural network, for which we choose a generic rectangular dense
+neural network as provided by ZüNIS. This coupling cell can now replace the predefined
+coupling cells present in ZüNIS:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]</span>
+<span class="n">nn_width</span><span class="o">=</span><span class="mi">8</span>
+<span class="n">nn_depth</span><span class="o">=</span><span class="mi">256</span>
+
+<span class="n">sampler</span><span class="o">=</span><span class="n">FactorizedGaussianSampler</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="n">linear_coupling</span><span class="o">=</span><span class="n">LinearCouplingCell</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">mask</span><span class="p">,</span><span class="n">nn_width</span><span class="p">,</span><span class="n">nn_depth</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow_prior</span><span class="o">=</span><span class="n">sampler</span><span class="p">,</span><span class="n">flow</span><span class="o">=</span><span class="n">linear_coupling</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After defining the number of dimensions and the hardware we want to work on, we need
+to provide a masking as well as the architecture of the neural network for creating
+an instance of our coupling cell.
+Additionally, the trainer needs to be supported with a sampling layer, which we
+choose in this case to be a Gaussian sampler. Now, instead of providing a string
+to the “flow” keyword fo the trainer, we can provide as an argument instead the
+instance of our coupling cell, which will now be used for training.</p>
+</div>
+
+
+
+            <!-- Render the warning message if using meta tag `:todo:` -->
+            
+        </div>
+        
+    </div>
+</div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">ZüNIS</a></h1>
+
+
+
+
+
+
+
+
+<hr id="mobileanchor">
+
+<p class="caption"><span class="caption-text">Library</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic-example.html">Basic example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorial.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config.html">Configuration files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nointeg.html">Training without integrating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preeval.html">Training on a fixed sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sample.html">Sampling points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rd.html">Integrating in R^d</a></li>
+<li class="toctree-l2"><a class="reference internal" href="invert.html">Inverting normalizing flows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom coupling cells</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Background</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../background/nis.html">Neural Importance Sampling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../background/training.html">Training strategies</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Symbol Index</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Info</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+</ul>
+
+
+
+<p class="caption">
+    <span class="caption-text">Sources</span>
+</p>
+
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    
+</ul>
+
+
+<p class="caption">
+    <span class="caption-text">Navigation</span>
+</p>
+<ul class="local-nav">
+
+
+
+    
+    
+    <li><a href="../tutorial.html"><i class="fa fa-arrow-up" aria-hidden="true"></i>&nbsp;ZüNIS Tutorials</a></li>
+    
+    
+<!--    <ul>-->
+        
+        
+        <li><a href="invert.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;How to invert a normalizing flow</a></li>
+        
+        
+        
+        <li><a href="../../background/nis.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;Neural Importance Sampling</a></li>
+        
+<!--    </ul>-->
+    
+
+</ul><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../tutorial.html">ZüNIS Tutorials</a><ul>
+      <li>Previous: <a href="invert.html" title="previous chapter">How to invert a normalizing flow</a></li>
+      <li>Next: <a href="../../background/nis.html" title="next chapter">Neural Importance Sampling</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      
+      
+      
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
