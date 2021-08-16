@@ -3,7 +3,7 @@ import click
 
 from utils.benchmark.vegas_benchmarks import VegasSequentialBenchmarker
 from utils.config.loaders import get_sql_types
-from utils.integrands.gaussian import SymmetricCamelIntegrand
+from utils.integrands.camel import SymmetricCamelIntegrand
 
 
 def benchmark_camel(db=None, experiment_name=None, debug=None, cuda=None, keep_history=None, config=None):
