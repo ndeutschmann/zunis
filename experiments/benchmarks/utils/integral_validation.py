@@ -2,6 +2,7 @@
 from better_abc import ABC, abstractmethod
 from math import sqrt
 import pandas as pd
+import numpy as np
 
 import logging
 
@@ -89,7 +90,30 @@ def evaluate_integral_stratified(integrand, sampler, n_batch=10000, keep_history
     -------
         utils.record.EvaluationRecord
     """
-    raise NotImplementedError("PLEASE IMPLEMENT ME")  # TODO
+    (wx, hcs), fx = sampler.sample(integrand, n_batch=n_batch)
+
+    integral = wx.dot(fx)
+    variance = 0
+
+    for hc in np.unique(hcs):
+        idx = (hcs == hc)
+        px = 1 / wx[idx] / np.sum(idx)
+
+        var_hc = np.var(fx[idx] / px)
+        variance += var_hc
+
+    unc = sqrt(variance)
+
+    logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
+    result = EvaluationRecord(
+        value=integral,
+        value_std=unc,
+    )
+
+    if keep_history:
+        result["history"] = sampler.get_history()
+
+    return result
 
 
 def validate_integral(integrand, sampler, n_batch=10000, sigma_cutoff=2, keep_history=False):

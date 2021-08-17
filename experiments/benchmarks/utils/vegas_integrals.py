@@ -48,7 +48,19 @@ class VegasSampler(Sampler):
             return self.sample_non_stratified(f, n_batch=n_batch)
 
     def sample_stratified(self, f, n_batch):
-        raise NotImplementedError("PLEASE IMPLEMENT ME")  # TODO
+        if n_batch != self.n_batch:
+            self.n_batch = n_batch
+            self.integrator.set(neval=n_batch, nhcube_batch=n_batch)
+
+        x, wx, hc = self.integrator.random_batch(yield_hcube=True)
+
+        x = np.asarray(x).copy()
+        wx = np.asarray(wx).copy()
+        hc = np.asarray(hc).copy()
+
+        fx = f(x)
+
+        return x, (wx, hc), fx
 
     def sample_non_stratified(self, f, n_batch=10000, *args, **kwargs):
         """
