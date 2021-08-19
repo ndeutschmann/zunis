@@ -90,9 +90,9 @@ def evaluate_integral_stratified(integrand, sampler, n_batch=10000, keep_history
     -------
         utils.record.EvaluationRecord
     """
-    (wx, hcs), fx = sampler.sample(integrand, n_batch=n_batch)
+    _, (wx, hcs), fx = sampler.sample(integrand, n_batch=n_batch)
 
-    integral = wx.dot(fx)
+    integral = wx.dot(fx).item()
     variance = 0
 
     for hc in np.unique(hcs):
@@ -102,7 +102,7 @@ def evaluate_integral_stratified(integrand, sampler, n_batch=10000, keep_history
         var_hc = np.var(fx[idx] / px)
         variance += var_hc
 
-    unc = sqrt(variance)
+    unc = sqrt(variance.item())
 
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     result = EvaluationRecord(

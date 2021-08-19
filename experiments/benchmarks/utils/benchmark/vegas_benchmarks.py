@@ -23,8 +23,11 @@ logger = logging.getLogger(__name__)
 class VegasBenchmarker(Benchmarker):
     """Benchmark by comparing with VEGAS"""
 
+    def __init__(self, stratified=False):
+        self.stratified = stratified
+
     def benchmark_method(self, d, integrand, integrator_config=None, integrand_params=None, n_batch=100000,
-                         keep_history=False, device=torch.device("cpu"), stratified=False):
+                         keep_history=False, device=torch.device("cpu")):
         """Benchmarking class for comparing with VEGAS
 
         Parameters
@@ -84,7 +87,7 @@ class VegasBenchmarker(Benchmarker):
         vegas_result = evaluate_integral_vegas(vf, vintegrator, n_batch=n_batch,
                                                n_batch_survey=n_batch_survey,
                                                n_survey_steps=n_survey_steps,
-                                               stratified=stratified)
+                                               stratified=self.stratified)
 
         end_time_vegas = datetime.datetime.utcnow()
         if vegas_checkpoint_path is not None:
@@ -143,6 +146,7 @@ class VegasBenchmarker(Benchmarker):
         result["d"] = d
         result["time_zunis"] = (end_time_zunis - start_time_zunis).total_seconds()
         result["time_vegas"] = (end_time_vegas - start_time_vegas).total_seconds()
+        result["stratified"] = self.stratified
 
         return result, integrator
 
@@ -153,6 +157,10 @@ class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):
 
 class VegasRandomHPBenchmarker(RandomHyperparameterBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling integrator hyperparameters randomly"""
+
+    def __init__(self, n=5, stratified=False):
+        RandomHyperparameterBenchmarker.__init__(self, n=n)
+        VegasBenchmarker.__init__(self, stratified=stratified)
 
 
 class VegasSequentialBenchmarker(SequentialBenchmarker, VegasBenchmarker):

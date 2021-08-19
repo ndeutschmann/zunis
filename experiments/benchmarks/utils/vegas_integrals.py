@@ -21,7 +21,7 @@ class VegasSampler(Sampler):
         self.stratified = stratified
         max_nhcube = None if stratified else 1
 
-        self.integrator.set(neval=n_batch, max_nhcube=max_nhcube)
+        self.integrator.set(neval=n_batch, max_nhcube=max_nhcube, nhcube_batch=n_batch)
 
         if train:
             self.train_integrator(n_survey_steps, n_batch)
@@ -52,7 +52,15 @@ class VegasSampler(Sampler):
             self.n_batch = n_batch
             self.integrator.set(neval=n_batch, nhcube_batch=n_batch)
 
-        x, wx, hc = self.integrator.random_batch(yield_hcube=True)
+        gen = self.integrator.random_batch(yield_hcube=True)
+        x, wx, hc = next(gen)
+
+        try:
+            gen_empty = False
+            n = next(gen)
+        except StopIteration:
+            gen_empty = True
+        assert gen_empty, 'The VEGAS random batch generator contained more than one entry'
 
         x = np.asarray(x).copy()
         wx = np.asarray(wx).copy()
