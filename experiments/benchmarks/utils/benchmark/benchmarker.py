@@ -152,9 +152,9 @@ class Benchmarker(ABC):
 
         if integrand_params_grid is None and integrator_config_grid is None and len(dimensions) == 1:
             result, integrator = self.benchmark_method(dimensions[0], integrand=integrand,
-                                           integrand_params=base_integrand_params,
-                                           integrator_config=base_integrator_config,
-                                           n_batch=n_batch, device=device, keep_history=keep_history)
+                                                       integrand_params=base_integrand_params,
+                                                       integrator_config=base_integrator_config,
+                                                       n_batch=n_batch, device=device, keep_history=keep_history)
             result = result.as_dataframe()
 
             if dbname is not None:
@@ -184,12 +184,12 @@ class Benchmarker(ABC):
 
                 try:
                     result, _ = self.benchmark_method(d, integrand=integrand,
-                                                   integrand_params=integrand_params,
-                                                   integrator_config=integrator_config,
-                                                   n_batch=n_batch, device=device,
-                                                   keep_history=keep_history)
+                                                      integrand_params=integrand_params,
+                                                      integrator_config=integrator_config,
+                                                      n_batch=n_batch, device=device,
+                                                      keep_history=keep_history)
                     result = result.as_dataframe()
-                    
+
                 except Exception as e:
                     logger.exception(e)
                     result = NestedMapping()
