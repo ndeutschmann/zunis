@@ -22,7 +22,7 @@ class VegasSampler(Sampler):
         # 1e9 is the default value for stratified sampling in VEGAS
         max_nhcube = int(1e9) if stratified else 1
 
-        self.integrator.set(neval=n_batch, max_nhcube=max_nhcube, nhcube_batch=n_batch)
+        self.integrator.set(neval=n_batch, max_nhcube=max_nhcube)
 
         if train:
             self.train_integrator(n_survey_steps, n_batch)
@@ -51,21 +51,18 @@ class VegasSampler(Sampler):
     def sample_stratified(self, f, n_batch):
         if n_batch != self.n_batch:
             self.n_batch = n_batch
-            self.integrator.set(neval=n_batch, nhcube_batch=n_batch)
+            self.integrator.set(neval=n_batch)
 
         gen = self.integrator.random_batch(yield_hcube=True)
         x, wx, hc = next(gen)
 
-        try:
-            gen_empty = False
-            n = next(gen)
-        except StopIteration:
-            gen_empty = True
-        assert gen_empty, 'The VEGAS random batch generator contained more than one entry'
-
-        x = np.asarray(x).copy()
-        wx = np.asarray(wx).copy()
-        hc = np.asarray(hc).copy()
+        for x_batch, wx_batch, hc_batch in gen:
+            x_batch = np.asarray(x_batch).copy()
+            wx_batch = np.asarray(wx_batch).copy()
+            hc_batch = np.asarray(hc_batch).copy()
+            x = np.concatenate((x, x_batch), axis=0)
+            wx = np.concatenate((wx, wx_batch), axis=0)
+            hc = np.concatenate((hc, hc_batch), axis=0)
 
         fx = f(x)
 
