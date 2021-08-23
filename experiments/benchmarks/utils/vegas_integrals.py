@@ -19,7 +19,8 @@ class VegasSampler(Sampler):
         self.integrand = integrand
         self.n_batch = n_batch
         self.stratified = stratified
-        max_nhcube = None if stratified else 1
+        # 1e9 is the default value for stratified sampling in VEGAS
+        max_nhcube = int(1e9) if stratified else 1
 
         self.integrator.set(neval=n_batch, max_nhcube=max_nhcube, nhcube_batch=n_batch)
 
@@ -36,7 +37,7 @@ class VegasSampler(Sampler):
         n_batch: int
             maximum number of function evaluations per survey step
         """
-        max_nhcube = None if self.stratified else 1
+        max_nhcube = int(1e9) if self.stratified else 1
         self.integrator(self.integrand, nitn=n_survey_steps, neval=n_batch, max_nhcube=max_nhcube)
         # integrating changes how points are sampled, the iterator should be reset
         self.integrator.set(neval=n_batch)
