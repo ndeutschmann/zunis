@@ -12,14 +12,14 @@ setup(
         "dictwrapper == 1.3",
         "ruamel.yaml <= 0.16.12"
     ],
-    version='0.2rc6',
+    version='0.2rc7',
     description='Neural Importance Sampling',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author='Nicolas Deutschmann',
     author_email="nicolas.deutschmann@gmail.com",
     url="https://zunis.readthedocs.io",
-    download_url="https://github.com/ndetschmann/zunis",
+    download_url="https://github.com/ndeutschmann/zunis",
     license='MIT',
     include_package_data = True
 )
