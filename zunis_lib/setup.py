@@ -8,7 +8,8 @@ setup(
         "pandas == 1.1.0",
         "torch == 1.6.0",
         "abc_property == 1.0",
-        "dictwrapper == 1.3"
+        "dictwrapper == 1.3",
+        "ruamel.yaml <= 0.16.12"
     ],
     version='0.2rc3',
     description='Neural Importance Sampling',
@@ -16,7 +17,7 @@ setup(
     long_description_content_type="text/markdown",
     author='Nicolas Deutschmann',
     author_email="nicolas.deutschmann@gmail.com",
-    url="https://ndeutschmann.github.io/zunis/",
+    url="https://zunis.readthedocs.io",
     download_url="https://github.com/ndetschmann/zunis",
     license='MIT',
     include_package_data = True
