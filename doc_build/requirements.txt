@@ -7,4 +7,4 @@ vegas==4.0.1
 
 torchps @ git+https://github.com/NGoetz/TorchPS
 # Editable Zunis install
--e ./zunis_lib
+-e .

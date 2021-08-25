@@ -44,9 +44,9 @@ python benchmark_hypersphere.py
 
 ## Library usage
 
-For basic uses, a RealNVP-based integrator is provided with default choices and can be created and used as follows:
+For basic applications, the integrator is provided with default choices and can be created and used as follows:
 
-```
+```python
 import torch
 from zunis.integration import Integrator
 
