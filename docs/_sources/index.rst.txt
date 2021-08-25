@@ -101,7 +101,7 @@ If this seems like a problem that machine learning should be able to solve, you 
     Tutorials  <library/tutorial>
 
 .. toctree::
-    :caption: Background
+    :caption: Background 
     :hidden:
     :maxdepth: 1
 

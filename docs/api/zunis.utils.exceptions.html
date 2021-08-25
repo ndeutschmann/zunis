@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>exceptions module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,32 +38,32 @@
                 </a>
             </p>
             
-  <div class="section" id="module-zunis.utils.exceptions">
+  <section id="module-zunis.utils.exceptions">
 <span id="zunis-utils-exceptions-module"></span><h1>exceptions module<a class="headerlink" href="#module-zunis.utils.exceptions" title="Permalink to this headline">¶</a></h1>
 <p>Custom exceptions for the ZüNIS library</p>
 <dl class="py exception">
-<dt id="zunis.utils.exceptions.AvertedCUDARuntimeError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-name descname"><span class="pre">AvertedCUDARuntimeError</span></code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.AvertedCUDARuntimeError" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.utils.exceptions.AvertedCUDARuntimeError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">AvertedCUDARuntimeError</span></span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.AvertedCUDARuntimeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
 <p>Prevents the raising of a RuntimeError cause by a CUDA device-side assert failure
 which whould lock the GPU in a failed state.</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="zunis.utils.exceptions.NoCheckpoint">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-name descname"><span class="pre">NoCheckpoint</span></code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.NoCheckpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.utils.exceptions.NoCheckpoint">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">NoCheckpoint</span></span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.NoCheckpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
 <p>Raised to signify no checkpoint is available for reloading</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="zunis.utils.exceptions.TrainingInterruption">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-name descname"><span class="pre">TrainingInterruption</span></code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.TrainingInterruption" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.utils.exceptions.TrainingInterruption">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">TrainingInterruption</span></span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/utils/exceptions.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.utils.exceptions.TrainingInterruption" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></p>
 <p>Raised when a Trainer determines that the model should no longer be trained</p>
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -85,19 +86,19 @@ which whould lock the GPU in a failed state.</p>
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
@@ -107,7 +108,7 @@ which whould lock the GPU in a failed state.</p>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -169,7 +170,7 @@ which whould lock the GPU in a failed state.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -191,7 +192,7 @@ which whould lock the GPU in a failed state.</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

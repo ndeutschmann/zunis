@@ -15,6 +15,7 @@ utils.integrands package
    :maxdepth: 1
 
    utils.integrands.abstract
+   utils.integrands.camel
    utils.integrands.gaussian
    utils.integrands.madgraph
    utils.integrands.pretty

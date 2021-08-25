@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>transforms module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,17 +38,17 @@
                 </a>
             </p>
             
-  <div class="section" id="module-zunis.models.flows.coupling_cells.transforms">
+  <section id="module-zunis.models.flows.coupling_cells.transforms">
 <span id="zunis-models-flows-coupling-cells-transforms-module"></span><h1>transforms module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.transforms" title="Permalink to this headline">¶</a></h1>
 <p>Abstract definition of invertible transforms for coupling cells</p>
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">InvertibleTransform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InvertibleTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
 <p>Callable invertible transform which calls self.forward or self.backward depending on self.inverse</p>
 <dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse">
-<code class="sig-name descname"><span class="pre">inverse</span></code><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse">
+<span class="sig-name descname"><span class="pre">inverse</span></span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.inverse" title="Permalink to this definition">¶</a></dt>
 <dd><p>whether calling the object will use the forward or backward transform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -59,8 +60,8 @@
 <p>Constructor for InvertibleTransform</p>
 <p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">backward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.backward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract backward transform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -80,8 +81,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.forward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract forward transform</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -101,8 +102,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert">
-<code class="sig-name descname"><span class="pre">invert</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert">
+<span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/transforms.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.transforms.InvertibleTransform.invert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flip the <code class="code docutils literal notranslate"><span class="pre">inverse</span></code> attribute</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -116,7 +117,7 @@
 
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -139,19 +140,19 @@
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
@@ -161,7 +162,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -227,7 +228,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -249,7 +250,7 @@
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

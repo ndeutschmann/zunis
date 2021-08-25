@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>invertible_sequential module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,33 +38,33 @@
                 </a>
             </p>
             
-  <div class="section" id="module-zunis.models.flows.sequential.invertible_sequential">
+  <section id="module-zunis.models.flows.sequential.invertible_sequential">
 <span id="zunis-models-flows-sequential-invertible-sequential-module"></span><h1>invertible_sequential module<a class="headerlink" href="#module-zunis.models.flows.sequential.invertible_sequential" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">InvertibleSequentialFlow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InvertibleSequentialFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
-<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow">
-<code class="sig-name descname"><span class="pre">flow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow">
+<span class="sig-name descname"><span class="pre">flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform the batch of points x  with shape (…,d)
 This is an abstract method that should be overriden</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert">
-<code class="sig-name descname"><span class="pre">invert</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert">
+<span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training">
-<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian">
-<code class="sig-name descname"><span class="pre">transform_and_compute_jacobian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian">
+<span class="sig-name descname"><span class="pre">transform_and_compute_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the flow transformation and its Jacobian simulatenously on
 xj with xj.shape == (…,d+1)</p>
 <p>This is an abstract method that should be overriden</p>
@@ -71,7 +72,7 @@ xj with xj.shape == (…,d+1)</p>
 
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -94,19 +95,19 @@ xj with xj.shape == (…,d+1)</p>
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
@@ -116,7 +117,7 @@ xj with xj.shape == (…,d+1)</p>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -179,7 +180,7 @@ xj with xj.shape == (…,d+1)</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -201,7 +202,7 @@ xj with xj.shape == (…,d+1)</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
