@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>utils.benchmark.vegas_benchmarks module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,31 +38,50 @@
                 </a>
             </p>
             
-  <div class="section" id="module-utils.benchmark.vegas_benchmarks">
+  <section id="module-utils.benchmark.vegas_benchmarks">
 <span id="utils-benchmark-vegas-benchmarks-module"></span><h1>utils.benchmark.vegas_benchmarks module<a class="headerlink" href="#module-utils.benchmark.vegas_benchmarks" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="utils.benchmark.vegas_benchmarks.VegasBenchmarker">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VegasBenchmarker</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.benchmark.vegas_benchmarks.VegasBenchmarker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">VegasBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
 <p>Benchmark by comparing with VEGAS</p>
 <dl class="py method">
-<dt id="utils.benchmark.vegas_benchmarks.VegasBenchmarker.benchmark_method">
-<code class="sig-name descname"><span class="pre">benchmark_method</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker.benchmark_method" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run a single benchmark evaluation of a given integrand</p>
+<dt class="sig sig-object py" id="utils.benchmark.vegas_benchmarks.VegasBenchmarker.benchmark_method">
+<span class="sig-name descname"><span class="pre">benchmark_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stratified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker.benchmark_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Benchmarking class for comparing with VEGAS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – </p></li>
+<li><p><strong>integrand</strong> (<a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><em>utils.integrands.abstract.Integrand</em></a>) – </p></li>
+<li><p><strong>integrator_config</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>integrand_params</strong> (<em>dict</em>) – </p></li>
+<li><p><strong>n_batch</strong> (<em>int</em>) – </p></li>
+<li><p><strong>keep_history</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="utils.benchmark.vegas_benchmarks.VegasBenchmarker">utils.benchmark.vegas_benchmarks.VegasBenchmarker</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.benchmark.vegas_benchmarks.VegasGridBenchmarker">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VegasGridBenchmarker</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasGridBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.benchmark.vegas_benchmarks.VegasGridBenchmarker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">VegasGridBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasGridBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.GridBenchmarker" title="utils.benchmark.benchmarker.GridBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.GridBenchmarker</span></code></a>, <a class="reference internal" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="utils.benchmark.vegas_benchmarks.VegasBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.vegas_benchmarks.VegasBenchmarker</span></code></a></p>
 <p>Benchmark against VEGAS by sampling parameters on a grid</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.benchmark.vegas_benchmarks.VegasRandomHPBenchmarker">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VegasRandomHPBenchmarker</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasRandomHPBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.benchmark.vegas_benchmarks.VegasRandomHPBenchmarker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">VegasRandomHPBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasRandomHPBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker" title="utils.benchmark.benchmarker.RandomHyperparameterBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.RandomHyperparameterBenchmarker</span></code></a>, <a class="reference internal" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="utils.benchmark.vegas_benchmarks.VegasBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.vegas_benchmarks.VegasBenchmarker</span></code></a></p>
 <p>Benchmark against VEGAS by sampling integrator hyperparameters randomly</p>
 <dl class="field-list simple">
@@ -72,13 +92,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">VegasSequentialBenchmarker</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">VegasSequentialBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/vegas_benchmarks.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.SequentialBenchmarker" title="utils.benchmark.benchmarker.SequentialBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.SequentialBenchmarker</span></code></a>, <a class="reference internal" href="#utils.benchmark.vegas_benchmarks.VegasBenchmarker" title="utils.benchmark.vegas_benchmarks.VegasBenchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.vegas_benchmarks.VegasBenchmarker</span></code></a></p>
 <p>Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets</p>
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -101,19 +121,19 @@
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
@@ -123,7 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -185,7 +205,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -207,7 +227,7 @@
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

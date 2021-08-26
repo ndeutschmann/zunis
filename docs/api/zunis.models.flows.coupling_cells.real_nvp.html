@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>real_nvp module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,31 +38,31 @@
                 </a>
             </p>
             
-  <div class="section" id="module-zunis.models.flows.coupling_cells.real_nvp">
+  <section id="module-zunis.models.flows.coupling_cells.real_nvp">
 <span id="zunis-models-flows-coupling-cells-real-nvp-module"></span><h1>real_nvp module<a class="headerlink" href="#module-zunis.models.flows.coupling_cells.real_nvp" title="Permalink to this headline">¶</a></h1>
 <p>Implementation of realNVP: a coupling cell with an affine transform</p>
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">ElementWiseAffineTransform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElementWiseAffineTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.transforms.html#zunis.models.flows.coupling_cells.transforms.InvertibleTransform" title="zunis.models.flows.coupling_cells.transforms.InvertibleTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.transforms.InvertibleTransform</span></code></a></p>
 <p>Invertible element-wise affine transform</p>
 <p>Constructor for InvertibleTransform</p>
 <p>No arguments, no returns, this is just encapsulation for a function and its inverse</p>
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward">
-<code class="sig-name descname"><span class="pre">backward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.backward" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.ElementWiseAffineTransform.forward" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">FakeRealNVP</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FakeRealNVP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP</span></code></a></p>
 <p>Fake real NVP with position independent affine parameters
 for basic debugging and training tests</p>
@@ -76,33 +77,33 @@ given some parameters.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training">
-<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeT">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">FakeT</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.FakeT">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FakeT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
 <p>Fake neural net for the test FakeRealNVP that returns a trainable constant</p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeT.forward">
-<code class="sig-name descname"><span class="pre">forward</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT.forward" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.FakeT.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT.forward" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.FakeT.training">
-<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT.training" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.FakeT.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.FakeT.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">GeneralRealNVP</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GeneralRealNVP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.coupling_cells.general_coupling.html#zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell" title="zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.general_coupling.InvertibleCouplingCell</span></code></a></p>
 <p>Coupling cell based on affine transforms without a specific parameter prediction function</p>
 <dl class="field-list simple">
@@ -116,15 +117,15 @@ given some parameters.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training">
-<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.RealNVP">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">RealNVP</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.RealNVP" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.RealNVP">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RealNVP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.RealNVP" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP" title="zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.coupling_cells.real_nvp.GeneralRealNVP</span></code></a></p>
 <p>Real non-volume-preserving coupling cell.</p>
 <p>This implements a bijective mapping R^d -&gt; R^d by transforming some subset of the coordinates
@@ -146,15 +147,15 @@ coordinates as input.</p>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.RealNVP.training">
-<code class="sig-name descname"><span class="pre">training</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.RealNVP.training" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.RealNVP.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.RealNVP.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.element_wise_affine">
-<code class="sig-name descname"><span class="pre">element_wise_affine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.element_wise_affine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.element_wise_affine">
+<span class="sig-name descname"><span class="pre">element_wise_affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.element_wise_affine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform x element-wise through an affine function y = exp(s)*x + t
 where s = st[…,0] and t = st[…,1] with s.shape == x.shape == t.shape</p>
 <p>The Jacobian for this transformation is the coordinate-wise product of the scaling factors
@@ -162,8 +163,8 @@ J = prod(es[…,i],i)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine">
-<code class="sig-name descname"><span class="pre">inverse_element_wise_affine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine">
+<span class="sig-name descname"><span class="pre">inverse_element_wise_affine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_jacobian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/coupling_cells/real_nvp.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.coupling_cells.real_nvp.inverse_element_wise_affine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform x element-wise through an affine function y = exp(-s)*(x - t)
 where s = st[…,0] and t = st[…,1] with s.shape == x.shape == t.shape
 This is the inverse of <code class="code docutils literal notranslate"><span class="pre">element_wise_affine</span></code> above for the same set of parameters st</p>
@@ -171,7 +172,7 @@ This is the inverse of <code class="code docutils literal notranslate"><span cla
 J = prod(es[…,i],i)</p>
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -194,19 +195,19 @@ J = prod(es[…,i],i)</p>
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="zunis.html">ZüNIS library</a></li>
@@ -216,7 +217,7 @@ J = prod(es[…,i],i)</p>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -282,7 +283,7 @@ J = prod(es[…,i],i)</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -304,7 +305,7 @@ J = prod(es[…,i],i)</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>utils.integrands.pretty module &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -37,20 +38,20 @@
                 </a>
             </p>
             
-  <div class="section" id="module-utils.integrands.pretty">
+  <section id="module-utils.integrands.pretty">
 <span id="utils-integrands-pretty-module"></span><h1>utils.integrands.pretty module<a class="headerlink" href="#module-utils.integrands.pretty" title="Permalink to this headline">¶</a></h1>
 <p>Pretty, low dimensional examples where we clearly beat VEGAS</p>
 <dl class="py class">
-<dt id="utils.integrands.pretty.CircleLineIntegrand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">CircleLineIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.CircleLineIntegrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.CircleLineIntegrand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CircleLineIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.CircleLineIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>Classic failure mode of VEGAS: function with an enhancement along
 a circle and a line on the diagonal, preventing a straightforward analytic
 change of variable</p>
 <p>This is a generalization with a n-sphere and maximal diagonal pattern</p>
 <dl class="py method">
-<dt id="utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand">
-<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand">
+<span class="sig-name descname"><span class="pre">evaluate_integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value function</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -68,8 +69,8 @@ change of variable</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.integrands.pretty.SineIntegrand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SineIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineIntegrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.SineIntegrand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SineIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>Sinusoidal function with a wave vector along the maximal hyperdiagonal</p>
 <dl class="field-list simple">
@@ -81,16 +82,16 @@ change of variable</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="utils.integrands.pretty.SineIntegrand.evaluate_integrand">
-<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.SineIntegrand.evaluate_integrand">
+<span class="sig-name descname"><span class="pre">evaluate_integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Define a wave vector k with the dimensionality of x and all entries 1 and return cst+cos(f*k.x)</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.integrands.pretty.SineLineIntegrand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">SineLineIntegrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineLineIntegrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.SineLineIntegrand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SineLineIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineLineIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>2D function enhanced on the graph y = sin(2*pi*f*x)</p>
 <dl class="field-list simple">
@@ -102,14 +103,14 @@ change of variable</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="utils.integrands.pretty.SineLineIntegrand.evaluate_integrand">
-<code class="sig-name descname"><span class="pre">evaluate_integrand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineLineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="utils.integrands.pretty.SineLineIntegrand.evaluate_integrand">
+<span class="sig-name descname"><span class="pre">evaluate_integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/pretty.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.pretty.SineLineIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the integrand as a gaussian whose argument is the characteristic equation of the graph</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
 
@@ -132,19 +133,19 @@ change of variable</p>
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docs.html">API Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api/zunis.html">ZüNIS library</a></li>
@@ -154,7 +155,7 @@ change of variable</p>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -216,7 +217,7 @@ change of variable</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -238,7 +239,7 @@ change of variable</p>
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

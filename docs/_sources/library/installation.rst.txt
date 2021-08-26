@@ -5,8 +5,13 @@ Installation
 Using `pip`
 ===============
 
-As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
-You can nevertheless install it with pip from this repository as follows:
+The library is available on PyPI:
+
+.. code-block:: bash
+
+    pip install zunis
+
+The latest version can be installed directly from GitHub:
 
 .. code-block:: bash
 
@@ -23,7 +28,7 @@ the easiest is to clone this repository directly and install the extended requir
     # Clone the repository
     git clone https://github.com/ndeutschmann/zunis.git ./zunis
     # Create a virtual environment (recommended)
-    python3.7 -m venv  zunis_venv
+    python3.8 -m venv  zunis_venv
     source ./zunis_venv/bin/activate
     pip install --upgrade pip
     # Install the requirements
