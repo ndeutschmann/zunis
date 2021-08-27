@@ -13,10 +13,14 @@ the limitations of existing tools.
 
 ### Using `pip`
 
-As the library is not yet fully mature, we have not released it to the Python Package Index (PyPI).
-You can nevertheless install it with pip from this repository as follows:
+The library is available on PyPI:
 ```bash
- pip install 'git+https://github.com/ndeutschmann/zunis#egg=zunis&subdirectory=zunis_lib'
+ pip install zunis 
+```
+
+The latest version can be installed directly from GitHub:
+```bash
+    pip install 'git+https://github.com/ndeutschmann/zunis#egg=zunis&subdirectory=zunis_lib'
 ```
 
 ### Setting up a development environment
@@ -40,9 +44,9 @@ python benchmark_hypersphere.py
 
 ## Library usage
 
-For basic uses, a RealNVP-based integrator is provided with default choices and can be created and used as follows:
+For basic applications, the integrator is provided with default choices and can be created and used as follows:
 
-```
+```python
 import torch
 from zunis.integration import Integrator
 
@@ -62,4 +66,4 @@ The function `f` is integrated over the `d`-dimensional unit hypercube and
 * takes `torch.Tensor` batched inputs with shape `(N,d)` for arbitrary batch size `N` on `device`
 * returns `torch.Tensor` batched inputs with shape `(N,)` for arbitrary batch size `N` on `device`
 
-A more systematic documentation is under construction [here](https://ndeutschmann.github.io/zunis).
+A more systematic documentation is under construction [here](https://zunis.readthedocs.io).

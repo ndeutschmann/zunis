@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -134,7 +134,7 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.CamelIntegrand">CamelIntegrand (class in utils.integrands.gaussian)</a>
+      <li><a href="benchmarks_api/utils.integrands.camel.html#utils.integrands.camel.CamelIntegrand">CamelIntegrand (class in utils.integrands.camel)</a>
 </li>
       <li><a href="api/zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow.cells">cells (RepeatedCellFlow attribute)</a>
 </li>
@@ -206,7 +206,9 @@
 </li>
       <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.empty_history">empty_history() (BaseIntegrator static method)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.epoch">epoch() (TrainingRecord property)</a>
+      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.epoch">epoch (TrainingRecord property)</a>
+</li>
+      <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.KnownGaussianIntegrand.erf">erf() (KnownGaussianIntegrand static method)</a>
 </li>
       <li><a href="benchmarks_api/utils.integral_validation.html#utils.integral_validation.evaluate_integral">evaluate_integral() (in module utils.integral_validation)</a>
 </li>
@@ -214,11 +216,13 @@
 </li>
       <li><a href="benchmarks_api/utils.integrator_integrals.html#utils.integrator_integrals.evaluate_integral_integrator">evaluate_integral_integrator() (in module utils.integrator_integrals)</a>
 </li>
+      <li><a href="benchmarks_api/utils.integral_validation.html#utils.integral_validation.evaluate_integral_stratified">evaluate_integral_stratified() (in module utils.integral_validation)</a>
+</li>
       <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.evaluate_integral_vegas">evaluate_integral_vegas() (in module utils.vegas_integrals)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.CamelIntegrand.evaluate_integrand">evaluate_integrand() (CamelIntegrand method)</a>
+      <li><a href="benchmarks_api/utils.integrands.camel.html#utils.integrands.camel.CamelIntegrand.evaluate_integrand">evaluate_integrand() (CamelIntegrand method)</a>
 
       <ul>
         <li><a href="benchmarks_api/utils.integrands.pretty.html#utils.integrands.pretty.CircleLineIntegrand.evaluate_integrand">(CircleLineIntegrand method)</a>
@@ -240,6 +244,8 @@
         <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.VolumeIntegrand.evaluate_integrand">(VolumeIntegrand method)</a>
 </li>
       </ul></li>
+      <li><a href="benchmarks_api/utils.known_integrals.html#utils.known_integrals.evaluate_known_integral">evaluate_known_integral() (in module utils.known_integrals)</a>
+</li>
       <li><a href="benchmarks_api/utils.record.html#utils.record.EvaluationRecord">EvaluationRecord (class in utils.record)</a>
 </li>
   </ul></td>
@@ -251,6 +257,8 @@
       <li><a href="api/zunis.models.flows.sampling.html#zunis.models.flows.sampling.FactorizedFlowSampler">FactorizedFlowSampler (class in zunis.models.flows.sampling)</a>
 </li>
       <li><a href="api/zunis.models.flows.sampling.html#zunis.models.flows.sampling.FactorizedGaussianSampler">FactorizedGaussianSampler (class in zunis.models.flows.sampling)</a>
+</li>
+      <li><a href="benchmarks_api/utils.known_integrals.html#utils.known_integrals.FakeKnownSampler">FakeKnownSampler (class in utils.known_integrals)</a>
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.real_nvp.html#zunis.models.flows.coupling_cells.real_nvp.FakeRealNVP">FakeRealNVP (class in zunis.models.flows.coupling_cells.real_nvp)</a>
 </li>
@@ -326,6 +334,8 @@
         <li><a href="api/zunis.models.utils.html#zunis.models.utils.Reshift.forward">(Reshift method)</a>
 </li>
       </ul></li>
+      <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.ForwardSurveySamplingIntegrator">ForwardSurveySamplingIntegrator (class in zunis.integration.adaptive_survey_integrator)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -387,8 +397,6 @@
       <li><a href="api/zunis.utils.config.loaders.html#zunis.utils.config.loaders.get_optim_from_config">get_optim_from_config() (in module zunis.utils.config.loaders)</a>
 </li>
       <li><a href="benchmarks_api/utils.repo_info.html#utils.repo_info.get_pipfreeze_hash">get_pipfreeze_hash() (in module utils.repo_info)</a>
-</li>
-      <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler.get_point">get_point() (VegasSampler method)</a>
 </li>
       <li><a href="benchmarks_api/utils.repo_info.html#utils.repo_info.get_repo">get_repo() (in module utils.repo_info)</a>
 </li>
@@ -463,17 +471,21 @@
       <ul>
         <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.HypersphereVolumeIntegrand.integral">(HypersphereVolumeIntegrand method)</a>
 </li>
+        <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.KnownGaussianIntegrand.integral">(KnownGaussianIntegrand method)</a>
+</li>
         <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand.integral">(KnownIntegrand method)</a>
+</li>
+        <li><a href="benchmarks_api/utils.integrands.camel.html#utils.integrands.camel.KnownSymmetricCamelIntegrand.integral">(KnownSymmetricCamelIntegrand method)</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.RegulatedHyperSphericalCamel.integral">(RegulatedHyperSphericalCamel method)</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedKnownIntegrand.integral">(RegulatedKnownIntegrand method)</a>
 </li>
       </ul></li>
-      <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.Integrand">Integrand (class in utils.integrands.abstract)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.Integrand">Integrand (class in utils.integrands.abstract)</a>
+</li>
       <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.integrate">integrate() (BaseIntegrator method)</a>
 
       <ul>
@@ -520,6 +532,8 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.KnownGaussianIntegrand">KnownGaussianIntegrand (class in utils.integrands.gaussian)</a>
+</li>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand">KnownIntegrand (class in utils.integrands.abstract)</a>
 </li>
       <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandBenchmarker">KnownIntegrandBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
@@ -529,6 +543,8 @@
       <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandGridBenchmarker">KnownIntegrandGridBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
 </li>
       <li><a href="benchmarks_api/utils.benchmark.known_integrand_benchmarks.html#utils.benchmark.known_integrand_benchmarks.KnownIntegrandRandomHPBenchmarker">KnownIntegrandRandomHPBenchmarker (class in utils.benchmark.known_integrand_benchmarks)</a>
+</li>
+      <li><a href="benchmarks_api/utils.integrands.camel.html#utils.integrands.camel.KnownSymmetricCamelIntegrand">KnownSymmetricCamelIntegrand (class in utils.integrands.camel)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -552,11 +568,11 @@
 </li>
       <li><a href="api/zunis.html#zunis.logger_training">logger_training (in module zunis)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.loss">loss() (TrainingRecord property)</a>
+      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.loss">loss (TrainingRecord property)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer.loss_map">loss_map (StatefulTrainer attribute)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.losses">losses() (TrainingRecord property)</a>
+      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.losses">losses (TrainingRecord property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -572,7 +588,7 @@
 </li>
       <li><a href="benchmarks_api/utils.integrals.html#utils.integrals.mean_std_integrand">mean_std_integrand() (in module utils.integrals)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">metrics() (TrainingRecord property)</a>
+      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">metrics (TrainingRecord property)</a>
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax">modified_softmax() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
 </li>
@@ -612,6 +628,8 @@
 </li>
         <li><a href="benchmarks_api/utils.integrands.abstract.html#module-utils.integrands.abstract">utils.integrands.abstract</a>
 </li>
+        <li><a href="benchmarks_api/utils.integrands.camel.html#module-utils.integrands.camel">utils.integrands.camel</a>
+</li>
         <li><a href="benchmarks_api/utils.integrands.gaussian.html#module-utils.integrands.gaussian">utils.integrands.gaussian</a>
 </li>
         <li><a href="benchmarks_api/utils.integrands.madgraph.html#module-utils.integrands.madgraph">utils.integrands.madgraph</a>
@@ -621,6 +639,8 @@
         <li><a href="benchmarks_api/utils.integrands.volume.html#module-utils.integrands.volume">utils.integrands.volume</a>
 </li>
         <li><a href="benchmarks_api/utils.integrator_integrals.html#module-utils.integrator_integrals">utils.integrator_integrals</a>
+</li>
+        <li><a href="benchmarks_api/utils.known_integrals.html#module-utils.known_integrals">utils.known_integrals</a>
 </li>
         <li><a href="benchmarks_api/utils.logging.html#module-utils.logging">utils.logging</a>
 </li>
@@ -845,10 +865,10 @@
 </li>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.RegulatedHyperSphericalCamel">RegulatedHyperSphericalCamel (class in utils.integrands.volume)</a>
 </li>
-      <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedIntegrand">RegulatedIntegrand (class in utils.integrands.abstract)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedIntegrand">RegulatedIntegrand (class in utils.integrands.abstract)</a>
+</li>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedKnownIntegrand">RegulatedKnownIntegrand (class in utils.integrands.abstract)</a>
 </li>
       <li><a href="api/zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow">RepeatedCellFlow (class in zunis.models.flows.sequential.repeated_cell)</a>
@@ -856,8 +876,6 @@
       <li><a href="benchmarks_api/utils.repo_info.html#utils.repo_info.repo_is_dirty">repo_is_dirty() (in module utils.repo_info)</a>
 </li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.reset">reset() (GenericTrainerAPI method)</a>
-</li>
-      <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler.reset_point_iterator">reset_point_iterator() (VegasSampler method)</a>
 </li>
       <li><a href="api/zunis.models.utils.html#zunis.models.utils.Reshift">Reshift (class in zunis.models.utils)</a>
 </li>
@@ -879,9 +897,11 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="benchmarks_api/utils.flat_integrals.html#utils.flat_integrals.FlatSampler.sample">sample() (FlatSampler method)</a>
+      <li><a href="benchmarks_api/utils.known_integrals.html#utils.known_integrals.FakeKnownSampler.sample">sample() (FakeKnownSampler method)</a>
 
       <ul>
+        <li><a href="benchmarks_api/utils.flat_integrals.html#utils.flat_integrals.FlatSampler.sample">(FlatSampler method)</a>
+</li>
         <li><a href="benchmarks_api/utils.integrator_integrals.html#utils.integrator_integrals.IntegratorSampler.sample">(IntegratorSampler method)</a>
 </li>
         <li><a href="benchmarks_api/utils.integral_validation.html#utils.integral_validation.Sampler.sample">(Sampler method)</a>
@@ -895,12 +915,16 @@
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.GenericTrainerAPI.sample_forward">(GenericTrainerAPI method)</a>
 </li>
       </ul></li>
+      <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler.sample_non_stratified">sample_non_stratified() (VegasSampler method)</a>
+</li>
       <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.sample_refine">sample_refine() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.sample_refine">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
+      <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler.sample_stratified">sample_stratified() (VegasSampler method)</a>
+</li>
       <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.sample_survey">sample_survey() (AdaptiveSurveyIntegrator method)</a>
 
       <ul>
@@ -927,10 +951,10 @@
 </li>
       <li><a href="benchmarks_api/utils.logging.html#utils.logging.set_benchmark_logger_debug">set_benchmark_logger_debug() (in module utils.logging)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_checkpoint">set_checkpoint() (BasicStatefulTrainer method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_checkpoint">set_checkpoint() (BasicStatefulTrainer method)</a>
+</li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.set_config">set_config() (BasicStatefulTrainer method)</a>
 
       <ul>
@@ -961,7 +985,7 @@
 </li>
       <li><a href="api/zunis.training.weighted_dataset.stateful_trainer.html#zunis.training.weighted_dataset.stateful_trainer.StatefulTrainer">StatefulTrainer (class in zunis.training.weighted_dataset.stateful_trainer)</a>
 </li>
-      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.step">step() (TrainingRecord property)</a>
+      <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.step">step (TrainingRecord property)</a>
 </li>
       <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.survey">survey() (BaseIntegrator method)</a>
 
@@ -976,10 +1000,12 @@
       <ul>
         <li><a href="api/zunis.integration.dkltrainer_integrator.html#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">(DKLAdaptiveSurveyIntegrator method)</a>
 </li>
+        <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.ForwardSurveySamplingIntegrator.survey_switch_condition">(ForwardSurveySamplingIntegrator method)</a>
+</li>
       </ul></li>
       <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI">SurveyRefineIntegratorAPI (class in zunis.integration.integratorAPI)</a>
 </li>
-      <li><a href="benchmarks_api/utils.integrands.gaussian.html#utils.integrands.gaussian.SymmetricCamelIntegrand">SymmetricCamelIntegrand (class in utils.integrands.gaussian)</a>
+      <li><a href="benchmarks_api/utils.integrands.camel.html#utils.integrands.camel.SymmetricCamelIntegrand">SymmetricCamelIntegrand (class in utils.integrands.camel)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1208,8 +1234,6 @@
         <li><a href="benchmarks_api/utils.integral_validation.html#module-utils.integral_validation">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     utils.integrals
 
@@ -1217,6 +1241,8 @@
         <li><a href="benchmarks_api/utils.integrals.html#module-utils.integrals">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     utils.integrands
 
@@ -1229,6 +1255,13 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.integrands.abstract.html#module-utils.integrands.abstract">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.integrands.camel
+
+      <ul>
+        <li><a href="benchmarks_api/utils.integrands.camel.html#module-utils.integrands.camel">module</a>
 </li>
       </ul></li>
       <li>
@@ -1264,6 +1297,13 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.integrator_integrals.html#module-utils.integrator_integrals">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.known_integrals
+
+      <ul>
+        <li><a href="benchmarks_api/utils.known_integrals.html#module-utils.known_integrals">module</a>
 </li>
       </ul></li>
       <li>
@@ -1766,25 +1806,25 @@
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="background/nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="background/training.html">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="docs.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
@@ -1823,7 +1863,7 @@
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -1845,7 +1885,7 @@
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

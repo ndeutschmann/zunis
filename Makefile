@@ -1,14 +1,15 @@
-.PHONY: clean data requirements doc static-doc docinstall serve
+.PHONY: clean data requirements doc static-doc docinstall serve build pypi-upload
 
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PROJECT_NAME = pytorch_flows
+PROJECT_NAME = zunis
 PYTHON_INTERPRETER = python
 DOC_DIR = docs/
 DOC_BUILD_DIR = doc_build/
+PROJECT_SRC = zunis_lib/
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -29,6 +30,7 @@ requirements:
 clean:
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
+	rm -rf dist zunis.egg-info
 
 ## Build automatic API documentation
 doc:
@@ -50,6 +52,12 @@ doc-install:
 
 serve:
 	$(MAKE) serve -C $(DOC_BUILD_DIR)
+
+build:
+	python setup.py sdist bdist_wheel
+
+pypi-upload:
+	python -m twine upload dist/*
 
 
 #################################################################################

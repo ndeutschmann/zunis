@@ -1,0 +1,2 @@
+include zunis_lib/zunis/utils/config/*.yaml
+include README.md

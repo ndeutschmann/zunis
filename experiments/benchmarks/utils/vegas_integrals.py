@@ -55,6 +55,9 @@ class VegasSampler(Sampler):
 
         gen = self.integrator.random_batch(yield_hcube=True)
         x, wx, hc = next(gen)
+        x = np.asarray(x).copy()
+        wx = np.asarray(wx).copy()
+        hc = np.asarray(hc).copy()
 
         for x_batch, wx_batch, hc_batch in gen:
             x_batch = np.asarray(x_batch).copy()

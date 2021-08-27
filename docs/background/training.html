@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Training Strategies &#8212; ZüNIS 0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon-v2.png"/>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -38,9 +39,9 @@
                 </a>
             </p>
             
-  <div class="section" id="training-strategies">
+  <section id="training-strategies">
 <h1>Training Strategies<a class="headerlink" href="#training-strategies" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="variance-loss">
+<section id="variance-loss">
 <h2>Variance Loss<a class="headerlink" href="#variance-loss" title="Permalink to this headline">¶</a></h2>
 <p>As defined in the <a class="reference internal" href="nis.html"><span class="doc">normalizing flows</span></a> section, our model consists of</p>
 <ol class="arabic simple">
@@ -58,7 +59,7 @@ the second term in the integral is independent of it and we can limit ourselves 
 \[{\cal L} = \int dx q(x) \left(\frac{f(x)}{q(x)}\right)^2.\]</div>
 <p>As an integral this is not a tractable loss function defined on a sample of points, we must build an estimator
 for it, and the multiple possibilities yield different ways of training the model</p>
-<div class="section" id="forward-training">
+<section id="forward-training">
 <h3>Forward Training<a class="headerlink" href="#forward-training" title="Permalink to this headline">¶</a></h3>
 <p>The most straightforward way to formulate an estimator for the loss <span class="math notranslate nohighlight">\({\cal L}\)</span> is to take it at face value
 as an expectation value over <span class="math notranslate nohighlight">\(q\)</span>:</p>
@@ -84,8 +85,8 @@ which is obtained by sampling in latent space and mapping them with our model.</
 </ol>
 <p>On the other hand, once a decent model has been learned, this approach ensures that most point being sampled
 are in the relevant regions where the function is enhanced, thus ensuring good end-time performance.</p>
-</div>
-<div class="section" id="backward-training">
+</section>
+<section id="backward-training">
 <h3>Backward Training<a class="headerlink" href="#backward-training" title="Permalink to this headline">¶</a></h3>
 <p>As a solution to the drawbacks of the forward training method, we formulate an alternative approach in which we reinterpret the loss integral. Let us consider a different PDF <span class="math notranslate nohighlight">\(p\)</span> over the target space, then</p>
 <div class="math notranslate nohighlight">
@@ -114,8 +115,8 @@ PDF on target space <span class="math notranslate nohighlight">\(p(x)\)</span> a
 meaning that the sample becomes progressively less representative of the distribution defined by the model.
 Nevertheless, as long as this distribution does not veer too far off the evolving model, it is likely to provide
 a good estimate of the ideal loss integral.</p>
-</div>
-<div class="section" id="adaptive-backward-training">
+</section>
+<section id="adaptive-backward-training">
 <h3>Adaptive Backward Training<a class="headerlink" href="#adaptive-backward-training" title="Permalink to this headline">¶</a></h3>
 <p>The description of the two possible PDFs used for sampling point datasets for backward training should make it clear
 that there is a “best of both worlds” options: use uniform sampling at the beginning of training, where the model
@@ -128,9 +129,9 @@ that we would obtain replacing our model by a uniform model:</p>
 \hat{\cal L}_\text{backward}^\text{flat model} &amp;= \frac{1}{N} \sum_{i=0}^N f(x_i)^2\end{split}\]</div>
 <p>If the actual loss is smaller than this quantity, then our model does a better job than the flat distribution
 at estimating the integral and we therefore switch sampling mode.</p>
-</div>
-</div>
-<div class="section" id="kullback-leibler-distance-loss">
+</section>
+</section>
+<section id="kullback-leibler-distance-loss">
 <h2>Kullback-Leibler Distance Loss<a class="headerlink" href="#kullback-leibler-distance-loss" title="Permalink to this headline">¶</a></h2>
 <p>A commonly used loss for normalizing flows is the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback-Leiber divergence</a> (<span class="math notranslate nohighlight">\(D_\text{KL}\)</span>), which is an
 information-theoretic distance measure between probability distribution. For two PDFs <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>,
@@ -159,8 +160,8 @@ on an estimator defined on a sample of point: we can define forward training by 
 or backward training by sampling in target space using an arbitrary PDF. Adaptive backward training can of course
 also be realized, all the more easier since the switching condition corresponds to testing the sign of the loss:
 if the model were a flat distribution, it would have unit PDF and therefore 0 loss.</p>
-</div>
-</div>
+</section>
+</section>
 
 
 
@@ -189,25 +190,25 @@ if the model were a flat distribution, it would have unit PDF and therefore 0 lo
 
 <hr id="mobileanchor">
 
-<p class="caption"><span class="caption-text">Library</span></p>
+<p class="caption" role="heading"><span class="caption-text">Library</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../library/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/basic-example.html">Basic example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../library/tutorial.html">Tutorials</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Background</span></p>
+<p class="caption" role="heading"><span class="caption-text">Background</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="nis.html">Neural Importance Sampling</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Training strategies</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Documentation</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs.html">API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Module Hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Symbol Index</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Info</span></p>
+<p class="caption" role="heading"><span class="caption-text">Info</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
@@ -259,7 +260,7 @@ if the model were a flat distribution, it would have unit PDF and therefore 0 lo
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -281,7 +282,7 @@ if the model were a flat distribution, it would have unit PDF and therefore 0 lo
       
       
       
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

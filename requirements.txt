@@ -80,4 +80,4 @@ widgetsnbextension==3.5.1
 torchps @ git+https://github.com/NGoetz/TorchPS
 
 # Editable Zunis install
--e ./zunis_lib
+-e .
