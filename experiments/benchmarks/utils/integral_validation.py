@@ -102,7 +102,7 @@ def evaluate_integral_stratified(integrand, sampler, n_batch=10000, keep_history
         var_hc = np.var(fx[idx] / px)
         variance += var_hc
 
-    unc = sqrt(variance.item())
+    unc = sqrt(variance.item()/n_batch)
 
     logger.info(f"Estimated result: {integral:.2e}+/-{unc:.2e}")
     result = EvaluationRecord(
