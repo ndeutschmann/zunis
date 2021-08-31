@@ -1,44 +1,50 @@
+"""Comparing ZuNIS to VEGAS on camel integrals"""
 import click
 
+from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker
 from utils.command_line_tools import PythonLiteralOption
-from utils.benchmark import run_benchmark_grid_known_integrand
-from utils.integrands.volume import RegulatedHyperSphericalCamel
 from utils.config.loaders import get_sql_types
-from zunis.utils.config.loaders import get_default_integrator_config
+from utils.integrands.volume import RegulatedSymmetricHyperSphericalCamel
 
 
-def hypercamel_benchmark(dimensions=(2, 4, 6, 8), rs=(0.25,), regs=(1.e-6,), debug=True, cuda=0):
-    base_integrand_params = {
-        "r1": 0.25,
-        "r2": 0.25,
-        "reg": 1.e-6
-    }
-    integrands_params_grid = {
-        "r1": rs,
-        "r2": rs,
-        "reg": regs
-    }
-
-    base_integrator_config = get_default_integrator_config()
+def benchmark_hypercamel(dimensions=None, radii=None, db=None,
+                         experiment_name=None, debug=None, cuda=None, keep_history=None,
+                         config=None,
+                         n_search=10,
+                         stratified=False):
     dtypes = get_sql_types()
 
-    if debug:
-        base_integrator_config["n_epochs"] = 1
-        base_integrator_config["n_iter"] = 1
+    # Integrand specific defaults
+    base_integrand_params = {
+        "r": 0.3,
+    }
 
-    run_benchmark_grid_known_integrand(dimensions=dimensions, integrand=RegulatedHyperSphericalCamel,
-                                       base_integrand_params=base_integrand_params,
-                                       base_integrator_config=base_integrator_config,
-                                       integrand_params_grid=integrands_params_grid, integrator_config_grid=None,
-                                       n_batch=100000, debug=debug, cuda=cuda, sql_dtypes=dtypes,
-                                       dbname="benchmarks-debug.db", experiment_name="hypercamel")
+    benchmarker = VegasRandomHPBenchmarker(n=n_search, stratified=stratified)
+
+    benchmark_config = benchmarker.set_benchmark_grid_config(config=config, dimensions=dimensions,
+                                                             keep_history=keep_history,
+                                                             dbname=db, experiment_name=experiment_name, cuda=cuda,
+                                                             debug=debug,
+                                                             base_integrand_params=base_integrand_params)
+
+    # Integrand specific CLI argument mapped to standard API
+    if radii is not None:
+        benchmark_config["integrand_params_grid"]["r"] = radii
+
+    benchmarker.run(integrand=RegulatedSymmetricHyperSphericalCamel, sql_dtypes=dtypes,
+                    **benchmark_config)
 
 
-cli = click.Command("cli", callback=hypercamel_benchmark, params=[
-    PythonLiteralOption(["--dimensions"], default=[2]),
-    PythonLiteralOption(["--fracs"], default=[0.3, 0.5, 0.7]),
-    click.Option(["--debug/--no-debug"], default=True),
-    click.Option(["--cuda"], default=0, type=int)
+cli = click.Command("cli", callback=benchmark_hypercamel, params=[
+    PythonLiteralOption(["--dimensions"], default=None),
+    PythonLiteralOption(["--radii"], default=None),
+    click.Option(["--debug/--no-debug"], default=None, type=bool),
+    click.Option(["--cuda"], default=None, type=int),
+    click.Option(["--db"], default=None, type=str),
+    click.Option(["--experiment_name"], default=None, type=str),
+    click.Option(["--config"], default=None, type=str),
+    click.Option(["--n_search"], default=10, type=int),
+    click.Option(["--stratified"], is_flag=True)
 ])
 
 if __name__ == '__main__':
