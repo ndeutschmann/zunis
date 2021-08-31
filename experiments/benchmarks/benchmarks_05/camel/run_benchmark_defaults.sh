@@ -5,6 +5,7 @@ sleep 3; python benchmark_camel.py --config benchmarks_05/camel/camel_4d_default
 sleep 3; python benchmark_camel.py --config benchmarks_05/camel/camel_8d_defaults.yaml --cuda=2 --n_search=10 --stratified&
 sleep 3; python benchmark_camel.py --config benchmarks_05/camel/camel_16d_defaults.yaml --cuda=3 --n_search=10 --stratified&
 sleep 3; python benchmark_camel.py --config benchmarks_05/camel/camel_32d_defaults.yaml --cuda=4 --n_search=10 --stratified&
+sleep 3; python benchmark_camel.py --config benchmarks_05/camel/camel_32d_histat_defaults.yaml --cuda=5 --n_search=10 --stratified&
 
 # wait until all child processes terminate
 wait
