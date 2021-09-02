@@ -94,7 +94,7 @@ class VegasBenchmarker(Benchmarker):
             try:
                 with open(vegas_checkpoint_path, "xb") as vegas_checkpoint_file:
                     pickle.dump(vintegrator, vegas_checkpoint_file)
-            except "FileExistsError" as e:
+            except FileExistsError as e:
                 logger.error("Error while saving VEGAS checkpoint: File exists")
                 logger.error(vegas_checkpoint_path)
                 logger.error(e)
@@ -117,7 +117,7 @@ class VegasBenchmarker(Benchmarker):
             result_vs_exact = compare_integral_result(integrator_result, exact_result, sigma_cutoff=3)
 
         target_keys = ['target', 'target_std', 'sigma_cutoff', 'sigmas_off', 'percent_difference', 'variance_ratio',
-                       'match']
+                       'match', 'target_unweighting_eff', 'unweighting_eff_ratio']
 
         for key in target_keys:
             result_vs_flat["flat_" + key] = result_vs_flat.pop(key)
@@ -125,7 +125,7 @@ class VegasBenchmarker(Benchmarker):
             if isinstance(f, KnownIntegrand):
                 result_vs_exact["exact_" + key] = result_vs_exact.pop(key)
 
-        common_keys = ["value", "value_std"]
+        common_keys = ["value", "value_std", 'value_unweighting_eff']
 
         for key in common_keys:
             result_vs_vegas.pop(key)
