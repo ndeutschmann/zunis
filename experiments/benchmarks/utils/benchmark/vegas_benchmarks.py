@@ -4,10 +4,11 @@ import pickle
 import torch
 import vegas
 import datetime
+import numpy as np
 from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
-    SequentialBenchmarker
+    SequentialBenchmarker, GridBenchmarkerN, SequentialBenchmarkerN
 from zunis.utils.config.loaders import get_default_integrator_config, create_integrator_args
 from utils.flat_integrals import evaluate_integral_flat
 from utils.integral_validation import compare_integral_result
@@ -44,6 +45,7 @@ class VegasBenchmarker(Benchmarker):
         -------
             utils.benchmark.vegas_benchmarks.VegasBenchmarker
         """
+
         logger.debug("=" * 72)
         logger.info("Defining integrand")
         if integrand_params is None:
@@ -57,6 +59,7 @@ class VegasBenchmarker(Benchmarker):
             integrator_config = get_default_integrator_config()
         integrator_args = create_integrator_args(integrator_config)
         integrator = Integrator(f=f, d=d, device=device, **integrator_args)
+
         vintegrator = vegas.Integrator([[0, 1]] * d)
 
         # Preparing VEGAS arguments
@@ -98,6 +101,7 @@ class VegasBenchmarker(Benchmarker):
                 logger.error("Error while saving VEGAS checkpoint: File exists")
                 logger.error(vegas_checkpoint_path)
                 logger.error(e)
+
 
         flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
 
@@ -144,9 +148,68 @@ class VegasBenchmarker(Benchmarker):
         result.update(integrand_params)
 
         result["d"] = d
+
         result["time_zunis"] = (end_time_zunis - start_time_zunis).total_seconds()
         result["time_vegas"] = (end_time_vegas - start_time_vegas).total_seconds()
         result["stratified"] = self.stratified
+
+        zunis_relerr=1
+        vegas_relerr=1
+        batches=1
+        continuer=True
+        time_zunis=datetime.datetime.utcnow()
+        error_zunis_sum=0
+        zunis01_found=False
+        zunis001_found=False
+        error_vegas_sum=0
+        vegas01_found=False
+        vegas001_found=False
+        while(continuer):
+            result_zunis_relerr=evaluate_integral_integrator(f, integrator, n_batch=batches*5000, train=False, keep_history=keep_history)
+            error_zunis_sum+=(1/result_zunis_relerr["value_std"]**2)
+            zunis_relerr=np.sqrt(1/error_zunis_sum)/result["value"]
+            logger.info(zunis_relerr)
+            if(zunis_relerr<0.1 and not zunis01_found):
+                result["time_zunis_01"]=(datetime.datetime.utcnow()-time_zunis).total_seconds()
+                zunis01_found=True
+                batches=10
+                logger.info("Zunis 0.1")
+            elif(zunis_relerr<0.01 and not zunis001_found):
+                result["time_zunis_001"]=(datetime.datetime.utcnow()-time_zunis).total_seconds()
+                zunis001_found=True
+                batches=100
+                logger.info("Zunis 0.01")
+            elif(zunis_relerr<0.001):
+                result["time_zunis_0001"]=(datetime.datetime.utcnow()-time_zunis).total_seconds()
+                continuer=False
+                logger.info("Zunis 0.001")
+        batches=1
+        time_vegas=datetime.datetime.utcnow()
+        continuer=True
+        while(continuer):
+            result_vegas_relerr=evaluate_integral_vegas(vf, vintegrator, n_batch=batches*15000,n_batch_survey=0, train=False)
+            error_vegas_sum+=(1/result_vegas_relerr["value_std"]**2)
+            vegas_relerr=np.sqrt(1/error_vegas_sum)/result["value"]
+            logger.info(vegas_relerr)
+            if(vegas_relerr<0.1 and not vegas01_found):
+                result["time_vegas_01"]=(datetime.datetime.utcnow()-time_vegas).total_seconds()
+                vegas01_found=True
+                batches=10
+                logger.info("Vegas 0.1")
+            elif(vegas_relerr<0.01 and not vegas001_found):
+                result["time_vegas_001"]=(datetime.datetime.utcnow()-time_vegas).total_seconds()
+                vegas001_found=True
+                batches=100
+                logger.info("Vegas 0.01")
+            elif(vegas_relerr<0.001):
+                result["time_vegas_0001"]=(datetime.datetime.utcnow()-time_vegas).total_seconds()
+                continuer=False
+                logger.info("Vegas 0.001")
+        
+    
+        #idea: add the evaluation routine here. then I could set it up the same way as before, let it run and write on the paper meanwhile.
+        #problem: is the training saved?->apparently how to do the fixed precision integration?
+
 
         return result, integrator
 
@@ -154,7 +217,9 @@ class VegasBenchmarker(Benchmarker):
 class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling parameters on a grid"""
 
-
+class VegasGridBenchmarkerN(GridBenchmarkerN, VegasBenchmarker):
+    """Benchmark against VEGAS by sampling parameters on a grid"""
+    
 class VegasRandomHPBenchmarker(RandomHyperparameterBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling integrator hyperparameters randomly"""
 
@@ -165,3 +230,7 @@ class VegasRandomHPBenchmarker(RandomHyperparameterBenchmarker, VegasBenchmarker
 
 class VegasSequentialBenchmarker(SequentialBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets"""
+    
+
+class VegasSequentialBenchmarkerN(SequentialBenchmarkerN, VegasBenchmarker):
+    """Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets n times"""
