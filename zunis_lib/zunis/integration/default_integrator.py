@@ -4,7 +4,7 @@ import logging
 
 from .flat_survey_integrator import FlatSurveySamplingIntegrator
 from .dkltrainer_integrator import DKLAdaptiveSurveyIntegrator
-from .adaptive_survey_integrator import ForwardSurveySamplingIntegrator
+from .adaptive_survey_integrator import ForwardSurveySamplingIntegrator, VarianceAdaptiveSurveyIntegrator
 
 from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
 
@@ -26,7 +26,8 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
     d: int
         dimensionality of the integration space
     survey_strategy: str
-        how points are sampled during the survey step: one of `'flat'`, `'forward'`, `'adaptive_dkl'`
+        how points are sampled during the survey step: one of `'flat'`, `'forward'`, `'adaptive_dkl'`, `'adaptive_variance'`,
+        `'forward_flat_init'`
     n_iter: int
         general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set
     n_iter_survey: int
@@ -94,6 +95,16 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                            n_points_refine=n_points_refine, use_survey=use_survey,
                                            device=device, verbosity=verbosity,
                                            trainer_verbosity=trainer_verbosity)
+
+    if survey_strategy == "adaptive_variance":
+        if trainer is None:
+            assert loss == "variance", "The adaptive variance strategy must be used with the variance loss"
+        return VarianceAdaptiveSurveyIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
+                                                n_iter_refine=n_iter_refine,
+                                                n_points=n_points, n_points_survey=n_points_survey,
+                                                n_points_refine=n_points_refine, use_survey=use_survey,
+                                                device=device, verbosity=verbosity,
+                                                trainer_verbosity=trainer_verbosity)
 
     if survey_strategy == 'forward':
         return ForwardSurveySamplingIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
