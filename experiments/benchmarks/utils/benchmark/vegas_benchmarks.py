@@ -182,3 +182,11 @@ class VegasSequentialBenchmarker(SequentialBenchmarker, VegasBenchmarker):
     def __init__(self, n_repeat=1, stratified=False, benchmark_time=False):
         SequentialBenchmarker.__init__(self, n_repeat=n_repeat)
         VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
+
+
+class VegasSequentialIntegratorBenchmarker(SequentialIntegratorBenchmarker, VegasBenchmarker):
+    """Benchmark against VEGAS by testing on a sequence of integrator configurations"""
+
+    def __init__(self, n_repeat=1, stratified=False, benchmark_time=False):
+        SequentialIntegratorBenchmarker.__init__(self, n_repeat=n_repeat)
+        VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
