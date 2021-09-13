@@ -8,7 +8,7 @@ import numpy as np
 from dictwrapper import NestedMapping
 
 from utils.benchmark.benchmarker import Benchmarker, GridBenchmarker, RandomHyperparameterBenchmarker, \
-    SequentialBenchmarker, GridBenchmarkerN, SequentialBenchmarkerN
+    SequentialBenchmarker, SequentialIntegratorBenchmarker
 from utils.benchmark.benchmark_time import run_time_benchmark
 from zunis.utils.config.loaders import get_default_integrator_config, create_integrator_args
 from utils.flat_integrals import evaluate_integral_flat
@@ -104,7 +104,6 @@ class VegasBenchmarker(Benchmarker):
                 logger.error(vegas_checkpoint_path)
                 logger.error(e)
 
-
         flat_result = evaluate_integral_flat(f, d, n_batch=n_batch, device=device)
 
         if isinstance(f, KnownIntegrand):
@@ -155,7 +154,7 @@ class VegasBenchmarker(Benchmarker):
         result["time_vegas"] = (end_time_vegas - start_time_vegas).total_seconds()
         result["stratified"] = self.stratified
 
-        if(self.benchmark_time):
+        if (self.benchmark_time):
             result = run_time_benchmark(f, vf, integrator, vintegrator, result)
 
         return result, integrator
@@ -164,34 +163,30 @@ class VegasBenchmarker(Benchmarker):
 class VegasGridBenchmarker(GridBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling parameters on a grid"""
 
-    def __init__(self, stratified=False, benchmark_time=False):
+    def __init__(self, n_repeat=1, stratified=False, benchmark_time=False):
+        GridBenchmarker.__init__(self, n_repeat=n_repeat)
         VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
 
-class VegasGridBenchmarkerN(GridBenchmarkerN, VegasBenchmarker):
-    """Benchmark against VEGAS by sampling parameters on a grid"""
-
-    def __init__(self, n=5, stratified=False, benchmark_time=False):
-        GridBenchmarkerN.__init__(self, n=n)
-        VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
 
 class VegasRandomHPBenchmarker(RandomHyperparameterBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by sampling integrator hyperparameters randomly"""
 
-    def __init__(self, n=5, stratified=False, benchmark_time=False):
-        RandomHyperparameterBenchmarker.__init__(self, n=n)
+    def __init__(self, n=5, n_repeat=1, stratified=False, benchmark_time=False):
+        RandomHyperparameterBenchmarker.__init__(self, n_samples=n, n_repeat=n_repeat)
         VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
 
 
 class VegasSequentialBenchmarker(SequentialBenchmarker, VegasBenchmarker):
     """Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets"""
 
-    def __init__(self, n=5, stratified=False, benchmark_time=False):
+    def __init__(self, n_repeat=1, stratified=False, benchmark_time=False):
+        SequentialBenchmarker.__init__(self, n_repeat=n_repeat)
         VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
 
 
-class VegasSequentialBenchmarkerN(SequentialBenchmarkerN, VegasBenchmarker):
-    """Benchmark against VEGAS by testing on a sequence of (dimension, integrand, integrator) triplets n times"""
+class VegasSequentialIntegratorBenchmarker(SequentialIntegratorBenchmarker, VegasBenchmarker):
+    """Benchmark against VEGAS by testing on a sequence of integrator configurations"""
 
-    def __init__(self, n=5, stratified=False, benchmark_time=False):
-        SequentialBenchmarkerN.__init__(self, n=n)
+    def __init__(self, n_repeat=1, stratified=False, benchmark_time=False):
+        SequentialIntegratorBenchmarker.__init__(self, n_repeat=n_repeat)
         VegasBenchmarker.__init__(self, stratified=stratified, benchmark_time=benchmark_time)
