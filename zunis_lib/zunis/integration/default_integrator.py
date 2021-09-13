@@ -5,6 +5,7 @@ import logging
 from .flat_survey_integrator import FlatSurveySamplingIntegrator
 from .dkltrainer_integrator import DKLAdaptiveSurveyIntegrator
 from .adaptive_survey_integrator import ForwardSurveySamplingIntegrator, VarianceAdaptiveSurveyIntegrator
+from .fixed_sample_integrator import FixedSampleSurveyIntegrator
 
 from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
 
@@ -124,5 +125,13 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                                trainer_verbosity=trainer_verbosity,
                                                sample_flat_once=True)
 
+    if survey_strategy == 'fixed_sample':
+        return FixedSampleSurveyIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
+                                           n_iter_refine=n_iter_refine,
+                                           n_points=n_points, n_points_survey=n_points_survey,
+                                           n_points_refine=n_points_refine, use_survey=use_survey,
+                                           device=device, verbosity=verbosity,
+                                           trainer_verbosity=trainer_verbosity)
+
     raise ValueError("""No valid survey strategy was provided. Allowed strategies are:
-     ['flat', 'adaptive_dkl', 'forward', 'forward_flat_init']""")
+     ['flat', 'adaptive_dkl', 'adaptive_variance', 'forward', 'forward_flat_init']""")
