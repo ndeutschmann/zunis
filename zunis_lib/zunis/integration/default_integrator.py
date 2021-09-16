@@ -28,7 +28,7 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
         dimensionality of the integration space
     survey_strategy: str
         how points are sampled during the survey step: one of `'flat'`, `'forward'`, `'adaptive_dkl'`, `'adaptive_variance'`,
-        `'forward_flat_init'`
+        `'forward_flat_init'`, `'fixed_sample'`
     n_iter: int
         general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set
     n_iter_survey: int
