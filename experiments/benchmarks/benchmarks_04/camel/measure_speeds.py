@@ -37,7 +37,6 @@ def get_df():
 
     df = read_pkl_sql(db_path, "camel_defaults", dtypes=dtypes)
     df.columns = df.columns.astype(str)
-    df = df.loc[df.lr == 1.e-3]
     d_sigmas = pd.read_csv(sigma_info)
     d_sigma_camel = d_sigmas[['d', 'sigma_camel', 'sigma_1d', 'relative_std_camel']].rename(columns=
     {
