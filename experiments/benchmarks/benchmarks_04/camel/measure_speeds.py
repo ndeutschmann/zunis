@@ -62,7 +62,8 @@ def create_integrators(row, device=None):
     integrator.model_trainer.flow.load_state_dict(ckpt)
 
     ckpt_vegas = benchmarks / (row['checkpoint_path'] + '.vegas')
-    vintegrator = pickle.load(ckpt_vegas)
+    with open(ckpt_vegas, 'rb') as ckpt_vegas_file:
+        vintegrator = pickle.load(ckpt_vegas_file)
 
     return integrator, vintegrator
 
@@ -76,19 +77,22 @@ def evaluate_integrator(integrator, f, npoints_max=1000000, npoints_min=100, n_s
     for n in spacers[how](npoints_min, npoints_max, n_splits, dtype=np.int):
         for rep in range(n_repeat):
             with torch.no_grad():
-                start = time.time()
-                _, px, fx = integrator.sample(f=f, n_batch=n)
-                end = time.time()
-                mean, std = torch.std_mean(fx / px)
-                mean = mean.cpu().item()
-                std = std.cpu().item() / np.sqrt(n)
-                data = data.append(
+                try:
+                    start = time.time()
+                    _, px, fx = integrator.sample(f=f, n_batch=n)
+                    end = time.time()
+                    mean, std = torch.std_mean(fx / px)
+                    mean = mean.cpu().item()
+                    std = std.cpu().item() / np.sqrt(n)
+                    data = data.append(
                     {'n_points': n,
                      'mean': mean,
                      'std': std,
                      'sample_time': end - start},
                     ignore_index=True
-                )
+                    )
+                except Exception:
+                    pass
 
     return data
 
@@ -108,7 +112,7 @@ def evaluate_row(row, npoints_max=1000000, npoints_min=100, n_splits=10, n_repea
     data['relative_std'] = row['relative_std']
     data['integrator'] = 'ZuNIS'
 
-    vegas_integrator = VegasSampler(vintegrator, train=False, stratified=False)
+    vegas_integrator = VegasSampler(vintegrator, integrand=None, train=False, stratified=False)
     datav = evaluate_integrator(vegas_integrator, f=vf, npoints_max=npoints_max, npoints_min=npoints_min,
                                 n_splits=n_splits,
                                 n_repeat=n_repeat, how=how)
