@@ -59,7 +59,8 @@ def repo_is_dirty(repo=None):
 def get_dirt_hash(repo=None):
     """Get a SHA1 hash of all sources of dirt (modified tracked files).
     Explicitly, we collect all such files, hash their contents one by one, concatenate all hashes and
-    hash them again (to avoid loading many large files in memory)
+    hash them again (to avoid loading many large files in memory).
+    If a file was deleted, its filenamed is hashed
 
     Parameters
     ----------
@@ -81,8 +82,11 @@ def get_dirt_hash(repo=None):
         return hashes
 
     for changed_file in changed_files:
-        with open(os.path.join(repo.working_dir, changed_file), "rb") as cf:
-            hashes += sha1(cf.read()).digest()
+        try:
+            with open(os.path.join(repo.working_dir, changed_file), "rb") as cf:
+                hashes += sha1(cf.read()).digest()
+        except FileNotFoundError:
+            hashes += sha1(str(changed_file).encode('utf-8')).digest()
 
     return sha1(hashes).hexdigest()
 
