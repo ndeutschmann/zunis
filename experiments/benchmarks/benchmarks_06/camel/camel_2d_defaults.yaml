@@ -1,0 +1,10 @@
+base_integrator_config: {checkpoint_on_cuda: false, n_points_survey: 100000, n_epochs: 10, minibatch_size: 10000}
+dbname: benchmarks_06/benchmarks.db
+debug: false
+dimensions: [2]
+experiment_name: camel_defaults
+integrand_params_grid:
+  s: [0.2208376154313601]
+integrator_config_grid:
+  n_epochs: [1, 2, 4, 5, 10, 20, 40, 50]
+keep_history: true
