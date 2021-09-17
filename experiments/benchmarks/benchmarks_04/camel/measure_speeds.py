@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import torch
 import time
+import pickle
 
 from pathlib import Path
 
@@ -11,6 +12,12 @@ from sqlalchemy import PickleType
 from zunis.utils.config.loaders import get_default_integrator_config
 from zunis.utils.config.loaders import create_integrator_args
 from zunis.integration import Integrator
+
+from utils.data_storage.dataframe2sql import read_pkl_sql
+from utils.config.loaders import get_sql_types
+from utils.integrands.camel import KnownSymmetricCamelIntegrand
+from utils.vegas_integrals import VegasSampler
+from utils.integrator_integrals import IntegratorSampler
 
 here = Path(__file__).parent.resolve()
 benchmarks_04 = here.parent
@@ -21,9 +28,6 @@ experiments = benchmarks.parent
 
 sys.path.append(str(benchmarks))
 
-from utils.data_storage.dataframe2sql import read_pkl_sql
-from utils.config.loaders import get_sql_types
-from utils.integrands.camel import KnownSymmetricCamelIntegrand
 
 def get_df():
     sigma_info = experiments / 'exploration' / 'gaussian_camel_integrands.csv'
@@ -45,7 +49,7 @@ def get_df():
     return df
 
 
-def create_integrator(row, device=None):
+def create_integrators(row, device=None):
     d = row['d']
     s = row['s']
     f = KnownSymmetricCamelIntegrand(d=d, s=s, device=device)
@@ -57,10 +61,14 @@ def create_integrator(row, device=None):
 
     ckpt = torch.load(benchmarks / row['checkpoint_path'])
     integrator.model_trainer.flow.load_state_dict(ckpt)
-    return integrator
+
+    ckpt_vegas = benchmarks / (row['checkpoint_path'] + '.vegas')
+    vintegrator = pickle.load(ckpt_vegas)
+
+    return integrator, vintegrator
 
 
-def evaluate_integrator(integrator, npoints_max=1000000, npoints_min=100, n_splits=10, n_repeat=10, how='geom'):
+def evaluate_integrator(integrator, f, npoints_max=1000000, npoints_min=100, n_splits=10, n_repeat=10, how='geom'):
     spacers = {
         'geom': np.geomspace,
         'lin': np.linspace
@@ -70,7 +78,7 @@ def evaluate_integrator(integrator, npoints_max=1000000, npoints_min=100, n_spli
         for rep in range(n_repeat):
             with torch.no_grad():
                 start = time.time()
-                _, px, fx = integrator.sample_refine(n_points=n)
+                _, px, fx = integrator.sample(f=f, n_batch=n)
                 end = time.time()
                 mean, std = torch.std_mean(fx / px)
                 mean = mean.cpu().item()
@@ -87,14 +95,31 @@ def evaluate_integrator(integrator, npoints_max=1000000, npoints_min=100, n_spli
 
 
 def evaluate_row(row, npoints_max=1000000, npoints_min=100, n_splits=10, n_repeat=10, how='geom', device=None):
-    integrator = create_integrator(row, device=device)
-    data = evaluate_integrator(integrator, npoints_max=npoints_max, npoints_min=npoints_min, n_splits=n_splits, n_repeat=n_repeat, how=how)
+    zintegrator, vintegrator = create_integrators(row, device=device)
+    f = zintegrator.f
+    vf = f.vegas(device=device)
+
+    zunis_integrator = IntegratorSampler(zintegrator, train=False)
+    data = evaluate_integrator(zunis_integrator, f=f, npoints_max=npoints_max, npoints_min=npoints_min,
+                               n_splits=n_splits,
+                               n_repeat=n_repeat, how=how)
     data['d'] = row['d']
     data['s'] = row['s']
     data['sigma_1d'] = row['sigma_1d']
     data['relative_std'] = row['relative_std']
+    data['integrator'] = 'ZuNIS'
 
-    return data
+    vegas_integrator = VegasSampler(vintegrator, train=False, stratified=False)
+    datav = evaluate_integrator(vegas_integrator, f=vf, npoints_max=npoints_max, npoints_min=npoints_min,
+                                n_splits=n_splits,
+                                n_repeat=n_repeat, how=how)
+    datav['d'] = row['d']
+    datav['s'] = row['s']
+    datav['sigma_1d'] = row['sigma_1d']
+    datav['relative_std'] = row['relative_std']
+    datav['integrator'] = 'VEGAS'
+
+    return data.append(datav, ignore_index=True)
 
 
 def evaluate_benchmarks(npoints_max=1000000, npoints_min=100, n_splits=10, n_repeat=10, how='geom', device=None):
