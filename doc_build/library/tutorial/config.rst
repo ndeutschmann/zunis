@@ -47,7 +47,11 @@ flows, the number of bins. It is also possible to choose either a `checkerboard`
 should be used.
 
 For the purpose of training, either a `variance` or `dkl` loss can be specified.
-For the DKL loss, it is possible to also request the survey strategy `adaptive_dkl`.
+Next to the default `flat` survey strategy, there exists also the `forward` and
+`forward_flat_int` survey strategy. For fixed samples, the `fixed_sample` survey
+strategy creates a :doc:`Fixed Sample Integrator </api/zunis.integration.fixed_sample_integrator>`.
+Specific for variance/DKL loss,
+a survey strategy `adaptive_variance`/`adaptive_dkl` is provided.
 `n_iter` refers to the number of iterations, whereas `n_points_survey` defines the
 number of points used per iteration for the survey stage; the same can be defined
 for the refine stage too.

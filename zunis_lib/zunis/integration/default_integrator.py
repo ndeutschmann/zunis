@@ -134,4 +134,4 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                            trainer_verbosity=trainer_verbosity)
 
     raise ValueError("""No valid survey strategy was provided. Allowed strategies are:
-     ['flat', 'adaptive_dkl', 'adaptive_variance', 'forward', 'forward_flat_init']""")
+     ['flat', 'adaptive_dkl', 'adaptive_variance', 'forward', 'forward_flat_init', 'fixed_sample']""")

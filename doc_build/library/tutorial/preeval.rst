@@ -6,6 +6,8 @@ useful when fine-tuning integration parameters for a function that is very costl
 
 The functionality for using pre-evaluated samples are provided by the
 :doc:`Fixed Sample Integrator </api/zunis.integration.fixed_sample_integrator>`.
+This integrator is accessible when using config files by choosing the survey strategy
+`fixed_sample`.
 
 Starting from the basic example, on can train on a sample defined as a
 PyTorch tensor:
