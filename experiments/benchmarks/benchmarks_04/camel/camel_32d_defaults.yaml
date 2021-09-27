@@ -1,0 +1,9 @@
+base_integrator_config: {checkpoint_on_cuda: false, n_points_survey: 100000, n_epochs: 10, minibatch_size: 10000,
+                         checkpoint_path: 'benchmarks_04/camel/camel32d.ckpt'}
+dbname: benchmarks_04/benchmarks.db
+debug: false
+dimensions: [32]
+experiment_name: camel_defaults
+integrand_params_grid:
+  s: [0.8252345025534282]
+keep_history: true

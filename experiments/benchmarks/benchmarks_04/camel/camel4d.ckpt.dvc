@@ -1,0 +1,4 @@
+outs:
+- md5: 8f875f4e3638fff276f4f6ac8fbe4cd7
+  size: 17595999
+  path: camel4d.ckpt

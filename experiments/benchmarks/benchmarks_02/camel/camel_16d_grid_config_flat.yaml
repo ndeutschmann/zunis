@@ -1,0 +1,20 @@
+base_integrator_config: {checkpoint_on_cuda: false, masking: iflow, minibatch_size: 20000,
+  n_bins: 50, n_epochs: 50, n_iter: 10, n_points_survey: 100000, repetitions: 1, survey_strategy: flat}
+dbname: benchmarks_02/benchmarks.db
+debug: false
+dimensions: [16]
+experiment_name: camel_scan
+integrand_params_grid:
+  s: [0.3612551242100517, 0.4638981074100002, 0.6672297418113383, 0.9111722409726692,
+    1.177343547343976, 1.5140506625162429, 2.072325110434781]
+integrator_config_grid:
+  d_hidden: [64, 128, 256, 512]
+  flow: [pwlinear, pwquad]
+  loss: [variance, dkl]
+  lr: [1.e-2, 1.e-3, 1.e-4, 1.e-5]
+  masking: [iflow, checkerboard]
+  n_bins: [2, 10, 50]
+  n_epochs: [2, 10, 50]
+  n_hidden: [2, 4, 8]
+  minibatch_size: [100, 1000, 10000]
+keep_history: true

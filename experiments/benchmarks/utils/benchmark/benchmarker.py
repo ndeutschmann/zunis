@@ -325,8 +325,13 @@ class SequentialIntegratorBenchmarker(Benchmarker):
         """
 
         grid_lengths = list(set([len(param) for param in integrator_grid.values()]))
-        assert len(grid_lengths) == 1, "All integrator paremeter lists must have the same length"
-        grid_length = grid_lengths[0]
+        # We use max to account for the possibility of an empty grid
+        assert max(1, len(grid_lengths)) == 1, "All integrator parameter lists must have the same length"
+        try:
+            grid_length = grid_lengths[0]
+        except IndexError:
+            # If no grid, use 1 to evaluate the default configuration once
+            grid_length = 1
 
         integrand_grid_keys = integrand_grid.keys()
         integrand_grid_values = integrand_grid.values()

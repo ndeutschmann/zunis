@@ -1,0 +1,4 @@
+outs:
+- md5: 017f91b65bc75d3bfe8dccbdaea6e226
+  size: 259476
+  path: camel32d.ckpt.vegas
