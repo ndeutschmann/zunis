@@ -15,8 +15,7 @@ PyTorch tensor:
 .. code-block:: python
 
   import torch
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cuda")
 
@@ -25,8 +24,7 @@ PyTorch tensor:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
+  integrator =  Integrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
   n_points = 100
   # Uniformly sampled points
@@ -57,8 +55,7 @@ batch of the same structure:
 
   import torch
   import pickle
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cuda")
 
@@ -67,8 +64,7 @@ batch of the same structure:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device="cuda")
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
+  integrator =  FixedSampleSurveyIntegrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
   data_x=[[0,4],[1,3],[2,2],[3,1],[4,0]]
   data_px=[1.0,1.0,1.0,1.0,1.0]
@@ -100,15 +96,13 @@ following way:
 
   import torch
   import numpy as np
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import  Integrator
 
   device = torch.device("cuda")
 
   d = 2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
+  integrator =  FixedSampleSurveyIntegrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
 
   integrator.set_sample_csv("sample.csv",device="cuda",dtype=np.float32)
