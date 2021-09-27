@@ -5,16 +5,17 @@ import logging
 from .flat_survey_integrator import FlatSurveySamplingIntegrator
 from .dkltrainer_integrator import DKLAdaptiveSurveyIntegrator
 from .adaptive_survey_integrator import ForwardSurveySamplingIntegrator, VarianceAdaptiveSurveyIntegrator
+from .fixed_sample_integrator import FixedSampleSurveyIntegrator
 
 from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
 
 logger = logging.getLogger(__name__)
 
 
-def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_iter_refine=None,
+def Integrator(f, d, survey_strategy="forward_flat_init", n_iter=10, n_iter_survey=None, n_iter_refine=None,
                n_points=100000, n_points_survey=None, n_points_refine=None, use_survey=False,
                device=torch.device("cpu"), verbosity=None, trainer_verbosity=None,
-               loss="variance", flow="pwlinear", trainer=None, trainer_options=None, flow_options=None):
+               loss="dkl", flow="pwquad", trainer=None, trainer_options=None, flow_options=None):
     """High level integration API
 
     This is a factory method that instantiates the relevant Integrator subclass based on the options
@@ -27,7 +28,7 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
         dimensionality of the integration space
     survey_strategy: str
         how points are sampled during the survey step: one of `'flat'`, `'forward'`, `'adaptive_dkl'`, `'adaptive_variance'`,
-        `'forward_flat_init'`
+        `'forward_flat_init'`, `'fixed_sample'`
     n_iter: int
         general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set
     n_iter_survey: int
@@ -124,5 +125,13 @@ def Integrator(f, d, survey_strategy="flat", n_iter=10, n_iter_survey=None, n_it
                                                trainer_verbosity=trainer_verbosity,
                                                sample_flat_once=True)
 
+    if survey_strategy == 'fixed_sample':
+        return FixedSampleSurveyIntegrator(f=f, trainer=trainer, d=d, n_iter=n_iter, n_iter_survey=n_iter_survey,
+                                           n_iter_refine=n_iter_refine,
+                                           n_points=n_points, n_points_survey=n_points_survey,
+                                           n_points_refine=n_points_refine, use_survey=use_survey,
+                                           device=device, verbosity=verbosity,
+                                           trainer_verbosity=trainer_verbosity)
+
     raise ValueError("""No valid survey strategy was provided. Allowed strategies are:
-     ['flat', 'adaptive_dkl', 'forward', 'forward_flat_init']""")
+     ['flat', 'adaptive_dkl', 'adaptive_variance', 'forward', 'forward_flat_init', 'fixed_sample']""")
