@@ -1,0 +1,7 @@
+define ud=u d
+define udx=u~ d~
+define v = a z
+
+generate e- mu- > e- mu-/a g
+output standalone fortran_output_emu
+launch -f
