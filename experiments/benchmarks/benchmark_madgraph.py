@@ -2,7 +2,7 @@
 import click
 import sys
 
-from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker, VegasGridBenchmarkerN, VegasSequentialBenchmarkerN
+from utils.benchmark.vegas_benchmarks import VegasRandomHPBenchmarker, VegasGridBenchmarker, VegasSequentialBenchmarker
 from utils.command_line_tools import PythonLiteralOption
 from utils.config.loaders import get_sql_types
 from utils.integrands.madgraph import CrossSection
@@ -26,7 +26,7 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         "lhapdf_dir":""
     }
 
-    benchmarker = VegasRandomHPBenchmarker(n=n_search, stratified=stratified,benchmark_time=benchmark_time)
+    benchmarker = VegasSequentialBenchmarker(n_repeat=n_search, stratified=stratified,benchmark_time=benchmark_time)
 
     benchmark_config = benchmarker.set_benchmark_grid_config(config=config,dimensions=1, #will be overwritten
                                                              keep_history=keep_history,
