@@ -14,6 +14,7 @@ utils.benchmark package
 .. toctree::
    :maxdepth: 1
 
+   utils.benchmark.benchmark_time
    utils.benchmark.benchmarker
    utils.benchmark.known_integrand_benchmarks
    utils.benchmark.vegas_benchmarks
