@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="utils.benchmark.known_integrand_benchmarks module" href="utils.benchmark.known_integrand_benchmarks.html" />
-    <link rel="prev" title="utils.benchmark package" href="utils.benchmark.html" />
+    <link rel="prev" title="utils.benchmark.benchmark_time module" href="utils.benchmark.benchmark_time.html" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -42,8 +42,8 @@
 <span id="utils-benchmark-benchmarker-module"></span><h1>utils.benchmark.benchmarker module<a class="headerlink" href="#module-utils.benchmark.benchmarker" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.Benchmarker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Benchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">better_abc.ABC</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Benchmarker</span></span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.Benchmarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Benchmarker class used to run benchmarks of our integrator comparing to others and perform parameter scans</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.Benchmarker.benchmark_method">
@@ -114,9 +114,14 @@ a value of <code class="code docutils literal notranslate"><span class="pre">par
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.GridBenchmarker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GridBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.GridBenchmarker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GridBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.GridBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
-<p>Benchmark by sampling configurations like a grid</p>
+<p>Benchmark by sampling configurations like a grid. Can repeat each configurations multiple times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Optional: How often the grid is sampled.</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.GridBenchmarker.generate_config_samples">
 <span class="sig-name descname"><span class="pre">generate_config_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand_grid</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.GridBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
@@ -139,12 +144,16 @@ a value of <code class="code docutils literal notranslate"><span class="pre">par
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.RandomHyperparameterBenchmarker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RandomHyperparameterBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">RandomHyperparameterBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.RandomHyperparameterBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
-<p>Benchmark by sampling integrator configurations randomly, a fixed number of times</p>
+<p>Benchmark by sampling integrator configurations randomly, a fixed number of times.
+Can repeat each configurations multiple times</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>n_attempts</strong> (<em>int</em>) – Number of random integrator configurations to draw</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_samples</strong> (<em>int</em>) – Number of random integrator configurations to draw</p></li>
+<li><p><strong>n_repeat</strong> (<em>int</em>) – Optional: How often the grid is sampled.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -169,12 +178,18 @@ a value of <code class="code docutils literal notranslate"><span class="pre">par
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.SequentialBenchmarker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SequentialBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialBenchmarker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SequentialBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
 <p>Benchmark by going through a list of integrands and matching integrator configurations
 (as opposed to scanning through parameters for either).</p>
 <p>This is intended for benchmarking integrands on “optimal configurations” found through previous
-hyper parameter searching.</p>
+hyper parameter searching.
+Can repeat each configurations multiple times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Optional: How often the grid is sampled.</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.SequentialBenchmarker.generate_config_samples">
 <span class="sig-name descname"><span class="pre">generate_config_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand_grid</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
@@ -211,10 +226,16 @@ hyper parameter searching.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.SequentialIntegratorBenchmarker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SequentialIntegratorBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SequentialIntegratorBenchmarker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_repeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.benchmark.benchmarker.Benchmarker" title="utils.benchmark.benchmarker.Benchmarker"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.benchmark.benchmarker.Benchmarker</span></code></a></p>
 <p>Benchmark by going through a list of full integrator configurations (as opposed to going through parameters
-in the configuration independently) and scan over a grid of possible integrands</p>
+in the configuration independently) and scan over a grid of possible integrands.
+Can repeat each configurations multiple times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Optional: How often the grid is sampled.</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.benchmark.benchmarker.SequentialIntegratorBenchmarker.generate_config_samples">
 <span class="sig-name descname"><span class="pre">generate_config_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrator_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integrand_grid</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/benchmark/benchmarker.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.benchmark.benchmarker.SequentialIntegratorBenchmarker.generate_config_samples" title="Permalink to this definition">¶</a></dt>
@@ -327,6 +348,9 @@ in the configuration independently) and scan over a grid of possible integrands<
 <!--    <ul>-->
         
         
+        <li><a href="utils.benchmark.benchmark_time.html"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;benchmark_time module</a></li>
+        
+        
         
         <li><a href="utils.benchmark.known_integrand_benchmarks.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;known_integrand_benchmarks module</a></li>
         
@@ -340,7 +364,7 @@ in the configuration independently) and scan over a grid of possible integrands<
   <li><a href="../docs.html">API Documentation</a><ul>
   <li><a href="utils.html">utils package</a><ul>
   <li><a href="utils.benchmark.html">utils.benchmark package</a><ul>
-      <li>Previous: <a href="utils.benchmark.html" title="previous chapter">utils.benchmark package</a></li>
+      <li>Previous: <a href="utils.benchmark.benchmark_time.html" title="previous chapter">utils.benchmark.benchmark_time module</a></li>
       <li>Next: <a href="utils.benchmark.known_integrand_benchmarks.html" title="next chapter">utils.benchmark.known_integrand_benchmarks module</a></li>
   </ul></li>
   </ul></li>

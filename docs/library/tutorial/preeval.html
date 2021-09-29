@@ -43,12 +43,13 @@
 <p>ZüNIS provides integrators which use pre-evaluated samples. This is especially
 useful when fine-tuning integration parameters for a function that is very costly to evaluate.</p>
 <p>The functionality for using pre-evaluated samples are provided by the
-<a class="reference internal" href="../../api/zunis.integration.fixed_sample_integrator.html"><span class="doc">Fixed Sample Integrator</span></a>.</p>
+<a class="reference internal" href="../../api/zunis.integration.fixed_sample_integrator.html"><span class="doc">Fixed Sample Integrator</span></a>.
+This integrator is accessible when using config files by choosing the survey strategy
+<code class="code docutils literal notranslate"><span class="pre">fixed_sample</span></code>.</p>
 <p>Starting from the basic example, on can train on a sample defined as a
 PyTorch tensor:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
-<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 
@@ -57,8 +58,7 @@ PyTorch tensor:</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">Integrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># Uniformly sampled points</span>
@@ -85,8 +85,7 @@ values, respectively of shapes <code class="code docutils literal notranslate"><
 batch of the same structure:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
-<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
-<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span> <span class="n">Integrator</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 
@@ -95,8 +94,7 @@ batch of the same structure:</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">data_x</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
 <span class="n">data_px</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
@@ -124,15 +122,13 @@ For the above example, the <code class="code docutils literal notranslate"><span
 following way:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">zunis.integration.fixed_sample_integrator</span> <span class="kn">import</span>  <span class="n">FixedSampleSurveyIntegrator</span>
-<span class="kn">from</span> <span class="nn">zunis.training.weighted_dataset.stateful_trainer</span> <span class="kn">import</span> <span class="n">StatefulTrainer</span>
+<span class="kn">from</span> <span class="nn">zunis.integration</span> <span class="kn">import</span>  <span class="n">Integrator</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">StatefulTrainer</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;variance&quot;</span><span class="p">,</span> <span class="n">flow</span><span class="o">=</span><span class="s2">&quot;pwquad&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">trainer</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 
 <span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_csv</span><span class="p">(</span><span class="s2">&quot;sample.csv&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>

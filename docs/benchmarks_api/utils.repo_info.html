@@ -46,7 +46,8 @@
 <span class="sig-name descname"><span class="pre">get_dirt_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/repo_info.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.repo_info.get_dirt_hash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a SHA1 hash of all sources of dirt (modified tracked files).
 Explicitly, we collect all such files, hash their contents one by one, concatenate all hashes and
-hash them again (to avoid loading many large files in memory)</p>
+hash them again (to avoid loading many large files in memory).
+If a file was deleted, its filenamed is hashed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>repo</strong> – </p>

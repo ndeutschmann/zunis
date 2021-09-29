@@ -152,10 +152,14 @@
 </li>
       <li><a href="benchmarks_api/utils.record.html#utils.record.ComparisonRecord">ComparisonRecord (class in utils.record)</a>
 </li>
+      <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.compute_flat_variance_loss">compute_flat_variance_loss() (VarianceAdaptiveSurveyIntegrator method)</a>
+</li>
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.compute_loss_no_grad">compute_loss_no_grad() (BasicTrainer method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="benchmarks_api/utils.integrals.html#utils.integrals.compute_mc_statistics">compute_mc_statistics() (in module utils.integrals)</a>
+</li>
       <li><a href="api/zunis.utils.config.configuration.html#zunis.utils.config.configuration.Configuration">Configuration (class in zunis.utils.config.configuration)</a>
 </li>
       <li><a href="api/zunis.models.generators.html#zunis.models.generators.create_checkerboard_hypercube_realnvp">create_checkerboard_hypercube_realnvp() (in module zunis.models.generators)</a>
@@ -586,8 +590,6 @@
 </li>
       <li><a href="api/zunis.models.flows.masking.html#zunis.models.flows.masking.maximal_masking_strategy">maximal_masking_strategy() (in module zunis.models.flows.masking)</a>
 </li>
-      <li><a href="benchmarks_api/utils.integrals.html#utils.integrals.mean_std_integrand">mean_std_integrand() (in module utils.integrals)</a>
-</li>
       <li><a href="api/zunis.training.weighted_dataset.training_record.html#zunis.training.weighted_dataset.training_record.TrainingRecord.metrics">metrics (TrainingRecord property)</a>
 </li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic.modified_softmax">modified_softmax() (in module zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_quadratic)</a>
@@ -599,6 +601,8 @@
         <li><a href="benchmarks_api/utils.html#module-utils">utils</a>
 </li>
         <li><a href="benchmarks_api/utils.benchmark.html#module-utils.benchmark">utils.benchmark</a>
+</li>
+        <li><a href="benchmarks_api/utils.benchmark.benchmark_time.html#module-utils.benchmark.benchmark_time">utils.benchmark.benchmark_time</a>
 </li>
         <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#module-utils.benchmark.benchmarker">utils.benchmark.benchmarker</a>
 </li>
@@ -815,20 +819,22 @@
         <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicTrainer.process_loss">(BasicTrainer method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.process_refine_step">process_refine_step() (BaseIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_refine_step">(SurveyRefineIntegratorAPI method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator.process_survey_step">process_survey_step() (AdaptiveSurveyIntegrator method)</a>
 
       <ul>
         <li><a href="api/zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator.process_survey_step">(BaseIntegrator method)</a>
 </li>
         <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI.process_survey_step">(SurveyRefineIntegratorAPI method)</a>
+</li>
+        <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.process_survey_step">(VarianceAdaptiveSurveyIntegrator method)</a>
 </li>
       </ul></li>
       <li><a href="api/zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.html#zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear.PWLinearCoupling">PWLinearCoupling (class in zunis.models.flows.coupling_cells.piecewise_coupling.piecewise_linear)</a>
@@ -865,11 +871,13 @@
 </li>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.RegulatedHyperSphericalCamel">RegulatedHyperSphericalCamel (class in utils.integrands.volume)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedIntegrand">RegulatedIntegrand (class in utils.integrands.abstract)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.RegulatedKnownIntegrand">RegulatedKnownIntegrand (class in utils.integrands.abstract)</a>
+</li>
+      <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.RegulatedSymmetricHyperSphericalCamel">RegulatedSymmetricHyperSphericalCamel (class in utils.integrands.volume)</a>
 </li>
       <li><a href="api/zunis.models.flows.sequential.repeated_cell.html#zunis.models.flows.sequential.repeated_cell.RepeatedCellFlow">RepeatedCellFlow (class in zunis.models.flows.sequential.repeated_cell)</a>
 </li>
@@ -884,6 +892,8 @@
       <li><a href="api/zunis.training.weighted_dataset.weighted_dataset_trainer.html#zunis.training.weighted_dataset.weighted_dataset_trainer.BasicStatefulTrainer.restore_checkpoint_except">restore_checkpoint_except() (BasicStatefulTrainer method)</a>
 </li>
       <li><a href="benchmarks_api/utils.benchmark.benchmarker.html#utils.benchmark.benchmarker.Benchmarker.run">run() (Benchmarker method)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.benchmark_time.html#utils.benchmark.benchmark_time.run_time_benchmark">run_time_benchmark() (in module utils.benchmark.benchmark_time)</a>
 </li>
       <li><a href="api/zunis.models.flows.analytic_flows.analytic_flow.html#zunis.models.flows.analytic_flows.analytic_flow.InvertibleAnalyticFlow.runs_forward">runs_forward() (InvertibleAnalyticFlow method)</a>
 
@@ -1001,6 +1011,8 @@
         <li><a href="api/zunis.integration.dkltrainer_integrator.html#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">(DKLAdaptiveSurveyIntegrator method)</a>
 </li>
         <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.ForwardSurveySamplingIntegrator.survey_switch_condition">(ForwardSurveySamplingIntegrator method)</a>
+</li>
+        <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.survey_switch_condition">(VarianceAdaptiveSurveyIntegrator method)</a>
 </li>
       </ul></li>
       <li><a href="api/zunis.integration.integratorAPI.html#zunis.integration.integratorAPI.SurveyRefineIntegratorAPI">SurveyRefineIntegratorAPI (class in zunis.integration.integratorAPI)</a>
@@ -1155,6 +1167,13 @@
 
       <ul>
         <li><a href="benchmarks_api/utils.benchmark.html#module-utils.benchmark">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.benchmark.benchmark_time
+
+      <ul>
+        <li><a href="benchmarks_api/utils.benchmark.benchmark_time.html#module-utils.benchmark.benchmark_time">module</a>
 </li>
       </ul></li>
       <li>
@@ -1360,6 +1379,8 @@
 </li>
       <li><a href="benchmarks_api/utils.flat_integrals.html#utils.flat_integrals.validate_known_integrand_flat">validate_known_integrand_flat() (in module utils.flat_integrals)</a>
 </li>
+      <li><a href="api/zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator">VarianceAdaptiveSurveyIntegrator (class in zunis.integration.adaptive_survey_integrator)</a>
+</li>
       <li><a href="benchmarks_api/utils.integrands.abstract.html#utils.integrands.abstract.Integrand.vegas">vegas() (Integrand method)</a>
 </li>
       <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasBenchmarker">VegasBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
@@ -1373,6 +1394,8 @@
       <li><a href="benchmarks_api/utils.vegas_integrals.html#utils.vegas_integrals.VegasSampler">VegasSampler (class in utils.vegas_integrals)</a>
 </li>
       <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasSequentialBenchmarker">VegasSequentialBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
+</li>
+      <li><a href="benchmarks_api/utils.benchmark.vegas_benchmarks.html#utils.benchmark.vegas_benchmarks.VegasSequentialIntegratorBenchmarker">VegasSequentialIntegratorBenchmarker (class in utils.benchmark.vegas_benchmarks)</a>
 </li>
       <li><a href="benchmarks_api/utils.integrands.volume.html#utils.integrands.volume.VolumeIntegrand">VolumeIntegrand (class in utils.integrands.volume)</a>
 </li>

@@ -127,6 +127,51 @@ and using the model</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">VarianceAdaptiveSurveyIntegrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
+<p>Survey/Refine adaptive integrator based on the variance loss.
+The integrator estimates the variance of a flat integrator and switches to forward sampling if
+the flow performs significantly (2 sigma) better.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<em>function</em>) – the function to integrate</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – general number of iterations - ignored for survey/refine if n_iter_survey/n_inter_refine is set</p></li>
+<li><p><strong>n_iter_survey</strong> (<em>int</em>) – number of iterations for the survey stage</p></li>
+<li><p><strong>n_iter_refine</strong> (<em>int</em>) – number of iterations for the refine stage</p></li>
+<li><p><strong>n_points</strong> – general number of points per iteration - ignored for survey/refine if n_points_survey/n_points_refine is set</p></li>
+<li><p><strong>n_points_survey</strong> (<em>int</em>) – number of points per iteration for the survey stage</p></li>
+<li><p><strong>n_points_refine</strong> (<em>int</em>) – number of points per iteration for the refine stage</p></li>
+<li><p><strong>use_survey</strong> (<em>bool</em>) – whether to use the points generated during the survey to compute the final integral
+not recommended due to uncontrolled correlations in error estimates</p></li>
+<li><p><strong>verbosity</strong> (<em>int</em>) – verbosity level of the integrator</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.compute_flat_variance_loss">
+<span class="sig-name descname"><span class="pre">compute_flat_variance_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fx</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.compute_flat_variance_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the variance loss and its standard deviation assuming points are sampled from a flat distribution
+We clip the loss standard deviation to loss/4 so that the switching condition can be met</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.process_survey_step">
+<span class="sig-name descname"><span class="pre">process_survey_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_record</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.process_survey_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the result of a survey step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.survey_switch_condition">
+<span class="sig-name descname"><span class="pre">survey_switch_condition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/adaptive_survey_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.adaptive_survey_integrator.VarianceAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean valued method that checks if it is time to switch between sampling uniformly
+and using the model</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
