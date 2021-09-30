@@ -24,14 +24,14 @@ PyTorch tensor:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  integrator =  Integrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
   n_points = 100
   # Uniformly sampled points
   x = torch.rand(n_points,d,device=device)
   # x.shape = (n_points,d)
 
-  px = torch.ones(n_points)
+  px = torch.ones(n_points, device=device)
   # px.shape = (n_points,)
 
   # Function values
@@ -64,7 +64,7 @@ batch of the same structure:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  integrator =  FixedSampleSurveyIntegrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
   data_x=[[0,4],[1,3],[2,2],[3,1],[4,0]]
   data_px=[1.0,1.0,1.0,1.0,1.0]
@@ -102,7 +102,7 @@ following way:
 
   d = 2
 
-  integrator =  FixedSampleSurveyIntegrator(f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=5)
 
 
   integrator.set_sample_csv("sample.csv",device="cuda",dtype=np.float32)
