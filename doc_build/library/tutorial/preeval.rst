@@ -6,6 +6,8 @@ useful when fine-tuning integration parameters for a function that is very costl
 
 The functionality for using pre-evaluated samples are provided by the
 :doc:`Fixed Sample Integrator </api/zunis.integration.fixed_sample_integrator>`.
+This integrator is accessible when using config files by choosing the survey strategy
+`fixed_sample`.
 
 Starting from the basic example, on can train on a sample defined as a
 PyTorch tensor:
@@ -13,8 +15,7 @@ PyTorch tensor:
 .. code-block:: python
 
   import torch
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cuda")
 
@@ -22,6 +23,7 @@ PyTorch tensor:
 
   def f(x):
       return x[:,0]**2 + x[:,1]**2
+
 
   trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
   integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=1000)
@@ -55,8 +57,7 @@ batch of the same structure:
 
   import torch
   import pickle
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cpu")
 
@@ -67,7 +68,6 @@ batch of the same structure:
 
   trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
   integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=1000)
-
 
   data_x = torch.rand(1000,d,device=device)
   #[[0.2093, 0.9918],[0.3216, 0.6965],[0.0625, 0.5634],...]
@@ -100,12 +100,12 @@ following way:
 
   import torch
   import numpy as np
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import  Integrator
 
   device = torch.device("cuda")
 
   d = 2
+
 
   trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
   integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=1000)

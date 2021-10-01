@@ -1,0 +1,4 @@
+outs:
+- md5: 8ce6709dcf2a293232452b59b7028d78
+  size: 56078983
+  path: camel32d.ckpt

@@ -1,0 +1,12 @@
+base_integrator_config: {checkpoint_on_cuda: false, n_points_survey: 100000, n_epochs: 10, minibatch_size: 10000}
+dbname: benchmarks_03/benchmarks.db
+debug: false
+dimensions: [32]
+experiment_name: camel_defaults
+integrand_params_grid:
+  s: [0.5064488351347225, 0.6063733994961127, 0.8252345025534282, 1.103869259356668,
+    1.4145795702932562, 1.811148822306666, 2.4718215436766178]
+integrator_config_grid:
+  loss: [variance, variance, variance, dkl, dkl, dkl]
+  survey_strategy: [flat, adaptive_variance, forward, flat, adaptive_dkl, forward]
+keep_history: true
