@@ -2,19 +2,19 @@ flow: pwquad
 flow_options:
   cell_params:
     d_hidden: 256
-    n_bins: 10
+    n_bins: 20
     n_hidden: 8
   masking: iflow
   masking_options:
     repetitions: 2
-loss: variance
+loss: dkl
 n_points_survey: 10000
 survey_strategy: "adaptive_dkl"
 n_iter: 10
 trainer_options:
   minibatch_size: 1.0
   max_reloads: 0
-  n_epochs: 50
+  n_epochs: 20
   optim:
     optim_cls: Adam
     optim_config:
@@ -22,7 +22,7 @@ trainer_options:
       - 0.9
       - 0.999
       eps: 1.0e-08
-      lr: 0.001
+      lr: 0.0001
   checkpoint: True
   checkpoint_on_cuda: True
   checkpoint_path: null

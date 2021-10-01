@@ -19,7 +19,8 @@ class VegasSampler(Sampler):
         self.integrand = integrand
         self.n_batch = n_batch
         self.stratified = stratified
-        max_nhcube = None if stratified else 1
+        # 1e9 is the default value for stratified sampling in VEGAS
+        max_nhcube = int(1e9) if stratified else 1
 
         self.integrator.set(neval=n_batch, max_nhcube=max_nhcube)
 
@@ -36,7 +37,7 @@ class VegasSampler(Sampler):
         n_batch: int
             maximum number of function evaluations per survey step
         """
-        max_nhcube = None if self.stratified else 1
+        max_nhcube = int(1e9) if self.stratified else 1
         self.integrator(self.integrand, nitn=n_survey_steps, neval=n_batch, max_nhcube=max_nhcube)
         # integrating changes how points are sampled, the iterator should be reset
         self.integrator.set(neval=n_batch)
@@ -48,7 +49,27 @@ class VegasSampler(Sampler):
             return self.sample_non_stratified(f, n_batch=n_batch)
 
     def sample_stratified(self, f, n_batch):
-        raise NotImplementedError("PLEASE IMPLEMENT ME")  # TODO
+        if n_batch != self.n_batch:
+            self.n_batch = n_batch
+            self.integrator.set(neval=n_batch)
+
+        gen = self.integrator.random_batch(yield_hcube=True)
+        x, wx, hc = next(gen)
+        x = np.asarray(x).copy()
+        wx = np.asarray(wx).copy()
+        hc = np.asarray(hc).copy()
+
+        for x_batch, wx_batch, hc_batch in gen:
+            x_batch = np.asarray(x_batch).copy()
+            wx_batch = np.asarray(wx_batch).copy()
+            hc_batch = np.asarray(hc_batch).copy()
+            x = np.concatenate((x, x_batch), axis=0)
+            wx = np.concatenate((wx, wx_batch), axis=0)
+            hc = np.concatenate((hc, hc_batch), axis=0)
+
+        fx = f(x)
+
+        return x, (wx, hc), fx
 
     def sample_non_stratified(self, f, n_batch=10000, *args, **kwargs):
         """

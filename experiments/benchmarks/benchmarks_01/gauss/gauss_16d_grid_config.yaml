@@ -1,0 +1,19 @@
+base_integrator_config: {checkpoint_on_cuda: false, masking: iflow, minibatch_size: 20000,
+  n_bins: 50, n_epochs: 50, n_iter: 10, n_points_survey: 100000, repetitions: 1}
+dbname: benchmarks_01/benchmarks.db
+debug: false
+dimensions: [16]
+experiment_name: gaussian_scan_per_dim
+integrand_params_grid:
+  s: [0.2808795124288384, 0.3414850085970704, 0.46976090967686, 0.7055727541451018,
+    1.0495982766142955, 1.4309778809551414, 2.019681572913965]
+integrator_config_grid:
+  d_hidden: [64, 128, 256]
+  flow: [pwlinear, pwquad]
+  loss: [variance, dkl]
+  lr: [0.005, 0.001, 0.0005, 0.0001, 5e-05, 1e-05]
+  masking: [iflow, checkerboard]
+  n_bins: [2, 10, 50]
+  n_epochs: [2, 10, 50]
+  n_hidden: [2, 4, 8, 16]
+keep_history: true

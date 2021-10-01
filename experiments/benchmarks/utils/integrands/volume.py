@@ -120,3 +120,19 @@ class RegulatedHyperSphericalCamel(KnownIntegrand):
 
     def evaluate_integrand(self, x):
         return self.hump1.evaluate_integrand(x) + self.hump2.evaluate_integrand(x)
+
+
+class RegulatedSymmetricHyperSphericalCamel(RegulatedHyperSphericalCamel):
+    """Camel function consisting of the sum of two regulated hyperspherical
+        volume functions with centers at (0.25, ..., 0.25) and (0.75, ..., 0.75)
+        with identical radii"""
+    def __init__(self, d, r=0.24, reg=1.e-6, device=None, *args, **kwargs):
+        super(RegulatedSymmetricHyperSphericalCamel, self).__init__(
+            d=d,
+            r1=r,
+            r2=r,
+            reg=reg,
+            device=device,
+            *args,
+            **kwargs
+        )

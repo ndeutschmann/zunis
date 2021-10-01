@@ -1,0 +1,1 @@
+# Benchmarks 04: Camel speed measurements

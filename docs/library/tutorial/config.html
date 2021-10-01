@@ -81,7 +81,11 @@ flows, the number of bins. It is also possible to choose either a <code class="c
 <code class="code docutils literal notranslate"><span class="pre">maximal</span></code> or <code class="code docutils literal notranslate"><span class="pre">iflow</span></code> masking strategy and define how many sets of coupling cells
 should be used.</p>
 <p>For the purpose of training, either a <code class="code docutils literal notranslate"><span class="pre">variance</span></code> or <code class="code docutils literal notranslate"><span class="pre">dkl</span></code> loss can be specified.
-For the DKL loss, it is possible to also request the survey strategy <code class="code docutils literal notranslate"><span class="pre">adaptive_dkl</span></code>.
+Next to the default <code class="code docutils literal notranslate"><span class="pre">flat</span></code> survey strategy, there exists also the <code class="code docutils literal notranslate"><span class="pre">forward</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">forward_flat_int</span></code> survey strategy. For fixed samples, the <code class="code docutils literal notranslate"><span class="pre">fixed_sample</span></code> survey
+strategy creates a <a class="reference internal" href="../../api/zunis.integration.fixed_sample_integrator.html"><span class="doc">Fixed Sample Integrator</span></a>.
+Specific for variance/DKL loss,
+a survey strategy <code class="code docutils literal notranslate"><span class="pre">adaptive_variance</span></code>/<code class="code docutils literal notranslate"><span class="pre">adaptive_dkl</span></code> is provided.
 <code class="code docutils literal notranslate"><span class="pre">n_iter</span></code> refers to the number of iterations, whereas <code class="code docutils literal notranslate"><span class="pre">n_points_survey</span></code> defines the
 number of points used per iteration for the survey stage; the same can be defined
 for the refine stage too.</p>

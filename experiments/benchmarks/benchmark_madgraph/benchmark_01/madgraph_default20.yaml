@@ -1,0 +1,17 @@
+dbname: madgraph.db
+experiment_name: madgraph_scan
+debug: False
+keep_history: True
+base_integrator_config:
+        n_points_survey: 500000
+        minibatch_size: 10000
+        repetitions: 1
+        n_epochs: 20
+integrand_params_grid:
+        e_cm: [1000,1000,1000,1000,1000,1000,1000,1000]
+        delr_cut: [0.4,0.4,0.4,0.4,0.4,0.4,0.4,0.4]
+        pt_cut: [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,]
+        rap_maxcut: [2.4,2.4,2.4,2.4,2.4,2.4,2.4,2.4]
+integrator_config_grid:
+        survey_strategy: ['flat','forward_flat_init','forward', 'adaptive_dkl','flat','forward_flat_init','forward', 'adaptive_variance']
+        loss: ['dkl','dkl','dkl','dkl','variance','variance','variance','variance']

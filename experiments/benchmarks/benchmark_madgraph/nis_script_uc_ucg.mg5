@@ -1,0 +1,7 @@
+define ud=u d
+define udx=u~ d~
+define v = a z
+
+generate u c > u c g
+output standalone fortran_output_ucg
+launch -f

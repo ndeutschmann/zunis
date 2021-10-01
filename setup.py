@@ -12,7 +12,7 @@ setup(
         "dictwrapper == 1.3",
         "ruamel.yaml <= 0.16.12"
     ],
-    version='0.2',
+    version='0.3',
     description='Neural Importance Sampling',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

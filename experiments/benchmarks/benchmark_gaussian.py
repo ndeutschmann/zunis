@@ -10,7 +10,8 @@ from utils.integrands.gaussian import DiagonalGaussianIntegrand
 def benchmark_gaussian(dimensions=None, sigmas=None, db=None,
                     experiment_name=None, debug=None, cuda=None, keep_history=None,
                     config=None,
-                    n_search=10):
+                    n_search=10,
+                    stratified=True):
     dtypes = get_sql_types()
 
     # Integrand specific defaults
@@ -19,7 +20,7 @@ def benchmark_gaussian(dimensions=None, sigmas=None, db=None,
         "norm": 1.
     }
 
-    benchmarker = VegasRandomHPBenchmarker(n=n_search)
+    benchmarker = VegasRandomHPBenchmarker(n=n_search, stratified=stratified)
 
     benchmark_config = benchmarker.set_benchmark_grid_config(config=config, dimensions=dimensions,
                                                              keep_history=keep_history,
@@ -43,7 +44,8 @@ cli = click.Command("cli", callback=benchmark_gaussian, params=[
     click.Option(["--db"], default=None, type=str),
     click.Option(["--experiment_name"], default=None, type=str),
     click.Option(["--config"], default=None, type=str),
-    click.Option(["--n_search"], default=10, type=int)
+    click.Option(["--n_search"], default=10, type=int),
+    click.Option(["--stratified"], is_flag=True)
 ])
 
 if __name__ == '__main__':

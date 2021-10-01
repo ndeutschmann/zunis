@@ -6,6 +6,8 @@ useful when fine-tuning integration parameters for a function that is very costl
 
 The functionality for using pre-evaluated samples are provided by the
 :doc:`Fixed Sample Integrator </api/zunis.integration.fixed_sample_integrator>`.
+This integrator is accessible when using config files by choosing the survey strategy
+`fixed_sample`.
 
 Starting from the basic example, on can train on a sample defined as a
 PyTorch tensor:
@@ -13,8 +15,7 @@ PyTorch tensor:
 .. code-block:: python
 
   import torch
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cuda")
 
@@ -23,15 +24,14 @@ PyTorch tensor:
   def f(x):
       return x[:,0]**2 + x[:,1]**2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=1000)
 
-  n_points = 100
+  n_points = 1000
   # Uniformly sampled points
   x = torch.rand(n_points,d,device=device)
   # x.shape = (n_points,d)
 
-  px = torch.ones(n_points)
+  px = torch.ones(n_points, device=device)
   # px.shape = (n_points,)
 
   # Function values
@@ -55,26 +55,26 @@ batch of the same structure:
 
   import torch
   import pickle
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import Integrator
 
   device = torch.device("cuda")
 
   d = 2
 
   def f(x):
-      return x[:,0]**2 + x[:,1]**2
+    return x[:,0]**2 + x[:,1]**2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device="cuda")
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=1000)
 
-  data_x=[[0,4],[1,3],[2,2],[3,1],[4,0]]
-  data_px=[1.0,1.0,1.0,1.0,1.0]
+  data_x = torch.rand(1000,d,device=device)
+  #[[0.2093, 0.9918],[0.3216, 0.6965],[0.0625, 0.5634],...]
+  data_px = torch.ones(1000)
+  #[1.0,1.0,1.0...]
 
-  sample=(torch.tensor(data_x, device="cuda"),torch.tensor(data_px, device="cuda"),f(torch.tensor(data_x, device="cuda")))
+  sample=(data_x.clone().detach(),data_px.clone().detach(),f(data_x.clone().detach()))
   pickle.dump(sample, open("sample.p","wb"))
 
-  integrator.set_sample_pickle("sample.p",device="cuda")
+  integrator.set_sample_pickle("sample.p",device=device)
   result, uncertainty, history = integrator.integrate()
 
 Finally , it is also possible to provide samples as a `.csv` file. This
@@ -85,11 +85,10 @@ For the above example, the `.csv` file would look like:
 
 .. code-block:: python
 
-  0, 4, 1, 16
-  1, 3, 1, 10
-  2, 2, 1, 8
-  3, 1, 1, 10
-  4, 0, 1, 16
+  0.2093, 0.9918, 1, 1.0274
+  0.3216, 0.6965, 1, 0.5885
+  0.0625, 0.5634, 1, 0.3213
+  ...
 
 This could be imported as a pre-evaluated example and used for integration in the
 following way:
@@ -98,16 +97,13 @@ following way:
 
   import torch
   import numpy as np
-  from zunis.integration.fixed_sample_integrator import  FixedSampleSurveyIntegrator
-  from zunis.training.weighted_dataset.stateful_trainer import StatefulTrainer
+  from zunis.integration import  Integrator
 
   device = torch.device("cuda")
 
   d = 2
 
-  trainer = StatefulTrainer(d=d, loss="variance", flow="pwquad", device=device)
-  integrator =  FixedSampleSurveyIntegrator(f,trainer, device=device, n_points_survey=5)
-
+  integrator =  Integrator(d=d, f=f, survey_strategy='fixed_sample', device=device, n_points_survey=1000)
 
   integrator.set_sample_csv("sample.csv",device="cuda",dtype=np.float32)
   result, uncertainty, history = integrator.integrate()
