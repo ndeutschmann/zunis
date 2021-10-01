@@ -58,14 +58,14 @@ PyTorch tensor:</p>
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">Integrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="n">n_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="c1"># Uniformly sampled points</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_points</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="c1"># x.shape = (n_points,d)</span>
 
-<span class="n">px</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
+<span class="n">px</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_points</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="c1"># px.shape = (n_points,)</span>
 
 <span class="c1"># Function values</span>
@@ -92,17 +92,19 @@ batch of the same structure:</p>
 <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+  <span class="k">return</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="n">data_x</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
-<span class="n">data_px</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="n">data_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="c1">#[[0.2093, 0.9918],[0.3216, 0.6965],[0.0625, 0.5634],...]</span>
+<span class="n">data_px</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1">#[1.0,1.0,1.0...]</span>
 
-<span class="n">sample</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_px</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)))</span>
+<span class="n">sample</span><span class="o">=</span><span class="p">(</span><span class="n">data_x</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span><span class="n">data_px</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span><span class="n">f</span><span class="p">(</span><span class="n">data_x</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()))</span>
 <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sample.p&quot;</span><span class="p">,</span><span class="s2">&quot;wb&quot;</span><span class="p">))</span>
 
-<span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_pickle</span><span class="p">(</span><span class="s2">&quot;sample.p&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_pickle</span><span class="p">(</span><span class="s2">&quot;sample.p&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -111,11 +113,10 @@ file has to have <code class="code docutils literal notranslate"><span class="pr
 points, the second the sampling distribution PDF values and the last the function
 value.
 For the above example, the <code class="code docutils literal notranslate"><span class="pre">.csv</span></code> file would look like:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span>
-<span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
-<span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span>
-<span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
-<span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">0.2093</span><span class="p">,</span> <span class="mf">0.9918</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0274</span>
+<span class="mf">0.3216</span><span class="p">,</span> <span class="mf">0.6965</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5885</span>
+<span class="mf">0.0625</span><span class="p">,</span> <span class="mf">0.5634</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3213</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>This could be imported as a pre-evaluated example and used for integration in the
@@ -128,8 +129,7 @@ following way:</p>
 
 <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">integrator</span> <span class="o">=</span>  <span class="n">FixedSampleSurveyIntegrator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
+<span class="n">integrator</span> <span class="o">=</span>  <span class="n">Integrator</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">survey_strategy</span><span class="o">=</span><span class="s1">&#39;fixed_sample&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">n_points_survey</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">integrator</span><span class="o">.</span><span class="n">set_sample_csv</span><span class="p">(</span><span class="s2">&quot;sample.csv&quot;</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">history</span> <span class="o">=</span> <span class="n">integrator</span><span class="o">.</span><span class="n">integrate</span><span class="p">()</span>
