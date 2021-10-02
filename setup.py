@@ -16,10 +16,10 @@ setup(
     description='Neural Importance Sampling',
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author='Nicolas Deutschmann',
-    author_email="nicolas.deutschmann@gmail.com",
+    author='Anonymous Authors',
+    author_email="zunis.anonymous@gmail.com",
     url="https://zunis.readthedocs.io",
-    download_url="https://github.com/ndeutschmann/zunis",
+    download_url="https://github.com/zunis-anonymous/zunis",
     license='MIT',
     include_package_data = True
 )

@@ -43,7 +43,7 @@
 <p>Survey/Refine integrator based on training models with a DKL trainer</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DKLAdaptiveSurveyIntegrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DKLAdaptiveSurveyIntegrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.adaptive_survey_integrator.html#zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator" title="zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.adaptive_survey_integrator.AdaptiveSurveyIntegrator</span></code></a></p>
 <p>Survey/Refine adaptive integrator based on the DKL loss. The loss is the D_KL distance between
 the PDF from a flow model and an un-normalized function, up to non-trainable terms</p>
@@ -73,7 +73,7 @@ not recommended due to uncontrolled correlations in error estimates</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition">
-<span class="sig-name descname"><span class="pre">survey_switch_condition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">survey_switch_condition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/dkltrainer_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.dkltrainer_integrator.DKLAdaptiveSurveyIntegrator.survey_switch_condition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the loss is negative. This test is used to switch from uniform sampling
 to sampling from the flow in the survey phase.</p>
 <p>The loss is the distance between the target function and the flow PDF. Since the distance between
@@ -141,7 +141,7 @@ the target function and the uniform function, a negative loss indicates that flo
 
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    <li class="toctree-l1"><a href="https://github.com/zunis-anonymous/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
     
 </ul>
 

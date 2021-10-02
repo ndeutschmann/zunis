@@ -43,7 +43,7 @@
 <p>Integrator that does not sample points during the training phase but uses a fixed dataset of points</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FixedSampleSurveyIntegrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FixedSampleSurveyIntegrator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.integration.base_integrator.html#zunis.integration.base_integrator.BaseIntegrator" title="zunis.integration.base_integrator.BaseIntegrator"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.integration.base_integrator.BaseIntegrator</span></code></a></p>
 <p>Integrator that trains its model during the survey phase using a pre-computed sample provided externally</p>
 <dl class="field-list simple">
@@ -69,7 +69,7 @@ in some cases.</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey">
-<span class="sig-name descname"><span class="pre">sample_survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sample_survey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.sample_survey" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sample points from the internally stored sample</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -89,7 +89,7 @@ in some cases.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample">
-<span class="sig-name descname"><span class="pre">set_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a sample to be trained on</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -100,7 +100,7 @@ in some cases.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv">
-<span class="sig-name descname"><span class="pre">set_sample_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">csv_path</span></em>, <em class="sig-param"><span class="pre">device=None</span></em>, <em class="sig-param"><span class="pre">delimiter='</span></em>, <em class="sig-param"><span class="pre">'</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_sample_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">csv_path</span></em>, <em class="sig-param"><span class="pre">device=None</span></em>, <em class="sig-param"><span class="pre">delimiter='</span></em>, <em class="sig-param"><span class="pre">'</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_csv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a sample to be trained on from a csv file
 The file must contain equal length rows with at least four columns, all numerical.
 All columns but the last two are interpreted as point coordinates,
@@ -118,7 +118,7 @@ the next-to-last is the point PDF and the last is the function value.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle">
-<span class="sig-name descname"><span class="pre">set_sample_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pickle_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_sample_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pickle_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/integration/fixed_sample_integrator.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.integration.fixed_sample_integrator.FixedSampleSurveyIntegrator.set_sample_pickle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assign a sample to be trained on from a pickle file
 The pickle file must either contain a tuple (x,px,fx) of point batch, PDF value batch, function batch
 or a mapping with keys “x”, “px”, “fx”. In either case, these batches must be valid inputs for torch.tensor</p>
@@ -193,7 +193,7 @@ or a mapping with keys “x”, “px”, “fx”. In either case, these batche
 
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    <li class="toctree-l1"><a href="https://github.com/zunis-anonymous/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
     
 </ul>
 

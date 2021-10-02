@@ -20,7 +20,7 @@ The library is available on PyPI:
 
 The latest version can be installed directly from GitHub:
 ```bash
-    pip install 'git+https://github.com/ndeutschmann/zunis#egg=zunis&subdirectory=zunis_lib'
+    pip install 'git+https://github.com/zunis-anonymous/zunis#egg=zunis&subdirectory=zunis_lib'
 ```
 
 ### Setting up a development environment
@@ -29,7 +29,7 @@ If you would like to contribute to the library, run the benchmarks or try the ex
 the easiest is to clone this repository directly and install the extended requirements:
 ````bash
 # Clone the repository
-git clone https://github.com/ndeutschmann/zunis.git ./zunis
+git clone https://github.com/zunis-anonymous/zunis.git ./zunis
 # Create a virtual environment (recommended)
 python3.7 -m venv  zunis_venv
 source ./zunis_venv/bin/activate

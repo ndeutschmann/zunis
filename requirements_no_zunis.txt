@@ -76,6 +76,5 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 
-#Packages by NGoetz
 torchps @ git+https://github.com/NGoetz/TorchPS
 

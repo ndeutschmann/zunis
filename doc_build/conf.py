@@ -102,7 +102,7 @@ html_theme_options = {
     "page_width": "1200px",
     "extra_nav_links": {
         "<i class=\"fa fa-github\" aria-hidden=\"true\"></i> Github Repository":
-            "https://github.com/ndeutschmann/zunis/"},
+            "https://github.com/zunis-anonymous/zunis/"},
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -204,7 +204,7 @@ latex_documents = [
     ('index',
      'zunis.tex',
      u'ZüNIS Documentation',
-     u"Nicolas Deutschmann", 'manual'),
+     u"Anonymous Authors", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -234,7 +234,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'zunis', u'ZüNIS Documentation',
-     [u"Nicolas Deutschmann"], 1)
+     [u"Anonymous Authors"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -248,7 +248,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'zunis', u'ZüNIS Documentation',
-     u"Nicolas Deutschmann", 'zunis',
+     u"Anonymous Authors", 'zunis',
      'Neural Importance Sampling', 'Miscellaneous'),
 ]
 
@@ -277,11 +277,11 @@ def linkcode_resolve(domain, info):
     filename = info['module'].replace('.', '/')
     file_path = pkgutil.get_loader(info["module"]).get_filename()
     if info['module'].startswith("zunis"):
-        module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}.py"
-        package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/{filename}/__init__.py"
+        module_url = f"https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/{filename}.py"
+        package_url = f"https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/{filename}/__init__.py"
     if info['module'].startswith("utils"):
-        module_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/{filename}.py"
-        package_url = f"https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/{filename}/__init__.py"
+        module_url = f"https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/{filename}.py"
+        package_url = f"https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/{filename}/__init__.py"
     if file_path.endswith("__init__.py"):
         return package_url
     else:
@@ -290,4 +290,4 @@ def linkcode_resolve(domain, info):
 
 # -- Meta Info --------------------
 
-author = "Nicolas Deutschmann"
+author = "Anonymous Authords"

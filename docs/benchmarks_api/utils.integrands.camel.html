@@ -42,7 +42,7 @@
 <span id="utils-integrands-camel-module"></span><h1>utils.integrands.camel module<a class="headerlink" href="#module-utils.integrands.camel" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.integrands.camel.CamelIntegrand">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.CamelIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.CamelIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.Integrand" title="utils.integrands.abstract.Integrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.Integrand</span></code></a></p>
 <p>Camel function: two gaussian peaks on the hyperdiagonal of the unit hypercube
 at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
@@ -59,7 +59,7 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.integrands.camel.CamelIntegrand.evaluate_integrand">
-<span class="sig-name descname"><span class="pre">evaluate_integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.CamelIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate_integrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.CamelIntegrand.evaluate_integrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the camel function for a batch of points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -78,7 +78,7 @@ at points (0.25, …, 0.25) and (0.75, …, 0.75).</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.integrands.camel.KnownSymmetricCamelIntegrand">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">KnownSymmetricCamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.KnownSymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">KnownSymmetricCamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.KnownSymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.camel.SymmetricCamelIntegrand" title="utils.integrands.camel.SymmetricCamelIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.camel.SymmetricCamelIntegrand</span></code></a>, <a class="reference internal" href="utils.integrands.abstract.html#utils.integrands.abstract.KnownIntegrand" title="utils.integrands.abstract.KnownIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.abstract.KnownIntegrand</span></code></a></p>
 <p>Camel function: two gaussian peaks on the hyperdiagonal of the unit hypercube
 at points (0.25, …, 0.25) and (0.75, …, 0.75), with an exact integral value provided
@@ -96,7 +96,7 @@ using pytorch.erf</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="utils.integrands.camel.KnownSymmetricCamelIntegrand.integral">
-<span class="sig-name descname"><span class="pre">integral</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.KnownSymmetricCamelIntegrand.integral" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">integral</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.KnownSymmetricCamelIntegrand.integral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the true value of the integral</p>
 </dd></dl>
 
@@ -104,7 +104,7 @@ using pytorch.erf</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="utils.integrands.camel.SymmetricCamelIntegrand">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SymmetricCamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.SymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SymmetricCamelIntegrand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/experiments/benchmarks/utils/integrands/camel.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.integrands.camel.SymmetricCamelIntegrand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#utils.integrands.camel.CamelIntegrand" title="utils.integrands.camel.CamelIntegrand"><code class="xref py py-class docutils literal notranslate"><span class="pre">utils.integrands.camel.CamelIntegrand</span></code></a></p>
 <p>Camel integrands with two identical humps</p>
 <dl class="field-list simple">
@@ -177,7 +177,7 @@ using pytorch.erf</p>
 
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    <li class="toctree-l1"><a href="https://github.com/zunis-anonymous/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
     
 </ul>
 

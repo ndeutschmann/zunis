@@ -42,29 +42,29 @@
 <span id="zunis-models-flows-sequential-invertible-sequential-module"></span><h1>invertible_sequential module<a class="headerlink" href="#module-zunis.models.flows.sequential.invertible_sequential" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InvertibleSequentialFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InvertibleSequentialFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="zunis.models.flows.general_flow.html#zunis.models.flows.general_flow.GeneralFlow" title="zunis.models.flows.general_flow.GeneralFlow"><code class="xref py py-class docutils literal notranslate"><span class="pre">zunis.models.flows.general_flow.GeneralFlow</span></code></a></p>
 <p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow">
-<span class="sig-name descname"><span class="pre">flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">flow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.flow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform the batch of points x  with shape (…,d)
 This is an abstract method that should be overriden</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert">
-<span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.invert" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training">
-<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.training" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian">
-<span class="sig-name descname"><span class="pre">transform_and_compute_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/ndeutschmann/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">transform_and_compute_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xj</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://www.github.com/zunis-anonymous/zunis/tree/master/zunis_lib/zunis/models/flows/sequential/invertible_sequential.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zunis.models.flows.sequential.invertible_sequential.InvertibleSequentialFlow.transform_and_compute_jacobian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the flow transformation and its Jacobian simulatenously on
 xj with xj.shape == (…,d+1)</p>
 <p>This is an abstract method that should be overriden</p>
@@ -131,7 +131,7 @@ xj with xj.shape == (…,d+1)</p>
 
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/ndeutschmann/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
+    <li class="toctree-l1"><a href="https://github.com/zunis-anonymous/zunis/"><i class="fa fa-github" aria-hidden="true"></i> Github Repository</a></li>
     
 </ul>
 

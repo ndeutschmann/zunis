@@ -15,7 +15,7 @@ The latest version can be installed directly from GitHub:
 
 .. code-block:: bash
 
-    pip install 'git+https://github.com/ndeutschmann/zunis#egg=zunis&subdirectory=zunis_lib'
+    pip install 'git+https://github.com/zunis-anonymous/zunis#egg=zunis&subdirectory=zunis_lib'
 
 Setting up a development environment
 ====================================
@@ -26,7 +26,7 @@ the easiest is to clone this repository directly and install the extended requir
 .. code-block:: bash
 
     # Clone the repository
-    git clone https://github.com/ndeutschmann/zunis.git ./zunis
+    git clone https://github.com/zunis-anonymous/zunis.git ./zunis
     # Create a virtual environment (recommended)
     python3.8 -m venv  zunis_venv
     source ./zunis_venv/bin/activate
