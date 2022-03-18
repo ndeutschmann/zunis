@@ -72,7 +72,7 @@ def piecewise_linear_transform(x, q_tilde, compute_jacobian=True):
     out = out * slopes
     # The jacobian is the product of the slopes in all dimensions
     if compute_jacobian:
-        logj = torch.log(torch.prod(slopes, 1))
+        logj = torch.sum(torch.log(slopes), 1)
 
     del slopes
 
@@ -180,7 +180,7 @@ def piecewise_linear_inverse_transform(y, q_tilde, compute_jacobian=True):
     # Prepare the jacobian
     logj = None
     if compute_jacobian:
-        logj = - torch.log(torch.prod(q, 1))
+        logj = - torch.sum(torch.log(q), 1)
     return x.detach(), logj
 
 

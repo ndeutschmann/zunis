@@ -117,15 +117,13 @@ def piecewise_quadratic_transform(x, wv_tilde, compute_jacobian=True):
     #the derivative of this transformation is the linear interpolation between v_i-1 and v_i at alpha
     #the jacobian is the product of all linear interpolations
     if compute_jacobian:
-        logj=torch.squeeze(
-            torch.log(torch.unsqueeze(
-                    torch.prod(#we need to take the product over all transformed dimensions
-                        torch.lerp(torch.squeeze(torch.gather(v,-1,mx),axis=-1),
-                                   torch.squeeze(torch.gather(v,-1,mx+1),axis=-1),alphas),
-                        #linear extrapolation between alpha, mx and mx+1
-                    axis=-1),
-                axis=-1)),
-            axis=-1)
+        logj = torch.sum(
+            torch.log(
+                torch.lerp(torch.squeeze(torch.gather(v, -1, mx), axis=-1),
+                           torch.squeeze(torch.gather(v, -1, mx + 1), axis=-1), alphas)
+                # linear extrapolation between alpha, mx and mx+1
+            ),
+        axis = -1)
        
     # Regularization: points must be strictly within the unit hypercube
     # Use the dtype information from pytorch
@@ -264,13 +262,13 @@ def piecewise_quadratic_inverse_transform(y, wv_tilde, compute_jacobian=True):
     )
     
     if compute_jacobian:
-        logj =-torch.squeeze(torch.log(
-            torch.unsqueeze(torch.prod(#we have to take the product of the jacobian of all dimensions
-                torch.lerp(torch.squeeze(torch.gather(v,-1,edges),axis=-1),torch.squeeze(torch.gather(v,-1,edges+1),
-                                                                                         axis=-1),sol),
-                axis=-1), #linear extrapolation between sol, edges and edges+1 gives the jacobian of the forward transformation. The prefactor of -1 is the log of the jacobian of the inverse
-            axis=-1)),
-        axis=-1)
+        logj = - torch.sum(
+            torch.log(
+                torch.lerp(torch.squeeze(torch.gather(v, -1, edges), axis=-1),
+                           torch.squeeze(torch.gather(v, -1, edges + 1),
+                                         axis=-1), sol),
+            ),
+            axis=-1)
        
     return x.detach(), logj
 
