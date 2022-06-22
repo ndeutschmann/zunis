@@ -5,7 +5,7 @@ setup(
     packages=find_packages(where='zunis_lib'),
     package_dir={'': 'zunis_lib'},
     install_requires=[
-        "numpy == 1.19.1",
+        "numpy == 1.22.0",
         "pandas == 1.1.0",
         "torch == 1.6.0",
         "abc_property == 1.0",
