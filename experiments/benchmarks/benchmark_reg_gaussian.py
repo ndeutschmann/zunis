@@ -4,8 +4,9 @@ import vegas
 from functools import partial
 import pandas as pd
 import torch
+import logging
 from utils.integrands.gaussian import RegulatedDiagonalGaussianIntegrand
-from utils.logging import get_benchmark_logger, get_benchmark_logger_debug
+from utils.logging import set_benchmark_logger, set_benchmark_logger_debug
 from utils.torch_utils import get_device
 from utils.integrator_integrals import evaluate_integral_integrator
 from utils.vegas_integrals import evaluate_integral_vegas
@@ -19,11 +20,12 @@ from zunis.integration import Integrator
 debug = True
 #############################################################
 
+logger = logging.getLogger("benchmark_reg_gaussian")
 
 if debug:
-    logger = get_benchmark_logger_debug("benchmark_reg_gaussian")
+    set_benchmark_logger_debug()
 else:
-    logger = get_benchmark_logger("benchmark_reg_gaussian")
+    set_benchmark_logger()
 
 device = get_device(cuda_ID=0)
 
