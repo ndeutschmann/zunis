@@ -16,7 +16,7 @@ def benchmark_hypercamel(dimensions=None, radii=None, db=None,
 
     # Integrand specific defaults
     base_integrand_params = {
-        "r": 0.3,
+        "r": 0.2,
     }
 
     benchmarker = VegasRandomHPBenchmarker(n=n_search, stratified=stratified)
