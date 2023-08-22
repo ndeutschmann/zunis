@@ -141,7 +141,7 @@ class FixedSampleSurveyIntegrator(BaseIntegrator):
         else:
             raise TypeError("Pickled sample must be either sequences or mappings")
 
-    def set_sample_csv(self, csv_path, device=None, delimiter=",", dtype=np.float):
+    def set_sample_csv(self, csv_path, device=None, delimiter=",", dtype=np.float32):
         """Assign a sample to be trained on from a csv file
         The file must contain equal length rows with at least four columns, all numerical.
         All columns but the last two are interpreted as point coordinates,

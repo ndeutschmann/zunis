@@ -55,7 +55,7 @@ class ParseParams():
             this parses line 2 and and 4 to extract the number of in- and outgoing particles
 
         """
-        file = open(self.exec_dir+"/integrands/mg/"+self.process+"/param/nexternal.inc", "r")
+        file = open(self.exec_dir+"/"+self.process+"/nexternal.inc", "r")
 
         #skip first line
         file.readline()
@@ -85,7 +85,7 @@ class ParseParams():
             all lines are read in and the value of the mass is extracted.
 
         """
-        file = open(self.exec_dir+"/integrands/mg/"+self.process+"/param/pmass.inc", "r")
+        file = open(self.exec_dir+"/"+self.process+"/pmass.inc", "r")
         z=file.readlines()
         # The string is split at the "=" to extract the float after it
         z=[x.split("=")[1].split("\n")[0] for x in z]
@@ -104,7 +104,7 @@ class ParseParams():
             to calculate the vale of the mass for the W-Boson, which is not contained in the file.
 
         """
-        file = open(self.exec_dir+"/integrands/mg/"+self.process+"/param/param.log", "r")
+        file = open(self.exec_dir+"/"+self.process+"/param.log", "r")
         p=file.readlines()
         file.close()
 
@@ -191,8 +191,6 @@ class ParseParams():
             #if the particle name is found at the second position, it is a quark if the name does either not start with t
             #or the length of the array after the start of the name is smaller than 2
             elif marker!=-1 and (x!='t' or (len(particles)<2+marker) ) and ( marker==0 or particles[marker-1]!='m'):
-                print(marker)
-                print(particles[marker-1])
                 #remove the char from the string
                 particles=particles[:marker]+particles[marker+1 :]
                 #convert the name in pdg code
