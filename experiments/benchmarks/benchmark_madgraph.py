@@ -35,8 +35,6 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
                                                              base_integrand_params=base_integrand_params)
 
     # Integrand specific CLI argument mapped to standard API
-    print(process)
-    print(process_path)
     if e_cm is not None:
         benchmark_config["integrand_params_grid"]["e_cm"] = [e_cm]
     if pdf is not None:
@@ -48,10 +46,8 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
     if rap_maxcut is not None:
         benchmark_config["integrand_params_grid"]["rap_maxcut"] = rap_maxcut
     if process is not None:
-        print("!")
         benchmark_config["base_integrand_params"]["process"] = process
     if process_path is not None:
-        print("!!")
         benchmark_config["base_integrand_params"]["process_path"] = process_path
     if pdf_type is not None:
         benchmark_config["base_integrand_params"]["pdf_type"] = pdf_type
