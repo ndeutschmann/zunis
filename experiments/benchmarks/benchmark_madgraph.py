@@ -8,7 +8,7 @@ from utils.config.loaders import get_sql_types
 from utils.integrands.madgraph import CrossSection
 
 
-def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut=None,process=None,pdf_type=None,
+def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut=None,process=None,process_path=None, pdf_type=None,
                        pdf_dir=None, lhapdf_dir=None, db=None, experiment_name=None, debug=None, cuda=None, keep_history=None, config=None, n_search=100, stratified=False, benchmark_time=False):
 
     dtypes = get_sql_types()
@@ -47,6 +47,8 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         benchmark_config["integrand_params_grid"]["rap_maxcut"] = rap_maxcut
     if process is not None:
         benchmark_config["base_integrand_params"]["process"] = process
+    if process_path is not None:
+        benchmark_config["base_integrand_params"]["process_path"] = process_path
     if pdf_type is not None:
         benchmark_config["base_integrand_params"]["pdf_type"] = pdf_type
     if pdf_dir is not None:
@@ -55,7 +57,7 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         benchmark_config["base_integrand_params"]["lhapdf_dir"] = lhapdf_dir
 
     #The integrand is initialised once in order to get the right number of dimensions needed to integrate the process
-    CS=CrossSection(pdf=benchmark_config["base_integrand_params"]["pdf"], pdf_dir=benchmark_config["base_integrand_params"]["pdf_dir"], lhapdf_dir=benchmark_config["base_integrand_params"]["lhapdf_dir"], process=benchmark_config["base_integrand_params"]["process"],pdf_type=benchmark_config["base_integrand_params"]["pdf_type"])
+    CS=CrossSection(pdf=benchmark_config["base_integrand_params"]["pdf"], pdf_dir=benchmark_config["base_integrand_params"]["pdf_dir"], lhapdf_dir=benchmark_config["base_integrand_params"]["lhapdf_dir"], process=benchmark_config["base_integrand_params"]["process"],process_path=benchmark_config["base_integrand_params"]["process_path"],pdf_type=benchmark_config["base_integrand_params"]["pdf_type"])
 
     benchmark_config["dimensions"]=[CS.d]
 
@@ -71,6 +73,7 @@ cli = click.Command("cli", callback=benchmark_madgraph, params=[
     PythonLiteralOption(["--rap_maxcut"], default=None),
     PythonLiteralOption(["--process"], default=None, type=str),
     PythonLiteralOption(["--pdf_type"], default=None, type=str),
+    click.Option(["--process_path"], default=None, type=click.Path()),
     click.Option(["--debug/--no-debug"], default=None, type=bool),
     click.Option(["--pdf/--no-pdf"], default=None, type=bool),
     click.Option(["--pdf_dir"], default=None, type=click.Path()),
