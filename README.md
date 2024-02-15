@@ -1,13 +1,15 @@
 ZüNIS: Normalizing flows for neural importance sampling
 ==============================
 
-ZüNIS (Zürich Neural Importance Sampling) a work-in-progress Pytorch-based library for Monte-Carlo integration
- based on Neural imporance sampling [[1]](https://arxiv.org/abs/1808.03856), developed at ETH Zürich.
+ZüNIS (Zürich Neural Importance Sampling)[[1]](https://arxiv.org/abs/2401.09069) a work-in-progress Pytorch-based library for Monte-Carlo integration
+ based on Neural imporance sampling [[2]](https://arxiv.org/abs/1808.03856), developed at ETH Zürich.
 In simple terms, we use artificial intelligence to compute integrals faster.
 
 The goal is to provide a flexible library to integrate black-box functions with a level of automation comparable to the
-VEGAS Library [[2]](https://pypi.org/project/vegas/), while using state-of-the-art methods that go around
+VEGAS Library [[3]](https://pypi.org/project/vegas/), while using state-of-the-art methods that go around
 the limitations of existing tools.
+
+If you are using ZüNIS, please cite arXiv:2401.09069.
 
 ## Installation
 
