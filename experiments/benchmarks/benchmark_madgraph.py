@@ -18,7 +18,7 @@ def benchmark_madgraph(e_cm=None,pdf=None, delr_cut=None,pt_cut=None, rap_maxcut
         "e_cm": 1000,
         "pdf": True,
         "delr_cut": 0.4,
-        "pt_cut":0.1,
+        "pt_cut":10,
         "rap_maxcut":2.4,
         "process":"",
         "pdf_type":"",

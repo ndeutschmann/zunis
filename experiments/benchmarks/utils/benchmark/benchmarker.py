@@ -411,7 +411,7 @@ class SequentialBenchmarker(Benchmarker):
         assert \
             len(integrator_grid_lengths) == 1 and \
             len(integrand_grid_lengths) == 1 and \
-            integrand_grid_lengths[0] == integrand_grid_lengths[0] == len(dimensions), \
+            integrand_grid_lengths[0] == integrand_grid_lengths[0] == dimensions[0]+1, \
             "The length of all parameter grids must match (integrator, integrand, dimensions)"
 
         grid_length = integrand_grid_lengths[0]
